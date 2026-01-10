@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Murat | CV</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23000'/%3E%3Ctext x='50' y='65' font-family='Courier New, monospace' font-size='50' fill='white' text-anchor='middle'%3E%26gt;m%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
       --bg: #ffffff;
@@ -34,6 +35,10 @@
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -360,16 +365,26 @@
 
     .platform-card {
       background: var(--card-bg);
-      border-radius: 16px;
-      padding: 28px 20px;
-      text-align: center;
+      border-radius: 24px;
+      padding: 32px 24px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       flex: 0 0 auto;
       width: 300px;
-      height: 100%;
+      min-height: 450px;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .platform-card > .platform-icon,
+    .platform-card > h3 {
+      text-align: center;
+    }
+
+    .platform-card > .download-link,
+    .platform-card > .project-desc {
+      text-align: left;
     }
 
     .platform-card:hover {
@@ -378,34 +393,47 @@
     }
 
     .platform-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 16px;
-      font-size: 2rem;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .platform-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .platform-card h3 {
       font-size: 1.25rem;
-      margin-bottom: 24px;
+      font-weight: 600;
+      margin-bottom: 28px;
       color: var(--text);
+      text-align: center;
     }
 
     .download-link {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      color: var(--text);
+      justify-content: flex-start;
+      gap: 6px;
+      color: var(--text-muted);
       text-decoration: none;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      transition: background 0.2s;
+      padding: 8px 16px;
+      margin-bottom: 4px;
+      margin-top: 0;
+      border-radius: 20px;
+      transition: all 0.2s;
       font-weight: 500;
+      font-size: 0.875rem;
     }
 
     .download-link:hover {
-      background: rgba(0,0,0,0.05);
+      color: var(--text);
+      background: var(--hover-bg);
     }
 
     .download-link::after {
@@ -413,9 +441,19 @@
       font-size: 0.9rem;
     }
 
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      text-align: left;
+    }
+
     /* Section Styles - Reduced spacing */
     section {
       margin-bottom: 60px;
+      scroll-margin-top: 80px;
     }
 
     .section-heading {
@@ -446,6 +484,58 @@
       font-size: 0.95rem;
     }
 
+    /* Blinking cursor with colorful animation - More prominent */
+    .cursor-blink {
+      display: inline-block;
+      font-weight: 900;
+      font-size: 1.6em;
+      margin-left: 3px;
+      margin-top: -4px;
+      animation: blinkColorful 1.5s infinite;
+      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+      vertical-align: text-top;
+      line-height: 1;
+    }
+
+    @keyframes blinkColorful {
+      0% {
+        opacity: 1;
+        color: #4285f4;
+      }
+      12.5% {
+        opacity: 1;
+        color: #34a853;
+      }
+      25% {
+        opacity: 1;
+        color: #fbbc04;
+      }
+      37.5% {
+        opacity: 1;
+        color: #ea4335;
+      }
+      50% {
+        opacity: 0.4;
+        color: #4285f4;
+      }
+      62.5% {
+        opacity: 0.4;
+        color: #34a853;
+      }
+      75% {
+        opacity: 0.4;
+        color: #fbbc04;
+      }
+      87.5% {
+        opacity: 0.4;
+        color: #ea4335;
+      }
+      100% {
+        opacity: 1;
+        color: #4285f4;
+      }
+    }
+
     footer {
       text-align: center;
       color: var(--text-muted);
@@ -464,9 +554,12 @@
       }
 
       .project-desc {
-        font-size: 0.9rem;
-        color: #666;
-        margin-top: 6px;
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-top: 4px;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        text-align: left;
       }
 
       .skills {
@@ -693,7 +786,7 @@
       <div class="particles" id="particles"></div>
       <div class="hero-content">
         <h1 class="title" data-i18n="hero.title">Computer Engineer Student</h1>
-        <p class="subtitle" data-i18n="hero.subtitle">Focused on Full Stack & iOS Development</p>
+        <p class="subtitle" data-i18n="hero.subtitle">Focused on Full Stack & iOS Development<span class="cursor-blink">|</span></p>
       </div>
     </div>
 
@@ -708,7 +801,9 @@
     <section id="projects">
       <div class="cards-grid">
         <div class="platform-card">
-          <div class="platform-icon">📱</div>
+          <div class="platform-icon">
+            <img src="images/apple.png" alt="iOS" />
+          </div>
           <h3>iOS</h3>
           <a href="#" class="download-link" data-i18n="projects.financetrick">FinanceTrick</a>
           <p class="project-desc" data-i18n="projects.financetrick.desc">
@@ -720,7 +815,9 @@
           </p>
         </div>
         <div class="platform-card">
-          <div class="platform-icon">💻</div>
+          <div class="platform-icon">
+            <img src="images/webpage.png" alt="Web" />
+          </div>
           <h3 data-i18n="projects.web">Web</h3>
           <a href="#" class="download-link" data-i18n="projects.react">React Projects</a>
           <p class="project-desc" data-i18n="projects.react.desc">
@@ -729,7 +826,9 @@
           <a href="#" class="download-link" data-i18n="projects.portfolio">Portfolio</a>
         </div>
         <div class="platform-card">
-          <div class="platform-icon">⚙️</div>
+          <div class="platform-icon">
+            <img src="images/backend.png" alt="Backend" />
+          </div>
           <h3 data-i18n="projects.backend">Backend</h3>
           <a href="#" class="download-link" data-i18n="projects.api">API Projects</a>
         </div>
@@ -781,7 +880,7 @@
         'nav.blog': 'Blog',
         'nav.contact': 'Contact',
         'hero.title': 'Computer Engineer Student',
-        'hero.subtitle': 'Focused on Full Stack & iOS Development',
+        'hero.subtitle': 'Focused on Full Stack & iOS Development|',
         'about.title': 'About',
         'about.text': 'I am a Computer Engineering student with a strong interest in frontend and iOS development. I focus on building clean, minimal, and user-friendly interfaces while continuously improving my software engineering skills. I enjoy turning ideas into real products and learning modern technologies through hands-on projects.',
         'projects.title': 'Projects',
@@ -808,7 +907,7 @@
         'nav.blog': 'Blog',
         'nav.contact': 'İletişim',
         'hero.title': 'Bilgisayar Mühendisliği Öğrencisi',
-        'hero.subtitle': 'Full Stack & iOS Geliştirme Odaklı',
+        'hero.subtitle': 'Full Stack & iOS Geliştirme Odaklı|',
         'about.title': 'Hakkımda',
         'about.text': 'Frontend ve iOS geliştirmeye güçlü ilgisi olan bir Bilgisayar Mühendisliği öğrencisiyim. Yazılım mühendisliği becerilerimi sürekli geliştirirken, temiz, minimal ve kullanıcı dostu arayüzler oluşturmaya odaklanıyorum. Fikirleri gerçek ürünlere dönüştürmekten ve modern teknolojileri uygulamalı projeler aracılığıyla öğrenmekten keyif alıyorum.',
         'projects.title': 'Projeler',
@@ -871,7 +970,14 @@
       document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-          element.textContent = translations[lang][key];
+          // Replace | with cursor span for hero.subtitle
+          if (key === 'hero.subtitle') {
+            const text = translations[lang][key];
+            const cursorHtml = '<span class="cursor-blink">|</span>';
+            element.innerHTML = text.replace('|', cursorHtml);
+          } else {
+            element.textContent = translations[lang][key];
+          }
         }
       });
     }
