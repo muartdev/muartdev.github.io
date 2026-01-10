@@ -326,12 +326,36 @@
       line-height: 1.6;
     }
 
-    /* Cards Grid - Subtle hover effects */
+    /* Cards Grid - Horizontal scrollable */
     .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      display: flex;
+      align-items: stretch;
       gap: 20px;
       margin-top: 40px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      padding-bottom: 8px;
+    }
+
+    .cards-grid::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .cards-grid::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cards-grid::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .cards-grid::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
     }
 
     .platform-card {
@@ -340,11 +364,17 @@
       padding: 28px 20px;
       text-align: center;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      flex: 0 0 auto;
+      width: 300px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
     .platform-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
 
     .platform-icon {
@@ -459,77 +489,175 @@
         transform: translateY(-2px);
       }
       .contact-link {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
+        color: var(--text);
+        text-decoration: none;
+        display: inline-block;
+      }
 
-.contact-link:hover {
-  border-bottom-color: var(--text);
-}
+      .contact-link:hover {
+        text-decoration: none;
+      }
 
 
 
     @media (max-width: 768px) {
+      /* Header - Mobile optimized */
       .header-container {
-        flex-wrap: wrap;
+        padding: 0 16px;
+        flex-wrap: nowrap;
       }
 
-      nav {
-        flex-wrap: wrap;
-        margin-top: 12px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-    
-      .title {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 12px;
-        letter-spacing: -0.02em;
-      }
-
-      .subtitle {
-        font-size: 1.2rem;
-        color: var(--text-muted);
-      }
-
-      .hero {
-        padding: 80px 0;
-      }
-
-      .hero {
-        padding: 40px 0;
-        margin-bottom: 40px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero-subtitle {
+      .logo {
         font-size: 1rem;
       }
 
+      .logo-icon {
+        height: 28px;
+        padding: 0 10px;
+        font-size: 0.8rem;
+      }
+
+      /* Navigation - Mobile optimized */
+      nav {
+        gap: 4px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      nav a {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+
+      .download-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+
+      .theme-toggle, .lang-toggle {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+
+      .controls {
+        gap: 4px;
+      }
+
+      /* Main Container - Mobile spacing */
       .main-container {
-        padding: 40px 24px;
+        padding: 32px 16px;
       }
 
+      /* Hero - Mobile optimized */
+      .hero {
+        padding: 48px 0;
+        margin-bottom: 48px;
+      }
+
+      .hero-content {
+        padding: 0 16px;
+      }
+
+      .hero h1 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+        margin-bottom: 10px;
+      }
+
+      .hero-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      /* Cards - Mobile layout (horizontal scroll) */
+      .cards-grid {
+        gap: 16px;
+        margin-top: 0;
+        padding-left: 0;
+        padding-right: 16px;
+      }
+
+      .platform-card {
+        padding: 20px 16px;
+        border-radius: 16px;
+        width: 260px;
+      }
+
+      .platform-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+      }
+
+      .download-link {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      .project-desc {
+        font-size: 0.85rem;
+        margin-top: 4px;
+      }
+
+      /* Content Cards - Mobile */
+      .content-card {
+        padding: 20px;
+        border-radius: 16px;
+        margin-bottom: 12px;
+      }
+
+      .content-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      /* Skills - Mobile */
+      .skills {
+        gap: 8px;
+      }
+
+      .skill {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+
+      /* Sections - Mobile spacing */
       section {
-        margin-bottom: 40px;
+        margin-bottom: 48px;
       }
 
-      .section-heading {
+      /* Footer - Mobile */
+      footer {
+        padding: 24px 16px;
+        margin-top: 48px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Extra small devices */
+      .hero h1 {
         font-size: 1.5rem;
-        margin-bottom: 20px;
+      }
+
+      .hero-subtitle {
+        font-size: 0.875rem;
+      }
+
+      nav a {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+      }
+
+      .download-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
       }
     }
   </style>
@@ -550,7 +678,7 @@
         <a href="#contact" class="download-btn" data-i18n="nav.contact">Contact</a>
         <div class="controls">
           <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">
-            <span id="langText">en</span>
+            <span id="langText">EN</span>
           </button>
           <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
             <span id="themeIcon">🌙</span>
@@ -570,7 +698,6 @@
     </div>
 
     <section id="about">
-      <h2 class="section-heading" data-i18n="about.title">About</h2>
       <div class="content-card">
         <p data-i18n="about.text">
           I am a Computer Engineering student with a strong interest in frontend and iOS development. I focus on building clean, minimal, and user-friendly interfaces while continuously improving my software engineering skills. I enjoy turning ideas into real products and learning modern technologies through hands-on projects.
@@ -579,7 +706,6 @@
     </section>
 
     <section id="projects">
-      <h2 class="section-heading" data-i18n="projects.title">Projects</h2>
       <div class="cards-grid">
         <div class="platform-card">
           <div class="platform-icon">📱</div>
@@ -611,7 +737,6 @@
     </section>
 
     <section id="skills">
-      <h2 class="section-heading" data-i18n="skills.title">Skills</h2>
       <div class="content-card">
         <div class="skills">
         <span class="skill">HTML</span>
@@ -626,20 +751,15 @@
     </section>
 
     <section id="contact">
-      <h2 class="section-heading" data-i18n="contact.title">Contact</h2>
       <div class="content-card">
-        <p>
-        <span data-i18n="contact.email">Email:</span>
-        <a href="mailto:muartmac@gmail.com" class="contact-link">
-          muartmac@gmail.com
-        </a>
-      </p>
-      <p>
-        <span data-i18n="contact.github">GitHub:</span>
-        <a href="https://github.com/muartdev" target="_blank" class="contact-link">
-          github.com/muartdev
-        </a>
-      </p>
+        <div class="skills">
+          <a href="mailto:muartmac@gmail.com" class="skill contact-link">
+            muartmac@gmail.com
+          </a>
+          <a href="https://github.com/muartdev" target="_blank" class="skill contact-link">
+            github.com/muartdev
+          </a>
+        </div>
       </div>
     </section>
 
