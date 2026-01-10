@@ -1,11 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>
-            My Site!
-        </title>
-    </head>
-    <body>
-        <h1>This is my GitHub Pages website!</h1>
-    </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Murat | CV</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --card: #171717;
+      --text: #eaeaea;
+      --muted: #a1a1a1;
+      --accent: #C9B59C;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+
+    header span {
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Murat <span>Computer Engineering Student</span></h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section id="about">
+      <h2>About</h2>
+      <div class="card">
+        <p>
+          I am a Computer Engineering student with a strong interest in frontend and iOS development. I focus on building clean, minimal, and user-friendly interfaces while continuously improving my software engineering skills. I enjoy turning ideas into real products and learning modern technologies through hands-on projects.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="card">
+        <h3>FinanceTrick (iOS)</h3>
+        <p>Personal finance tracking app built with Swift.</p>
+      </div>
+      <div class="card">
+        <h3>CV Website</h3>
+        <p>Minimal personal CV website using HTML, CSS and JavaScript.</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="card">
+        <p>HTML, CSS, JavaScript, React, Git, Swift, Java</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Email: yourmail@example.com</p>
+        <p>GitHub: github.com/username</p>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Murat. All rights reserved.
+    </footer>
+  </div>
+</body>
 </html>
