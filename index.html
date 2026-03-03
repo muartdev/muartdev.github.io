@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Murat | CV</title>
+  <meta name="description" content="Murat - Computer Engineering student focused on Full Stack & iOS Development. Portfolio showcasing projects in Swift, React, and backend technologies." />
+  <meta name="author" content="Murat" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Murat | Computer Engineer & Developer" />
+  <meta property="og:description" content="Computer Engineering student focused on Full Stack & iOS Development." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://muartdev.github.io/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="tr_TR" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@muartdev" />
+  <meta name="twitter:title" content="Murat | Computer Engineer & Developer" />
+  <meta name="twitter:description" content="Computer Engineering student focused on Full Stack & iOS Development." />
+  <title>Murat | Computer Engineer & Developer</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23000'/%3E%3Ctext x='50' y='65' font-family='Courier New, monospace' font-size='50' fill='white' text-anchor='middle'%3E%26gt;m%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
@@ -120,70 +133,6 @@
       font-weight: 500;
     }
 
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-toggle {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .dropdown-toggle::after {
-      content: '▼';
-      font-size: 0.7rem;
-      transition: transform 0.2s;
-    }
-
-    .dropdown.active .dropdown-toggle::after {
-      transform: rotate(180deg);
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      min-width: 200px;
-      padding: 8px;
-      margin-top: 8px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s;
-    }
-
-    .dropdown.active .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      color: var(--text);
-      text-decoration: none;
-      border-radius: 6px;
-      margin: 0;
-    }
-
-    .dropdown-menu a:hover {
-      background: var(--hover-bg);
-    }
-
-    .dropdown-menu a::after {
-      content: '›';
-      font-size: 1.2rem;
-      color: var(--text-muted);
-    }
-
     .download-btn {
       background: var(--text);
       color: var(--bg);
@@ -226,10 +175,6 @@
       gap: 8px;
     }
 
-    .download-btn::after {
-      content: '↓';
-      font-size: 0.9rem;
-    }
 
     /* Main Content - Reduced padding */
     .main-container {
@@ -245,6 +190,11 @@
       position: relative;
       overflow: hidden;
       padding: 60px 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(66,133,244,0.06) 0%, transparent 70%);
+    }
+
+    [data-theme="dark"] .hero {
+      background: radial-gradient(ellipse at 50% 0%, rgba(66,133,244,0.08) 0%, transparent 70%);
     }
 
     .particles {
@@ -298,20 +248,6 @@
       padding: 0 24px;
     }
 
-    .hero-logo {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 40px;
-      background: linear-gradient(135deg, #4285f4 0%, #34a853 30%, #fbbc04 60%, #ea4335 100%);
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 4rem;
-      font-weight: bold;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
 
     /* Hero typography - Engineer-focused, not flashy */
     .hero h1 {
@@ -437,7 +373,7 @@
     }
 
     .download-link::after {
-      content: '↓';
+      content: '↗';
       font-size: 0.9rem;
     }
 
@@ -548,15 +484,6 @@
       border-top: 1px solid var(--border);
       margin-top: 60px;
     }
-          .project-card {
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-
-        .project-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      }
-
       .project-desc {
         font-size: 0.875rem;
         color: var(--text-muted);
@@ -585,17 +512,116 @@
         background: var(--skill-hover);
         transform: translateY(-2px);
       }
-      .contact-link {
+      /* Section title with accent bar */
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-title::before {
+        content: '';
+        width: 4px;
+        height: 24px;
+        background: #4285f4;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      /* Skills categories */
+      .skills-category {
+        margin-bottom: 20px;
+      }
+
+      .skills-category:last-child {
+        margin-bottom: 0;
+      }
+
+      .skills-category-title {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 10px;
+      }
+
+      .skills-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      /* Contact items with icons */
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        background: var(--skill-bg);
+        border-radius: 12px;
         color: var(--text);
         text-decoration: none;
-        display: inline-block;
+        font-size: 0.9rem;
+        transition: background 0.2s ease, transform 0.2s ease;
       }
 
-      .contact-link:hover {
+      .contact-item:hover {
+        background: var(--skill-hover);
+        transform: translateY(-2px);
+      }
+
+      .contact-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      /* Footer */
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 16px;
+      }
+
+      .footer-links a {
+        color: var(--text-muted);
         text-decoration: none;
+        font-size: 0.85rem;
+        transition: color 0.2s;
       }
 
+      .footer-links a:hover {
+        color: var(--text);
+      }
 
+      .footer-copyright {
+        font-size: 0.8rem;
+      }
+
+      /* Scroll reveal animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
 
     @media (max-width: 768px) {
       /* Header - Mobile optimized */
@@ -735,6 +761,23 @@
         margin-top: 48px;
         font-size: 0.8rem;
       }
+
+      .section-title {
+        font-size: 1.25rem;
+      }
+
+      .skills-category-title {
+        font-size: 0.75rem;
+      }
+
+      .contact-item {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+      }
+
+      .footer-links {
+        gap: 16px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -771,13 +814,12 @@
         <a href="#about" data-i18n="nav.about">About</a>
         <a href="#projects" data-i18n="nav.projects">Projects</a>
         <a href="#skills" data-i18n="nav.skills">Skills</a>
-        <a href="#blog" data-i18n="nav.blog">Blog</a>
         <a href="#contact" class="download-btn" data-i18n="nav.contact">Contact</a>
         <div class="controls">
-          <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">
+          <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()" aria-label="Toggle language">
             <span id="langText">EN</span>
           </button>
-          <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+          <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
             <span id="themeIcon">🌙</span>
           </button>
         </div>
@@ -794,7 +836,8 @@
       </div>
     </div>
 
-    <section id="about">
+    <section id="about" class="reveal">
+      <h2 class="section-title" data-i18n="about.title">About</h2>
       <div class="content-card">
         <p data-i18n="about.text">
           Computer Engineering student who builds full-stack products end to end — from iOS apps with in-app purchases to web platforms with custom domains and live deployments. I've set up Supabase backends, configured Cloudflare Pages and Vercel, integrated Google Sheets as a CMS, and shipped apps that real users can pay for. I learn by shipping.
@@ -802,66 +845,104 @@
       </div>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="reveal">
+      <h2 class="section-title" data-i18n="projects.title">Projects</h2>
       <div class="cards-grid">
         <div class="platform-card">
           <div class="platform-icon">
-            <img src="images/apple.png" alt="iOS" />
+            <img src="images/apple.png" alt="Apple iOS development icon" />
           </div>
-          <h3>iOS</h3>
-          <a href="https://mindshelf-web.pages.dev" target="_blank" class="download-link visit-link" data-i18n="projects.mindshelf">MindShelf</a>
+          <h3>iOS / macOS</h3>
+          <a href="https://github.com/muartdev/Mind-Shelf" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.mindshelf">MindShelf</a>
           <p class="project-desc" data-i18n="projects.mindshelf.desc">
-            iOS app + web app. In-app purchases &amp; subscriptions (StoreKit 2), cross-device sync via Supabase, deployed on Cloudflare Pages. Full monetization flow.
+            Book tracking app with in-app purchases, built with Swift
           </p>
-          <a href="#" class="download-link" data-i18n="projects.financetrick">FinanceTrick</a>
-          <p class="project-desc" data-i18n="projects.financetrick.desc">
-            Personal finance tracking app built with Swift
+          <a href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.foodsuggest">FoodSuggest</a>
+          <p class="project-desc" data-i18n="projects.foodsuggest.desc">
+            Food suggestion app built with Swift
+          </p>
+          <a href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.sysmonitor">System Monitor</a>
+          <p class="project-desc" data-i18n="projects.sysmonitor.desc">
+            macOS system monitoring tool built with Swift
           </p>
         </div>
         <div class="platform-card">
           <div class="platform-icon">
-            <img src="images/webpage.png" alt="Web" />
+            <img src="images/webpage.png" alt="Web development icon" />
           </div>
           <h3 data-i18n="projects.web">Web</h3>
-          <a href="https://www.vogeriderstr.com" target="_blank" class="download-link visit-link" data-i18n="projects.vogeriders">VogeRidersTR</a>
-          <p class="project-desc" data-i18n="projects.vogeriders.desc">
-            Community platform for Voge motorcycle owners in Turkey. Custom domain, Vercel deployment, Google Sheets as CMS, AI-assisted development.
+          <a href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.mindshelfweb">MindShelf Web</a>
+          <p class="project-desc" data-i18n="projects.mindshelfweb.desc">
+            Web version of MindShelf built with TypeScript
           </p>
-          <a href="https://muartdev.github.io" target="_blank" class="download-link visit-link" data-i18n="projects.portfolio">This Portfolio</a>
+          <a href="https://muartdev.github.io" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.portfolio">Portfolio</a>
           <p class="project-desc" data-i18n="projects.portfolio.desc">
-            Minimal CV site with dark mode, EN/TR language toggle, deployed on GitHub Pages.
+            This personal portfolio website
+          </p>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon">
+            <img src="images/backend.png" alt="Backend development icon" />
+          </div>
+          <h3 data-i18n="projects.backend">Backend</h3>
+          <a href="https://github.com/muartdev/mind" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.mindapi">Mind API</a>
+          <p class="project-desc" data-i18n="projects.mindapi.desc">
+            Backend API service built with TypeScript
           </p>
         </div>
       </div>
     </section>
 
-    <section id="skills">
+    <section id="skills" class="reveal">
+      <h2 class="section-title" data-i18n="skills.title">Skills</h2>
       <div class="content-card">
-        <div class="skills">
-        <span class="skill">HTML</span>
-        <span class="skill">CSS</span>
-        <span class="skill">JavaScript</span>
-        <span class="skill">React</span>
-        <span class="skill">Next.js</span>
-        <span class="skill">Git</span>
-        <span class="skill">Swift</span>
-        <span class="skill">SwiftUI</span>
-        <span class="skill">Supabase</span>
-        <span class="skill">Java</span>
-      </div>
+        <div class="skills-category">
+          <div class="skills-category-title" data-i18n="skills.frontend">Frontend</div>
+          <div class="skills-group">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">React</span>
+            <span class="skill">Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <div class="skills-category-title" data-i18n="skills.mobile">Mobile</div>
+          <div class="skills-group">
+            <span class="skill">Swift</span>
+            <span class="skill">SwiftUI</span>
+            <span class="skill">UIKit</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <div class="skills-category-title" data-i18n="skills.backend_tools">Backend & Tools</div>
+          <div class="skills-group">
+            <span class="skill">Java</span>
+            <span class="skill">Node.js</span>
+            <span class="skill">Git</span>
+            <span class="skill">GitHub</span>
+            <span class="skill">REST APIs</span>
+            <span class="skill">Firebase</span>
+            <span class="skill">Supabase</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="reveal">
+      <h2 class="section-title" data-i18n="contact.title">Contact</h2>
       <div class="content-card">
         <div class="skills">
-          <a href="mailto:muartmac@gmail.com" class="skill contact-link">
+          <a href="mailto:muartmac@gmail.com" class="contact-item">
+            <span class="contact-icon">&#9993;</span>
             muartmac@gmail.com
           </a>
-          <a href="https://github.com/muartdev" target="_blank" class="skill contact-link">
+          <a href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-icon">&#128187;</span>
             github.com/muartdev
           </a>
-          <a href="https://x.com/muartdev" target="_blank" class="skill contact-link">
+          <a href="https://x.com/muartdev" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-icon">&#128172;</span>
             x.com/muartdev
           </a>
         </div>
@@ -869,7 +950,14 @@
     </section>
 
     <footer>
-      <span data-i18n="footer.text">© 2026 Murat. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://x.com/muartdev" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+        <a href="mailto:muartmac@gmail.com">Email</a>
+      </div>
+      <div class="footer-copyright">
+        <span data-i18n="footer.text">&copy; 2026 Murat. All rights reserved.</span>
+      </div>
     </footer>
   </div>
 
@@ -880,53 +968,63 @@
         'nav.about': 'About',
         'nav.projects': 'Projects',
         'nav.skills': 'Skills',
-        'nav.blog': 'Blog',
         'nav.contact': 'Contact',
         'hero.title': 'Software Developer',
         'hero.subtitle': 'Full Stack · iOS · Shipping real products|',
         'about.title': 'About',
         'about.text': 'Computer Engineering student who builds full-stack products end to end — from iOS apps with in-app purchases to web platforms with custom domains and live deployments. I\'ve set up Supabase backends, configured Cloudflare Pages and Vercel, integrated Google Sheets as a CMS, and shipped apps that real users can pay for. I learn by shipping.',
         'projects.title': 'Projects',
-        'projects.financetrick': 'FinanceTrick',
-        'projects.financetrick.desc': 'Personal finance tracking app built with Swift',
-        'projects.web': 'Web',
         'projects.mindshelf': 'MindShelf',
-        'projects.mindshelf.desc': 'iOS app + web app. In-app purchases & subscriptions (StoreKit 2), cross-device sync via Supabase, deployed on Cloudflare Pages. Full monetization flow.',
-        'projects.vogeriders': 'VogeRidersTR',
-        'projects.vogeriders.desc': 'Community platform for Voge motorcycle owners in Turkey. Custom domain, Vercel deployment, Google Sheets as CMS, AI-assisted development.',
-        'projects.portfolio': 'This Portfolio',
-        'projects.portfolio.desc': 'Minimal CV site with dark mode, EN/TR language toggle, deployed on GitHub Pages.',
+        'projects.mindshelf.desc': 'Book tracking app with in-app purchases, built with Swift',
+        'projects.foodsuggest': 'FoodSuggest',
+        'projects.foodsuggest.desc': 'Food suggestion app built with Swift',
+        'projects.sysmonitor': 'System Monitor',
+        'projects.sysmonitor.desc': 'macOS system monitoring tool built with Swift',
+        'projects.web': 'Web',
+        'projects.mindshelfweb': 'MindShelf Web',
+        'projects.mindshelfweb.desc': 'Web version of MindShelf built with TypeScript',
+        'projects.portfolio': 'Portfolio',
+        'projects.portfolio.desc': 'This personal portfolio website',
+        'projects.backend': 'Backend',
+        'projects.mindapi': 'Mind API',
+        'projects.mindapi.desc': 'Backend API service built with TypeScript',
         'skills.title': 'Skills',
+        'skills.frontend': 'Frontend',
+        'skills.mobile': 'Mobile',
+        'skills.backend_tools': 'Backend & Tools',
         'contact.title': 'Contact',
-        'contact.email': 'Email:',
-        'contact.github': 'GitHub:',
-        'footer.text': '© 2026 Murat. All rights reserved.'
+        'footer.text': '\u00a9 2026 Murat. All rights reserved.'
       },
       tr: {
-        'nav.about': 'Hakkımda',
+        'nav.about': 'Hakk\u0131mda',
         'nav.projects': 'Projeler',
         'nav.skills': 'Yetenekler',
-        'nav.blog': 'Blog',
         'nav.contact': 'İletişim',
-        'hero.title': 'Yazılım Geliştirici',
-        'hero.subtitle': 'Full Stack · iOS · Gerçek ürünler üretiyorum|',
+        'hero.title': 'Bilgisayar Mühendisliği Öğrencisi',
+        'hero.subtitle': 'Full Stack & iOS Geliştirme Odaklı|',
         'about.title': 'Hakkımda',
-        'about.text': 'Uçtan uca tam yığın ürünler geliştiren bir Bilgisayar Mühendisliği öğrencisiyim — uygulama içi satın alımlı iOS uygulamalarından özel domainli canlı web platformlarına kadar. Supabase backend kurdum, Cloudflare Pages ve Vercel yapılandırdım, Google Sheets\'i CMS olarak entegre ettim ve gerçek kullanıcıların ödeme yapabildiği uygulamalar yayınladım. Yaparak öğreniyorum.',
+        'about.text': 'Frontend ve iOS geliştirmeye güçlü ilgisi olan bir Bilgisayar Mühendisliği öğrencisiyim. Yazılım mühendisliği becerilerimi sürekli geliştirirken, temiz, minimal ve kullanıcı dostu arayüzler oluşturmaya odaklanıyorum. Fikirleri gerçek ürünlere dönüştürmekten ve modern teknolojileri uygulamalı projeler aracılığıyla öğrenmekten keyif alıyorum.',
         'projects.title': 'Projeler',
-        'projects.financetrick': 'FinanceTrick',
-        'projects.financetrick.desc': 'Swift ile geliştirilmiş kişisel finans takip uygulaması',
-        'projects.web': 'Web',
         'projects.mindshelf': 'MindShelf',
-        'projects.mindshelf.desc': 'iOS uygulama + web uygulaması. Uygulama içi satın alım ve abonelik (StoreKit 2), Supabase ile cihazlar arası senkronizasyon, Cloudflare Pages\'te yayında.',
-        'projects.vogeriders': 'VogeRidersTR',
-        'projects.vogeriders.desc': 'Türkiye\'deki Voge motosiklet sahipleri için topluluk platformu. Özel domain, Vercel deployment, Google Sheets CMS entegrasyonu, AI destekli geliştirme.',
-        'projects.portfolio': 'Bu Portfolio',
-        'projects.portfolio.desc': 'Dark mode, EN/TR dil değiştirme özellikli minimal CV sitesi, GitHub Pages\'te yayında.',
+        'projects.mindshelf.desc': 'Uygulama içi satın alım özellikli kitap takip uygulaması, Swift ile geliştirildi',
+        'projects.foodsuggest': 'FoodSuggest',
+        'projects.foodsuggest.desc': 'Swift ile geliştirilmiş yemek öneri uygulaması',
+        'projects.sysmonitor': 'System Monitor',
+        'projects.sysmonitor.desc': 'Swift ile geliştirilmiş macOS sistem izleme aracı',
+        'projects.web': 'Web',
+        'projects.mindshelfweb': 'MindShelf Web',
+        'projects.mindshelfweb.desc': 'TypeScript ile geliştirilmiş MindShelf web versiyonu',
+        'projects.portfolio': 'Portföy',
+        'projects.portfolio.desc': 'Bu kişisel portföy web sitesi',
+        'projects.backend': 'Backend',
+        'projects.mindapi': 'Mind API',
+        'projects.mindapi.desc': 'TypeScript ile geliştirilmiş backend API servisi',
         'skills.title': 'Yetenekler',
-        'contact.title': 'İletişim',
-        'contact.email': 'E-posta:',
-        'contact.github': 'GitHub:',
-        'footer.text': '© 2026 Murat. Tüm hakları saklıdır.'
+        'skills.frontend': 'Frontend',
+        'skills.mobile': 'Mobil',
+        'skills.backend_tools': 'Backend & Ara\u00e7lar',
+        'contact.title': '\u0130leti\u015fim',
+        'footer.text': '\u00a9 2026 Murat. T\u00fcm haklar\u0131 sakl\u0131d\u0131r.'
       }
     };
 
@@ -983,26 +1081,39 @@
       });
     }
 
-    // Dropdown Management
-    function toggleDropdown(id) {
-      const dropdown = document.getElementById(id);
-      const isActive = dropdown.classList.contains('active');
-      
-      // Close all dropdowns
-      document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
-      
-      // Toggle this dropdown
-      if (!isActive) {
-        dropdown.classList.add('active');
+    // Scroll Reveal Animation
+    function initScrollReveal() {
+      const revealElements = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        revealElements.forEach(el => el.classList.add('visible'));
+        return;
       }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      revealElements.forEach(el => observer.observe(el));
     }
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(event) {
-      if (!event.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
-      }
-    });
+    // Active Nav Link Highlighting
+    function initActiveNav() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector('nav a[href="#' + entry.target.id + '"]');
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+      sections.forEach(section => observer.observe(section));
+    }
 
     // Particles Animation - Colorful particles, more visible
     function createParticles() {
@@ -1037,6 +1148,8 @@
       initTheme();
       initLanguage();
       createParticles();
+      initScrollReveal();
+      initActiveNav();
     });
   </script>
 </body>
