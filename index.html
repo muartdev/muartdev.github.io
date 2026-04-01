@@ -3,51 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Murat - Computer Engineering student focused on Full Stack & iOS Development. Portfolio showcasing projects in Swift, React, and backend technologies." />
+  <meta name="description" content="Murat builds polished digital products across iOS, web, and backend. A modern portfolio showcasing Swift, React, and product-minded engineering." />
   <meta name="author" content="Murat" />
   <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Murat | Computer Engineer & Developer" />
-  <meta property="og:description" content="Computer Engineering student focused on Full Stack & iOS Development." />
+  <meta name="theme-color" content="#f7f4ec" />
+  <meta property="og:title" content="Murat | Product-Minded Developer" />
+  <meta property="og:description" content="Portfolio of a Computer Engineering student building thoughtful products across iOS, web, and backend." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://muartdev.github.io/" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="tr_TR" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@muartdev" />
-  <meta name="twitter:title" content="Murat | Computer Engineer & Developer" />
-  <meta name="twitter:description" content="Computer Engineering student focused on Full Stack & iOS Development." />
-  <title>Murat | Computer Engineer & Developer</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23000'/%3E%3Ctext x='50' y='65' font-family='Courier New, monospace' font-size='50' fill='white' text-anchor='middle'%3E%26gt;m%3C/text%3E%3C/svg%3E" />
+  <meta name="twitter:title" content="Murat | Product-Minded Developer" />
+  <meta name="twitter:description" content="Modern portfolio highlighting iOS, web, and backend projects." />
+  <title>Murat | Product-Minded Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%23ff6b2c'/%3E%3Cstop offset='1' stop-color='%230f766e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='26' fill='%230c111b'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='url(%23g)' font-family='Space Grotesk, Arial, sans-serif' font-size='32' font-weight='700'%3Emu%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --text-muted: #666666;
-      --accent: #4285f4;
-      --hover-bg: #f5f5f5;
-      --card-bg: #f8f9fa;
-      --border: #e0e0e0;
-      --skill-bg: #f4f4f5;
-      --skill-hover: #e5e5e7;
+      --bg: #f7f4ec;
+      --bg-soft: #efe9dd;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-strong: rgba(255, 255, 255, 0.92);
+      --surface-muted: rgba(255, 255, 255, 0.58);
+      --text: #111827;
+      --muted: #5d6776;
+      --muted-strong: #2f3946;
+      --line: rgba(17, 24, 39, 0.08);
+      --line-strong: rgba(17, 24, 39, 0.14);
+      --accent: #ff6b2c;
+      --accent-strong: #f24d0d;
+      --accent-secondary: #0f766e;
+      --accent-tertiary: #121826;
+      --shadow: 0 28px 90px rgba(15, 23, 42, 0.12);
+      --shadow-soft: 0 16px 50px rgba(15, 23, 42, 0.08);
+      --radius-xl: 36px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --header-height: 84px;
     }
 
     [data-theme="dark"] {
-      --bg: #0f0f0f;
-      --text: #eaeaea;
-      --text-muted: #a1a1a1;
-      --accent: #4285f4;
-      --hover-bg: #1a1a1a;
-      --card-bg: #171717;
-      --border: #2a2a2a;
-      --skill-bg: #1a1a1a;
-      --skill-hover: #2a2a2a;
+      --bg: #09101a;
+      --bg-soft: #0d1624;
+      --surface: rgba(14, 22, 36, 0.78);
+      --surface-strong: rgba(13, 21, 34, 0.94);
+      --surface-muted: rgba(16, 26, 42, 0.7);
+      --text: #f3f6fb;
+      --muted: #97a3b7;
+      --muted-strong: #d9e1ee;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.16);
+      --accent: #ff7d4d;
+      --accent-strong: #ff9358;
+      --accent-secondary: #52d1c8;
+      --accent-tertiary: #dce7fb;
+      --shadow: 0 32px 100px rgba(0, 0, 0, 0.45);
+      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.3);
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     html {
@@ -55,906 +77,1461 @@
     }
 
     body {
-      background: var(--bg);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 107, 44, 0.14), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(15, 118, 110, 0.12), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(18, 24, 38, 0.08), transparent 36%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
       color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* Header - Reduced padding and sizing */
-    header {
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-
-    .logo-icon {
-      width: auto;
-      height: 32px;
-      padding: 0 12px;
-      background: #000000 !important;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white !important;
-      font-family: 'Courier New', Courier, 'Monaco', 'Menlo', 'Consolas', monospace;
-      font-weight: normal;
-      font-size: 0.9rem;
-      letter-spacing: 0.5px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.875rem;
-      transition: all 0.2s;
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
       position: relative;
     }
 
-    nav a:hover {
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -2;
+      width: 32rem;
+      height: 32rem;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    body::before {
+      top: -8rem;
+      right: -10rem;
+      background: rgba(255, 107, 44, 0.22);
+    }
+
+    body::after {
+      left: -10rem;
+      bottom: -12rem;
+      background: rgba(15, 118, 110, 0.18);
+    }
+
+    [data-theme="dark"] body::before {
+      background: rgba(255, 125, 77, 0.24);
+    }
+
+    [data-theme="dark"] body::after {
+      background: rgba(82, 209, 200, 0.16);
+    }
+
+    ::selection {
+      background: rgba(255, 107, 44, 0.2);
       color: var(--text);
-      background: var(--hover-bg);
     }
 
-    nav a.active {
-      background: var(--hover-bg);
-      color: var(--text);
-      font-weight: 500;
+    img {
+      display: block;
+      max-width: 100%;
     }
 
-    .download-btn {
-      background: var(--text);
-      color: var(--bg);
-      padding: 10px 20px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s;
+    a {
+      color: inherit;
     }
 
-    .download-btn:hover {
-      opacity: 0.8;
+    button {
+      font: inherit;
     }
 
-    .theme-toggle, .lang-toggle {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.875rem;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .theme-toggle:hover, .lang-toggle:hover {
-      background: var(--hover-bg);
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-
-    /* Main Content - Reduced padding */
-    .main-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-
-    /* Hero - More compact, engineer-focused */
-    .hero {
-      text-align: center;
-      margin-bottom: 60px;
-      position: relative;
-      overflow: hidden;
-      padding: 60px 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(66,133,244,0.06) 0%, transparent 70%);
-    }
-
-    [data-theme="dark"] .hero {
-      background: radial-gradient(ellipse at 50% 0%, rgba(66,133,244,0.08) 0%, transparent 70%);
-    }
-
-    .particles {
-      position: absolute;
+    .progress-bar {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Background particles - colorful, more visible, faster animation */
-    .particle {
-      position: absolute;
-      width: 3px;
       height: 3px;
-      border-radius: 50%;
-      opacity: 0.4;
-      animation: float 8s infinite ease-in-out;
+      z-index: 200;
+      background: transparent;
+      pointer-events: none;
     }
 
-    [data-theme="dark"] .particle {
-      opacity: 0.5;
+    .progress-bar span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+      box-shadow: 0 0 18px rgba(255, 107, 44, 0.35);
+      transition: width 0.12s ease-out;
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0);
-        opacity: 0.4;
-      }
-      25% {
-        transform: translate(30px, -40px);
-        opacity: 0.5;
-      }
-      50% {
-        transform: translate(-20px, 30px);
-        opacity: 0.45;
-      }
-      75% {
-        transform: translate(40px, 20px);
-        opacity: 0.5;
-      }
+    .site-header {
+      position: sticky;
+      top: 14px;
+      z-index: 120;
+      padding: 14px 24px 0;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
+    .header-shell {
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
     }
 
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      min-width: 0;
+    }
 
-    /* Hero typography - Engineer-focused, not flashy */
-    .hero h1 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin-bottom: 12px;
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 102px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(17, 24, 39, 0.82));
+      color: #f8fafc;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.98rem;
+      letter-spacing: -0.02em;
       color: var(--text);
-      letter-spacing: -0.01em;
-      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .site-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover,
+    .site-nav a[aria-current="page"] {
+      background: rgba(255, 107, 44, 0.1);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .site-nav .nav-cta {
+      background: var(--accent-tertiary);
+      color: #f8fafc;
+      box-shadow: 0 12px 30px rgba(18, 24, 38, 0.18);
+    }
+
+    .site-nav .nav-cta:hover,
+    .site-nav .nav-cta[aria-current="page"] {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #ffffff;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .control-btn {
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      min-width: 68px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .control-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    [data-theme="dark"] .control-btn:hover {
+      background: rgba(17, 27, 45, 0.98);
+    }
+
+    .page-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 24px 96px;
+      position: relative;
+    }
+
+    section {
+      scroll-margin-top: calc(var(--header-height) + 36px);
+      margin-top: 96px;
+    }
+
+    .glass-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-intro {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+      max-width: 780px;
+    }
+
+    .section-kicker {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-strong);
+    }
+
+    .section-intro h2,
+    .contact-panel h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+      color: var(--text);
+    }
+
+    .section-intro p,
+    .contact-panel p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 62ch;
+    }
+
+    .hero {
+      margin-top: 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-side {
+      min-height: 100%;
+    }
+
+    .hero-copy {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(255, 107, 44, 0.22), transparent 28%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.62));
+    }
+
+    [data-theme="dark"] .hero-copy {
+      background:
+        radial-gradient(circle at top right, rgba(255, 125, 77, 0.16), transparent 28%),
+        linear-gradient(145deg, rgba(17, 27, 45, 0.92), rgba(11, 18, 30, 0.84));
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      inset: auto -6% -24% auto;
+      width: 15rem;
+      height: 15rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15, 118, 110, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 107, 44, 0.12);
+      border: 1px solid rgba(255, 107, 44, 0.14);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-strong);
+      margin-bottom: 22px;
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      box-shadow: 0 0 0 6px rgba(255, 107, 44, 0.12);
+    }
+
+    .hero-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.08em;
+      color: var(--text);
+      max-width: 12ch;
+    }
+
+    .hero-title span {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .hero-subtitle {
-      font-size: 1.125rem;
-      color: var(--text-muted);
-      margin-bottom: 0;
-      font-weight: 400;
-      line-height: 1.6;
+      margin-top: 24px;
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 56ch;
     }
 
-    /* Cards Grid - Horizontal scrollable */
-    .cards-grid {
+    .hero-actions {
       display: flex;
-      align-items: stretch;
-      gap: 20px;
-      margin-top: 40px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-      padding-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
     }
 
-    .cards-grid::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .cards-grid::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .cards-grid::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 3px;
-    }
-
-    .cards-grid::-webkit-scrollbar-thumb:hover {
-      background: var(--text-muted);
-    }
-
-    .platform-card {
-      background: var(--card-bg);
-      border-radius: 24px;
-      padding: 32px 24px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      flex: 0 0 auto;
-      width: 300px;
-      min-height: 450px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-
-    .platform-card > .platform-icon,
-    .platform-card > h3 {
-      text-align: center;
-    }
-
-    .platform-card > .download-link,
-    .platform-card > .project-desc {
-      text-align: left;
-    }
-
-    .platform-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    }
-
-    .platform-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 20px;
-      display: flex;
+    .button {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      border: 1px solid transparent;
     }
 
-    .platform-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    .button:hover {
+      transform: translateY(-2px);
     }
 
-    .platform-card h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 28px;
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #ffffff;
+      box-shadow: 0 18px 35px rgba(255, 107, 44, 0.2);
+    }
+
+    .button-secondary {
+      border-color: var(--line);
+      background: var(--surface-strong);
       color: var(--text);
-      text-align: center;
     }
 
-    .download-link {
+    .button-secondary:hover {
+      border-color: var(--line-strong);
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.52);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--muted-strong);
+    }
+
+    [data-theme="dark"] .pill {
+      background: rgba(17, 27, 45, 0.6);
+    }
+
+    .pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      flex-shrink: 0;
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+      background:
+        linear-gradient(180deg, rgba(18, 24, 38, 0.98), rgba(18, 24, 38, 0.92)),
+        linear-gradient(135deg, rgba(255, 107, 44, 0.08), transparent 60%);
+      color: #f8fafc;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-side::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: calc(var(--radius-lg) - 6px);
+      pointer-events: none;
+    }
+
+    .terminal {
+      border-radius: 22px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 240px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .terminal-head {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 6px;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 8px 16px;
-      margin-bottom: 4px;
-      margin-top: 0;
-      border-radius: 20px;
-      transition: all 0.2s;
-      font-weight: 500;
-      font-size: 0.875rem;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.72);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    .download-link:hover {
-      color: var(--text);
-      background: var(--hover-bg);
+    .terminal-head .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
     }
 
-    .download-link::after {
-      content: '↗';
+    .terminal-head .dot:nth-child(1) {
+      background: #ff5f57;
+    }
+
+    .terminal-head .dot:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .terminal-head .dot:nth-child(3) {
+      background: #28c840;
+    }
+
+    .terminal pre {
+      white-space: pre-wrap;
+      font-family: "IBM Plex Mono", monospace;
       font-size: 0.9rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.88);
     }
 
-    .visit-link::after {
-      content: '↗' !important;
+    .terminal .accent-line {
+      color: #7ee3dc;
     }
 
-    .project-desc {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      margin-bottom: 16px;
-      line-height: 1.5;
-      text-align: left;
+    .hero-note {
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Section Styles - Reduced spacing */
-    section {
-      margin-bottom: 60px;
-      scroll-margin-top: 80px;
+    .hero-note h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
     }
 
-    .section-heading {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 24px;
+    .hero-note p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.94rem;
+    }
+
+    .insight-strip {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .insight-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .insight-index {
+      display: inline-flex;
+      margin-bottom: 18px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--accent-strong);
+      letter-spacing: 0.1em;
+    }
+
+    .insight-card h3,
+    .value-card h3,
+    .project-card h3,
+    .stack-card h3,
+    .workflow-step h4 {
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: -0.03em;
       color: var(--text);
-      letter-spacing: -0.01em;
-      line-height: 1.3;
     }
 
-    .content-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 24px;
+    .insight-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .insight-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .about-story {
+      padding: 34px;
+    }
+
+    .about-story p + p {
+      margin-top: 18px;
+    }
+
+    .about-story p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .value-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .value-card {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -3rem -3rem auto;
+      width: 7rem;
+      height: 7rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 107, 44, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .value-number {
+      display: inline-flex;
       margin-bottom: 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--accent-strong);
     }
 
-    .content-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-      color: var(--text);
+    .value-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 8px;
     }
 
-    .content-card p {
-      color: var(--text-muted);
-      line-height: 1.7;
+    .value-card p {
+      color: var(--muted);
       font-size: 0.95rem;
     }
 
-    /* Blinking cursor with colorful animation - More prominent */
-    .cursor-blink {
-      display: inline-block;
-      font-weight: 900;
-      font-size: 1.6em;
-      margin-left: 3px;
-      margin-top: -4px;
-      animation: blinkColorful 1.5s infinite;
-      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-      vertical-align: text-top;
-      line-height: 1;
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
     }
 
-    @keyframes blinkColorful {
-      0% {
-        opacity: 1;
-        color: #4285f4;
-      }
-      12.5% {
-        opacity: 1;
-        color: #34a853;
-      }
-      25% {
-        opacity: 1;
-        color: #fbbc04;
-      }
-      37.5% {
-        opacity: 1;
-        color: #ea4335;
-      }
-      50% {
-        opacity: 0.4;
-        color: #4285f4;
-      }
-      62.5% {
-        opacity: 0.4;
-        color: #34a853;
-      }
-      75% {
-        opacity: 0.4;
-        color: #fbbc04;
-      }
-      87.5% {
-        opacity: 0.4;
-        color: #ea4335;
-      }
-      100% {
-        opacity: 1;
-        color: #4285f4;
-      }
+    .project-card {
+      grid-column: span 4;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 100%;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), transparent 55%);
+      z-index: -1;
+    }
+
+    .project-card.feature {
+      grid-column: span 6;
+      min-height: 360px;
+    }
+
+    .project-card.warm {
+      background:
+        radial-gradient(circle at top right, rgba(255, 107, 44, 0.16), transparent 26%),
+        var(--surface);
+    }
+
+    .project-card.cool {
+      background:
+        radial-gradient(circle at top right, rgba(15, 118, 110, 0.18), transparent 24%),
+        var(--surface);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .project-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255, 107, 44, 0.1);
+      border: 1px solid rgba(255, 107, 44, 0.12);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+    }
+
+    .project-icon-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .project-icon-wrap {
+      background: rgba(15, 23, 42, 0.58);
+    }
+
+    .project-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      opacity: 0.88;
+    }
+
+    [data-theme="dark"] .project-icon {
+      filter: brightness(0) invert(1);
+      opacity: 0.82;
+    }
+
+    .project-card h3 {
+      font-size: 1.5rem;
+      line-height: 1.05;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .project-meta {
+      color: var(--muted-strong);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.55);
+      color: var(--muted-strong);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] .chip {
+      background: rgba(17, 27, 45, 0.62);
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .project-links a::after {
+      content: "↗";
+      font-size: 0.94rem;
+      color: var(--accent-strong);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .stack-card {
+      padding: 24px;
+      min-height: 100%;
+    }
+
+    .stack-index {
+      display: inline-flex;
+      margin-bottom: 16px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+      color: var(--accent-strong);
+    }
+
+    .stack-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .stack-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 18px;
+    }
+
+    .workflow-panel {
+      margin-top: 22px;
+      padding: 30px;
+    }
+
+    .workflow-panel h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .workflow-step {
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface-muted);
+    }
+
+    .workflow-step span {
+      display: inline-flex;
+      margin-bottom: 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      color: var(--accent-strong);
+    }
+
+    .workflow-step h4 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .workflow-step p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact-panel {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      background:
+        radial-gradient(circle at top right, rgba(255, 107, 44, 0.14), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(15, 118, 110, 0.12), transparent 30%),
+        var(--surface);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .contact-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
     }
 
     footer {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      padding: 32px 24px;
-      border-top: 1px solid var(--border);
-      margin-top: 60px;
+      margin-top: 82px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
     }
-      .project-desc {
-        font-size: 0.875rem;
-        color: var(--text-muted);
-        margin-top: 4px;
-        margin-bottom: 20px;
-        line-height: 1.6;
-        text-align: left;
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .skills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+      .progress-bar span,
+      .reveal,
+      .button,
+      .control-btn,
+      .site-nav a {
+        transition: none;
       }
 
-      .skill {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-        background: var(--skill-bg);
-        color: var(--text);
-        border-radius: 999px;
-        transition: background 0.2s ease, transform 0.2s ease;
-      }
-
-      .skill:hover {
-        background: var(--skill-hover);
-        transform: translateY(-2px);
-      }
-      /* Section title with accent bar */
-      .section-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 20px;
-        color: var(--text);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .section-title::before {
-        content: '';
-        width: 4px;
-        height: 24px;
-        background: #4285f4;
-        border-radius: 2px;
-        flex-shrink: 0;
-      }
-
-      /* Skills categories */
-      .skills-category {
-        margin-bottom: 20px;
-      }
-
-      .skills-category:last-child {
-        margin-bottom: 0;
-      }
-
-      .skills-category-title {
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-bottom: 10px;
-      }
-
-      .skills-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      /* Contact items with icons */
-      .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px 18px;
-        background: var(--skill-bg);
-        border-radius: 12px;
-        color: var(--text);
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: background 0.2s ease, transform 0.2s ease;
-      }
-
-      .contact-item:hover {
-        background: var(--skill-hover);
-        transform: translateY(-2px);
-      }
-
-      .contact-icon {
-        width: 20px;
-        height: 20px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .contact-icon svg {
-        width: 20px;
-        height: 20px;
-        fill: currentColor;
-      }
-
-      /* Footer */
-      .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 16px;
-      }
-
-      .footer-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-size: 0.85rem;
-        transition: color 0.2s;
-      }
-
-      .footer-links a:hover {
-        color: var(--text);
-      }
-
-      .footer-copyright {
-        font-size: 0.8rem;
-      }
-
-      /* Scroll reveal animations */
       .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-
-      .reveal.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .header-shell {
+        border-radius: 30px;
+        padding: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
-      @media (prefers-reduced-motion: reduce) {
-        .reveal {
-          opacity: 1;
-          transform: none;
-          transition: none;
-        }
-      }
-
-    @media (max-width: 768px) {
-      /* Header - Mobile optimized */
-      .header-container {
-        padding: 0 16px;
-        flex-wrap: nowrap;
-      }
-
-      .logo {
-        font-size: 1rem;
-      }
-
-      .logo-icon {
-        height: 28px;
-        padding: 0 10px;
-        font-size: 0.8rem;
-      }
-
-      /* Navigation - Mobile optimized */
-      nav {
-        gap: 4px;
-        flex-wrap: nowrap;
+      .site-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        padding-bottom: 4px;
       }
 
-      nav::-webkit-scrollbar {
+      .site-nav::-webkit-scrollbar {
         display: none;
       }
 
-      nav a {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-        white-space: nowrap;
+      .hero-grid,
+      .about-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
       }
 
-      .download-btn {
-        padding: 8px 16px;
-        font-size: 0.8rem;
+      .insight-strip {
+        grid-template-columns: 1fr;
       }
 
-      .theme-toggle, .lang-toggle {
-        padding: 6px 12px;
-        font-size: 0.8rem;
+      .stack-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .controls {
-        gap: 4px;
+      .workflow-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      /* Main Container - Mobile spacing */
-      .main-container {
-        padding: 32px 16px;
+      .project-card,
+      .project-card.feature {
+        grid-column: span 6;
       }
 
-      /* Hero - Mobile optimized */
-      .hero {
-        padding: 48px 0;
-        margin-bottom: 48px;
-      }
-
-      .hero-content {
-        padding: 0 16px;
-      }
-
-      .hero h1 {
-        font-size: 1.75rem;
-        line-height: 1.2;
-        margin-bottom: 10px;
-      }
-
-      .hero-subtitle {
-        font-size: 0.95rem;
-        line-height: 1.5;
-      }
-
-      /* Cards - Mobile layout (horizontal scroll) */
-      .cards-grid {
-        gap: 16px;
-        margin-top: 0;
-        padding-left: 0;
-        padding-right: 16px;
-      }
-
-      .platform-card {
-        padding: 20px 16px;
-        border-radius: 16px;
-        width: 260px;
-      }
-
-      .platform-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 16px;
-      }
-
-      .download-link {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-
-      .project-desc {
-        font-size: 0.85rem;
-        margin-top: 4px;
-      }
-
-      /* Content Cards - Mobile */
-      .content-card {
-        padding: 20px;
-        border-radius: 16px;
-        margin-bottom: 12px;
-      }
-
-      .content-card p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-      }
-
-      /* Skills - Mobile */
-      .skills {
-        gap: 8px;
-      }
-
-      .skill {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-      }
-
-      /* Sections - Mobile spacing */
-      section {
-        margin-bottom: 48px;
-      }
-
-      /* Footer - Mobile */
-      footer {
-        padding: 24px 16px;
-        margin-top: 48px;
-        font-size: 0.8rem;
-      }
-
-      .section-title {
-        font-size: 1.25rem;
-      }
-
-      .skills-category-title {
-        font-size: 0.75rem;
-      }
-
-      .contact-item {
-        padding: 10px 14px;
-        font-size: 0.85rem;
-      }
-
-      .footer-links {
-        gap: 16px;
+      .contact-actions {
+        justify-content: flex-start;
       }
     }
 
-    @media (max-width: 480px) {
-      /* Extra small devices */
-      .hero h1 {
-        font-size: 1.5rem;
+    @media (max-width: 760px) {
+      .site-header {
+        top: 10px;
+        padding: 10px 16px 0;
+      }
+
+      .header-shell {
+        gap: 14px;
+      }
+
+      .brand {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .page-shell {
+        padding: 18px 16px 80px;
+      }
+
+      section {
+        margin-top: 72px;
+      }
+
+      .hero-copy,
+      .hero-side,
+      .about-story,
+      .value-card,
+      .project-card,
+      .stack-card,
+      .workflow-panel,
+      .contact-panel {
+        padding: 24px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.6rem, 15vw, 4.2rem);
       }
 
       .hero-subtitle {
-        font-size: 0.875rem;
+        font-size: 1rem;
       }
 
-      nav a {
-        padding: 6px 10px;
-        font-size: 0.75rem;
+      .project-grid {
+        grid-template-columns: 1fr;
       }
 
-      .download-btn {
-        padding: 6px 12px;
-        font-size: 0.75rem;
+      .project-card,
+      .project-card.feature {
+        grid-column: span 1;
+      }
+
+      .stack-grid,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand-mark {
+        min-width: 92px;
+        font-size: 0.76rem;
+      }
+
+      .control-btn,
+      .button {
+        width: 100%;
+      }
+
+      .hero-actions,
+      .contact-actions {
+        flex-direction: column;
       }
     }
   </style>
 </head>
-
-
 <body>
-  <header>
-    <div class="header-container">
-      <a href="#" class="logo">
-        <div class="logo-icon">>muartdev</div>
+  <div class="progress-bar" aria-hidden="true">
+    <span id="progressBar"></span>
+  </div>
+
+  <header class="site-header">
+    <div class="header-shell">
+      <a class="brand" href="#top">
+        <span class="brand-mark">&gt;muartdev</span>
+        <span class="brand-text">
+          <strong>muartdev</strong>
+          <span data-i18n="brand.label">product portfolio</span>
+        </span>
       </a>
-      <nav>
+
+      <nav class="site-nav" aria-label="Primary navigation">
         <a href="#about" data-i18n="nav.about">About</a>
-        <a href="#projects" data-i18n="nav.projects">Projects</a>
-        <a href="#skills" data-i18n="nav.skills">Skills</a>
-        <a href="#contact" class="download-btn" data-i18n="nav.contact">Contact</a>
-        <div class="controls">
-          <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()" aria-label="Toggle language">
-            <span id="langText">EN</span>
-          </button>
-          <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-            <span id="themeIcon">🌙</span>
-          </button>
-        </div>
+        <a href="#projects" data-i18n="nav.projects">Work</a>
+        <a href="#skills" data-i18n="nav.skills">Stack</a>
+        <a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact</a>
       </nav>
+
+      <div class="header-actions">
+        <button class="control-btn" id="langToggle" type="button" aria-label="Toggle language">
+          <span id="langText">EN</span>
+        </button>
+        <button class="control-btn" id="themeToggle" type="button" aria-label="Toggle color theme">
+          <span id="themeText">DARK</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <div class="main-container">
-    <div class="hero">
-      <div class="particles" id="particles"></div>
-      <div class="hero-content">
-        <h1 class="title" data-i18n="hero.title">Software Developer</h1>
-        <p class="subtitle" data-i18n="hero.subtitle">Full Stack · iOS · Shipping real products<span class="cursor-blink">|</span></p>
+  <main class="page-shell">
+    <section class="hero reveal" id="top">
+      <div class="hero-grid">
+        <div class="hero-copy glass-card">
+          <div class="hero-badge" data-i18n="hero.badge">Product-minded developer</div>
+          <h1 class="hero-title">
+            <span data-i18n="hero.title">I build polished digital products across iOS, web, and backend.</span>
+          </h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
+            Computer Engineering student turning ideas into launch-ready experiences with clean UI, solid architecture, and real deployments.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="button button-primary" data-i18n="hero.primary">See selected work</a>
+            <a href="mailto:muartmac@gmail.com" class="button button-secondary" data-i18n="hero.secondary">Say hello</a>
+          </div>
+          <div class="hero-pills">
+            <span class="pill" data-i18n="hero.pill1">SwiftUI &amp; UIKit</span>
+            <span class="pill" data-i18n="hero.pill2">React &amp; TypeScript</span>
+            <span class="pill" data-i18n="hero.pill3">Supabase &amp; Deployments</span>
+          </div>
+        </div>
+
+        <aside class="hero-side glass-card">
+          <div class="terminal">
+            <div class="terminal-head">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span>build.ts</span>
+            </div>
+            <pre><code>const stack = [
+  "SwiftUI",
+  "TypeScript",
+  "Supabase"
+];
+
+ship({
+  interface: "clean",
+  details: "intentional",
+  deploy: <span class="accent-line">"live"</span>
+});</code></pre>
+          </div>
+          <div class="hero-note">
+            <h3 data-i18n="hero.note.title">From idea to launch</h3>
+            <p data-i18n="hero.note.text">I enjoy stitching together interface, product logic, integrations, and release work so the final result feels complete.</p>
+          </div>
+        </aside>
       </div>
-    </div>
+
+      <div class="insight-strip">
+        <article class="insight-card reveal">
+          <span class="insight-index">01</span>
+          <h3 data-i18n="hero.signal1.title">End-to-end ownership</h3>
+          <p data-i18n="hero.signal1.text">I like handling interface, logic, integrations, and deployment as one connected product.</p>
+        </article>
+        <article class="insight-card reveal">
+          <span class="insight-index">02</span>
+          <h3 data-i18n="hero.signal2.title">Clean product taste</h3>
+          <p data-i18n="hero.signal2.text">Minimal interfaces, deliberate spacing, and the small details that make a project feel intentional.</p>
+        </article>
+        <article class="insight-card reveal">
+          <span class="insight-index">03</span>
+          <h3 data-i18n="hero.signal3.title">Shipping mindset</h3>
+          <p data-i18n="hero.signal3.text">I learn by building real things, getting them live, and improving them through iteration.</p>
+        </article>
+      </div>
+    </section>
 
     <section id="about" class="reveal">
-      <h2 class="section-title" data-i18n="about.title">About</h2>
-      <div class="content-card">
-        <p data-i18n="about.text">
-          Computer Engineering student who builds full-stack products end to end — from iOS apps with in-app purchases to web platforms with custom domains and live deployments. I've set up Supabase backends, configured Cloudflare Pages and Vercel, integrated Google Sheets as a CMS, and shipped apps that real users can pay for. I learn by shipping.
-        </p>
+      <div class="section-intro">
+        <span class="section-kicker" data-i18n="about.kicker">About</span>
+        <h2 data-i18n="about.title">I like products that feel clear, fast, and ready to use.</h2>
+        <p data-i18n="about.intro">My work sits between engineering and product thinking, with a strong bias toward clean execution and launch-ready polish.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-story glass-card">
+          <p data-i18n="about.lead">
+            I'm a Computer Engineering student who enjoys turning ideas into products people can actually use. That includes iOS apps with in-app purchases, web experiences with custom domains, and backend services that support the whole flow.
+          </p>
+          <p data-i18n="about.copy">
+            I care about how a product feels as much as how it works. Clean interfaces, sensible architecture, solid deployment, and thoughtful details are usually where I spend the most energy.
+          </p>
+        </div>
+
+        <div class="value-grid">
+          <article class="value-card glass-card">
+            <span class="value-number">/01</span>
+            <h3 data-i18n="about.card1.title">Design with intent</h3>
+            <p data-i18n="about.card1.text">Interfaces should feel calm, readable, and useful before they try to feel impressive.</p>
+          </article>
+          <article class="value-card glass-card">
+            <span class="value-number">/02</span>
+            <h3 data-i18n="about.card2.title">Build the whole flow</h3>
+            <p data-i18n="about.card2.text">From frontend and iOS to backend integrations, I like understanding how every layer supports the product.</p>
+          </article>
+          <article class="value-card glass-card">
+            <span class="value-number">/03</span>
+            <h3 data-i18n="about.card3.title">Polish after launch</h3>
+            <p data-i18n="about.card3.text">Shipping is the baseline. Refinement, iteration, and reliability are what make a project feel mature.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <section id="projects" class="reveal">
-      <h2 class="section-title" data-i18n="projects.title">Projects</h2>
-      <div class="cards-grid">
-        <div class="platform-card">
-          <div class="platform-icon">
-            <img src="images/apple.png" alt="Apple iOS development icon" />
+      <div class="section-intro">
+        <span class="section-kicker" data-i18n="projects.kicker">Selected Work</span>
+        <h2 data-i18n="projects.title">Projects that shaped how I build.</h2>
+        <p data-i18n="projects.intro">A mix of apps, utilities, and web products where I explored product design, system thinking, and practical shipping.</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card feature warm glass-card">
+          <div class="project-top">
+            <span class="project-tag" data-i18n="projects.mindshelf.tag">iOS product</span>
+            <div class="project-icon-wrap">
+              <img class="project-icon" src="images/apple.png" alt="Apple development icon" />
+            </div>
           </div>
-          <h3>iOS / macOS</h3>
-          <a href="https://github.com/muartdev/Mind-Shelf" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.mindshelf">MindShelf</a>
-          <p class="project-desc" data-i18n="projects.mindshelf.desc">
-            Book tracking app with in-app purchases, built with Swift
-          </p>
-          <a href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.foodsuggest">FoodSuggest</a>
-          <p class="project-desc" data-i18n="projects.foodsuggest.desc">
-            Food suggestion app built with Swift
-          </p>
-          <a href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.sysmonitor">System Monitor</a>
-          <p class="project-desc" data-i18n="projects.sysmonitor.desc">
-            macOS system monitoring tool built with Swift
-          </p>
-        </div>
-        <div class="platform-card">
-          <div class="platform-icon">
-            <img src="images/webpage.png" alt="Web development icon" />
+          <h3>MindShelf</h3>
+          <p data-i18n="projects.mindshelf.desc">Book tracking app with in-app purchases, shaped as a polished reading companion on iOS.</p>
+          <p class="project-meta" data-i18n="projects.mindshelf.meta">Swift, in-app purchases, product UX</p>
+          <div class="chip-row">
+            <span class="chip">Swift</span>
+            <span class="chip">In-App Purchase</span>
+            <span class="chip">iOS</span>
           </div>
-          <h3 data-i18n="projects.web">Web</h3>
-          <a href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.mindshelfweb">MindShelf Web</a>
-          <p class="project-desc" data-i18n="projects.mindshelfweb.desc">
-            Web version of MindShelf built with TypeScript
-          </p>
-          <a href="https://muartdev.github.io" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.portfolio">Portfolio</a>
-          <p class="project-desc" data-i18n="projects.portfolio.desc">
-            This personal portfolio website
-          </p>
-        </div>
-        <div class="platform-card">
-          <div class="platform-icon">
-            <img src="images/backend.png" alt="Backend development icon" />
+          <div class="project-links">
+            <a href="https://github.com/muartdev/Mind-Shelf" target="_blank" rel="noopener noreferrer" data-i18n="projects.link.repo">View repo</a>
           </div>
-          <h3 data-i18n="projects.backend">Backend</h3>
-          <a href="https://github.com/muartdev/mind" target="_blank" rel="noopener noreferrer" class="download-link" data-i18n="projects.mindapi">Mind API</a>
-          <p class="project-desc" data-i18n="projects.mindapi.desc">
-            Backend API service built with TypeScript
-          </p>
-        </div>
+        </article>
+
+        <article class="project-card feature cool glass-card">
+          <div class="project-top">
+            <span class="project-tag" data-i18n="projects.mindshelfweb.tag">Companion web app</span>
+            <div class="project-icon-wrap">
+              <img class="project-icon" src="images/webpage.png" alt="Web development icon" />
+            </div>
+          </div>
+          <h3>MindShelf Web</h3>
+          <p data-i18n="projects.mindshelfweb.desc">Web companion experience built with TypeScript to extend the MindShelf idea beyond mobile.</p>
+          <p class="project-meta" data-i18n="projects.mindshelfweb.meta">TypeScript, frontend architecture</p>
+          <div class="chip-row">
+            <span class="chip">TypeScript</span>
+            <span class="chip">Web</span>
+            <span class="chip">Product consistency</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener noreferrer" data-i18n="projects.link.repo">View repo</a>
+          </div>
+        </article>
+
+        <article class="project-card glass-card">
+          <div class="project-top">
+            <span class="project-tag" data-i18n="projects.sysmonitor.tag">macOS utility</span>
+            <div class="project-icon-wrap">
+              <img class="project-icon" src="images/apple.png" alt="Apple development icon" />
+            </div>
+          </div>
+          <h3>System Monitor</h3>
+          <p data-i18n="projects.sysmonitor.desc">macOS utility focused on system visibility, clean information hierarchy, and desktop performance.</p>
+          <p class="project-meta" data-i18n="projects.sysmonitor.meta">Swift, macOS, desktop tooling</p>
+          <div class="chip-row">
+            <span class="chip">Swift</span>
+            <span class="chip">macOS</span>
+            <span class="chip">Utility</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener noreferrer" data-i18n="projects.link.repo">View repo</a>
+          </div>
+        </article>
+
+        <article class="project-card glass-card">
+          <div class="project-top">
+            <span class="project-tag" data-i18n="projects.mindapi.tag">backend service</span>
+            <div class="project-icon-wrap">
+              <img class="project-icon" src="images/backend.png" alt="Backend development icon" />
+            </div>
+          </div>
+          <h3>Mind API</h3>
+          <p data-i18n="projects.mindapi.desc">Backend API layer used to support product logic and integrations.</p>
+          <p class="project-meta" data-i18n="projects.mindapi.meta">TypeScript, APIs, services</p>
+          <div class="chip-row">
+            <span class="chip">TypeScript</span>
+            <span class="chip">REST API</span>
+            <span class="chip">Backend</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/muartdev/mind" target="_blank" rel="noopener noreferrer" data-i18n="projects.link.repo">View repo</a>
+          </div>
+        </article>
+
+        <article class="project-card glass-card">
+          <div class="project-top">
+            <span class="project-tag" data-i18n="projects.foodsuggest.tag">Swift experiment</span>
+            <div class="project-icon-wrap">
+              <img class="project-icon" src="images/apple.png" alt="Apple development icon" />
+            </div>
+          </div>
+          <h3>FoodSuggest</h3>
+          <p data-i18n="projects.foodsuggest.desc">Small Swift project exploring recommendation flows with a lightweight interface.</p>
+          <p class="project-meta" data-i18n="projects.foodsuggest.meta">Swift, rapid prototyping</p>
+          <div class="chip-row">
+            <span class="chip">Swift</span>
+            <span class="chip">Prototype</span>
+            <span class="chip">UX</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener noreferrer" data-i18n="projects.link.repo">View repo</a>
+          </div>
+        </article>
+
+        <article class="project-card glass-card">
+          <div class="project-top">
+            <span class="project-tag" data-i18n="projects.portfolio.tag">brand surface</span>
+            <div class="project-icon-wrap">
+              <img class="project-icon" src="images/webpage.png" alt="Web development icon" />
+            </div>
+          </div>
+          <h3>Portfolio</h3>
+          <p data-i18n="projects.portfolio.desc">This portfolio itself, used as a playground for layout, motion, and presentation.</p>
+          <p class="project-meta" data-i18n="projects.portfolio.meta">HTML, CSS, JavaScript</p>
+          <div class="chip-row">
+            <span class="chip">Design</span>
+            <span class="chip">Motion</span>
+            <span class="chip">Branding</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/muartdev/muartdev.github.io" target="_blank" rel="noopener noreferrer" data-i18n="projects.link.repo">View repo</a>
+            <a href="https://muartdev.github.io/" target="_blank" rel="noopener noreferrer" data-i18n="projects.link.live">Visit site</a>
+          </div>
+        </article>
       </div>
     </section>
 
     <section id="skills" class="reveal">
-      <h2 class="section-title" data-i18n="skills.title">Skills</h2>
-      <div class="content-card">
-        <div class="skills-category">
-          <div class="skills-category-title" data-i18n="skills.frontend">Frontend</div>
-          <div class="skills-group">
-            <span class="skill">HTML</span>
-            <span class="skill">CSS</span>
-            <span class="skill">JavaScript</span>
-            <span class="skill">React</span>
-            <span class="skill">Tailwind CSS</span>
+      <div class="section-intro">
+        <span class="section-kicker" data-i18n="stack.kicker">Stack</span>
+        <h2 data-i18n="stack.title">Tools I reach for when a product needs range.</h2>
+        <p data-i18n="stack.intro">I work comfortably across client experiences, mobile surfaces, and the services underneath them.</p>
+      </div>
+
+      <div class="stack-grid">
+        <article class="stack-card glass-card">
+          <span class="stack-index">/01</span>
+          <h3 data-i18n="stack.frontend.title">Frontend</h3>
+          <p data-i18n="stack.frontend.text">Responsive interfaces with HTML, CSS, JavaScript, React, and Tailwind when speed matters.</p>
+          <div class="chip-row">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">React</span>
+            <span class="chip">Tailwind</span>
           </div>
-        </div>
-        <div class="skills-category">
-          <div class="skills-category-title" data-i18n="skills.mobile">Mobile</div>
-          <div class="skills-group">
-            <span class="skill">Swift</span>
-            <span class="skill">SwiftUI</span>
-            <span class="skill">UIKit</span>
+        </article>
+
+        <article class="stack-card glass-card">
+          <span class="stack-index">/02</span>
+          <h3 data-i18n="stack.mobile.title">Mobile</h3>
+          <p data-i18n="stack.mobile.text">Swift-first iOS and macOS work with a strong focus on interaction quality.</p>
+          <div class="chip-row">
+            <span class="chip">Swift</span>
+            <span class="chip">SwiftUI</span>
+            <span class="chip">UIKit</span>
+            <span class="chip">macOS</span>
           </div>
-        </div>
-        <div class="skills-category">
-          <div class="skills-category-title" data-i18n="skills.backend_tools">Backend & Tools</div>
-          <div class="skills-group">
-            <span class="skill">Java</span>
-            <span class="skill">Node.js</span>
-            <span class="skill">Git</span>
-            <span class="skill">GitHub</span>
-            <span class="skill">REST APIs</span>
-            <span class="skill">Firebase</span>
-            <span class="skill">Supabase</span>
+        </article>
+
+        <article class="stack-card glass-card">
+          <span class="stack-index">/03</span>
+          <h3 data-i18n="stack.backend.title">Backend</h3>
+          <p data-i18n="stack.backend.text">Node.js services, REST APIs, Supabase, Firebase, and deployment workflows.</p>
+          <div class="chip-row">
+            <span class="chip">Node.js</span>
+            <span class="chip">REST APIs</span>
+            <span class="chip">Supabase</span>
+            <span class="chip">Firebase</span>
           </div>
+        </article>
+
+        <article class="stack-card glass-card">
+          <span class="stack-index">/04</span>
+          <h3 data-i18n="stack.tools.title">Workflow</h3>
+          <p data-i18n="stack.tools.text">Git, GitHub, Vercel, Cloudflare Pages, custom domains, and hands-on release work.</p>
+          <div class="chip-row">
+            <span class="chip">Git</span>
+            <span class="chip">GitHub</span>
+            <span class="chip">Vercel</span>
+            <span class="chip">Cloudflare</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="workflow-panel glass-card">
+        <h3 data-i18n="workflow.title">How I like to work</h3>
+        <div class="workflow-grid">
+          <article class="workflow-step">
+            <span>01</span>
+            <h4 data-i18n="workflow.step1.title">Shape</h4>
+            <p data-i18n="workflow.step1.text">Understand the idea, the user, and what needs to feel different.</p>
+          </article>
+          <article class="workflow-step">
+            <span>02</span>
+            <h4 data-i18n="workflow.step2.title">Design</h4>
+            <p data-i18n="workflow.step2.text">Build structure, tone, and interface direction before adding noise.</p>
+          </article>
+          <article class="workflow-step">
+            <span>03</span>
+            <h4 data-i18n="workflow.step3.title">Ship</h4>
+            <p data-i18n="workflow.step3.text">Move fast toward a real working version with honest constraints.</p>
+          </article>
+          <article class="workflow-step">
+            <span>04</span>
+            <h4 data-i18n="workflow.step4.title">Refine</h4>
+            <p data-i18n="workflow.step4.text">Tighten the product after launch through iteration and feedback.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="contact" class="reveal">
-      <h2 class="section-title" data-i18n="contact.title">Contact</h2>
-      <div class="content-card">
-        <div class="skills">
-          <a href="mailto:muartmac@gmail.com" class="contact-item">
-            <span class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
-            muartmac@gmail.com
-          </a>
-          <a href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></span>
-            github.com/muartdev
-          </a>
-          <a href="https://x.com/muartdev" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
-            x.com/muartdev
-          </a>
+      <div class="contact-panel glass-card">
+        <div>
+          <span class="section-kicker" data-i18n="contact.kicker">Contact</span>
+          <h2 data-i18n="contact.title">If you want something modern, useful, and cleanly shipped, let's talk.</h2>
+          <p data-i18n="contact.text">I'm most excited by products that care about both craft and execution. You can reach out by email, GitHub, or X.</p>
+          <p class="contact-note" data-i18n="contact.note">Based in Turkey, building in English and Turkish.</p>
+        </div>
+        <div class="contact-actions">
+          <a href="mailto:muartmac@gmail.com" class="button button-primary" data-i18n="contact.primary">Email me</a>
+          <a href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer" class="button button-secondary" data-i18n="contact.secondary">View GitHub</a>
+          <a href="https://x.com/muartdev" target="_blank" rel="noopener noreferrer" class="button button-secondary" data-i18n="contact.tertiary">Follow on X</a>
         </div>
       </div>
     </section>
@@ -962,204 +1539,319 @@
     <footer>
       <div class="footer-links">
         <a href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://x.com/muartdev" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+        <a href="https://x.com/muartdev" target="_blank" rel="noopener noreferrer">X</a>
         <a href="mailto:muartmac@gmail.com">Email</a>
       </div>
-      <div class="footer-copyright">
-        <span data-i18n="footer.text">&copy; 2026 Murat. All rights reserved.</span>
-      </div>
+      <div class="footer-copy" data-i18n="footer.text">© 2026 Murat. Built with care.</div>
     </footer>
-  </div>
+  </main>
 
   <script>
-    // Translations
     const translations = {
       en: {
-        'nav.about': 'About',
-        'nav.projects': 'Projects',
-        'nav.skills': 'Skills',
-        'nav.contact': 'Contact',
-        'hero.title': 'Software Developer',
-        'hero.subtitle': 'Full Stack · iOS · Shipping real products|',
-        'about.title': 'About',
-        'about.text': 'Computer Engineering student who builds full-stack products end to end — from iOS apps with in-app purchases to web platforms with custom domains and live deployments. I\'ve set up Supabase backends, configured Cloudflare Pages and Vercel, integrated Google Sheets as a CMS, and shipped apps that real users can pay for. I learn by shipping.',
-        'projects.title': 'Projects',
-        'projects.mindshelf': 'MindShelf',
-        'projects.mindshelf.desc': 'Book tracking app with in-app purchases, built with Swift',
-        'projects.foodsuggest': 'FoodSuggest',
-        'projects.foodsuggest.desc': 'Food suggestion app built with Swift',
-        'projects.sysmonitor': 'System Monitor',
-        'projects.sysmonitor.desc': 'macOS system monitoring tool built with Swift',
-        'projects.web': 'Web',
-        'projects.mindshelfweb': 'MindShelf Web',
-        'projects.mindshelfweb.desc': 'Web version of MindShelf built with TypeScript',
-        'projects.portfolio': 'Portfolio',
-        'projects.portfolio.desc': 'This personal portfolio website',
-        'projects.backend': 'Backend',
-        'projects.mindapi': 'Mind API',
-        'projects.mindapi.desc': 'Backend API service built with TypeScript',
-        'skills.title': 'Skills',
-        'skills.frontend': 'Frontend',
-        'skills.mobile': 'Mobile',
-        'skills.backend_tools': 'Backend & Tools',
-        'contact.title': 'Contact',
-        'footer.text': '\u00a9 2026 Murat. All rights reserved.'
+        "brand.label": "product portfolio",
+        "nav.about": "About",
+        "nav.projects": "Work",
+        "nav.skills": "Stack",
+        "nav.contact": "Contact",
+        "hero.badge": "Product-minded developer",
+        "hero.title": "I build polished digital products across iOS, web, and backend.",
+        "hero.subtitle": "Computer Engineering student turning ideas into launch-ready experiences with clean UI, solid architecture, and real deployments.",
+        "hero.primary": "See selected work",
+        "hero.secondary": "Say hello",
+        "hero.pill1": "SwiftUI & UIKit",
+        "hero.pill2": "React & TypeScript",
+        "hero.pill3": "Supabase & Deployments",
+        "hero.note.title": "From idea to launch",
+        "hero.note.text": "I enjoy stitching together interface, product logic, integrations, and release work so the final result feels complete.",
+        "hero.signal1.title": "End-to-end ownership",
+        "hero.signal1.text": "I like handling interface, logic, integrations, and deployment as one connected product.",
+        "hero.signal2.title": "Clean product taste",
+        "hero.signal2.text": "Minimal interfaces, deliberate spacing, and the small details that make a project feel intentional.",
+        "hero.signal3.title": "Shipping mindset",
+        "hero.signal3.text": "I learn by building real things, getting them live, and improving them through iteration.",
+        "about.kicker": "About",
+        "about.title": "I like products that feel clear, fast, and ready to use.",
+        "about.intro": "My work sits between engineering and product thinking, with a strong bias toward clean execution and launch-ready polish.",
+        "about.lead": "I'm a Computer Engineering student who enjoys turning ideas into products people can actually use. That includes iOS apps with in-app purchases, web experiences with custom domains, and backend services that support the whole flow.",
+        "about.copy": "I care about how a product feels as much as how it works. Clean interfaces, sensible architecture, solid deployment, and thoughtful details are usually where I spend the most energy.",
+        "about.card1.title": "Design with intent",
+        "about.card1.text": "Interfaces should feel calm, readable, and useful before they try to feel impressive.",
+        "about.card2.title": "Build the whole flow",
+        "about.card2.text": "From frontend and iOS to backend integrations, I like understanding how every layer supports the product.",
+        "about.card3.title": "Polish after launch",
+        "about.card3.text": "Shipping is the baseline. Refinement, iteration, and reliability are what make a project feel mature.",
+        "projects.kicker": "Selected Work",
+        "projects.title": "Projects that shaped how I build.",
+        "projects.intro": "A mix of apps, utilities, and web products where I explored product design, system thinking, and practical shipping.",
+        "projects.link.repo": "View repo",
+        "projects.link.live": "Visit site",
+        "projects.mindshelf.tag": "iOS product",
+        "projects.mindshelf.desc": "Book tracking app with in-app purchases, shaped as a polished reading companion on iOS.",
+        "projects.mindshelf.meta": "Swift, in-app purchases, product UX",
+        "projects.mindshelfweb.tag": "Companion web app",
+        "projects.mindshelfweb.desc": "Web companion experience built with TypeScript to extend the MindShelf idea beyond mobile.",
+        "projects.mindshelfweb.meta": "TypeScript, frontend architecture",
+        "projects.sysmonitor.tag": "macOS utility",
+        "projects.sysmonitor.desc": "macOS utility focused on system visibility, clean information hierarchy, and desktop performance.",
+        "projects.sysmonitor.meta": "Swift, macOS, desktop tooling",
+        "projects.mindapi.tag": "backend service",
+        "projects.mindapi.desc": "Backend API layer used to support product logic and integrations.",
+        "projects.mindapi.meta": "TypeScript, APIs, services",
+        "projects.foodsuggest.tag": "Swift experiment",
+        "projects.foodsuggest.desc": "Small Swift project exploring recommendation flows with a lightweight interface.",
+        "projects.foodsuggest.meta": "Swift, rapid prototyping",
+        "projects.portfolio.tag": "brand surface",
+        "projects.portfolio.desc": "This portfolio itself, used as a playground for layout, motion, and presentation.",
+        "projects.portfolio.meta": "HTML, CSS, JavaScript",
+        "stack.kicker": "Stack",
+        "stack.title": "Tools I reach for when a product needs range.",
+        "stack.intro": "I work comfortably across client experiences, mobile surfaces, and the services underneath them.",
+        "stack.frontend.title": "Frontend",
+        "stack.frontend.text": "Responsive interfaces with HTML, CSS, JavaScript, React, and Tailwind when speed matters.",
+        "stack.mobile.title": "Mobile",
+        "stack.mobile.text": "Swift-first iOS and macOS work with a strong focus on interaction quality.",
+        "stack.backend.title": "Backend",
+        "stack.backend.text": "Node.js services, REST APIs, Supabase, Firebase, and deployment workflows.",
+        "stack.tools.title": "Workflow",
+        "stack.tools.text": "Git, GitHub, Vercel, Cloudflare Pages, custom domains, and hands-on release work.",
+        "workflow.title": "How I like to work",
+        "workflow.step1.title": "Shape",
+        "workflow.step1.text": "Understand the idea, the user, and what needs to feel different.",
+        "workflow.step2.title": "Design",
+        "workflow.step2.text": "Build structure, tone, and interface direction before adding noise.",
+        "workflow.step3.title": "Ship",
+        "workflow.step3.text": "Move fast toward a real working version with honest constraints.",
+        "workflow.step4.title": "Refine",
+        "workflow.step4.text": "Tighten the product after launch through iteration and feedback.",
+        "contact.kicker": "Contact",
+        "contact.title": "If you want something modern, useful, and cleanly shipped, let's talk.",
+        "contact.text": "I'm most excited by products that care about both craft and execution. You can reach out by email, GitHub, or X.",
+        "contact.note": "Based in Turkey, building in English and Turkish.",
+        "contact.primary": "Email me",
+        "contact.secondary": "View GitHub",
+        "contact.tertiary": "Follow on X",
+        "footer.text": "© 2026 Murat. Built with care."
       },
       tr: {
-        'nav.about': 'Hakk\u0131mda',
-        'nav.projects': 'Projeler',
-        'nav.skills': 'Yetenekler',
-        'nav.contact': 'İletişim',
-        'hero.title': 'Bilgisayar Mühendisliği Öğrencisi',
-        'hero.subtitle': 'Full Stack & iOS Geliştirme Odaklı|',
-        'about.title': 'Hakkımda',
-        'about.text': 'Frontend ve iOS geliştirmeye güçlü ilgisi olan bir Bilgisayar Mühendisliği öğrencisiyim. Yazılım mühendisliği becerilerimi sürekli geliştirirken, temiz, minimal ve kullanıcı dostu arayüzler oluşturmaya odaklanıyorum. Fikirleri gerçek ürünlere dönüştürmekten ve modern teknolojileri uygulamalı projeler aracılığıyla öğrenmekten keyif alıyorum.',
-        'projects.title': 'Projeler',
-        'projects.mindshelf': 'MindShelf',
-        'projects.mindshelf.desc': 'Uygulama içi satın alım özellikli kitap takip uygulaması, Swift ile geliştirildi',
-        'projects.foodsuggest': 'FoodSuggest',
-        'projects.foodsuggest.desc': 'Swift ile geliştirilmiş yemek öneri uygulaması',
-        'projects.sysmonitor': 'System Monitor',
-        'projects.sysmonitor.desc': 'Swift ile geliştirilmiş macOS sistem izleme aracı',
-        'projects.web': 'Web',
-        'projects.mindshelfweb': 'MindShelf Web',
-        'projects.mindshelfweb.desc': 'TypeScript ile geliştirilmiş MindShelf web versiyonu',
-        'projects.portfolio': 'Portföy',
-        'projects.portfolio.desc': 'Bu kişisel portföy web sitesi',
-        'projects.backend': 'Backend',
-        'projects.mindapi': 'Mind API',
-        'projects.mindapi.desc': 'TypeScript ile geliştirilmiş backend API servisi',
-        'skills.title': 'Yetenekler',
-        'skills.frontend': 'Frontend',
-        'skills.mobile': 'Mobil',
-        'skills.backend_tools': 'Backend & Ara\u00e7lar',
-        'contact.title': '\u0130leti\u015fim',
-        'footer.text': '\u00a9 2026 Murat. T\u00fcm haklar\u0131 sakl\u0131d\u0131r.'
+        "brand.label": "ürün portföyü",
+        "nav.about": "Hakkımda",
+        "nav.projects": "Projeler",
+        "nav.skills": "Yetenekler",
+        "nav.contact": "İletişim",
+        "hero.badge": "Ürün odaklı geliştirici",
+        "hero.title": "iOS, web ve backend tarafında özenli dijital ürünler geliştiriyorum.",
+        "hero.subtitle": "Temiz arayüzler, sağlam mimari ve gerçek deploy süreçleriyle fikirleri yayına hazır deneyimlere dönüştüren bir Bilgisayar Mühendisliği öğrencisiyim.",
+        "hero.primary": "Projeleri incele",
+        "hero.secondary": "Merhaba de",
+        "hero.pill1": "SwiftUI & UIKit",
+        "hero.pill2": "React & TypeScript",
+        "hero.pill3": "Supabase & Deploy",
+        "hero.note.title": "Fikirden yayına",
+        "hero.note.text": "Arayüz, ürün mantığı, entegrasyonlar ve release sürecini bir araya getirip sonucu bütünlüklü hissettirmeyi seviyorum.",
+        "hero.signal1.title": "Uçtan uca sahiplenme",
+        "hero.signal1.text": "Arayüz, mantık, entegrasyon ve deploy tarafını tek bir ürün gibi ele almayı seviyorum.",
+        "hero.signal2.title": "Temiz ürün zevki",
+        "hero.signal2.text": "Minimal arayüzler, bilinçli boşluk kullanımı ve işi daha özenli hissettiren küçük detaylar.",
+        "hero.signal3.title": "Yayına alma odağı",
+        "hero.signal3.text": "Gerçek ürünler geliştirip yayına alarak ve sonra yineleyerek en hızlı şekilde öğreniyorum.",
+        "about.kicker": "Hakkımda",
+        "about.title": "Net, hızlı ve kullanıma hazır hissettiren ürünleri seviyorum.",
+        "about.intro": "İşlerim mühendislik ile ürün düşüncesi arasında duruyor; temiz uygulama ve yayına hazır kalite benim için çok önemli.",
+        "about.lead": "İnsanların gerçekten kullanabileceği ürünlere fikir dönüştürmeyi seven bir Bilgisayar Mühendisliği öğrencisiyim. Buna uygulama içi satın alımlı iOS uygulamaları, özel domain'li web deneyimleri ve tüm akışı destekleyen backend servisleri dahil.",
+        "about.copy": "Bir ürünün nasıl çalıştığı kadar nasıl hissettirdiğiyle de ilgileniyorum. Temiz arayüzler, mantıklı mimari, sağlam deploy ve düşünülmüş detaylar en çok enerji harcadığım alanlar.",
+        "about.card1.title": "Niyetli tasarım",
+        "about.card1.text": "Arayüzler önce sakin, okunabilir ve faydalı hissettirmeli; etkileyici görünmek ikinci adım olmalı.",
+        "about.card2.title": "Akışın tamamını kurmak",
+        "about.card2.text": "Frontend'den iOS'a ve backend entegrasyonlarına kadar her katmanın ürünü nasıl desteklediğini anlamayı seviyorum.",
+        "about.card3.title": "Yayın sonrası parlatmak",
+        "about.card3.text": "Yayına almak başlangıç. Rafine etmek, yinelemek ve güvenilir hale getirmek projeyi olgunlaştırıyor.",
+        "projects.kicker": "Seçili İşler",
+        "projects.title": "Nasıl üretmeyi sevdiğimi şekillendiren projeler.",
+        "projects.intro": "Ürün tasarımı, sistem düşüncesi ve pratik teslim odağını geliştirdiğim uygulama, araç ve web projelerinden seçkiler.",
+        "projects.link.repo": "Repo'yu aç",
+        "projects.link.live": "Siteyi ziyaret et",
+        "projects.mindshelf.tag": "iOS ürünü",
+        "projects.mindshelf.desc": "Uygulama içi satın alımlar içeren, iOS tarafında özenli bir okuma eşlikçisi olarak şekillenen kitap takip uygulaması.",
+        "projects.mindshelf.meta": "Swift, uygulama içi satın alım, ürün deneyimi",
+        "projects.mindshelfweb.tag": "Web eşlikçi ürün",
+        "projects.mindshelfweb.desc": "MindShelf fikrini mobilin dışına taşıyan TypeScript tabanlı web deneyimi.",
+        "projects.mindshelfweb.meta": "TypeScript, frontend mimarisi",
+        "projects.sysmonitor.tag": "macOS aracı",
+        "projects.sysmonitor.desc": "Sistem görünürlüğü, temiz bilgi hiyerarşisi ve masaüstü performansına odaklanan macOS yardımcı aracı.",
+        "projects.sysmonitor.meta": "Swift, macOS, masaüstü araçları",
+        "projects.mindapi.tag": "backend servis",
+        "projects.mindapi.desc": "Ürün mantığını ve entegrasyonları destekleyen backend API katmanı.",
+        "projects.mindapi.meta": "TypeScript, API'ler, servisler",
+        "projects.foodsuggest.tag": "Swift deneyi",
+        "projects.foodsuggest.desc": "Hafif bir arayüz eşliğinde öneri akışlarını deneyimleyen küçük bir Swift projesi.",
+        "projects.foodsuggest.meta": "Swift, hızlı prototipleme",
+        "projects.portfolio.tag": "kişisel vitrin",
+        "projects.portfolio.desc": "Yerleşim, motion ve sunum dili için kullandığım bu portföyün kendisi.",
+        "projects.portfolio.meta": "HTML, CSS, JavaScript",
+        "stack.kicker": "Teknoloji",
+        "stack.title": "Bir ürünün menzile ihtiyacı olduğunda başvurduğum araçlar.",
+        "stack.intro": "Kullanıcı deneyimi katmanları, mobil yüzeyler ve bunların altındaki servisler arasında rahat çalışıyorum.",
+        "stack.frontend.title": "Frontend",
+        "stack.frontend.text": "Hız gerektiğinde HTML, CSS, JavaScript, React ve Tailwind ile duyarlı arayüzler geliştiriyorum.",
+        "stack.mobile.title": "Mobil",
+        "stack.mobile.text": "Etkileşim kalitesine güçlü odakla Swift tabanlı iOS ve macOS uygulamaları geliştiriyorum.",
+        "stack.backend.title": "Backend",
+        "stack.backend.text": "Node.js servisleri, REST API'ler, Supabase, Firebase ve deploy akışlarıyla çalışıyorum.",
+        "stack.tools.title": "Workflow",
+        "stack.tools.text": "Git, GitHub, Vercel, Cloudflare Pages, özel domain'ler ve release süreçleri.",
+        "workflow.title": "Çalışma biçimim",
+        "workflow.step1.title": "Şekillendir",
+        "workflow.step1.text": "Fikri, kullanıcıyı ve fark yaratması gereken noktayı anlarım.",
+        "workflow.step2.title": "Tasarla",
+        "workflow.step2.text": "Gürültü eklemeden önce yapı, ton ve arayüz yönünü oluştururum.",
+        "workflow.step3.title": "Yayına al",
+        "workflow.step3.text": "Dürüst kısıtlarla çalışan gerçek bir versiyona hızlıca ulaşırım.",
+        "workflow.step4.title": "Rafine et",
+        "workflow.step4.text": "Yayın sonrası ürünü geri bildirim ve yinelemeyle sıkılaştırırım.",
+        "contact.kicker": "İletişim",
+        "contact.title": "Modern, kullanışlı ve temiz teslim edilmiş bir iş istiyorsan konuşalım.",
+        "contact.text": "Hem craft hem execution tarafını önemseyen ürünler beni daha çok heyecanlandırıyor. Bana e-posta, GitHub veya X üzerinden ulaşabilirsin.",
+        "contact.note": "Türkiye merkezli, İngilizce ve Türkçe üretim yapıyorum.",
+        "contact.primary": "E-posta gönder",
+        "contact.secondary": "GitHub'a git",
+        "contact.tertiary": "X profilini aç",
+        "footer.text": "© 2026 Murat. Özenle tasarlandı."
       }
     };
 
-    // Theme Management
+    function syncThemeMeta(theme) {
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        metaTheme.setAttribute("content", theme === "dark" ? "#09101a" : "#f7f4ec");
+      }
+    }
+
+    function updateThemeButton(theme) {
+      const themeText = document.getElementById("themeText");
+      const themeButton = document.getElementById("themeToggle");
+      if (!themeText || !themeButton) return;
+      const nextTheme = theme === "dark" ? "LIGHT" : "DARK";
+      themeText.textContent = nextTheme;
+      themeButton.setAttribute("aria-label", `Switch to ${nextTheme.toLowerCase()} mode`);
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      updateThemeButton(theme);
+      syncThemeMeta(theme);
+    }
+
     function initTheme() {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeIcon(savedTheme);
+      const savedTheme = localStorage.getItem("theme") || "light";
+      setTheme(savedTheme);
     }
 
     function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeIcon(newTheme);
-    }
-
-    function updateThemeIcon(theme) {
-      const icon = document.getElementById('themeIcon');
-      icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    }
-
-    // Language Management
-    function initLanguage() {
-      const savedLang = localStorage.getItem('language') || 'en';
-      setLanguage(savedLang);
-    }
-
-    function toggleLanguage() {
-      const currentLang = document.documentElement.getAttribute('lang');
-      const newLang = currentLang === 'en' ? 'tr' : 'en';
-      setLanguage(newLang);
-      localStorage.setItem('language', newLang);
+      const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+      setTheme(currentTheme === "dark" ? "light" : "dark");
     }
 
     function setLanguage(lang) {
-      document.documentElement.setAttribute('lang', lang);
-      const langText = document.getElementById('langText');
-      langText.textContent = lang.toLowerCase();
-      
-      document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
+      document.documentElement.setAttribute("lang", lang);
+      localStorage.setItem("language", lang);
+
+      const langText = document.getElementById("langText");
+      const langToggle = document.getElementById("langToggle");
+      if (langText) {
+        langText.textContent = lang.toUpperCase();
+      }
+      if (langToggle) {
+        langToggle.setAttribute("aria-label", lang === "en" ? "Switch language to Turkish" : "Dili İngilizceye çevir");
+      }
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
         if (translations[lang] && translations[lang][key]) {
-          // Replace | with cursor span for hero.subtitle
-          if (key === 'hero.subtitle') {
-            const text = translations[lang][key];
-            const cursorHtml = '<span class="cursor-blink">|</span>';
-            element.innerHTML = text.replace('|', cursorHtml);
-          } else {
-            element.textContent = translations[lang][key];
-          }
+          element.textContent = translations[lang][key];
         }
       });
     }
 
-    // Scroll Reveal Animation
+    function initLanguage() {
+      const savedLanguage = localStorage.getItem("language") || "en";
+      setLanguage(savedLanguage);
+    }
+
+    function toggleLanguage() {
+      const currentLang = document.documentElement.getAttribute("lang") || "en";
+      setLanguage(currentLang === "en" ? "tr" : "en");
+    }
+
     function initScrollReveal() {
-      const revealElements = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window)) {
-        revealElements.forEach(el => el.classList.add('visible'));
+      const revealItems = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        revealItems.forEach((item) => item.classList.add("visible"));
         return;
       }
+
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            entry.target.classList.add("visible");
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      revealElements.forEach(el => observer.observe(el));
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+      });
+
+      revealItems.forEach((item) => observer.observe(item));
     }
 
-    // Active Nav Link Highlighting
     function initActiveNav() {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".site-nav a[href^='#']");
+      if (!("IntersectionObserver" in window)) return;
+
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            const activeLink = document.querySelector('nav a[href="#' + entry.target.id + '"]');
-            if (activeLink) activeLink.classList.add('active');
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((link) => link.removeAttribute("aria-current"));
+          const activeLink = document.querySelector(`.site-nav a[href="#${entry.target.id}"]`);
+          if (activeLink) {
+            activeLink.setAttribute("aria-current", "page");
           }
         });
-      }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
-      sections.forEach(section => observer.observe(section));
+      }, {
+        threshold: 0.35,
+        rootMargin: "-20% 0px -45% 0px"
+      });
+
+      sections.forEach((section) => observer.observe(section));
     }
 
-    // Particles Animation - Colorful particles, more visible
-    function createParticles() {
-      const particlesContainer = document.getElementById('particles');
-      if (!particlesContainer) return;
-      
-      const particleCount = 80;
-      // Colorful gradient colors
-      const colors = ['#4285f4', '#34a853', '#fbbc04', '#ea4335'];
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random position
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        
-        // Random colorful background
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
-        // Random animation delay for natural feel (shorter delays for faster feel)
-        particle.style.animationDelay = Math.random() * 8 + 's';
-        particle.style.animationDuration = (6 + Math.random() * 4) + 's';
-        
-        particlesContainer.appendChild(particle);
-      }
+    function initProgressBar() {
+      const progressBar = document.getElementById("progressBar");
+      if (!progressBar) return;
+
+      const updateProgress = () => {
+        const scrollTop = window.scrollY;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        progressBar.style.width = `${progress}%`;
+      };
+
+      updateProgress();
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
     }
 
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("langToggle")?.addEventListener("click", toggleLanguage);
+      document.getElementById("themeToggle")?.addEventListener("click", toggleTheme);
       initTheme();
       initLanguage();
-      createParticles();
       initScrollReveal();
       initActiveNav();
+      initProgressBar();
     });
   </script>
 </body>
