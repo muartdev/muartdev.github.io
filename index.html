@@ -8,7 +8,7 @@
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#f7f5f1" />
   <meta property="og:title" content="Murat | Product Engineer" />
-  <meta property="og:description" content="Portfolio of Murat, a Computer Engineering student building thoughtful products across iOS, web, and backend." />
+  <meta property="og:description" content="Portfolio of Murat, a Computer Engineering student shipping thoughtful products across iOS, web, and backend." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://muartdev.github.io/" />
   <meta property="og:locale" content="en_US" />
@@ -34,7 +34,7 @@
       --accent: #121316;
       --accent-soft: rgba(18, 19, 22, 0.05);
       --selection: rgba(18, 19, 22, 0.12);
-      --max-width: 760px;
+      --max-width: 780px;
     }
 
     [data-theme="dark"] {
@@ -85,6 +85,7 @@
       color: inherit;
       background: transparent;
       border: 0;
+      cursor: pointer;
     }
 
     .shell,
@@ -154,7 +155,7 @@
     }
 
     main {
-      padding: 72px 0 88px;
+      padding: 64px 0 88px;
     }
 
     section {
@@ -162,12 +163,12 @@
     }
 
     section + section {
-      margin-top: 88px;
+      margin-top: 80px;
     }
 
     .hero {
       display: grid;
-      gap: 28px;
+      gap: 24px;
     }
 
     .hero-head {
@@ -179,7 +180,7 @@
 
     .hero-name {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.1rem, 6vw, 3.4rem);
+      font-size: clamp(2.2rem, 6.2vw, 3.6rem);
       line-height: 0.95;
       letter-spacing: -0.06em;
     }
@@ -203,10 +204,10 @@
 
     .hero-copy {
       display: grid;
-      gap: 20px;
+      gap: 16px;
       max-width: 60ch;
       color: var(--text);
-      font-size: 0.98rem;
+      font-size: 1rem;
     }
 
     .hero-copy p {
@@ -217,16 +218,94 @@
       color: var(--muted);
     }
 
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border: 1px solid var(--line-strong);
+      font-size: 0.86rem;
+      line-height: 1;
+      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .cta::after {
+      content: "↗";
+      font-size: 0.86em;
+      transition: transform 0.18s ease;
+    }
+
+    .cta:hover {
+      transform: translateX(2px);
+      border-color: var(--accent);
+    }
+
+    .cta:hover::after {
+      transform: translate(2px, -1px);
+    }
+
+    .cta-primary {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-color: var(--tag-bg);
+    }
+
+    .cta-primary:hover {
+      border-color: var(--tag-bg);
+      opacity: 0.92;
+    }
+
+    .proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .chip::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.6;
+    }
+
+    .chip:hover {
+      color: var(--text);
+      border-color: var(--line-strong);
+    }
+
     .inline-links {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
-      margin-top: 6px;
+      margin-top: 2px;
     }
 
     .inline-links a,
     .item-link,
-    .contact-links a {
+    .contact-links a,
+    .featured-links a {
       position: relative;
       display: inline-flex;
       align-items: center;
@@ -237,7 +316,8 @@
 
     .inline-links a::after,
     .item-link::after,
-    .contact-links a::after {
+    .contact-links a::after,
+    .featured-links a::after {
       content: "↗";
       font-size: 0.82em;
       transform: translateX(0);
@@ -246,23 +326,25 @@
 
     .inline-links a:hover,
     .item-link:hover,
-    .contact-links a:hover {
+    .contact-links a:hover,
+    .featured-links a:hover {
       color: var(--muted);
       transform: translateX(2px);
     }
 
     .inline-links a:hover::after,
     .item-link:hover::after,
-    .contact-links a:hover::after {
+    .contact-links a:hover::after,
+    .featured-links a:hover::after {
       transform: translate(2px, -1px);
     }
 
     .section-title {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
       line-height: 1;
       letter-spacing: -0.05em;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .section-title::after {
@@ -272,8 +354,85 @@
     .section-note {
       max-width: 60ch;
       color: var(--muted);
-      font-size: 0.93rem;
-      margin-bottom: 18px;
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .featured {
+      padding: 24px 20px 26px;
+      border: 1px solid var(--line-strong);
+      display: grid;
+      gap: 16px;
+    }
+
+    .featured-label {
+      color: var(--muted);
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
+    }
+
+    .featured-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .featured-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .featured-tag {
+      color: var(--muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .featured-desc {
+      max-width: 62ch;
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+
+    .featured-bullets {
+      display: grid;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+      list-style: none;
+    }
+
+    .featured-bullets li {
+      padding-left: 18px;
+      position: relative;
+      color: var(--text);
+      font-size: 0.9rem;
+      max-width: 62ch;
+      line-height: 1.6;
+    }
+
+    .featured-bullets li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--muted);
+    }
+
+    .featured-meta {
+      color: var(--muted);
+      font-size: 0.82rem;
+      max-width: 62ch;
+    }
+
+    .featured-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .item-list {
@@ -330,7 +489,7 @@
 
     .note-row {
       display: grid;
-      grid-template-columns: 92px 1fr;
+      grid-template-columns: 120px 1fr;
       gap: 16px;
       align-items: start;
       padding-top: 12px;
@@ -373,7 +532,7 @@
     .contact-copy {
       max-width: 58ch;
       color: var(--text);
-      font-size: 0.94rem;
+      font-size: 0.96rem;
     }
 
     .contact-links {
@@ -384,7 +543,7 @@
     }
 
     footer {
-      margin-top: 88px;
+      margin-top: 80px;
       padding-top: 18px;
       border-top: 1px solid var(--line);
       color: var(--muted);
@@ -423,7 +582,10 @@
       .item-link,
       .contact-links a,
       .topbar-link,
-      .topbar-button {
+      .topbar-button,
+      .cta,
+      .chip,
+      .featured-links a {
         transition: none;
       }
 
@@ -451,11 +613,11 @@
       }
 
       main {
-        padding: 52px 0 72px;
+        padding: 48px 0 72px;
       }
 
       section + section {
-        margin-top: 72px;
+        margin-top: 64px;
       }
 
       .hero-head {
@@ -466,13 +628,22 @@
       .topbar-links,
       .topbar-actions,
       .inline-links,
-      .contact-links {
+      .contact-links,
+      .featured-links {
         gap: 12px;
       }
 
       .note-row {
         grid-template-columns: 1fr;
         gap: 6px;
+      }
+
+      .featured {
+        padding: 20px 16px 22px;
+      }
+
+      footer {
+        margin-top: 64px;
       }
     }
   </style>
@@ -486,10 +657,10 @@
 
     <nav class="topbar-links" aria-label="Primary navigation">
       <a class="topbar-link" href="#work" data-i18n="nav.work">work</a>
+      <a class="topbar-link" href="#approach" data-i18n="nav.approach">approach</a>
       <a class="topbar-link" href="#about" data-i18n="nav.about">about</a>
       <a class="topbar-link" href="#contact" data-i18n="nav.contact">contact</a>
       <a class="topbar-link" href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer" data-i18n="nav.github">github</a>
-      <a class="topbar-link" href="mailto:muartmac@gmail.com" data-i18n="nav.email">email</a>
     </nav>
 
     <div class="topbar-actions">
@@ -510,30 +681,61 @@
       </div>
 
       <div class="hero-copy reveal" style="--delay: 0.04s;">
-        <p data-i18n="hero.text1">I’m a Computer Engineering student building thoughtful products across iOS, web, and backend.</p>
-        <p data-i18n="hero.text2">What I care about most is clean structure, product feel, and shipping work that is actually usable.</p>
-        <p class="muted" data-i18n="hero.text3">Less noise, less template energy, more deliberate software.</p>
+        <p data-i18n="hero.text1">I build thoughtful, production-ready products across iOS, web, and backend.</p>
+        <p class="muted" data-i18n="hero.text2">Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.</p>
 
-        <div class="inline-links">
-          <a href="#work" data-i18n="hero.link1">selected work</a>
-          <a href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer" data-i18n="hero.link2">github</a>
-          <a href="mailto:muartmac@gmail.com" data-i18n="hero.link3">email</a>
+        <div class="cta-group">
+          <a class="cta cta-primary" href="#work" data-i18n="hero.cta1">see selected work</a>
+          <a class="cta" href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta2">github</a>
+          <a class="cta" href="mailto:muartmac@gmail.com" data-i18n="hero.cta3">email</a>
+        </div>
+
+        <div class="proof" role="list" aria-label="Credibility signals">
+          <span class="chip" role="listitem" data-i18n="proof.chip1">shipped iOS + web</span>
+          <span class="chip" role="listitem" data-i18n="proof.chip2">StoreKit 2 · Supabase</span>
+          <span class="chip" role="listitem" data-i18n="proof.chip3">Cloudflare · Vercel</span>
+          <span class="chip" role="listitem" data-i18n="proof.chip4">EN / TR</span>
         </div>
       </div>
     </section>
 
     <section id="work">
       <h2 class="section-title reveal" data-i18n="work.title">work</h2>
-      <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="work.note">A few projects that best represent the kind of engineer I am becoming: product-focused, end-to-end, and careful about experience.</p>
+      <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="work.note">One featured product that best shows how I think, plus a few projects that show range across iOS, web, and backend.</p>
 
-      <div class="item-list">
+      <article class="featured reveal" style="--delay: 0.08s;">
+        <div class="featured-label" data-i18n="featured.label">featured project_</div>
+
+        <div class="featured-head">
+          <h3 class="featured-title">MindShelf</h3>
+          <span class="featured-tag" data-i18n="featured.tag">iOS + web · in production</span>
+        </div>
+
+        <p class="featured-desc" data-i18n="featured.desc">A book tracking product with a native iOS app and a companion web app — both live in production and sharing the same account.</p>
+
+        <ul class="featured-bullets">
+          <li data-i18n="featured.b1">iOS app with in-app purchases, paywall, and restore purchases via StoreKit 2</li>
+          <li data-i18n="featured.b2">Supabase for auth and real-time sync between iOS and the web</li>
+          <li data-i18n="featured.b3">Web app on Cloudflare Pages with metadata auto-fetch (microlink, noembed)</li>
+          <li data-i18n="featured.b4">Full free-tier, paywall, and monetization flow shipped end to end</li>
+        </ul>
+
+        <p class="featured-meta" data-i18n="featured.meta">// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages</p>
+
+        <div class="featured-links">
+          <a href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener noreferrer" data-i18n="featured.link1">live web app</a>
+          <a href="https://github.com/muartdev/Mind-Shelf" target="_blank" rel="noopener noreferrer" data-i18n="featured.link2">ios repo</a>
+        </div>
+      </article>
+
+      <div class="item-list" style="margin-top: 28px;">
         <article class="item reveal" style="--delay: 0.08s;">
           <div class="item-top">
-            <a class="item-link" href="https://github.com/muartdev/Mind-Shelf" target="_blank" rel="noopener noreferrer">MindShelf</a>
-            <span class="item-tag" data-i18n="work.mindshelf.tag">featured iOS / web product</span>
+            <a class="item-link" href="https://www.vogeriderstr.com" target="_blank" rel="noopener noreferrer">VogeRidersTR</a>
+            <span class="item-tag" data-i18n="work.voge.tag">community platform · live</span>
           </div>
-          <p class="item-desc" data-i18n="work.mindshelf.desc">A book tracking product built around calm UX, real product thinking, and the less glamorous details that make something actually shippable.</p>
-          <p class="item-meta" data-i18n="work.mindshelf.meta">// SwiftUI / StoreKit 2 / Supabase / product UX</p>
+          <p class="item-desc" data-i18n="work.voge.desc">Community site for Voge motorcycle owners in Turkey. Built with Next.js, deployed on Vercel with a custom domain, and uses Google Sheets as a lightweight CMS.</p>
+          <p class="item-meta" data-i18n="work.voge.meta">// Next.js · Vercel · Google Sheets API</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.12s;">
@@ -541,8 +743,8 @@
             <a class="item-link" href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener noreferrer">MindShelf Web</a>
             <span class="item-tag" data-i18n="work.web.tag">product extension</span>
           </div>
-          <p class="item-desc" data-i18n="work.web.desc">A TypeScript web version that expands the same idea beyond mobile and shows how I think about continuity across surfaces.</p>
-          <p class="item-meta" data-i18n="work.web.meta">// React / TypeScript / product flow</p>
+          <p class="item-desc" data-i18n="work.web.desc">The TypeScript web version of MindShelf. Shows how I think about continuity across surfaces and keeping a product consistent across mobile and web.</p>
+          <p class="item-meta" data-i18n="work.web.meta">// React · TypeScript · Vite</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.16s;">
@@ -550,8 +752,8 @@
             <a class="item-link" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener noreferrer">System Monitor</a>
             <span class="item-tag" data-i18n="work.monitor.tag">macOS utility</span>
           </div>
-          <p class="item-desc" data-i18n="work.monitor.desc">A desktop utility focused on cleaner information hierarchy and a more restrained utility experience.</p>
-          <p class="item-meta" data-i18n="work.monitor.meta">// Swift / macOS / information design</p>
+          <p class="item-desc" data-i18n="work.monitor.desc">A desktop utility focused on cleaner information hierarchy and a more restrained take on a Mac system monitor.</p>
+          <p class="item-meta" data-i18n="work.monitor.meta">// Swift · macOS · information design</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.2s;">
@@ -559,63 +761,64 @@
             <a class="item-link" href="https://github.com/muartdev/mind" target="_blank" rel="noopener noreferrer">Mind API</a>
             <span class="item-tag" data-i18n="work.api.tag">backend service</span>
           </div>
-          <p class="item-desc" data-i18n="work.api.desc">Backend work that supports product logic, integrations, and the invisible parts that keep the whole system coherent.</p>
-          <p class="item-meta" data-i18n="work.api.meta">// TypeScript / APIs / backend logic</p>
+          <p class="item-desc" data-i18n="work.api.desc">Backend work supporting product logic, integrations, and the invisible parts that keep a multi-surface product coherent.</p>
+          <p class="item-meta" data-i18n="work.api.meta">// TypeScript · APIs · backend logic</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.24s;">
           <div class="item-top">
             <a class="item-link" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener noreferrer">FoodSuggest</a>
-            <span class="item-tag" data-i18n="work.food.tag">swift side project</span>
+            <span class="item-tag" data-i18n="work.food.tag">swift prototype</span>
           </div>
-          <p class="item-desc" data-i18n="work.food.desc">A smaller recommendation-focused Swift experiment that let me explore lighter product flows without overbuilding them.</p>
-          <p class="item-meta" data-i18n="work.food.meta">// Swift / recommendations / prototyping</p>
+          <p class="item-desc" data-i18n="work.food.desc">A smaller recommendation-focused Swift experiment used to explore lighter product flows without overbuilding them.</p>
+          <p class="item-meta" data-i18n="work.food.meta">// Swift · recommendations · prototyping</p>
         </article>
+      </div>
+    </section>
+
+    <section id="approach">
+      <h2 class="section-title reveal" data-i18n="approach.title">approach</h2>
+      <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="approach.note">How I actually work when I'm on a product.</p>
+
+      <div class="note-list">
+        <div class="note-row reveal" style="--delay: 0.08s;">
+          <strong data-i18n="approach.row1.label">shape the product_</strong>
+          <span data-i18n="approach.row1.text">I don't just style the UI. I think through flows, edge cases, and what the product actually needs to feel right before writing it.</span>
+        </div>
+        <div class="note-row reveal" style="--delay: 0.12s;">
+          <strong data-i18n="approach.row2.label">own the stack_</strong>
+          <span data-i18n="approach.row2.text">Comfortable moving between iOS, frontend, backend glue, and deployment — so features don't stall at a handoff.</span>
+        </div>
+        <div class="note-row reveal" style="--delay: 0.16s;">
+          <strong data-i18n="approach.row3.label">ship, then polish_</strong>
+          <span data-i18n="approach.row3.text">I prefer real users over internal demos. Most of what I build is live on the internet, not sitting in a branch.</span>
+        </div>
       </div>
     </section>
 
     <section id="about">
       <h2 class="section-title reveal" data-i18n="about.title">about</h2>
-      <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="about.note">I’m not trying to be the loudest developer in the room. I’m more interested in making products clearer, calmer, and better put together.</p>
-
-      <div class="note-list">
-        <div class="note-row reveal" style="--delay: 0.08s;">
-          <strong data-i18n="about.row1.label">focus_</strong>
-          <span data-i18n="about.row1.text">Product-minded engineering with attention to interaction quality, content hierarchy, and real delivery.</span>
-        </div>
-        <div class="note-row reveal" style="--delay: 0.12s;">
-          <strong data-i18n="about.row2.label">range_</strong>
-          <span data-i18n="about.row2.text">Comfortable moving between frontend, Apple platforms, backend glue, and shipping details.</span>
-        </div>
-        <div class="note-row reveal" style="--delay: 0.16s;">
-          <strong data-i18n="about.row3.label">goal_</strong>
-          <span data-i18n="about.row3.text">Build work that feels thoughtful on the surface and solid underneath.</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="stack">
-      <h2 class="section-title reveal" data-i18n="stack.title">stack</h2>
+      <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="about.note">Computer Engineering student based in Turkey. I work in English and Turkish, with a bias toward shipping over talking about shipping.</p>
 
       <div class="stack-list">
         <div class="stack-group reveal" style="--delay: 0.04s;">
           <strong data-i18n="stack.frontend.label">frontend_</strong>
-          <span data-i18n="stack.frontend.text">HTML, CSS, JavaScript, React, TypeScript, Tailwind</span>
+          <span data-i18n="stack.frontend.text">React, Next.js, TypeScript, Tailwind, HTML, CSS, JavaScript</span>
         </div>
         <div class="stack-group reveal" style="--delay: 0.08s;">
           <strong data-i18n="stack.apple.label">apple_</strong>
-          <span data-i18n="stack.apple.text">Swift, SwiftUI, UIKit, macOS</span>
+          <span data-i18n="stack.apple.text">Swift, SwiftUI, StoreKit 2, SwiftData, macOS</span>
         </div>
         <div class="stack-group reveal" style="--delay: 0.12s;">
-          <strong data-i18n="stack.backend.label">backend_</strong>
-          <span data-i18n="stack.backend.text">Node.js, REST APIs, Supabase, Firebase, deployments</span>
+          <strong data-i18n="stack.backend.label">backend & deploy_</strong>
+          <span data-i18n="stack.backend.text">Node.js, REST APIs, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages</span>
         </div>
       </div>
     </section>
 
     <section id="contact">
       <h2 class="section-title reveal" data-i18n="contact.title">contact</h2>
-      <p class="contact-copy reveal" style="--delay: 0.04s;" data-i18n="contact.text">Open to internships, junior roles, freelance work, and collaborations where product quality matters.</p>
+      <p class="contact-copy reveal" style="--delay: 0.04s;" data-i18n="contact.text">Open to internships, junior roles, and freelance product work. If you're building something that deserves to feel properly made, let's talk.</p>
 
       <div class="contact-links reveal" style="--delay: 0.08s;">
         <a href="mailto:muartmac@gmail.com" data-i18n="contact.link1">email</a>
@@ -636,110 +839,138 @@
         "meta.description": "Murat builds thoughtful, production-ready products across iOS, web, and backend.",
         "brand.label": "muartdev",
         "nav.work": "work",
+        "nav.approach": "approach",
         "nav.about": "about",
         "nav.contact": "contact",
         "nav.github": "github",
-        "nav.email": "email",
         "hero.role": "product engineer",
-        "hero.text1": "I’m a Computer Engineering student building thoughtful products across iOS, web, and backend.",
-        "hero.text2": "What I care about most is clean structure, product feel, and shipping work that is actually usable.",
-        "hero.text3": "Less noise, less template energy, more deliberate software.",
-        "hero.link1": "selected work",
-        "hero.link2": "github",
-        "hero.link3": "email",
+        "hero.text1": "I build thoughtful, production-ready products across iOS, web, and backend.",
+        "hero.text2": "Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.",
+        "hero.cta1": "see selected work",
+        "hero.cta2": "github",
+        "hero.cta3": "email",
+        "proof.chip1": "shipped iOS + web",
+        "proof.chip2": "StoreKit 2 · Supabase",
+        "proof.chip3": "Cloudflare · Vercel",
+        "proof.chip4": "EN / TR",
         "work.title": "work",
-        "work.note": "A few projects that best represent the kind of engineer I am becoming: product-focused, end-to-end, and careful about experience.",
-        "work.mindshelf.tag": "featured iOS / web product",
-        "work.mindshelf.desc": "A book tracking product built around calm UX, real product thinking, and the less glamorous details that make something actually shippable.",
-        "work.mindshelf.meta": "// SwiftUI / StoreKit 2 / Supabase / product UX",
+        "work.note": "One featured product that best shows how I think, plus a few projects that show range across iOS, web, and backend.",
+        "featured.label": "featured project_",
+        "featured.tag": "iOS + web · in production",
+        "featured.desc": "A book tracking product with a native iOS app and a companion web app — both live in production and sharing the same account.",
+        "featured.b1": "iOS app with in-app purchases, paywall, and restore purchases via StoreKit 2",
+        "featured.b2": "Supabase for auth and real-time sync between iOS and the web",
+        "featured.b3": "Web app on Cloudflare Pages with metadata auto-fetch (microlink, noembed)",
+        "featured.b4": "Full free-tier, paywall, and monetization flow shipped end to end",
+        "featured.meta": "// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages",
+        "featured.link1": "live web app",
+        "featured.link2": "ios repo",
+        "work.voge.tag": "community platform · live",
+        "work.voge.desc": "Community site for Voge motorcycle owners in Turkey. Built with Next.js, deployed on Vercel with a custom domain, and uses Google Sheets as a lightweight CMS.",
+        "work.voge.meta": "// Next.js · Vercel · Google Sheets API",
         "work.web.tag": "product extension",
-        "work.web.desc": "A TypeScript web version that expands the same idea beyond mobile and shows how I think about continuity across surfaces.",
-        "work.web.meta": "// React / TypeScript / product flow",
+        "work.web.desc": "The TypeScript web version of MindShelf. Shows how I think about continuity across surfaces and keeping a product consistent across mobile and web.",
+        "work.web.meta": "// React · TypeScript · Vite",
         "work.monitor.tag": "macOS utility",
-        "work.monitor.desc": "A desktop utility focused on cleaner information hierarchy and a more restrained utility experience.",
-        "work.monitor.meta": "// Swift / macOS / information design",
+        "work.monitor.desc": "A desktop utility focused on cleaner information hierarchy and a more restrained take on a Mac system monitor.",
+        "work.monitor.meta": "// Swift · macOS · information design",
         "work.api.tag": "backend service",
-        "work.api.desc": "Backend work that supports product logic, integrations, and the invisible parts that keep the whole system coherent.",
-        "work.api.meta": "// TypeScript / APIs / backend logic",
-        "work.food.tag": "swift side project",
-        "work.food.desc": "A smaller recommendation-focused Swift experiment that let me explore lighter product flows without overbuilding them.",
-        "work.food.meta": "// Swift / recommendations / prototyping",
+        "work.api.desc": "Backend work supporting product logic, integrations, and the invisible parts that keep a multi-surface product coherent.",
+        "work.api.meta": "// TypeScript · APIs · backend logic",
+        "work.food.tag": "swift prototype",
+        "work.food.desc": "A smaller recommendation-focused Swift experiment used to explore lighter product flows without overbuilding them.",
+        "work.food.meta": "// Swift · recommendations · prototyping",
+        "approach.title": "approach",
+        "approach.note": "How I actually work when I'm on a product.",
+        "approach.row1.label": "shape the product_",
+        "approach.row1.text": "I don't just style the UI. I think through flows, edge cases, and what the product actually needs to feel right before writing it.",
+        "approach.row2.label": "own the stack_",
+        "approach.row2.text": "Comfortable moving between iOS, frontend, backend glue, and deployment — so features don't stall at a handoff.",
+        "approach.row3.label": "ship, then polish_",
+        "approach.row3.text": "I prefer real users over internal demos. Most of what I build is live on the internet, not sitting in a branch.",
         "about.title": "about",
-        "about.note": "I’m not trying to be the loudest developer in the room. I’m more interested in making products clearer, calmer, and better put together.",
-        "about.row1.label": "focus_",
-        "about.row1.text": "Product-minded engineering with attention to interaction quality, content hierarchy, and real delivery.",
-        "about.row2.label": "range_",
-        "about.row2.text": "Comfortable moving between frontend, Apple platforms, backend glue, and shipping details.",
-        "about.row3.label": "goal_",
-        "about.row3.text": "Build work that feels thoughtful on the surface and solid underneath.",
-        "stack.title": "stack",
+        "about.note": "Computer Engineering student based in Turkey. I work in English and Turkish, with a bias toward shipping over talking about shipping.",
         "stack.frontend.label": "frontend_",
-        "stack.frontend.text": "HTML, CSS, JavaScript, React, TypeScript, Tailwind",
+        "stack.frontend.text": "React, Next.js, TypeScript, Tailwind, HTML, CSS, JavaScript",
         "stack.apple.label": "apple_",
-        "stack.apple.text": "Swift, SwiftUI, UIKit, macOS",
-        "stack.backend.label": "backend_",
-        "stack.backend.text": "Node.js, REST APIs, Supabase, Firebase, deployments",
+        "stack.apple.text": "Swift, SwiftUI, StoreKit 2, SwiftData, macOS",
+        "stack.backend.label": "backend & deploy_",
+        "stack.backend.text": "Node.js, REST APIs, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages",
         "contact.title": "contact",
-        "contact.text": "Open to internships, junior roles, freelance work, and collaborations where product quality matters.",
+        "contact.text": "Open to internships, junior roles, and freelance product work. If you're building something that deserves to feel properly made, let's talk.",
         "contact.link1": "email",
         "contact.link2": "github",
         "contact.link3": "x",
         "footer.text": "based in Turkey_ working in English and Turkish_"
       },
       tr: {
-        "meta.title": "Murat | Product Engineer",
-        "meta.description": "Murat iOS, web ve backend tarafinda dusunulmus, yayina hazir urunler gelistirir.",
+        "meta.title": "Murat | Ürün Mühendisi",
+        "meta.description": "Murat; iOS, web ve backend tarafında düşünülmüş, prodüksiyona hazır ürünler geliştirir.",
         "brand.label": "muartdev",
         "nav.work": "projeler",
-        "nav.about": "hakkimda",
-        "nav.contact": "iletisim",
+        "nav.approach": "yaklaşım",
+        "nav.about": "hakkımda",
+        "nav.contact": "iletişim",
         "nav.github": "github",
-        "nav.email": "e-posta",
-        "hero.role": "product engineer",
-        "hero.text1": "iOS, web ve backend tarafinda dusunulmus urunler ureten bir Bilgisayar Muhendisligi ogrencisiyim.",
-        "hero.text2": "En cok onem verdigim sey net yapi, urun hissi ve gercekten kullanilabilir isler ship etmek.",
-        "hero.text3": "Daha az gurultu, daha az template hissi, daha cok bilincli yazilim.",
-        "hero.link1": "secili isler",
-        "hero.link2": "github",
-        "hero.link3": "e-posta",
+        "hero.role": "ürün mühendisi",
+        "hero.text1": "iOS, web ve backend tarafında düşünülmüş, prodüksiyona hazır ürünler geliştiriyorum.",
+        "hero.text2": "Bilgisayar Mühendisliği öğrencisiyim — abonelikli iOS uygulamaları, gerçek kullanıcılı web ürünleri ve hepsini birbirine bağlayan backend işleri ship ediyorum.",
+        "hero.cta1": "seçili işler",
+        "hero.cta2": "github",
+        "hero.cta3": "e-posta",
+        "proof.chip1": "iOS + web yayında",
+        "proof.chip2": "StoreKit 2 · Supabase",
+        "proof.chip3": "Cloudflare · Vercel",
+        "proof.chip4": "EN / TR",
         "work.title": "projeler",
-        "work.note": "Benim nasil bir engineer oldugumu en iyi gosteren birkac is: urun odakli, uctan uca ve deneyim tarafinda dikkatli.",
-        "work.mindshelf.tag": "one cikan ios / web urunu",
-        "work.mindshelf.desc": "Sakin UX, gercek urun dusuncesi ve bir seyi gercekten ship edilebilir yapan daha gorunmeyen detaylar etrafinda kurulu kitap takip urunu.",
-        "work.mindshelf.meta": "// SwiftUI / StoreKit 2 / Supabase / product UX",
-        "work.web.tag": "urun genisletmesi",
-        "work.web.desc": "Ayni fikri mobil disina tasiyan ve yuzeyler arasi devamlıligi nasil dusundugumu gosteren TypeScript tabanli web surumu.",
-        "work.web.meta": "// React / TypeScript / urun akisi",
-        "work.monitor.tag": "macOS araci",
-        "work.monitor.desc": "Daha temiz bilgi hiyerarsisi ve daha sakin bir utility deneyimine odaklanan masaustu araci.",
-        "work.monitor.meta": "// Swift / macOS / bilgi tasarimi",
+        "work.note": "Nasıl düşündüğümü en iyi gösteren bir öne çıkan ürün, ve iOS, web, backend arasında ne kadar rahat geçiş yaptığımı gösteren birkaç proje.",
+        "featured.label": "öne çıkan proje_",
+        "featured.tag": "iOS + web · yayında",
+        "featured.desc": "Native iOS uygulaması ve onun web versiyonu olan, ikisi de aynı hesabı paylaşan ve yayında olan kitap takip ürünü.",
+        "featured.b1": "StoreKit 2 ile uygulama içi satın alma, paywall ve restore purchases",
+        "featured.b2": "Supabase ile auth ve iOS — web arasında real-time senkron",
+        "featured.b3": "Cloudflare Pages üzerinde çalışan, microlink ve noembed ile otomatik metadata çeken web uygulaması",
+        "featured.b4": "Free-tier, paywall ve tüm monetization akışı baştan sona yayına alındı",
+        "featured.meta": "// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages",
+        "featured.link1": "canlı web",
+        "featured.link2": "ios repo",
+        "work.voge.tag": "topluluk platformu · yayında",
+        "work.voge.desc": "Türkiye'deki Voge motosiklet sahipleri için topluluk sitesi. Next.js ile yazıldı, Vercel'de özel domain ile yayında, dinamik içerik için Google Sheets hafif bir CMS olarak kullanıldı.",
+        "work.voge.meta": "// Next.js · Vercel · Google Sheets API",
+        "work.web.tag": "ürün genişletmesi",
+        "work.web.desc": "MindShelf'in TypeScript tabanlı web versiyonu. Yüzeyler arası devamlılığı ve bir ürünün mobil ile web arasında nasıl tutarlı kaldığını nasıl düşündüğümü gösteriyor.",
+        "work.web.meta": "// React · TypeScript · Vite",
+        "work.monitor.tag": "macOS aracı",
+        "work.monitor.desc": "Daha temiz bilgi hiyerarşisine odaklanan, Mac system monitor'ün daha sakin bir yorumu olan masaüstü aracı.",
+        "work.monitor.meta": "// Swift · macOS · bilgi tasarımı",
         "work.api.tag": "backend servis",
-        "work.api.desc": "Urun mantigini, entegrasyonlari ve butun sistemi tutarli tutan gorunmeyen kisimlari destekleyen backend calismasi.",
-        "work.api.meta": "// TypeScript / API'ler / backend mantigi",
-        "work.food.tag": "swift yan proje",
-        "work.food.desc": "Daha hafif urun akislarini gereksiz buyutmeden kesfetmemi saglayan kucuk bir Swift tavsiye denemesi.",
-        "work.food.meta": "// Swift / tavsiyeler / prototipleme",
-        "about.title": "hakkimda",
-        "about.note": "En yuksek sesli gelistirici olmaya calismiyorum. Daha cok urunleri daha net, daha sakin ve daha iyi kurulmus hale getirmek ilgimi cekiyor.",
-        "about.row1.label": "odak_",
-        "about.row1.text": "Interaction quality, icerik hiyerarsisi ve gercek teslim ile product-minded engineering.",
-        "about.row2.label": "aralik_",
-        "about.row2.text": "Frontend, Apple platformlari, backend glue ve shipping detaylari arasinda rahat hareket ediyorum.",
-        "about.row3.label": "amac_",
-        "about.row3.text": "Yuzeyde dusunulmus, altyapida saglam hissettiren isler uretmek.",
-        "stack.title": "stack",
+        "work.api.desc": "Ürün mantığını, entegrasyonları ve çok yüzeyli bir ürünü tutarlı tutan görünmeyen kısımları destekleyen backend çalışması.",
+        "work.api.meta": "// TypeScript · API'ler · backend mantığı",
+        "work.food.tag": "swift prototip",
+        "work.food.desc": "Daha hafif ürün akışlarını gereksiz büyütmeden keşfetmek için yapılmış, tavsiye odaklı küçük bir Swift denemesi.",
+        "work.food.meta": "// Swift · tavsiyeler · prototipleme",
+        "approach.title": "yaklaşım",
+        "approach.note": "Bir ürün üzerinde çalışırken aslında nasıl ilerliyorum.",
+        "approach.row1.label": "ürünü şekillendir_",
+        "approach.row1.text": "Sadece UI'ı stillemiyorum. Kod yazmadan önce akışları, edge case'leri ve ürünün gerçekten nasıl hissettirmesi gerektiğini düşünüyorum.",
+        "approach.row2.label": "tüm stack'i sahiplen_",
+        "approach.row2.text": "iOS, frontend, backend glue ve deploy arasında rahat geçiş yapıyorum — böylece bir feature handoff'ta takılıp kalmıyor.",
+        "approach.row3.label": "önce ship, sonra cila_",
+        "approach.row3.text": "İç demolardansa gerçek kullanıcıları tercih ediyorum. Yaptığım işlerin çoğu bir branch'te değil, canlı internette.",
+        "about.title": "hakkımda",
+        "about.note": "Türkiye'de yaşayan bir Bilgisayar Mühendisliği öğrencisiyim. İngilizce ve Türkçe çalışıyorum; ship etmekten konuşmak yerine ship etmeyi tercih ediyorum.",
         "stack.frontend.label": "frontend_",
-        "stack.frontend.text": "HTML, CSS, JavaScript, React, TypeScript, Tailwind",
+        "stack.frontend.text": "React, Next.js, TypeScript, Tailwind, HTML, CSS, JavaScript",
         "stack.apple.label": "apple_",
-        "stack.apple.text": "Swift, SwiftUI, UIKit, macOS",
-        "stack.backend.label": "backend_",
-        "stack.backend.text": "Node.js, REST APIs, Supabase, Firebase, deploy akislari",
-        "contact.title": "iletisim",
-        "contact.text": "Urun kalitesinin onemli oldugu stajlar, junior roller, freelance isler ve is birlikleri icin acigim.",
+        "stack.apple.text": "Swift, SwiftUI, StoreKit 2, SwiftData, macOS",
+        "stack.backend.label": "backend & deploy_",
+        "stack.backend.text": "Node.js, REST API'ler, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages",
+        "contact.title": "iletişim",
+        "contact.text": "Ürün kalitesinin önemli olduğu stajlara, junior rollere ve freelance işlere açığım. Düzgün hissettirmesi gereken bir şey inşa ediyorsan konuşalım.",
         "contact.link1": "e-posta",
         "contact.link2": "github",
         "contact.link3": "x",
-        "footer.text": "turkiye merkezli_ ingilizce ve turkce calisiyorum_"
+        "footer.text": "türkiye merkezli_ i̇ngilizce ve türkçe_"
       }
     };
 
