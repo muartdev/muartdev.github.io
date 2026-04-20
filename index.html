@@ -20,7 +20,7 @@
   <title>Murat | Product Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23131316'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='%23ffffff' font-family='IBM Plex Mono, monospace' font-size='32' font-weight='600'%3Em%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
@@ -200,6 +200,74 @@
     .hero-role::after {
       content: "_";
       animation: blink 1.1s steps(1, end) infinite;
+    }
+
+    .accent {
+      font-family: "Fraunces", "Space Grotesk", serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
+      animation: pulse-soft 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-soft {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45); }
+      70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    .section-num {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.42em;
+      font-weight: 400;
+      color: var(--muted);
+      margin-right: 14px;
+      vertical-align: 0.35em;
+      letter-spacing: 0;
+    }
+
+    .item-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .item-idx {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 400;
+      flex-shrink: 0;
+      letter-spacing: 0;
+    }
+
+    .item-tag-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1;
+      margin-bottom: 16px;
+      width: fit-content;
     }
 
     .hero-copy {
@@ -681,7 +749,7 @@
       </div>
 
       <div class="hero-copy reveal" style="--delay: 0.04s;">
-        <p data-i18n="hero.text1">I build thoughtful, production-ready products across iOS, web, and backend.</p>
+        <p data-i18n="hero.text1" data-i18n-html>I build <span class="accent">thoughtful</span>, production-ready products across iOS, web, and backend.</p>
         <p class="muted" data-i18n="hero.text2">Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.</p>
 
         <div class="cta-group">
@@ -700,7 +768,7 @@
     </section>
 
     <section id="work">
-      <h2 class="section-title reveal" data-i18n="work.title">work</h2>
+      <h2 class="section-title reveal"><span class="section-num">01</span><span data-i18n="work.title">work</span></h2>
       <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="work.note">One featured product that best shows how I think, plus a few projects that show range across iOS, web, and backend.</p>
 
       <article class="featured reveal" style="--delay: 0.08s;">
@@ -731,43 +799,76 @@
       <div class="item-list" style="margin-top: 28px;">
         <article class="item reveal" style="--delay: 0.08s;">
           <div class="item-top">
-            <a class="item-link" href="https://www.vogeriderstr.com" target="_blank" rel="noopener noreferrer">VogeRidersTR</a>
-            <span class="item-tag" data-i18n="work.voge.tag">community platform · live</span>
+            <div class="item-head">
+              <span class="item-idx">01</span>
+              <a class="item-link" href="https://softmendil.com" target="_blank" rel="noopener noreferrer">Softmendil</a>
+            </div>
+            <span class="item-tag-row">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="item-tag" data-i18n="work.softmendil.tag">b2b e-commerce · live</span>
+            </span>
+          </div>
+          <p class="item-desc" data-i18n="work.softmendil.desc">A Next.js B2B e-commerce platform for custom-branded packaging — wet wipes, stick sugars, spice bags, kraft bags — with a quote-request flow, user accounts, and cart.</p>
+          <p class="item-meta" data-i18n="work.softmendil.meta">// Next.js · e-commerce · quote flow · b2b</p>
+        </article>
+
+        <article class="item reveal" style="--delay: 0.12s;">
+          <div class="item-top">
+            <div class="item-head">
+              <span class="item-idx">02</span>
+              <a class="item-link" href="https://www.vogeriderstr.com" target="_blank" rel="noopener noreferrer">VogeRidersTR</a>
+            </div>
+            <span class="item-tag-row">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="item-tag" data-i18n="work.voge.tag">community platform · live</span>
+            </span>
           </div>
           <p class="item-desc" data-i18n="work.voge.desc">Community site for Voge motorcycle owners in Turkey. Built with Next.js, deployed on Vercel with a custom domain, and uses Google Sheets as a lightweight CMS.</p>
           <p class="item-meta" data-i18n="work.voge.meta">// Next.js · Vercel · Google Sheets API</p>
         </article>
 
-        <article class="item reveal" style="--delay: 0.12s;">
+        <article class="item reveal" style="--delay: 0.16s;">
           <div class="item-top">
-            <a class="item-link" href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener noreferrer">MindShelf Web</a>
+            <div class="item-head">
+              <span class="item-idx">03</span>
+              <a class="item-link" href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener noreferrer">MindShelf Web</a>
+            </div>
             <span class="item-tag" data-i18n="work.web.tag">product extension</span>
           </div>
           <p class="item-desc" data-i18n="work.web.desc">The TypeScript web version of MindShelf. Shows how I think about continuity across surfaces and keeping a product consistent across mobile and web.</p>
           <p class="item-meta" data-i18n="work.web.meta">// React · TypeScript · Vite</p>
         </article>
 
-        <article class="item reveal" style="--delay: 0.16s;">
+        <article class="item reveal" style="--delay: 0.2s;">
           <div class="item-top">
-            <a class="item-link" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener noreferrer">System Monitor</a>
+            <div class="item-head">
+              <span class="item-idx">04</span>
+              <a class="item-link" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener noreferrer">System Monitor</a>
+            </div>
             <span class="item-tag" data-i18n="work.monitor.tag">macOS utility</span>
           </div>
           <p class="item-desc" data-i18n="work.monitor.desc">A desktop utility focused on cleaner information hierarchy and a more restrained take on a Mac system monitor.</p>
           <p class="item-meta" data-i18n="work.monitor.meta">// Swift · macOS · information design</p>
         </article>
 
-        <article class="item reveal" style="--delay: 0.2s;">
+        <article class="item reveal" style="--delay: 0.24s;">
           <div class="item-top">
-            <a class="item-link" href="https://github.com/muartdev/mind" target="_blank" rel="noopener noreferrer">Mind API</a>
+            <div class="item-head">
+              <span class="item-idx">05</span>
+              <a class="item-link" href="https://github.com/muartdev/mind" target="_blank" rel="noopener noreferrer">Mind API</a>
+            </div>
             <span class="item-tag" data-i18n="work.api.tag">backend service</span>
           </div>
           <p class="item-desc" data-i18n="work.api.desc">Backend work supporting product logic, integrations, and the invisible parts that keep a multi-surface product coherent.</p>
           <p class="item-meta" data-i18n="work.api.meta">// TypeScript · APIs · backend logic</p>
         </article>
 
-        <article class="item reveal" style="--delay: 0.24s;">
+        <article class="item reveal" style="--delay: 0.28s;">
           <div class="item-top">
-            <a class="item-link" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener noreferrer">FoodSuggest</a>
+            <div class="item-head">
+              <span class="item-idx">06</span>
+              <a class="item-link" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener noreferrer">FoodSuggest</a>
+            </div>
             <span class="item-tag" data-i18n="work.food.tag">swift prototype</span>
           </div>
           <p class="item-desc" data-i18n="work.food.desc">A smaller recommendation-focused Swift experiment used to explore lighter product flows without overbuilding them.</p>
@@ -777,7 +878,7 @@
     </section>
 
     <section id="approach">
-      <h2 class="section-title reveal" data-i18n="approach.title">approach</h2>
+      <h2 class="section-title reveal"><span class="section-num">02</span><span data-i18n="approach.title">approach</span></h2>
       <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="approach.note">How I actually work when I'm on a product.</p>
 
       <div class="note-list">
@@ -797,7 +898,7 @@
     </section>
 
     <section id="about">
-      <h2 class="section-title reveal" data-i18n="about.title">about</h2>
+      <h2 class="section-title reveal"><span class="section-num">03</span><span data-i18n="about.title">about</span></h2>
       <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="about.note">Computer Engineering student based in Turkey. I work in English and Turkish, with a bias toward shipping over talking about shipping.</p>
 
       <div class="stack-list">
@@ -817,7 +918,11 @@
     </section>
 
     <section id="contact">
-      <h2 class="section-title reveal" data-i18n="contact.title">contact</h2>
+      <h2 class="section-title reveal"><span class="section-num">04</span><span data-i18n="contact.title">contact</span></h2>
+      <div class="avail reveal" style="--delay: 0.03s;">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span data-i18n="contact.avail">available for work</span>
+      </div>
       <p class="contact-copy reveal" style="--delay: 0.04s;" data-i18n="contact.text">Open to internships, junior roles, and freelance product work. If you're building something that deserves to feel properly made, let's talk.</p>
 
       <div class="contact-links reveal" style="--delay: 0.08s;">
@@ -844,7 +949,7 @@
         "nav.contact": "contact",
         "nav.github": "github",
         "hero.role": "product engineer",
-        "hero.text1": "I build thoughtful, production-ready products across iOS, web, and backend.",
+        "hero.text1": "I build <span class=\"accent\">thoughtful</span>, production-ready products across iOS, web, and backend.",
         "hero.text2": "Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.",
         "hero.cta1": "see selected work",
         "hero.cta2": "github",
@@ -865,6 +970,9 @@
         "featured.meta": "// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages",
         "featured.link1": "live web app",
         "featured.link2": "ios repo",
+        "work.softmendil.tag": "b2b e-commerce · live",
+        "work.softmendil.desc": "A Next.js B2B e-commerce platform for custom-branded packaging — wet wipes, stick sugars, spice bags, kraft bags — with a quote-request flow, user accounts, and cart.",
+        "work.softmendil.meta": "// Next.js · e-commerce · quote flow · b2b",
         "work.voge.tag": "community platform · live",
         "work.voge.desc": "Community site for Voge motorcycle owners in Turkey. Built with Next.js, deployed on Vercel with a custom domain, and uses Google Sheets as a lightweight CMS.",
         "work.voge.meta": "// Next.js · Vercel · Google Sheets API",
@@ -897,6 +1005,7 @@
         "stack.backend.label": "backend & deploy_",
         "stack.backend.text": "Node.js, REST APIs, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages",
         "contact.title": "contact",
+        "contact.avail": "available for work",
         "contact.text": "Open to internships, junior roles, and freelance product work. If you're building something that deserves to feel properly made, let's talk.",
         "contact.link1": "email",
         "contact.link2": "github",
@@ -913,7 +1022,7 @@
         "nav.contact": "iletişim",
         "nav.github": "github",
         "hero.role": "ürün mühendisi",
-        "hero.text1": "iOS, web ve backend tarafında düşünülmüş, prodüksiyona hazır ürünler geliştiriyorum.",
+        "hero.text1": "iOS, web ve backend tarafında <span class=\"accent\">düşünülmüş</span>, prodüksiyona hazır ürünler geliştiriyorum.",
         "hero.text2": "Bilgisayar Mühendisliği öğrencisiyim — abonelikli iOS uygulamaları, gerçek kullanıcılı web ürünleri ve hepsini birbirine bağlayan backend işleri ship ediyorum.",
         "hero.cta1": "seçili işler",
         "hero.cta2": "github",
@@ -934,6 +1043,9 @@
         "featured.meta": "// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages",
         "featured.link1": "canlı web",
         "featured.link2": "ios repo",
+        "work.softmendil.tag": "b2b e-ticaret · yayında",
+        "work.softmendil.desc": "Özel markalı paketleme için Next.js tabanlı B2B e-ticaret platformu — ıslak mendil, stick şeker, baharat paketi, kraft torba. Teklif alma akışı, kullanıcı hesapları ve sepet dahil.",
+        "work.softmendil.meta": "// Next.js · e-ticaret · teklif akışı · b2b",
         "work.voge.tag": "topluluk platformu · yayında",
         "work.voge.desc": "Türkiye'deki Voge motosiklet sahipleri için topluluk sitesi. Next.js ile yazıldı, Vercel'de özel domain ile yayında, dinamik içerik için Google Sheets hafif bir CMS olarak kullanıldı.",
         "work.voge.meta": "// Next.js · Vercel · Google Sheets API",
@@ -966,6 +1078,7 @@
         "stack.backend.label": "backend & deploy_",
         "stack.backend.text": "Node.js, REST API'ler, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages",
         "contact.title": "iletişim",
+        "contact.avail": "iş için müsait",
         "contact.text": "Ürün kalitesinin önemli olduğu stajlara, junior rollere ve freelance işlere açığım. Düzgün hissettirmesi gereken bir şey inşa ediyorsan konuşalım.",
         "contact.link1": "e-posta",
         "contact.link2": "github",
@@ -1031,8 +1144,12 @@
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.getAttribute("data-i18n");
-        if (translations[lang][key]) {
-          element.textContent = translations[lang][key];
+        const value = translations[lang][key];
+        if (!value) return;
+        if (element.hasAttribute("data-i18n-html")) {
+          element.innerHTML = value;
+        } else {
+          element.textContent = value;
         }
       });
     }
