@@ -1,275 +1,263 @@
-# Motion Wall Portfolio Redesign Design
+# Motion-Led Editorial Portfolio Redesign
 
 Date: 2026-04-21
 Project: `muartdev.github.io`
-Status: Approved direction, awaiting user review before implementation planning
+Status: Revised direction approved in chat, awaiting user review before implementation planning
 
 ## Summary
 
-This redesign evolves the current editorial portfolio into a more memorable version built around two new ideas:
+This redesign resets the current broken draft and rebuilds the portfolio around two stronger ideas:
 
-1. a motion-led hero with a hybrid mascot/object
-2. a dark textured proof wall inspired by portfolio presentation boards and logo sheets
+1. motion that lives in typography, spacing, and signal elements instead of a mascot
+2. a dark textured proof wall that acts as the only major visual contrast moment
 
-The site should still feel clean and intentional, but it should now carry more personality and visual memory.
+The result should feel sharper, more mature, and more controlled than the previous attempt.
 
 ## Problem
 
-The current site is quieter and cleaner than before, but it still has two gaps:
+The last draft failed for two reasons:
 
-1. it does not create a strong visual hook in the first screen
-2. it does not yet turn shipped work into a more cinematic proof moment
+1. the moving mascot pushed the site toward a toy-like feeling
+2. the proof wall became visually disconnected from the rest of the page
 
-The user explicitly likes:
+The user feedback is now explicit:
 
-- the animated character/object feel from the first reference
-- the dark, textured wall feeling from the second reference
-
-So the next iteration should keep the minimal editorial structure while introducing a stronger visual identity.
+- do not use the mascot direction
+- do not keep the current motion style
+- keep the idea of movement, but make it smarter and more design-led
+- keep the textured wall feeling, but integrate it into a cleaner page
 
 ## Goals
 
-- Add a distinctive animated hero element that feels crafted and memorable
-- Add a dark proof wall section that feels tactile and visually strong
-- Keep the rest of the site restrained so the motion and proof moments feel intentional
-- Preserve the professional positioning:
-  - product engineer first
-  - designer-minded developer second
-  - freelancer / collaborator third
-- Keep the implementation lightweight enough for a static GitHub Pages portfolio
+- rebuild the hero from scratch
+- keep motion, but move it into type, rhythm, and layout choreography
+- preserve a strong, tactile dark proof wall
+- make the whole page feel intentional instead of decorative
+- keep the site static, lightweight, and GitHub Pages friendly
 
 ## Non-Goals
 
-- Turning the site into a cartoon portfolio
-- Using noisy, gimmicky, or excessive 3D effects
-- Replacing the whole site with a motion demo
-- Adding fake client brands or fabricated logos
-- Introducing heavy animation libraries unless absolutely necessary
+- no mascot
+- no face-like hero illustration
+- no bouncy or cute motion language
+- no fake client logos
+- no heavy animation libraries
+- no over-designed gradients or glass effects
 
 ## Chosen Direction
 
 The approved direction is:
 
-`hybrid mascot + textured proof wall`
+`motion-led editorial hero + textured proof wall`
 
 That means:
 
-- not a full cute mascot
-- not a purely abstract object
-- a middle ground that suggests personality without becoming childish
-
-The hero object should feel like a visual identity piece, not an illustration dumped on the page.
+- the hero becomes typographic first
+- the motion becomes structural instead of illustrative
+- the proof wall stays strong, but only as one controlled contrast section
 
 ## Visual Direction
 
 ### Overall feeling
 
-- quiet
-- designed
+- editorial
+- minimal
+- sharp
 - tactile
-- slightly playful
-- still credible and sharp
+- product-minded
+- quietly premium
 
-### Composition logic
+### Section rhythm
 
-The page should have stronger contrast between sections:
+The page should deliberately alternate intensity:
 
-- top: light, spacious, minimal
-- middle: dark, textured, dense proof moment
-- lower sections: calm and editorial again
+- top: light, open, typographic, motion-led
+- middle: dark, dense, textured proof moment
+- lower sections: clean editorial lists again
 
-This contrast is what will make the site feel more designed without relying on loud UI tricks everywhere.
+This rhythm should create identity without making every section loud.
 
 ## Hero Direction
 
 ### Hero structure
 
-The top of the page should become a simple stage:
+The first screen should feel like a designed spread:
 
 - minimal top bar
-- centered or near-centered animated object
-- short greeting / identity line
-- one or two short lines of copy
-- compact CTA set
+- oversized name and role composition
+- short, strong positioning sentence
+- restrained proof chips
+- compact CTA row
+- one motion-led signal element
 
-The hero should feel more like a visual opening than a standard portfolio intro block.
+### Motion language
 
-### Hybrid mascot/object
+Motion should come from layout and type, not from a character.
 
-The object should combine:
+Good candidates:
 
-- monogram or head-like silhouette
-- soft face-like geometry or eye-like forms
-- simple rounded construction
-- restrained single-accent palette
+- a slow sliding signal rail
+- a horizontally moving status strip
+- staggered hero reveals
+- gentle directional shifts on CTAs
 
-It should feel adjacent to a mascot, but more like a design system object than a cartoon character.
+Bad candidates:
 
-### Motion behavior
+- bouncing objects
+- blinking faces
+- floating mascot parts
+- motion that demands attention every second
 
-Motion should be idle and tasteful:
+### Hero signal element
 
-- subtle floating
-- soft tilt
-- gentle blink or eye-state shift
+The main motion device should be a slim, intelligent element near the hero:
 
-No aggressive bouncing, no fast looping, no game-like behavior.
+- a line of repeated signals
+- a moving strip with product phrases
+- a calm ticker-like rhythm
+- or a rail that drifts across a masked viewport
 
-### Implementation choice
+Possible copy for the motion rail:
 
-For the first implementation pass, use:
+- `shipping across iOS / web / backend`
+- `selected work / live products / real systems`
+- `product engineer / designer-minded developer / builder`
 
-- inline SVG for the hero object
-- CSS keyframes for motion
-
-Do not start with canvas, WebGL, or heavy motion libraries.
-
-For the first pass, prefer CSS-only motion. JavaScript-driven animation is out of scope unless a tiny helper is strictly required for blink timing.
+The rail should be readable enough to feel crafted, but subtle enough to not dominate the hero.
 
 ## Proof Wall Direction
 
 ### Purpose
 
-The proof wall should act as the visual counterweight to the light hero.
+The proof wall should turn shipped work into a stronger credibility moment.
 
 It should communicate:
 
-- shipped work
-- brand or product breadth
-- stronger professional credibility
+- real projects
+- product breadth
+- production signals
+- stronger professional weight
 
 ### Surface style
 
 The wall should feel like:
 
-- dark studio wall
-- textured presentation board
-- subtle paper / concrete / grain surface
+- a dark studio board
+- a textured presentation surface
+- a subtle paper / concrete / grain composition
 
-This should not be a flat dark rectangle. It needs tactile depth, but the texture should remain understated.
+It should feel tactile, but still restrained.
 
-### Content approach
+### Content treatment
 
-For the first implementation pass, the wall should contain:
+The wall should use real project names and product names only.
 
-- project names
-- product names
-- selected work labels
-- shipped signals
+Do not invent logos.
+Do not fake client branding.
 
-Because the repo does not currently include a ready logo system, do not fabricate logos. Use refined text marks and structured layout first.
+Instead, use:
 
-The first pass should treat the proof wall as a text-mark composition, not a real client-logo board.
+- large and small text-mark hierarchy
+- varied scale
+- deliberate spacing
+- occasional outline or contrast treatment
 
-### Layout
-
-The proof wall should use a grid with enough spacing to feel curated.
-
-Good content candidates:
-
-- MindShelf
-- MindShelf Web
-- System Monitor
-- Mind API
-- FoodSuggest
-- any real shipped names already supported by the repo or user
-
-The grid should feel like a portfolio proof board, not a dashboard.
+The proof wall should feel curated, not randomly tiled.
 
 ## Page Structure
 
-The redesigned page should use this sequence:
+The redesigned page should use this order:
 
 1. Minimal top bar
-2. Motion hero
-3. Short intro copy / CTA
+2. Motion-led editorial hero
+3. Proof chips and CTA
 4. Textured proof wall
 5. Selected work list
-6. About / stack
+6. Approach / about / stack
 7. Contact
-
-This keeps the site simple while giving the strongest visual ideas room to lead.
 
 ## Typography
 
-The current monospace/editorial foundation is worth keeping.
+Typography should carry most of the design.
 
 Recommended type logic:
 
-- monospace for structure and body rhythm
-- Space Grotesk for names and section headings
-- Fraunces italic only for selective accent moments
-
-Typography should do most of the work after motion and texture.
+- IBM Plex Mono for body structure, labels, and proof chips
+- Space Grotesk for hero name, section titles, and emphasis
+- Fraunces italic only as a rare accent if it actually helps
 
 ## Color Direction
 
-Use mostly restrained neutrals:
+Use restrained neutrals:
 
 - warm light background
-- dark charcoal proof wall
-- white / off-white text on dark sections
+- charcoal or near-black proof wall
+- soft off-white wall text
 
-Accent should be limited:
+Accent should be limited to one electric note used in:
 
-- one electric accent for the hero object
+- the motion rail
+- a rule
+- a small signal detail
 
-Do not spread accent color everywhere.
+Do not use the accent everywhere.
 
 ## Interaction Rules
 
-- hover states stay minimal
-- links can keep subtle directional arrow movement
-- motion belongs mainly in the hero object
-- the textured wall should feel stable, not animated constantly
+- hovers stay quiet
+- arrow movement can remain subtle
+- motion should mostly live near the hero
+- the proof wall should stay stable
 
-If the whole page moves, the concept weakens.
+If the page starts moving everywhere, the concept fails.
 
 ## Technical Constraints
 
-- keep it as a single-page static site
+- single-file static site
 - preserve language toggle
 - preserve theme toggle
-- avoid heavy dependencies
-- keep performance high enough for GitHub Pages and mobile
+- avoid dependencies
+- keep mobile layout solid
+- prevent overflow and horizontal breakage
 
 ## Risks
 
-- If the mascot side is too literal, the site can feel childish
-- If the proof wall is too busy, it can overpower the rest of the page
-- If both sections are too strong at once, the site can lose its clean editorial restraint
+- if the hero motion is too weak, the redesign feels flat
+- if the proof wall is too large or too dark, it can overpower the page
+- if the motion rail is badly proportioned, it can look like a generic marquee
 
-So implementation should intentionally keep the rest of the page quiet.
+So the implementation needs strong layout discipline first, motion second.
 
 ## Success Criteria
 
 The redesign is successful if:
 
-- the hero becomes visually memorable within a second or two
-- the site still feels professional and not gimmicky
-- the proof wall makes shipped work feel more credible and substantial
-- the rest of the page still reads clearly and calmly
-- the portfolio feels more “crafted” than a standard student site
+- the first screen feels more mature immediately
+- the motion feels designed rather than playful
+- the proof wall looks intentional and proportionate on mobile
+- the rest of the page remains readable and calm
+- the portfolio feels closer to a real designer-engineer portfolio than to a student demo
 
 ## First-Pass Implementation Decisions
 
-To keep scope focused, the first implementation pass should do all of these:
+The first implementation pass should:
 
-- replace the current plain hero with a motion-led hybrid mascot/object
-- add one dark textured proof wall section
-- keep the rest of the site relatively simple
-- use project names / text marks instead of invented logo graphics
-- avoid adding any dependency that is not clearly necessary
+- remove the mascot and current hero experiment entirely
+- rebuild the hero from scratch
+- add one clean motion rail or signal strip
+- keep the proof chips but integrate them into the new hero rhythm
+- rebuild the proof wall so it fits the page cleanly on mobile
+- keep the rest of the sections simple
 
-And it should explicitly avoid these for now:
+And it should explicitly avoid:
 
-- full 3D rendering
-- external animation tooling
-- fake branding systems
-- multiple animated sections competing at once
+- character graphics
+- 3D experiments
+- fake logos
+- multiple competing motion ideas
 
 ## Assumptions
 
-- The current live `origin/main` version is the correct implementation base.
-- The user wants a more memorable portfolio, not a fully playful mascot site.
-- The proof wall can start with project-name composition before any real logo asset set exists.
+- the current branch is still the correct place to continue work
+- the user wants a cleaner, more mature site rather than a playful one
+- the proof wall should remain part of the concept, but not dominate the whole portfolio
