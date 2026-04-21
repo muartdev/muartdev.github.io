@@ -35,6 +35,13 @@
       --accent-soft: rgba(18, 19, 22, 0.05);
       --selection: rgba(18, 19, 22, 0.12);
       --max-width: 780px;
+      --electric: #2156f5;
+      --electric-soft: rgba(33, 86, 245, 0.16);
+      --stage-ring: rgba(18, 19, 22, 0.09);
+      --stage-shadow: rgba(13, 18, 28, 0.16);
+      --wall-text: #f4f1e9;
+      --wall-muted: rgba(244, 241, 233, 0.62);
+      --wall-pin: #f0ef66;
     }
 
     [data-theme="dark"] {
@@ -48,6 +55,10 @@
       --accent: #eef2f6;
       --accent-soft: rgba(255, 255, 255, 0.05);
       --selection: rgba(255, 255, 255, 0.18);
+      --electric: #84a1ff;
+      --electric-soft: rgba(132, 161, 255, 0.16);
+      --stage-ring: rgba(255, 255, 255, 0.09);
+      --stage-shadow: rgba(0, 0, 0, 0.34);
     }
 
     * {
@@ -68,6 +79,7 @@
       line-height: 1.72;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
 
     ::selection {
@@ -168,14 +180,154 @@
 
     .hero {
       display: grid;
-      gap: 24px;
+      gap: 26px;
+    }
+
+    .hero-stage {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .hero-greeting {
+      color: var(--electric);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3.2rem, 10vw, 5.9rem);
+      line-height: 0.86;
+      letter-spacing: -0.09em;
+      text-shadow: 0 10px 28px rgba(33, 86, 245, 0.12);
+    }
+
+    .hero-object-wrap {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: min(100%, 520px);
+      padding: 14px 0 0;
+      isolation: isolate;
+    }
+
+    .hero-object-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 8% 12% 22%;
+      border-radius: 999px;
+      background: radial-gradient(circle at 50% 40%, var(--electric-soft), transparent 62%);
+      filter: blur(14px);
+      opacity: 0.95;
+      z-index: 0;
+    }
+
+    .hero-object-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 13% 16% 19%;
+      border: 1px solid var(--stage-ring);
+      border-radius: 46% 46% 30% 30% / 44% 44% 34% 34%;
+      z-index: 0;
+    }
+
+    .hero-mascot {
+      width: min(100%, 430px);
+      height: auto;
+      display: block;
+      overflow: visible;
+      filter: drop-shadow(0 28px 34px var(--stage-shadow));
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-float-group,
+    .mascot-tilt-group,
+    .mascot-eye {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .hero-float-group {
+      animation: mascot-float 6s ease-in-out infinite;
+    }
+
+    .mascot-tilt-group {
+      transform-origin: 50% 54%;
+      animation: mascot-tilt 7.2s ease-in-out infinite;
+    }
+
+    .mascot-aura {
+      fill: var(--electric-soft);
+      opacity: 0.85;
+    }
+
+    .mascot-shadow {
+      fill: rgba(18, 19, 22, 0.14);
+    }
+
+    [data-theme="dark"] .mascot-shadow {
+      fill: rgba(0, 0, 0, 0.42);
+    }
+
+    .mascot-base {
+      fill: url(#mascot-base-grad);
+      opacity: 0.92;
+    }
+
+    .mascot-ear,
+    .mascot-head,
+    .mascot-face {
+      fill: #f9f7f2;
+      stroke: var(--electric);
+      stroke-width: 4;
+    }
+
+    [data-theme="dark"] .mascot-ear,
+    [data-theme="dark"] .mascot-head,
+    [data-theme="dark"] .mascot-face {
+      fill: #12161d;
+    }
+
+    .mascot-cap {
+      fill: none;
+      stroke: url(#mascot-cap-grad);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .mascot-cap-outer {
+      stroke-width: 34;
+    }
+
+    .mascot-cap-inner {
+      stroke-width: 28;
+    }
+
+    .mascot-eye {
+      fill: var(--electric);
+      animation: mascot-blink 6.8s infinite;
+    }
+
+    .mascot-eye-right {
+      animation-delay: 0.08s;
+    }
+
+    .mascot-eye-glint {
+      fill: #ffffff;
+      opacity: 0.96;
+    }
+
+    .hero-stage-note {
+      color: var(--muted);
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
     }
 
     .hero-head {
       display: flex;
       align-items: baseline;
+      justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
+      text-align: center;
     }
 
     .hero-name {
@@ -274,8 +426,10 @@
       display: grid;
       gap: 16px;
       max-width: 60ch;
+      margin: 0 auto;
       color: var(--text);
       font-size: 1rem;
+      text-align: center;
     }
 
     .hero-copy p {
@@ -284,11 +438,14 @@
 
     .hero-copy .muted {
       color: var(--muted);
+      max-width: 56ch;
+      margin: 0 auto;
     }
 
     .cta-group {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
       margin-top: 6px;
     }
@@ -333,6 +490,7 @@
     .proof {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 8px;
       margin-top: 8px;
     }
@@ -405,6 +563,155 @@
     .contact-links a:hover::after,
     .featured-links a:hover::after {
       transform: translate(2px, -1px);
+    }
+
+    .proof-wall-section {
+      width: min(1120px, calc(100vw - 32px));
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .proof-wall {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 34px 36px 64px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--wall-text);
+      background:
+        radial-gradient(circle at 82% 22%, rgba(255, 255, 255, 0.08), transparent 26%),
+        radial-gradient(circle at 18% 82%, rgba(105, 121, 154, 0.2), transparent 36%),
+        linear-gradient(162deg, #313740 0%, #1d2229 46%, #14181d 100%);
+      box-shadow:
+        0 26px 56px rgba(5, 8, 12, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .proof-wall::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 5px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.014) 0 3px, transparent 3px 7px),
+        radial-gradient(circle at 26% 18%, rgba(255, 255, 255, 0.06), transparent 22%);
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    .proof-wall::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 0.7px, transparent 0.7px);
+      background-size: 12px 12px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .wall-top,
+    .wall-grid,
+    .wall-side {
+      position: relative;
+      z-index: 1;
+    }
+
+    .wall-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .wall-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--wall-text);
+      font-size: 0.88rem;
+    }
+
+    .wall-pin {
+      width: 18px;
+      height: 18px;
+      background: var(--wall-pin);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+      flex-shrink: 0;
+    }
+
+    .wall-meta {
+      max-width: 30ch;
+      color: var(--wall-muted);
+      font-size: 0.76rem;
+      text-align: right;
+      letter-spacing: 0.06em;
+    }
+
+    .wall-side {
+      position: absolute;
+      left: 16px;
+      bottom: 36px;
+      transform: rotate(-90deg);
+      transform-origin: left bottom;
+      color: var(--wall-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .wall-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 34px 24px;
+      padding-left: 26px;
+    }
+
+    .wall-mark {
+      min-height: 86px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .wall-mark strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.34rem, 2.5vw, 2rem);
+      line-height: 0.94;
+      letter-spacing: -0.055em;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .wall-mark span {
+      color: var(--wall-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      line-height: 1.45;
+    }
+
+    .wall-mark-xl strong {
+      font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+    }
+
+    .wall-mark-outline strong {
+      color: transparent;
+      text-shadow: none;
+      -webkit-text-stroke: 1px rgba(244, 241, 233, 0.78);
+    }
+
+    .wall-mark-offset {
+      padding-top: 28px;
+    }
+
+    .wall-mark-lower {
+      padding-top: 44px;
+    }
+
+    .wall-mark-meta strong {
+      color: #cfd7ff;
+      font-size: clamp(1.1rem, 2vw, 1.62rem);
+      letter-spacing: -0.04em;
     }
 
     .section-title {
@@ -639,6 +946,45 @@
       }
     }
 
+    @keyframes mascot-float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes mascot-tilt {
+      0%, 100% {
+        transform: rotate(-1.6deg);
+      }
+      50% {
+        transform: rotate(1.8deg);
+      }
+    }
+
+    @keyframes mascot-blink {
+      0%, 3%, 100% {
+        transform: scaleY(1);
+      }
+      1.4% {
+        transform: scaleY(0.08);
+      }
+      2.1% {
+        transform: scaleY(1);
+      }
+      90% {
+        transform: scaleY(1);
+      }
+      92% {
+        transform: scaleY(0.16);
+      }
+      94% {
+        transform: scaleY(1);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
@@ -653,7 +999,10 @@
       .topbar-button,
       .cta,
       .chip,
-      .featured-links a {
+      .featured-links a,
+      .hero-float-group,
+      .mascot-tilt-group,
+      .mascot-eye {
         transition: none;
       }
 
@@ -661,9 +1010,35 @@
         animation: none;
       }
 
+      .hero-float-group,
+      .mascot-tilt-group,
+      .mascot-eye {
+        animation: none;
+      }
+
       .reveal {
         opacity: 1;
         transform: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .proof-wall-section {
+        width: min(100vw - 24px, 960px);
+      }
+
+      .proof-wall {
+        padding: 28px 24px 32px;
+      }
+
+      .wall-side {
+        display: none;
+      }
+
+      .wall-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 20px;
+        padding-left: 0;
       }
     }
 
@@ -692,6 +1067,14 @@
         gap: 10px;
       }
 
+      .hero-stage {
+        gap: 12px;
+      }
+
+      .hero-object-wrap {
+        width: min(100%, 420px);
+      }
+
       .item-top,
       .topbar-links,
       .topbar-actions,
@@ -708,6 +1091,29 @@
 
       .featured {
         padding: 20px 16px 22px;
+      }
+
+      .proof-wall-section {
+        width: min(100vw - 20px, 640px);
+      }
+
+      .wall-top {
+        flex-direction: column;
+        margin-bottom: 24px;
+      }
+
+      .wall-meta {
+        text-align: left;
+      }
+
+      .wall-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .wall-mark-offset,
+      .wall-mark-lower {
+        padding-top: 0;
       }
 
       footer {
@@ -743,12 +1149,61 @@
 
   <main class="shell">
     <section class="hero" id="top">
+      <div class="hero-stage reveal">
+        <div class="hero-greeting" data-i18n="hero.greeting">hey!</div>
+
+        <div class="hero-object-wrap" aria-hidden="true">
+          <svg class="hero-mascot" viewBox="0 0 420 440" role="presentation">
+            <defs>
+              <linearGradient id="mascot-cap-grad" x1="86" y1="92" x2="332" y2="246" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2f6bff" />
+                <stop offset="100%" stop-color="#1747d8" />
+              </linearGradient>
+              <linearGradient id="mascot-base-grad" x1="108" y1="366" x2="320" y2="430" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#9e7cff" />
+                <stop offset="100%" stop-color="#3158ff" />
+              </linearGradient>
+              <filter id="hero-soft-blur" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="14" />
+              </filter>
+            </defs>
+
+            <g class="hero-float-group">
+              <ellipse class="mascot-aura" cx="210" cy="238" rx="118" ry="108" filter="url(#hero-soft-blur)" />
+              <ellipse class="mascot-shadow" cx="210" cy="386" rx="108" ry="22" />
+              <ellipse class="mascot-base" cx="210" cy="408" rx="126" ry="42" />
+
+              <g class="mascot-tilt-group">
+                <circle class="mascot-ear" cx="96" cy="232" r="28" />
+                <circle class="mascot-ear" cx="324" cy="232" r="28" />
+                <circle class="mascot-head" cx="210" cy="226" r="128" />
+                <path class="mascot-cap mascot-cap-outer" d="M92 196c22-73 80-114 151-114 70 0 129 41 151 114" />
+                <path class="mascot-cap mascot-cap-inner" d="M177 212c5-44 19-82 33-107 18 22 34 59 38 102" />
+                <path class="mascot-face" d="M174 224c-25 0-46 21-46 46v6c0 26 21 47 46 47 15 0 29-7 38-19 9 12 23 19 38 19 25 0 46-21 46-47v-6c0-25-21-46-46-46-15 0-29 7-38 19-9-12-23-19-38-19Z" />
+
+                <g class="mascot-eye mascot-eye-left">
+                  <rect x="168" y="246" width="34" height="42" rx="17" />
+                  <circle class="mascot-eye-glint" cx="185" cy="263" r="5" />
+                </g>
+
+                <g class="mascot-eye mascot-eye-right">
+                  <rect x="218" y="246" width="34" height="42" rx="17" />
+                  <circle class="mascot-eye-glint" cx="235" cy="263" r="5" />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="hero-stage-note" data-i18n="hero.stageNote">iOS / web / backend</div>
+      </div>
+
       <div class="hero-head reveal">
         <h1 class="hero-name">Murat</h1>
         <span class="hero-role" data-i18n="hero.role">product engineer</span>
       </div>
 
-      <div class="hero-copy reveal" style="--delay: 0.04s;">
+      <div class="hero-copy reveal" style="--delay: 0.06s;">
         <p data-i18n="hero.text1" data-i18n-html>I build <span class="accent">thoughtful</span>, production-ready products across iOS, web, and backend.</p>
         <p class="muted" data-i18n="hero.text2">Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.</p>
 
@@ -763,6 +1218,62 @@
           <span class="chip" role="listitem" data-i18n="proof.chip2">StoreKit 2 · Supabase</span>
           <span class="chip" role="listitem" data-i18n="proof.chip3">Cloudflare · Vercel</span>
           <span class="chip" role="listitem" data-i18n="proof.chip4">EN / TR</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-wall-section reveal" style="--delay: 0.08s;" aria-labelledby="wallTitle">
+      <div class="proof-wall">
+        <div class="wall-top">
+          <div class="wall-label">
+            <span class="wall-pin" aria-hidden="true"></span>
+            <span id="wallTitle" data-i18n="wall.label">shipped signals</span>
+          </div>
+          <p class="wall-meta" data-i18n="wall.meta">real products / iOS / web / backend</p>
+        </div>
+
+        <div class="wall-side" data-i18n="wall.side">portfolio_2026</div>
+
+        <div class="wall-grid" role="list" aria-label="Selected shipped work">
+          <article class="wall-mark wall-mark-xl" role="listitem">
+            <strong>MindShelf</strong>
+            <span data-i18n="wall.mindshelf">native iOS app / web companion</span>
+          </article>
+
+          <article class="wall-mark wall-mark-outline" role="listitem">
+            <strong>Softmendil</strong>
+            <span data-i18n="wall.softmendil">b2b commerce / quote flow</span>
+          </article>
+
+          <article class="wall-mark wall-mark-offset" role="listitem">
+            <strong>VogeRidersTR</strong>
+            <span data-i18n="wall.voge">community product / custom domain</span>
+          </article>
+
+          <article class="wall-mark wall-mark-meta" role="listitem">
+            <strong data-i18n="wall.shipped">ship_01</strong>
+            <span data-i18n="wall.shippedMeta">real software / live on the internet</span>
+          </article>
+
+          <article class="wall-mark" role="listitem">
+            <strong>Mind API</strong>
+            <span data-i18n="wall.api">product backend / glue layer</span>
+          </article>
+
+          <article class="wall-mark wall-mark-lower" role="listitem">
+            <strong>System Monitor</strong>
+            <span data-i18n="wall.monitor">macOS utility / info design</span>
+          </article>
+
+          <article class="wall-mark wall-mark-outline" role="listitem">
+            <strong>MindShelf Web</strong>
+            <span data-i18n="wall.web">same product / second surface</span>
+          </article>
+
+          <article class="wall-mark" role="listitem">
+            <strong>FoodSuggest</strong>
+            <span data-i18n="wall.food">swift prototype / lighter flows</span>
+          </article>
         </div>
       </div>
     </section>
@@ -948,6 +1459,8 @@
         "nav.about": "about",
         "nav.contact": "contact",
         "nav.github": "github",
+        "hero.greeting": "hey!",
+        "hero.stageNote": "iOS / web / backend",
         "hero.role": "product engineer",
         "hero.text1": "I build <span class=\"accent\">thoughtful</span>, production-ready products across iOS, web, and backend.",
         "hero.text2": "Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.",
@@ -958,6 +1471,18 @@
         "proof.chip2": "StoreKit 2 · Supabase",
         "proof.chip3": "Cloudflare · Vercel",
         "proof.chip4": "EN / TR",
+        "wall.label": "shipped signals",
+        "wall.meta": "real products / iOS / web / backend",
+        "wall.side": "portfolio_2026",
+        "wall.mindshelf": "native iOS app / web companion",
+        "wall.softmendil": "b2b commerce / quote flow",
+        "wall.voge": "community product / custom domain",
+        "wall.shipped": "ship_01",
+        "wall.shippedMeta": "real software / live on the internet",
+        "wall.api": "product backend / glue layer",
+        "wall.monitor": "macOS utility / info design",
+        "wall.web": "same product / second surface",
+        "wall.food": "swift prototype / lighter flows",
         "work.title": "work",
         "work.note": "One featured product that best shows how I think, plus a few projects that show range across iOS, web, and backend.",
         "featured.label": "featured project_",
@@ -1021,6 +1546,8 @@
         "nav.about": "hakkımda",
         "nav.contact": "iletişim",
         "nav.github": "github",
+        "hero.greeting": "selam!",
+        "hero.stageNote": "iOS / web / backend",
         "hero.role": "ürün mühendisi",
         "hero.text1": "iOS, web ve backend tarafında <span class=\"accent\">düşünülmüş</span>, prodüksiyona hazır ürünler geliştiriyorum.",
         "hero.text2": "Bilgisayar Mühendisliği öğrencisiyim — abonelikli iOS uygulamaları, gerçek kullanıcılı web ürünleri ve hepsini birbirine bağlayan backend işleri ship ediyorum.",
@@ -1031,6 +1558,18 @@
         "proof.chip2": "StoreKit 2 · Supabase",
         "proof.chip3": "Cloudflare · Vercel",
         "proof.chip4": "EN / TR",
+        "wall.label": "yayın sinyalleri",
+        "wall.meta": "gerçek ürünler / iOS / web / backend",
+        "wall.side": "portfolyo_2026",
+        "wall.mindshelf": "native iOS uygulaması / web eşlikçisi",
+        "wall.softmendil": "b2b ticaret / teklif akışı",
+        "wall.voge": "topluluk ürünü / özel domain",
+        "wall.shipped": "ship_01",
+        "wall.shippedMeta": "gerçek yazılım / internette yayında",
+        "wall.api": "ürün backend'i / glue katmanı",
+        "wall.monitor": "macOS aracı / bilgi tasarımı",
+        "wall.web": "aynı ürün / ikinci yüzey",
+        "wall.food": "swift prototip / hafif akışlar",
         "work.title": "projeler",
         "work.note": "Nasıl düşündüğümü en iyi gösteren bir öne çıkan ürün, ve iOS, web, backend arasında ne kadar rahat geçiş yaptığımı gösteren birkaç proje.",
         "featured.label": "öne çıkan proje_",
