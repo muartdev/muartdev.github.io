@@ -6,7 +6,7 @@
   <meta name="description" content="Murat builds thoughtful, production-ready products across iOS, web, and backend." />
   <meta name="author" content="Murat" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#f7f5f1" />
+  <meta name="theme-color" content="#f6f3ec" />
   <meta property="og:title" content="Murat | Product Engineer" />
   <meta property="og:description" content="Portfolio of Murat, a Computer Engineering student shipping thoughtful products across iOS, web, and backend." />
   <meta property="og:type" content="website" />
@@ -24,41 +24,41 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23131316'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='%23ffffff' font-family='IBM Plex Mono, monospace' font-size='32' font-weight='600'%3Em%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
-      --bg: #f7f5f1;
-      --text: #121316;
-      --muted: #6a7080;
-      --line: rgba(18, 19, 22, 0.13);
-      --line-strong: rgba(18, 19, 22, 0.22);
-      --tag-bg: #151619;
-      --tag-text: #f9f7f3;
-      --accent: #121316;
-      --accent-soft: rgba(18, 19, 22, 0.05);
-      --selection: rgba(18, 19, 22, 0.12);
-      --max-width: 780px;
-      --electric: #2156f5;
-      --electric-soft: rgba(33, 86, 245, 0.16);
-      --stage-ring: rgba(18, 19, 22, 0.09);
-      --stage-shadow: rgba(13, 18, 28, 0.16);
-      --wall-text: #f4f1e9;
-      --wall-muted: rgba(244, 241, 233, 0.62);
-      --wall-pin: #f0ef66;
+      --bg: #f6f3ec;
+      --bg-soft: #fbf8f2;
+      --text: #131417;
+      --muted: #6b7280;
+      --line: rgba(19, 20, 23, 0.12);
+      --line-strong: rgba(19, 20, 23, 0.22);
+      --tag-bg: #131417;
+      --tag-text: #f8f5ee;
+      --selection: rgba(19, 20, 23, 0.12);
+      --signal: #1f5eff;
+      --signal-soft: rgba(31, 94, 255, 0.1);
+      --wall-bg-top: #2a3038;
+      --wall-bg-bottom: #14181e;
+      --wall-text: #f4efe6;
+      --wall-muted: rgba(244, 239, 230, 0.64);
+      --max-width: 840px;
+      --wall-width: 1040px;
     }
 
     [data-theme="dark"] {
-      --bg: #0e1014;
-      --text: #eef2f6;
-      --muted: #97a0ae;
+      --bg: #0f1115;
+      --bg-soft: #14171d;
+      --text: #ecf0f4;
+      --muted: #99a2af;
       --line: rgba(255, 255, 255, 0.1);
       --line-strong: rgba(255, 255, 255, 0.18);
-      --tag-bg: #f2f5f8;
+      --tag-bg: #edf1f5;
       --tag-text: #101216;
-      --accent: #eef2f6;
-      --accent-soft: rgba(255, 255, 255, 0.05);
       --selection: rgba(255, 255, 255, 0.18);
-      --electric: #84a1ff;
-      --electric-soft: rgba(132, 161, 255, 0.16);
-      --stage-ring: rgba(255, 255, 255, 0.09);
-      --stage-shadow: rgba(0, 0, 0, 0.34);
+      --signal: #8aa9ff;
+      --signal-soft: rgba(138, 169, 255, 0.12);
+      --wall-bg-top: #242a33;
+      --wall-bg-bottom: #11151a;
+      --wall-text: #f4efe6;
+      --wall-muted: rgba(244, 239, 230, 0.62);
     }
 
     * {
@@ -108,39 +108,38 @@
 
     .topbar {
       margin-top: 28px;
-      padding: 12px 14px;
+      padding: 14px 16px;
       border: 1px solid var(--line);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 18px;
       background: transparent;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       min-width: 0;
     }
 
     .brand-mark {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       background: var(--tag-bg);
       color: var(--tag-text);
-      font-size: 0.7rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      letter-spacing: -0.04em;
       flex-shrink: 0;
     }
 
     .brand-label {
       color: var(--muted);
-      font-size: 0.75rem;
+      font-size: 0.86rem;
       white-space: nowrap;
     }
 
@@ -154,10 +153,9 @@
 
     .topbar-link,
     .topbar-button {
-      color: var(--text);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       line-height: 1;
-      transition: color 0.18s ease, opacity 0.18s ease;
+      transition: color 0.18s ease;
     }
 
     .topbar-link:hover,
@@ -167,7 +165,7 @@
     }
 
     main {
-      padding: 64px 0 88px;
+      padding: 62px 0 88px;
     }
 
     section {
@@ -175,7 +173,7 @@
     }
 
     section + section {
-      margin-top: 80px;
+      margin-top: 76px;
     }
 
     .hero {
@@ -183,168 +181,40 @@
       gap: 26px;
     }
 
-    .hero-stage {
+    .hero-grid {
       display: grid;
-      justify-items: center;
-      gap: 14px;
-      text-align: center;
+      gap: 18px;
     }
 
-    .hero-greeting {
-      color: var(--electric);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(3.2rem, 10vw, 5.9rem);
-      line-height: 0.86;
-      letter-spacing: -0.09em;
-      text-shadow: 0 10px 28px rgba(33, 86, 245, 0.12);
-    }
-
-    .hero-object-wrap {
-      position: relative;
-      display: grid;
-      place-items: center;
-      width: min(100%, 520px);
-      padding: 14px 0 0;
-      isolation: isolate;
-    }
-
-    .hero-object-wrap::before {
-      content: "";
-      position: absolute;
-      inset: 8% 12% 22%;
-      border-radius: 999px;
-      background: radial-gradient(circle at 50% 40%, var(--electric-soft), transparent 62%);
-      filter: blur(14px);
-      opacity: 0.95;
-      z-index: 0;
-    }
-
-    .hero-object-wrap::after {
-      content: "";
-      position: absolute;
-      inset: 13% 16% 19%;
-      border: 1px solid var(--stage-ring);
-      border-radius: 46% 46% 30% 30% / 44% 44% 34% 34%;
-      z-index: 0;
-    }
-
-    .hero-mascot {
-      width: min(100%, 430px);
-      height: auto;
-      display: block;
-      overflow: visible;
-      filter: drop-shadow(0 28px 34px var(--stage-shadow));
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-float-group,
-    .mascot-tilt-group,
-    .mascot-eye {
-      transform-box: fill-box;
-      transform-origin: center;
-    }
-
-    .hero-float-group {
-      animation: mascot-float 6s ease-in-out infinite;
-    }
-
-    .mascot-tilt-group {
-      transform-origin: 50% 54%;
-      animation: mascot-tilt 7.2s ease-in-out infinite;
-    }
-
-    .mascot-aura {
-      fill: var(--electric-soft);
-      opacity: 0.85;
-    }
-
-    .mascot-shadow {
-      fill: rgba(18, 19, 22, 0.14);
-    }
-
-    [data-theme="dark"] .mascot-shadow {
-      fill: rgba(0, 0, 0, 0.42);
-    }
-
-    .mascot-base {
-      fill: url(#mascot-base-grad);
-      opacity: 0.92;
-    }
-
-    .mascot-ear,
-    .mascot-head,
-    .mascot-face {
-      fill: #f9f7f2;
-      stroke: var(--electric);
-      stroke-width: 4;
-    }
-
-    [data-theme="dark"] .mascot-ear,
-    [data-theme="dark"] .mascot-head,
-    [data-theme="dark"] .mascot-face {
-      fill: #12161d;
-    }
-
-    .mascot-cap {
-      fill: none;
-      stroke: url(#mascot-cap-grad);
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .mascot-cap-outer {
-      stroke-width: 34;
-    }
-
-    .mascot-cap-inner {
-      stroke-width: 28;
-    }
-
-    .mascot-eye {
-      fill: var(--electric);
-      animation: mascot-blink 6.8s infinite;
-    }
-
-    .mascot-eye-right {
-      animation-delay: 0.08s;
-    }
-
-    .mascot-eye-glint {
-      fill: #ffffff;
-      opacity: 0.96;
-    }
-
-    .hero-stage-note {
-      color: var(--muted);
+    .hero-kicker {
+      color: var(--signal);
       font-size: 0.76rem;
       letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
-    .hero-head {
+    .hero-title-row {
       display: flex;
-      align-items: baseline;
-      justify-content: center;
+      align-items: flex-end;
       gap: 14px;
       flex-wrap: wrap;
-      text-align: center;
     }
 
     .hero-name {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.2rem, 6.2vw, 3.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
+      font-size: clamp(3.3rem, 10vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
     }
 
     .hero-role {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 8px 10px;
+      padding: 10px 12px;
       background: var(--tag-bg);
       color: var(--tag-text);
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       line-height: 1;
       white-space: nowrap;
     }
@@ -354,100 +224,73 @@
       animation: blink 1.1s steps(1, end) infinite;
     }
 
+    .hero-copy {
+      display: grid;
+      gap: 12px;
+      max-width: 58ch;
+    }
+
+    .hero-lead {
+      font-size: clamp(1.06rem, 2.7vw, 1.26rem);
+      line-height: 1.5;
+      max-width: 34ch;
+    }
+
+    .hero-subcopy {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 58ch;
+    }
+
     .accent {
       font-family: "Fraunces", "Space Grotesk", serif;
       font-style: italic;
       font-weight: 400;
-      letter-spacing: -0.005em;
+      letter-spacing: -0.01em;
     }
 
-    .status-dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #22c55e;
-      flex-shrink: 0;
-      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
-      animation: pulse-soft 2.4s ease-in-out infinite;
+    .motion-rail {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, transparent, var(--signal-soft), transparent);
     }
 
-    @keyframes pulse-soft {
-      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45); }
-      70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-    }
-
-    .section-num {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.42em;
-      font-weight: 400;
-      color: var(--muted);
-      margin-right: 14px;
-      vertical-align: 0.35em;
-      letter-spacing: 0;
-    }
-
-    .item-head {
+    .motion-rail-track {
       display: flex;
-      align-items: baseline;
-      gap: 14px;
-      min-width: 0;
+      width: max-content;
+      min-width: 100%;
+      align-items: center;
+      gap: 18px;
+      padding: 12px 0;
+      animation: signal-drift 24s linear infinite;
     }
 
-    .item-idx {
+    .motion-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
       color: var(--muted);
       font-size: 0.78rem;
-      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .motion-item::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--signal);
       flex-shrink: 0;
-      letter-spacing: 0;
-    }
-
-    .item-tag-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .avail {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.78rem;
-      line-height: 1;
-      margin-bottom: 16px;
-      width: fit-content;
-    }
-
-    .hero-copy {
-      display: grid;
-      gap: 16px;
-      max-width: 60ch;
-      margin: 0 auto;
-      color: var(--text);
-      font-size: 1rem;
-      text-align: center;
-    }
-
-    .hero-copy p {
-      color: var(--text);
-    }
-
-    .hero-copy .muted {
-      color: var(--muted);
-      max-width: 56ch;
-      margin: 0 auto;
     }
 
     .cta-group {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 10px;
-      margin-top: 6px;
+      margin-top: 2px;
     }
 
     .cta {
@@ -458,7 +301,7 @@
       border: 1px solid var(--line-strong);
       font-size: 0.86rem;
       line-height: 1;
-      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+      transition: transform 0.18s ease, color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
     .cta::after {
@@ -469,7 +312,7 @@
 
     .cta:hover {
       transform: translateX(2px);
-      border-color: var(--accent);
+      border-color: var(--text);
     }
 
     .cta:hover::after {
@@ -484,108 +327,55 @@
 
     .cta-primary:hover {
       border-color: var(--tag-bg);
-      opacity: 0.92;
+      opacity: 0.94;
     }
 
     .proof {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 8px;
+      gap: 10px;
+      margin-top: 2px;
     }
 
     .chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 11px;
+      padding: 8px 12px;
       border: 1px solid var(--line);
       color: var(--muted);
       font-size: 0.76rem;
       line-height: 1;
-      transition: color 0.18s ease, border-color 0.18s ease;
     }
 
     .chip::before {
       content: "";
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: var(--muted);
-      opacity: 0.6;
-    }
-
-    .chip:hover {
-      color: var(--text);
-      border-color: var(--line-strong);
-    }
-
-    .inline-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 2px;
-    }
-
-    .inline-links a,
-    .item-link,
-    .contact-links a,
-    .featured-links a {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      width: fit-content;
-      transition: color 0.18s ease, transform 0.18s ease;
-    }
-
-    .inline-links a::after,
-    .item-link::after,
-    .contact-links a::after,
-    .featured-links a::after {
-      content: "↗";
-      font-size: 0.82em;
-      transform: translateX(0);
-      transition: transform 0.18s ease;
-    }
-
-    .inline-links a:hover,
-    .item-link:hover,
-    .contact-links a:hover,
-    .featured-links a:hover {
-      color: var(--muted);
-      transform: translateX(2px);
-    }
-
-    .inline-links a:hover::after,
-    .item-link:hover::after,
-    .contact-links a:hover::after,
-    .featured-links a:hover::after {
-      transform: translate(2px, -1px);
+      opacity: 0.7;
     }
 
     .proof-wall-section {
-      width: min(1120px, calc(100vw - 32px));
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
+      width: min(var(--wall-width), calc(100vw - 28px));
+      margin: 0 auto;
     }
 
     .proof-wall {
       position: relative;
       overflow: hidden;
-      padding: 28px 34px 36px 64px;
-      border-radius: 28px;
+      padding: 26px clamp(18px, 3vw, 32px) 30px;
+      border-radius: 24px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--wall-text);
       background:
-        radial-gradient(circle at 82% 22%, rgba(255, 255, 255, 0.08), transparent 26%),
-        radial-gradient(circle at 18% 82%, rgba(105, 121, 154, 0.2), transparent 36%),
-        linear-gradient(162deg, #313740 0%, #1d2229 46%, #14181d 100%);
+        radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.08), transparent 26%),
+        radial-gradient(circle at 16% 82%, rgba(111, 132, 171, 0.16), transparent 34%),
+        linear-gradient(160deg, var(--wall-bg-top) 0%, #1e242b 40%, var(--wall-bg-bottom) 100%);
       box-shadow:
-        0 26px 56px rgba(5, 8, 12, 0.24),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        0 24px 56px rgba(7, 10, 14, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
     .proof-wall::before {
@@ -593,10 +383,9 @@
       position: absolute;
       inset: 0;
       background:
-        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 5px),
-        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.014) 0 3px, transparent 3px 7px),
-        radial-gradient(circle at 26% 18%, rgba(255, 255, 255, 0.06), transparent 22%);
-      opacity: 0.34;
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.012) 0 3px, transparent 3px 8px);
+      opacity: 0.26;
       pointer-events: none;
     }
 
@@ -604,72 +393,61 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 0.7px, transparent 0.7px);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.09) 0.7px, transparent 0.7px);
       background-size: 12px 12px;
-      opacity: 0.08;
+      opacity: 0.06;
       pointer-events: none;
     }
 
-    .wall-top,
-    .wall-grid,
-    .wall-side {
+    .wall-head,
+    .wall-grid {
       position: relative;
       z-index: 1;
     }
 
-    .wall-top {
+    .wall-head {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 18px;
-      margin-bottom: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
     }
 
     .wall-label {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       color: var(--wall-text);
-      font-size: 0.88rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
-    .wall-pin {
-      width: 18px;
-      height: 18px;
-      background: var(--wall-pin);
+    .wall-label::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      background: #efe94f;
       box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
       flex-shrink: 0;
     }
 
-    .wall-meta {
-      max-width: 30ch;
+    .wall-copy {
+      max-width: 28ch;
       color: var(--wall-muted);
-      font-size: 0.76rem;
-      text-align: right;
-      letter-spacing: 0.06em;
-    }
-
-    .wall-side {
-      position: absolute;
-      left: 16px;
-      bottom: 36px;
-      transform: rotate(-90deg);
-      transform-origin: left bottom;
-      color: var(--wall-muted);
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-size: 0.78rem;
+      line-height: 1.7;
     }
 
     .wall-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 34px 24px;
-      padding-left: 26px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px 22px;
     }
 
     .wall-mark {
-      min-height: 86px;
+      min-height: 88px;
       display: grid;
       align-content: start;
       gap: 8px;
@@ -677,41 +455,34 @@
 
     .wall-mark strong {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.34rem, 2.5vw, 2rem);
-      line-height: 0.94;
+      font-size: clamp(1.2rem, 2.4vw, 1.86rem);
+      line-height: 0.96;
       letter-spacing: -0.055em;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+      color: var(--wall-text);
     }
 
     .wall-mark span {
       color: var(--wall-muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      line-height: 1.45;
+      font-size: 0.76rem;
+      line-height: 1.58;
     }
 
-    .wall-mark-xl strong {
-      font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+    .wall-mark--xl {
+      grid-column: span 2;
     }
 
-    .wall-mark-outline strong {
+    .wall-mark--xl strong {
+      font-size: clamp(2rem, 4vw, 3.8rem);
+    }
+
+    .wall-mark--outline strong {
       color: transparent;
-      text-shadow: none;
-      -webkit-text-stroke: 1px rgba(244, 241, 233, 0.78);
+      -webkit-text-stroke: 1px rgba(244, 239, 230, 0.82);
     }
 
-    .wall-mark-offset {
-      padding-top: 28px;
-    }
-
-    .wall-mark-lower {
-      padding-top: 44px;
-    }
-
-    .wall-mark-meta strong {
-      color: #cfd7ff;
-      font-size: clamp(1.1rem, 2vw, 1.62rem);
-      letter-spacing: -0.04em;
+    .wall-mark--signal strong {
+      color: #ced8ff;
+      font-size: clamp(1.18rem, 2vw, 1.68rem);
     }
 
     .section-title {
@@ -726,6 +497,16 @@
       content: "_";
     }
 
+    .section-num {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.42em;
+      font-weight: 400;
+      color: var(--muted);
+      margin-right: 14px;
+      vertical-align: 0.35em;
+      letter-spacing: 0;
+    }
+
     .section-note {
       max-width: 60ch;
       color: var(--muted);
@@ -734,16 +515,17 @@
     }
 
     .featured {
-      padding: 24px 20px 26px;
+      padding: 22px 20px 24px;
       border: 1px solid var(--line-strong);
       display: grid;
       gap: 16px;
+      background: transparent;
     }
 
     .featured-label {
       color: var(--muted);
       font-size: 0.76rem;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
     }
 
     .featured-head {
@@ -756,7 +538,7 @@
 
     .featured-title {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+      font-size: clamp(1.6rem, 3.6vw, 2.08rem);
       line-height: 1.02;
       letter-spacing: -0.04em;
     }
@@ -769,7 +551,6 @@
 
     .featured-desc {
       max-width: 62ch;
-      color: var(--text);
       font-size: 0.96rem;
     }
 
@@ -784,7 +565,6 @@
     .featured-bullets li {
       padding-left: 18px;
       position: relative;
-      color: var(--text);
       font-size: 0.9rem;
       max-width: 62ch;
       line-height: 1.6;
@@ -804,21 +584,54 @@
       max-width: 62ch;
     }
 
-    .featured-links {
+    .featured-links,
+    .contact-links {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
     }
 
+    .featured-links a,
+    .item-link,
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .featured-links a::after,
+    .item-link::after,
+    .contact-links a::after {
+      content: "↗";
+      font-size: 0.82em;
+      transition: transform 0.18s ease;
+    }
+
+    .featured-links a:hover,
+    .item-link:hover,
+    .contact-links a:hover {
+      color: var(--muted);
+      transform: translateX(2px);
+    }
+
+    .featured-links a:hover::after,
+    .item-link:hover::after,
+    .contact-links a:hover::after {
+      transform: translate(2px, -1px);
+    }
+
     .item-list {
       display: grid;
       border-top: 1px solid var(--line);
+      margin-top: 28px;
     }
 
     .item {
       padding: 16px 0 18px;
       border-bottom: 1px solid var(--line);
-      transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+      transition: border-color 0.18s ease, transform 0.18s ease;
     }
 
     .item:hover {
@@ -834,8 +647,27 @@
       flex-wrap: wrap;
     }
 
+    .item-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .item-idx {
+      color: var(--muted);
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
+
     .item-link {
       font-size: 1.02rem;
+    }
+
+    .item-tag-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .item-tag {
@@ -846,7 +678,6 @@
 
     .item-desc {
       margin-top: 8px;
-      color: var(--text);
       font-size: 0.92rem;
       max-width: 58ch;
     }
@@ -857,7 +688,19 @@
       font-size: 0.86rem;
     }
 
-    .note-list {
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
+      animation: pulse-soft 2.4s ease-in-out infinite;
+    }
+
+    .note-list,
+    .stack-list {
       display: grid;
       gap: 14px;
     }
@@ -871,20 +714,16 @@
       border-top: 1px solid var(--line);
     }
 
-    .note-row strong {
-      color: var(--text);
-      font-size: 0.82rem;
+    .note-row strong,
+    .stack-group strong {
+      font-size: 0.84rem;
       font-weight: 500;
     }
 
-    .note-row span {
+    .note-row span,
+    .stack-group span {
       color: var(--muted);
       font-size: 0.92rem;
-    }
-
-    .stack-list {
-      display: grid;
-      gap: 16px;
     }
 
     .stack-group {
@@ -894,27 +733,22 @@
       border-top: 1px solid var(--line);
     }
 
-    .stack-group strong {
-      font-size: 0.88rem;
-      font-weight: 500;
-    }
-
-    .stack-group span {
+    .avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.78rem;
+      line-height: 1;
+      margin-bottom: 16px;
+      width: fit-content;
     }
 
     .contact-copy {
       max-width: 58ch;
-      color: var(--text);
       font-size: 0.96rem;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 18px;
     }
 
     footer {
@@ -946,42 +780,24 @@
       }
     }
 
-    @keyframes mascot-float {
-      0%, 100% {
-        transform: translateY(0);
+    @keyframes signal-drift {
+      from {
+        transform: translateX(0);
       }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes mascot-tilt {
-      0%, 100% {
-        transform: rotate(-1.6deg);
-      }
-      50% {
-        transform: rotate(1.8deg);
+      to {
+        transform: translateX(-50%);
       }
     }
 
-    @keyframes mascot-blink {
-      0%, 3%, 100% {
-        transform: scaleY(1);
+    @keyframes pulse-soft {
+      0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
       }
-      1.4% {
-        transform: scaleY(0.08);
+      70% {
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
       }
-      2.1% {
-        transform: scaleY(1);
-      }
-      90% {
-        transform: scaleY(1);
-      }
-      92% {
-        transform: scaleY(0.16);
-      }
-      94% {
-        transform: scaleY(1);
+      100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
       }
     }
 
@@ -991,28 +807,19 @@
       }
 
       .reveal,
-      .inline-links a,
       .item,
+      .featured-links a,
       .item-link,
       .contact-links a,
-      .topbar-link,
-      .topbar-button,
       .cta,
-      .chip,
-      .featured-links a,
-      .hero-float-group,
-      .mascot-tilt-group,
-      .mascot-eye {
+      .topbar-link,
+      .topbar-button {
         transition: none;
       }
 
-      .hero-role::after {
-        animation: none;
-      }
-
-      .hero-float-group,
-      .mascot-tilt-group,
-      .mascot-eye {
+      .hero-role::after,
+      .motion-rail-track,
+      .status-dot {
         animation: none;
       }
 
@@ -1022,23 +829,17 @@
       }
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 940px) {
       .proof-wall-section {
-        width: min(100vw - 24px, 960px);
-      }
-
-      .proof-wall {
-        padding: 28px 24px 32px;
-      }
-
-      .wall-side {
-        display: none;
+        width: min(var(--wall-width), calc(100vw - 24px));
       }
 
       .wall-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 28px 20px;
-        padding-left: 0;
+      }
+
+      .wall-mark--xl {
+        grid-column: span 2;
       }
     }
 
@@ -1046,6 +847,11 @@
       .topbar {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .topbar-links,
+      .topbar-actions {
+        gap: 14px;
       }
     }
 
@@ -1063,25 +869,37 @@
         margin-top: 64px;
       }
 
-      .hero-head {
-        gap: 10px;
-      }
-
-      .hero-stage {
+      .hero-title-row,
+      .cta-group,
+      .proof,
+      .featured-links,
+      .contact-links {
         gap: 12px;
       }
 
-      .hero-object-wrap {
-        width: min(100%, 420px);
+      .hero-name {
+        font-size: clamp(2.8rem, 16vw, 4.8rem);
       }
 
-      .item-top,
-      .topbar-links,
-      .topbar-actions,
-      .inline-links,
-      .contact-links,
-      .featured-links {
-        gap: 12px;
+      .hero-lead {
+        max-width: 100%;
+      }
+
+      .motion-item {
+        font-size: 0.72rem;
+      }
+
+      .proof-wall-section {
+        width: calc(100vw - 20px);
+      }
+
+      .wall-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .wall-mark--xl {
+        grid-column: span 1;
       }
 
       .note-row {
@@ -1091,29 +909,6 @@
 
       .featured {
         padding: 20px 16px 22px;
-      }
-
-      .proof-wall-section {
-        width: min(100vw - 20px, 640px);
-      }
-
-      .wall-top {
-        flex-direction: column;
-        margin-bottom: 24px;
-      }
-
-      .wall-meta {
-        text-align: left;
-      }
-
-      .wall-grid {
-        grid-template-columns: 1fr;
-        gap: 22px;
-      }
-
-      .wall-mark-offset,
-      .wall-mark-lower {
-        padding-top: 0;
       }
 
       footer {
@@ -1147,66 +942,34 @@
     </div>
   </header>
 
-  <main class="shell">
-    <section class="hero" id="top">
-      <div class="hero-stage reveal">
-        <div class="hero-greeting" data-i18n="hero.greeting">hey!</div>
+  <main>
+    <section class="hero shell" id="top">
+      <div class="hero-grid reveal">
+        <div class="hero-kicker" data-i18n="hero.kicker">shipping thoughtful systems</div>
 
-        <div class="hero-object-wrap" aria-hidden="true">
-          <svg class="hero-mascot" viewBox="0 0 420 440" role="presentation">
-            <defs>
-              <linearGradient id="mascot-cap-grad" x1="86" y1="92" x2="332" y2="246" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#2f6bff" />
-                <stop offset="100%" stop-color="#1747d8" />
-              </linearGradient>
-              <linearGradient id="mascot-base-grad" x1="108" y1="366" x2="320" y2="430" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#9e7cff" />
-                <stop offset="100%" stop-color="#3158ff" />
-              </linearGradient>
-              <filter id="hero-soft-blur" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur stdDeviation="14" />
-              </filter>
-            </defs>
-
-            <g class="hero-float-group">
-              <ellipse class="mascot-aura" cx="210" cy="238" rx="118" ry="108" filter="url(#hero-soft-blur)" />
-              <ellipse class="mascot-shadow" cx="210" cy="386" rx="108" ry="22" />
-              <ellipse class="mascot-base" cx="210" cy="408" rx="126" ry="42" />
-
-              <g class="mascot-tilt-group">
-                <circle class="mascot-ear" cx="96" cy="232" r="28" />
-                <circle class="mascot-ear" cx="324" cy="232" r="28" />
-                <circle class="mascot-head" cx="210" cy="226" r="128" />
-                <path class="mascot-cap mascot-cap-outer" d="M92 196c22-73 80-114 151-114 70 0 129 41 151 114" />
-                <path class="mascot-cap mascot-cap-inner" d="M177 212c5-44 19-82 33-107 18 22 34 59 38 102" />
-                <path class="mascot-face" d="M174 224c-25 0-46 21-46 46v6c0 26 21 47 46 47 15 0 29-7 38-19 9 12 23 19 38 19 25 0 46-21 46-47v-6c0-25-21-46-46-46-15 0-29 7-38 19-9-12-23-19-38-19Z" />
-
-                <g class="mascot-eye mascot-eye-left">
-                  <rect x="168" y="246" width="34" height="42" rx="17" />
-                  <circle class="mascot-eye-glint" cx="185" cy="263" r="5" />
-                </g>
-
-                <g class="mascot-eye mascot-eye-right">
-                  <rect x="218" y="246" width="34" height="42" rx="17" />
-                  <circle class="mascot-eye-glint" cx="235" cy="263" r="5" />
-                </g>
-              </g>
-            </g>
-          </svg>
+        <div class="hero-title-row">
+          <h1 class="hero-name">Murat</h1>
+          <span class="hero-role" data-i18n="hero.role">product engineer</span>
         </div>
 
-        <div class="hero-stage-note" data-i18n="hero.stageNote">iOS / web / backend</div>
+        <div class="hero-copy">
+          <p class="hero-lead" data-i18n="hero.text1" data-i18n-html>I build <span class="accent">thoughtful</span>, production-ready products across iOS, web, and backend.</p>
+          <p class="hero-subcopy" data-i18n="hero.text2">Computer Engineering student shipping real software - iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.</p>
+        </div>
       </div>
 
-      <div class="hero-head reveal">
-        <h1 class="hero-name">Murat</h1>
-        <span class="hero-role" data-i18n="hero.role">product engineer</span>
+      <div class="motion-rail reveal" style="--delay: 0.04s;" aria-hidden="true">
+        <div class="motion-rail-track">
+          <span class="motion-item" data-i18n="hero.rail1">shipping across iOS / web / backend</span>
+          <span class="motion-item" data-i18n="hero.rail2">selected work / live products / real systems</span>
+          <span class="motion-item" data-i18n="hero.rail3">product engineer / designer-minded developer / builder</span>
+          <span class="motion-item" data-i18n="hero.rail1">shipping across iOS / web / backend</span>
+          <span class="motion-item" data-i18n="hero.rail2">selected work / live products / real systems</span>
+          <span class="motion-item" data-i18n="hero.rail3">product engineer / designer-minded developer / builder</span>
+        </div>
       </div>
 
-      <div class="hero-copy reveal" style="--delay: 0.06s;">
-        <p data-i18n="hero.text1" data-i18n-html>I build <span class="accent">thoughtful</span>, production-ready products across iOS, web, and backend.</p>
-        <p class="muted" data-i18n="hero.text2">Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.</p>
-
+      <div class="hero-grid reveal" style="--delay: 0.08s;">
         <div class="cta-group">
           <a class="cta cta-primary" href="#work" data-i18n="hero.cta1">see selected work</a>
           <a class="cta" href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta2">github</a>
@@ -1215,70 +978,64 @@
 
         <div class="proof" role="list" aria-label="Credibility signals">
           <span class="chip" role="listitem" data-i18n="proof.chip1">shipped iOS + web</span>
-          <span class="chip" role="listitem" data-i18n="proof.chip2">StoreKit 2 · Supabase</span>
-          <span class="chip" role="listitem" data-i18n="proof.chip3">Cloudflare · Vercel</span>
+          <span class="chip" role="listitem" data-i18n="proof.chip2">StoreKit 2 / Supabase</span>
+          <span class="chip" role="listitem" data-i18n="proof.chip3">Cloudflare / Vercel</span>
           <span class="chip" role="listitem" data-i18n="proof.chip4">EN / TR</span>
         </div>
       </div>
     </section>
-
-    <section class="proof-wall-section reveal" style="--delay: 0.08s;" aria-labelledby="wallTitle">
+    <section class="proof-wall-section reveal" style="--delay: 0.12s;" aria-labelledby="wallTitle">
       <div class="proof-wall">
-        <div class="wall-top">
-          <div class="wall-label">
-            <span class="wall-pin" aria-hidden="true"></span>
-            <span id="wallTitle" data-i18n="wall.label">shipped signals</span>
-          </div>
-          <p class="wall-meta" data-i18n="wall.meta">real products / iOS / web / backend</p>
+        <div class="wall-head">
+          <span class="wall-label" id="wallTitle" data-i18n="wall.label">selected signals</span>
+          <p class="wall-copy" data-i18n="wall.meta">real products / iOS / web / backend</p>
         </div>
 
-        <div class="wall-side" data-i18n="wall.side">portfolio_2026</div>
-
         <div class="wall-grid" role="list" aria-label="Selected shipped work">
-          <article class="wall-mark wall-mark-xl" role="listitem">
+          <article class="wall-mark wall-mark--xl" role="listitem">
             <strong>MindShelf</strong>
-            <span data-i18n="wall.mindshelf">native iOS app / web companion</span>
+            <span data-i18n="wall.mindshelf">native iOS app / web companion / shipped account system</span>
           </article>
 
-          <article class="wall-mark wall-mark-outline" role="listitem">
+          <article class="wall-mark wall-mark--outline" role="listitem">
             <strong>Softmendil</strong>
-            <span data-i18n="wall.softmendil">b2b commerce / quote flow</span>
+            <span data-i18n="wall.softmendil">b2b commerce / quote flow / custom packaging platform</span>
           </article>
 
-          <article class="wall-mark wall-mark-offset" role="listitem">
+          <article class="wall-mark" role="listitem">
             <strong>VogeRidersTR</strong>
-            <span data-i18n="wall.voge">community product / custom domain</span>
+            <span data-i18n="wall.voge">community product / custom domain / lightweight CMS</span>
           </article>
 
-          <article class="wall-mark wall-mark-meta" role="listitem">
+          <article class="wall-mark wall-mark--signal" role="listitem">
             <strong data-i18n="wall.shipped">ship_01</strong>
             <span data-i18n="wall.shippedMeta">real software / live on the internet</span>
           </article>
 
           <article class="wall-mark" role="listitem">
             <strong>Mind API</strong>
-            <span data-i18n="wall.api">product backend / glue layer</span>
+            <span data-i18n="wall.api">product backend / integration glue / core logic</span>
           </article>
 
-          <article class="wall-mark wall-mark-lower" role="listitem">
+          <article class="wall-mark" role="listitem">
             <strong>System Monitor</strong>
-            <span data-i18n="wall.monitor">macOS utility / info design</span>
+            <span data-i18n="wall.monitor">macOS utility / cleaner information design</span>
           </article>
 
-          <article class="wall-mark wall-mark-outline" role="listitem">
+          <article class="wall-mark wall-mark--outline" role="listitem">
             <strong>MindShelf Web</strong>
-            <span data-i18n="wall.web">same product / second surface</span>
+            <span data-i18n="wall.web">same product / second surface / continuity across platforms</span>
           </article>
 
           <article class="wall-mark" role="listitem">
             <strong>FoodSuggest</strong>
-            <span data-i18n="wall.food">swift prototype / lighter flows</span>
+            <span data-i18n="wall.food">swift prototype / lightweight recommendation flows</span>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="work">
+    <section id="work" class="shell">
       <h2 class="section-title reveal"><span class="section-num">01</span><span data-i18n="work.title">work</span></h2>
       <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="work.note">One featured product that best shows how I think, plus a few projects that show range across iOS, web, and backend.</p>
 
@@ -1287,19 +1044,19 @@
 
         <div class="featured-head">
           <h3 class="featured-title">MindShelf</h3>
-          <span class="featured-tag" data-i18n="featured.tag">iOS + web · in production</span>
+          <span class="featured-tag" data-i18n="featured.tag">iOS + web / in production</span>
         </div>
 
-        <p class="featured-desc" data-i18n="featured.desc">A book tracking product with a native iOS app and a companion web app — both live in production and sharing the same account.</p>
+        <p class="featured-desc" data-i18n="featured.desc">A book tracking product with a native iOS app and a companion web app - both live in production and sharing the same account.</p>
 
         <ul class="featured-bullets">
           <li data-i18n="featured.b1">iOS app with in-app purchases, paywall, and restore purchases via StoreKit 2</li>
           <li data-i18n="featured.b2">Supabase for auth and real-time sync between iOS and the web</li>
-          <li data-i18n="featured.b3">Web app on Cloudflare Pages with metadata auto-fetch (microlink, noembed)</li>
+          <li data-i18n="featured.b3">Web app on Cloudflare Pages with metadata auto-fetch via microlink and noembed</li>
           <li data-i18n="featured.b4">Full free-tier, paywall, and monetization flow shipped end to end</li>
         </ul>
 
-        <p class="featured-meta" data-i18n="featured.meta">// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages</p>
+        <p class="featured-meta" data-i18n="featured.meta">// Swift / SwiftUI / StoreKit 2 / Supabase / React / Vite / Cloudflare Pages</p>
 
         <div class="featured-links">
           <a href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener noreferrer" data-i18n="featured.link1">live web app</a>
@@ -1307,7 +1064,7 @@
         </div>
       </article>
 
-      <div class="item-list" style="margin-top: 28px;">
+      <div class="item-list">
         <article class="item reveal" style="--delay: 0.08s;">
           <div class="item-top">
             <div class="item-head">
@@ -1316,11 +1073,11 @@
             </div>
             <span class="item-tag-row">
               <span class="status-dot" aria-hidden="true"></span>
-              <span class="item-tag" data-i18n="work.softmendil.tag">b2b e-commerce · live</span>
+              <span class="item-tag" data-i18n="work.softmendil.tag">b2b e-commerce / live</span>
             </span>
           </div>
-          <p class="item-desc" data-i18n="work.softmendil.desc">A Next.js B2B e-commerce platform for custom-branded packaging — wet wipes, stick sugars, spice bags, kraft bags — with a quote-request flow, user accounts, and cart.</p>
-          <p class="item-meta" data-i18n="work.softmendil.meta">// Next.js · e-commerce · quote flow · b2b</p>
+          <p class="item-desc" data-i18n="work.softmendil.desc">A Next.js B2B e-commerce platform for custom-branded packaging - wet wipes, stick sugars, spice bags, kraft bags - with a quote-request flow, user accounts, and cart.</p>
+          <p class="item-meta" data-i18n="work.softmendil.meta">// Next.js / e-commerce / quote flow / b2b</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.12s;">
@@ -1331,11 +1088,11 @@
             </div>
             <span class="item-tag-row">
               <span class="status-dot" aria-hidden="true"></span>
-              <span class="item-tag" data-i18n="work.voge.tag">community platform · live</span>
+              <span class="item-tag" data-i18n="work.voge.tag">community platform / live</span>
             </span>
           </div>
           <p class="item-desc" data-i18n="work.voge.desc">Community site for Voge motorcycle owners in Turkey. Built with Next.js, deployed on Vercel with a custom domain, and uses Google Sheets as a lightweight CMS.</p>
-          <p class="item-meta" data-i18n="work.voge.meta">// Next.js · Vercel · Google Sheets API</p>
+          <p class="item-meta" data-i18n="work.voge.meta">// Next.js / Vercel / Google Sheets API</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.16s;">
@@ -1347,7 +1104,7 @@
             <span class="item-tag" data-i18n="work.web.tag">product extension</span>
           </div>
           <p class="item-desc" data-i18n="work.web.desc">The TypeScript web version of MindShelf. Shows how I think about continuity across surfaces and keeping a product consistent across mobile and web.</p>
-          <p class="item-meta" data-i18n="work.web.meta">// React · TypeScript · Vite</p>
+          <p class="item-meta" data-i18n="work.web.meta">// React / TypeScript / Vite</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.2s;">
@@ -1359,7 +1116,7 @@
             <span class="item-tag" data-i18n="work.monitor.tag">macOS utility</span>
           </div>
           <p class="item-desc" data-i18n="work.monitor.desc">A desktop utility focused on cleaner information hierarchy and a more restrained take on a Mac system monitor.</p>
-          <p class="item-meta" data-i18n="work.monitor.meta">// Swift · macOS · information design</p>
+          <p class="item-meta" data-i18n="work.monitor.meta">// Swift / macOS / information design</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.24s;">
@@ -1371,7 +1128,7 @@
             <span class="item-tag" data-i18n="work.api.tag">backend service</span>
           </div>
           <p class="item-desc" data-i18n="work.api.desc">Backend work supporting product logic, integrations, and the invisible parts that keep a multi-surface product coherent.</p>
-          <p class="item-meta" data-i18n="work.api.meta">// TypeScript · APIs · backend logic</p>
+          <p class="item-meta" data-i18n="work.api.meta">// TypeScript / APIs / backend logic</p>
         </article>
 
         <article class="item reveal" style="--delay: 0.28s;">
@@ -1383,12 +1140,12 @@
             <span class="item-tag" data-i18n="work.food.tag">swift prototype</span>
           </div>
           <p class="item-desc" data-i18n="work.food.desc">A smaller recommendation-focused Swift experiment used to explore lighter product flows without overbuilding them.</p>
-          <p class="item-meta" data-i18n="work.food.meta">// Swift · recommendations · prototyping</p>
+          <p class="item-meta" data-i18n="work.food.meta">// Swift / recommendations / prototyping</p>
         </article>
       </div>
     </section>
 
-    <section id="approach">
+    <section id="approach" class="shell">
       <h2 class="section-title reveal"><span class="section-num">02</span><span data-i18n="approach.title">approach</span></h2>
       <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="approach.note">How I actually work when I'm on a product.</p>
 
@@ -1399,7 +1156,7 @@
         </div>
         <div class="note-row reveal" style="--delay: 0.12s;">
           <strong data-i18n="approach.row2.label">own the stack_</strong>
-          <span data-i18n="approach.row2.text">Comfortable moving between iOS, frontend, backend glue, and deployment — so features don't stall at a handoff.</span>
+          <span data-i18n="approach.row2.text">Comfortable moving between iOS, frontend, backend glue, and deployment - so features do not stall at a handoff.</span>
         </div>
         <div class="note-row reveal" style="--delay: 0.16s;">
           <strong data-i18n="approach.row3.label">ship, then polish_</strong>
@@ -1408,7 +1165,7 @@
       </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="shell">
       <h2 class="section-title reveal"><span class="section-num">03</span><span data-i18n="about.title">about</span></h2>
       <p class="section-note reveal" style="--delay: 0.04s;" data-i18n="about.note">Computer Engineering student based in Turkey. I work in English and Turkish, with a bias toward shipping over talking about shipping.</p>
 
@@ -1422,19 +1179,20 @@
           <span data-i18n="stack.apple.text">Swift, SwiftUI, StoreKit 2, SwiftData, macOS</span>
         </div>
         <div class="stack-group reveal" style="--delay: 0.12s;">
-          <strong data-i18n="stack.backend.label">backend & deploy_</strong>
+          <strong data-i18n="stack.backend.label">backend &amp; deploy_</strong>
           <span data-i18n="stack.backend.text">Node.js, REST APIs, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages</span>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="shell">
       <h2 class="section-title reveal"><span class="section-num">04</span><span data-i18n="contact.title">contact</span></h2>
       <div class="avail reveal" style="--delay: 0.03s;">
         <span class="status-dot" aria-hidden="true"></span>
         <span data-i18n="contact.avail">available for work</span>
       </div>
-      <p class="contact-copy reveal" style="--delay: 0.04s;" data-i18n="contact.text">Open to internships, junior roles, and freelance product work. If you're building something that deserves to feel properly made, let's talk.</p>
+
+      <p class="contact-copy reveal" style="--delay: 0.04s;" data-i18n="contact.text">Open to internships, junior roles, and freelance product work. If you are building something that deserves to feel properly made, let's talk.</p>
 
       <div class="contact-links reveal" style="--delay: 0.08s;">
         <a href="mailto:muartmac@gmail.com" data-i18n="contact.link1">email</a>
@@ -1443,7 +1201,7 @@
       </div>
     </section>
 
-    <footer class="reveal" style="--delay: 0.12s;">
+    <footer class="shell reveal" style="--delay: 0.12s;">
       <div data-i18n="footer.text">based in Turkey_ working in English and Turkish_</div>
     </footer>
   </main>
@@ -1459,66 +1217,67 @@
         "nav.about": "about",
         "nav.contact": "contact",
         "nav.github": "github",
-        "hero.greeting": "hey!",
-        "hero.stageNote": "iOS / web / backend",
+        "hero.kicker": "shipping thoughtful systems",
         "hero.role": "product engineer",
         "hero.text1": "I build <span class=\"accent\">thoughtful</span>, production-ready products across iOS, web, and backend.",
-        "hero.text2": "Computer Engineering student shipping real software — iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.",
+        "hero.text2": "Computer Engineering student shipping real software - iOS apps with paid subscriptions, web products with real users, and the backend glue that holds it all together.",
+        "hero.rail1": "shipping across iOS / web / backend",
+        "hero.rail2": "selected work / live products / real systems",
+        "hero.rail3": "product engineer / designer-minded developer / builder",
         "hero.cta1": "see selected work",
         "hero.cta2": "github",
         "hero.cta3": "email",
         "proof.chip1": "shipped iOS + web",
-        "proof.chip2": "StoreKit 2 · Supabase",
-        "proof.chip3": "Cloudflare · Vercel",
+        "proof.chip2": "StoreKit 2 / Supabase",
+        "proof.chip3": "Cloudflare / Vercel",
         "proof.chip4": "EN / TR",
-        "wall.label": "shipped signals",
+        "wall.label": "selected signals",
         "wall.meta": "real products / iOS / web / backend",
-        "wall.side": "portfolio_2026",
-        "wall.mindshelf": "native iOS app / web companion",
-        "wall.softmendil": "b2b commerce / quote flow",
-        "wall.voge": "community product / custom domain",
+        "wall.mindshelf": "native iOS app / web companion / shipped account system",
+        "wall.softmendil": "b2b commerce / quote flow / custom packaging platform",
+        "wall.voge": "community product / custom domain / lightweight CMS",
         "wall.shipped": "ship_01",
         "wall.shippedMeta": "real software / live on the internet",
-        "wall.api": "product backend / glue layer",
-        "wall.monitor": "macOS utility / info design",
-        "wall.web": "same product / second surface",
-        "wall.food": "swift prototype / lighter flows",
+        "wall.api": "product backend / integration glue / core logic",
+        "wall.monitor": "macOS utility / cleaner information design",
+        "wall.web": "same product / second surface / continuity across platforms",
+        "wall.food": "swift prototype / lightweight recommendation flows",
         "work.title": "work",
         "work.note": "One featured product that best shows how I think, plus a few projects that show range across iOS, web, and backend.",
         "featured.label": "featured project_",
-        "featured.tag": "iOS + web · in production",
-        "featured.desc": "A book tracking product with a native iOS app and a companion web app — both live in production and sharing the same account.",
+        "featured.tag": "iOS + web / in production",
+        "featured.desc": "A book tracking product with a native iOS app and a companion web app - both live in production and sharing the same account.",
         "featured.b1": "iOS app with in-app purchases, paywall, and restore purchases via StoreKit 2",
         "featured.b2": "Supabase for auth and real-time sync between iOS and the web",
-        "featured.b3": "Web app on Cloudflare Pages with metadata auto-fetch (microlink, noembed)",
+        "featured.b3": "Web app on Cloudflare Pages with metadata auto-fetch via microlink and noembed",
         "featured.b4": "Full free-tier, paywall, and monetization flow shipped end to end",
-        "featured.meta": "// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages",
+        "featured.meta": "// Swift / SwiftUI / StoreKit 2 / Supabase / React / Vite / Cloudflare Pages",
         "featured.link1": "live web app",
         "featured.link2": "ios repo",
-        "work.softmendil.tag": "b2b e-commerce · live",
-        "work.softmendil.desc": "A Next.js B2B e-commerce platform for custom-branded packaging — wet wipes, stick sugars, spice bags, kraft bags — with a quote-request flow, user accounts, and cart.",
-        "work.softmendil.meta": "// Next.js · e-commerce · quote flow · b2b",
-        "work.voge.tag": "community platform · live",
+        "work.softmendil.tag": "b2b e-commerce / live",
+        "work.softmendil.desc": "A Next.js B2B e-commerce platform for custom-branded packaging - wet wipes, stick sugars, spice bags, kraft bags - with a quote-request flow, user accounts, and cart.",
+        "work.softmendil.meta": "// Next.js / e-commerce / quote flow / b2b",
+        "work.voge.tag": "community platform / live",
         "work.voge.desc": "Community site for Voge motorcycle owners in Turkey. Built with Next.js, deployed on Vercel with a custom domain, and uses Google Sheets as a lightweight CMS.",
-        "work.voge.meta": "// Next.js · Vercel · Google Sheets API",
+        "work.voge.meta": "// Next.js / Vercel / Google Sheets API",
         "work.web.tag": "product extension",
         "work.web.desc": "The TypeScript web version of MindShelf. Shows how I think about continuity across surfaces and keeping a product consistent across mobile and web.",
-        "work.web.meta": "// React · TypeScript · Vite",
+        "work.web.meta": "// React / TypeScript / Vite",
         "work.monitor.tag": "macOS utility",
         "work.monitor.desc": "A desktop utility focused on cleaner information hierarchy and a more restrained take on a Mac system monitor.",
-        "work.monitor.meta": "// Swift · macOS · information design",
+        "work.monitor.meta": "// Swift / macOS / information design",
         "work.api.tag": "backend service",
         "work.api.desc": "Backend work supporting product logic, integrations, and the invisible parts that keep a multi-surface product coherent.",
-        "work.api.meta": "// TypeScript · APIs · backend logic",
+        "work.api.meta": "// TypeScript / APIs / backend logic",
         "work.food.tag": "swift prototype",
         "work.food.desc": "A smaller recommendation-focused Swift experiment used to explore lighter product flows without overbuilding them.",
-        "work.food.meta": "// Swift · recommendations · prototyping",
+        "work.food.meta": "// Swift / recommendations / prototyping",
         "approach.title": "approach",
         "approach.note": "How I actually work when I'm on a product.",
         "approach.row1.label": "shape the product_",
         "approach.row1.text": "I don't just style the UI. I think through flows, edge cases, and what the product actually needs to feel right before writing it.",
         "approach.row2.label": "own the stack_",
-        "approach.row2.text": "Comfortable moving between iOS, frontend, backend glue, and deployment — so features don't stall at a handoff.",
+        "approach.row2.text": "Comfortable moving between iOS, frontend, backend glue, and deployment - so features do not stall at a handoff.",
         "approach.row3.label": "ship, then polish_",
         "approach.row3.text": "I prefer real users over internal demos. Most of what I build is live on the internet, not sitting in a branch.",
         "about.title": "about",
@@ -1531,98 +1290,99 @@
         "stack.backend.text": "Node.js, REST APIs, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages",
         "contact.title": "contact",
         "contact.avail": "available for work",
-        "contact.text": "Open to internships, junior roles, and freelance product work. If you're building something that deserves to feel properly made, let's talk.",
+        "contact.text": "Open to internships, junior roles, and freelance product work. If you are building something that deserves to feel properly made, let's talk.",
         "contact.link1": "email",
         "contact.link2": "github",
         "contact.link3": "x",
         "footer.text": "based in Turkey_ working in English and Turkish_"
       },
       tr: {
-        "meta.title": "Murat | Ürün Mühendisi",
-        "meta.description": "Murat; iOS, web ve backend tarafında düşünülmüş, prodüksiyona hazır ürünler geliştirir.",
+        "meta.title": "Murat | Urun Muhendisi",
+        "meta.description": "Murat; iOS, web ve backend tarafinda dusunulmus, produksiyona hazir urunler gelistirir.",
         "brand.label": "muartdev",
         "nav.work": "projeler",
-        "nav.approach": "yaklaşım",
-        "nav.about": "hakkımda",
-        "nav.contact": "iletişim",
+        "nav.approach": "yaklasim",
+        "nav.about": "hakkimda",
+        "nav.contact": "iletisim",
         "nav.github": "github",
-        "hero.greeting": "selam!",
-        "hero.stageNote": "iOS / web / backend",
-        "hero.role": "ürün mühendisi",
-        "hero.text1": "iOS, web ve backend tarafında <span class=\"accent\">düşünülmüş</span>, prodüksiyona hazır ürünler geliştiriyorum.",
-        "hero.text2": "Bilgisayar Mühendisliği öğrencisiyim — abonelikli iOS uygulamaları, gerçek kullanıcılı web ürünleri ve hepsini birbirine bağlayan backend işleri ship ediyorum.",
-        "hero.cta1": "seçili işler",
+        "hero.kicker": "dusunulmus sistemler ship etmek",
+        "hero.role": "urun muhendisi",
+        "hero.text1": "iOS, web ve backend tarafinda <span class=\"accent\">dusunulmus</span>, produksiyona hazir urunler gelistiriyorum.",
+        "hero.text2": "Bilgisayar Muhendisligi ogrencisiyim - abonelikli iOS uygulamalari, gercek kullanicili web urunleri ve hepsini birbirine baglayan backend isleri ship ediyorum.",
+        "hero.rail1": "iOS / web / backend boyunca ship etmek",
+        "hero.rail2": "secili isler / canli urunler / gercek sistemler",
+        "hero.rail3": "urun muhendisi / tasarim zevki olan gelistirici / builder",
+        "hero.cta1": "secili isler",
         "hero.cta2": "github",
         "hero.cta3": "e-posta",
-        "proof.chip1": "iOS + web yayında",
-        "proof.chip2": "StoreKit 2 · Supabase",
-        "proof.chip3": "Cloudflare · Vercel",
+        "proof.chip1": "iOS + web yayinda",
+        "proof.chip2": "StoreKit 2 / Supabase",
+        "proof.chip3": "Cloudflare / Vercel",
         "proof.chip4": "EN / TR",
-        "wall.label": "yayın sinyalleri",
-        "wall.meta": "gerçek ürünler / iOS / web / backend",
-        "wall.side": "portfolyo_2026",
-        "wall.mindshelf": "native iOS uygulaması / web eşlikçisi",
-        "wall.softmendil": "b2b ticaret / teklif akışı",
-        "wall.voge": "topluluk ürünü / özel domain",
+        "wall.label": "secili sinyaller",
+        "wall.meta": "gercek urunler / iOS / web / backend",
+        "wall.mindshelf": "native iOS uygulamasi / web eslikcisi / yayinda hesap sistemi",
+        "wall.softmendil": "b2b ticaret / teklif akisi / ozel paketleme platformu",
+        "wall.voge": "topluluk urunu / ozel domain / hafif CMS",
         "wall.shipped": "ship_01",
-        "wall.shippedMeta": "gerçek yazılım / internette yayında",
-        "wall.api": "ürün backend'i / glue katmanı",
-        "wall.monitor": "macOS aracı / bilgi tasarımı",
-        "wall.web": "aynı ürün / ikinci yüzey",
-        "wall.food": "swift prototip / hafif akışlar",
+        "wall.shippedMeta": "gercek yazilim / internette yayinda",
+        "wall.api": "urun backend'i / entegrasyon glue katmani / ana mantik",
+        "wall.monitor": "macOS araci / daha temiz bilgi tasarimi",
+        "wall.web": "ayni urun / ikinci yuzey / platformlar arasi tutarlilik",
+        "wall.food": "swift prototip / hafif tavsiye akislari",
         "work.title": "projeler",
-        "work.note": "Nasıl düşündüğümü en iyi gösteren bir öne çıkan ürün, ve iOS, web, backend arasında ne kadar rahat geçiş yaptığımı gösteren birkaç proje.",
-        "featured.label": "öne çıkan proje_",
-        "featured.tag": "iOS + web · yayında",
-        "featured.desc": "Native iOS uygulaması ve onun web versiyonu olan, ikisi de aynı hesabı paylaşan ve yayında olan kitap takip ürünü.",
-        "featured.b1": "StoreKit 2 ile uygulama içi satın alma, paywall ve restore purchases",
-        "featured.b2": "Supabase ile auth ve iOS — web arasında real-time senkron",
-        "featured.b3": "Cloudflare Pages üzerinde çalışan, microlink ve noembed ile otomatik metadata çeken web uygulaması",
-        "featured.b4": "Free-tier, paywall ve tüm monetization akışı baştan sona yayına alındı",
-        "featured.meta": "// Swift · SwiftUI · StoreKit 2 · Supabase · React · Vite · Cloudflare Pages",
-        "featured.link1": "canlı web",
+        "work.note": "Nasil dusundugumu en iyi gosteren bir one cikan urun, ve iOS, web, backend arasinda ne kadar rahat gecis yaptigimi gosteren birkac proje.",
+        "featured.label": "one cikan proje_",
+        "featured.tag": "iOS + web / yayinda",
+        "featured.desc": "Native iOS uygulamasi ve onun web versiyonu olan, ikisi de ayni hesabi paylasan ve yayinda olan kitap takip urunu.",
+        "featured.b1": "StoreKit 2 ile uygulama ici satin alma, paywall ve restore purchases",
+        "featured.b2": "Supabase ile auth ve iOS - web arasinda real-time senkron",
+        "featured.b3": "Cloudflare Pages uzerinde calisan, microlink ve noembed ile otomatik metadata ceken web uygulamasi",
+        "featured.b4": "Free-tier, paywall ve tum monetization akisi bastan sona yayina alindi",
+        "featured.meta": "// Swift / SwiftUI / StoreKit 2 / Supabase / React / Vite / Cloudflare Pages",
+        "featured.link1": "canli web",
         "featured.link2": "ios repo",
-        "work.softmendil.tag": "b2b e-ticaret · yayında",
-        "work.softmendil.desc": "Özel markalı paketleme için Next.js tabanlı B2B e-ticaret platformu — ıslak mendil, stick şeker, baharat paketi, kraft torba. Teklif alma akışı, kullanıcı hesapları ve sepet dahil.",
-        "work.softmendil.meta": "// Next.js · e-ticaret · teklif akışı · b2b",
-        "work.voge.tag": "topluluk platformu · yayında",
-        "work.voge.desc": "Türkiye'deki Voge motosiklet sahipleri için topluluk sitesi. Next.js ile yazıldı, Vercel'de özel domain ile yayında, dinamik içerik için Google Sheets hafif bir CMS olarak kullanıldı.",
-        "work.voge.meta": "// Next.js · Vercel · Google Sheets API",
-        "work.web.tag": "ürün genişletmesi",
-        "work.web.desc": "MindShelf'in TypeScript tabanlı web versiyonu. Yüzeyler arası devamlılığı ve bir ürünün mobil ile web arasında nasıl tutarlı kaldığını nasıl düşündüğümü gösteriyor.",
-        "work.web.meta": "// React · TypeScript · Vite",
-        "work.monitor.tag": "macOS aracı",
-        "work.monitor.desc": "Daha temiz bilgi hiyerarşisine odaklanan, Mac system monitor'ün daha sakin bir yorumu olan masaüstü aracı.",
-        "work.monitor.meta": "// Swift · macOS · bilgi tasarımı",
+        "work.softmendil.tag": "b2b e-ticaret / yayinda",
+        "work.softmendil.desc": "Ozel markali paketleme icin Next.js tabanli B2B e-ticaret platformu - islak mendil, stick seker, baharat paketi, kraft torba. Teklif alma akisi, kullanici hesaplari ve sepet dahil.",
+        "work.softmendil.meta": "// Next.js / e-ticaret / teklif akisi / b2b",
+        "work.voge.tag": "topluluk platformu / yayinda",
+        "work.voge.desc": "Turkiye'deki Voge motosiklet sahipleri icin topluluk sitesi. Next.js ile yazildi, Vercel'de ozel domain ile yayinda, dinamik icerik icin Google Sheets hafif bir CMS olarak kullanildi.",
+        "work.voge.meta": "// Next.js / Vercel / Google Sheets API",
+        "work.web.tag": "urun genisletmesi",
+        "work.web.desc": "MindShelf'in TypeScript tabanli web versiyonu. Yuzeyler arasi devamliligi ve bir urunun mobil ile web arasinda nasil tutarli kaldigini nasil dusundugumu gosteriyor.",
+        "work.web.meta": "// React / TypeScript / Vite",
+        "work.monitor.tag": "macOS araci",
+        "work.monitor.desc": "Daha temiz bilgi hiyerarsisine odaklanan, Mac system monitor'un daha sakin bir yorumu olan masaustu araci.",
+        "work.monitor.meta": "// Swift / macOS / bilgi tasarimi",
         "work.api.tag": "backend servis",
-        "work.api.desc": "Ürün mantığını, entegrasyonları ve çok yüzeyli bir ürünü tutarlı tutan görünmeyen kısımları destekleyen backend çalışması.",
-        "work.api.meta": "// TypeScript · API'ler · backend mantığı",
+        "work.api.desc": "Urun mantigini, entegrasyonlari ve cok yuzeyli bir urunu tutarli tutan gorunmeyen kisimlari destekleyen backend calismasi.",
+        "work.api.meta": "// TypeScript / API'ler / backend mantigi",
         "work.food.tag": "swift prototip",
-        "work.food.desc": "Daha hafif ürün akışlarını gereksiz büyütmeden keşfetmek için yapılmış, tavsiye odaklı küçük bir Swift denemesi.",
-        "work.food.meta": "// Swift · tavsiyeler · prototipleme",
-        "approach.title": "yaklaşım",
-        "approach.note": "Bir ürün üzerinde çalışırken aslında nasıl ilerliyorum.",
-        "approach.row1.label": "ürünü şekillendir_",
-        "approach.row1.text": "Sadece UI'ı stillemiyorum. Kod yazmadan önce akışları, edge case'leri ve ürünün gerçekten nasıl hissettirmesi gerektiğini düşünüyorum.",
-        "approach.row2.label": "tüm stack'i sahiplen_",
-        "approach.row2.text": "iOS, frontend, backend glue ve deploy arasında rahat geçiş yapıyorum — böylece bir feature handoff'ta takılıp kalmıyor.",
-        "approach.row3.label": "önce ship, sonra cila_",
-        "approach.row3.text": "İç demolardansa gerçek kullanıcıları tercih ediyorum. Yaptığım işlerin çoğu bir branch'te değil, canlı internette.",
-        "about.title": "hakkımda",
-        "about.note": "Türkiye'de yaşayan bir Bilgisayar Mühendisliği öğrencisiyim. İngilizce ve Türkçe çalışıyorum; ship etmekten konuşmak yerine ship etmeyi tercih ediyorum.",
+        "work.food.desc": "Daha hafif urun akislarini gereksiz buyutmeden kesfetmek icin yapilmis, tavsiye odakli kucuk bir Swift denemesi.",
+        "work.food.meta": "// Swift / tavsiyeler / prototipleme",
+        "approach.title": "yaklasim",
+        "approach.note": "Bir urun uzerinde calisirken aslinda nasil ilerliyorum.",
+        "approach.row1.label": "urunu sekillendir_",
+        "approach.row1.text": "Sadece UI'i stillemiyorum. Kod yazmadan once akislari, edge case'leri ve urunun gercekten nasil hissettirmesi gerektigini dusunuyorum.",
+        "approach.row2.label": "tum stack'i sahiplen_",
+        "approach.row2.text": "iOS, frontend, backend glue ve deploy arasinda rahat gecis yapiyorum - boylece bir feature handoff'ta takilip kalmiyor.",
+        "approach.row3.label": "once ship, sonra cila_",
+        "approach.row3.text": "Ic demolardansa gercek kullanicilari tercih ediyorum. Yaptigim islerin cogu bir branch'te degil, canli internette.",
+        "about.title": "hakkimda",
+        "about.note": "Turkiye'de yasayan bir Bilgisayar Muhendisligi ogrencisiyim. Ingilizce ve Turkce calisiyorum; ship etmekten konusmak yerine ship etmeyi tercih ediyorum.",
         "stack.frontend.label": "frontend_",
         "stack.frontend.text": "React, Next.js, TypeScript, Tailwind, HTML, CSS, JavaScript",
         "stack.apple.label": "apple_",
         "stack.apple.text": "Swift, SwiftUI, StoreKit 2, SwiftData, macOS",
         "stack.backend.label": "backend & deploy_",
         "stack.backend.text": "Node.js, REST API'ler, Supabase, Firebase, Cloudflare Pages, Vercel, GitHub Pages",
-        "contact.title": "iletişim",
-        "contact.avail": "iş için müsait",
-        "contact.text": "Ürün kalitesinin önemli olduğu stajlara, junior rollere ve freelance işlere açığım. Düzgün hissettirmesi gereken bir şey inşa ediyorsan konuşalım.",
+        "contact.title": "iletisim",
+        "contact.avail": "is icin musait",
+        "contact.text": "Urun kalitesinin onemli oldugu stajlara, junior rollere ve freelance islere acigim. Duzgun hissettirmesi gereken bir sey insa ediyorsan konusalim.",
         "contact.link1": "e-posta",
         "contact.link2": "github",
         "contact.link3": "x",
-        "footer.text": "türkiye merkezli_ i̇ngilizce ve türkçe_"
+        "footer.text": "turkiye merkezli_ ingilizce ve turkce_"
       }
     };
 
@@ -1638,7 +1398,7 @@
     function syncThemeMeta(theme) {
       const metaTheme = document.querySelector('meta[name="theme-color"]');
       if (metaTheme) {
-        metaTheme.setAttribute("content", theme === "dark" ? "#0e1014" : "#f7f5f1");
+        metaTheme.setAttribute("content", theme === "dark" ? "#0f1115" : "#f6f3ec");
       }
     }
 
@@ -1719,7 +1479,7 @@
           observer.unobserve(entry.target);
         });
       }, {
-        threshold: 0.18,
+        threshold: 0.16,
         rootMargin: "0px 0px -24px 0px"
       });
 
@@ -1742,8 +1502,8 @@
           }
         });
       }, {
-        threshold: 0.32,
-        rootMargin: "-20% 0px -55% 0px"
+        threshold: 0.3,
+        rootMargin: "-18% 0px -55% 0px"
       });
 
       sections.forEach((section) => observer.observe(section));
