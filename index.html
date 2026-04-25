@@ -259,13 +259,83 @@
 
     /* HERO */
     .hero {
-      padding: 88px 0 48px;
+      padding: 56px 0 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-left {
+      min-width: 0;
+    }
+
+    @media (max-width: 880px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    /* Tech ticker */
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg-soft) 70%, transparent);
+      margin: 28px 0 0;
+      padding: 12px 0;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 36px;
+      width: max-content;
+      animation: ticker 38s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .ticker-item::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .ticker-sep {
+      color: var(--line-strong);
+      align-self: center;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none; }
     }
 
     /* Terminal block */
     .terminal {
-      margin-top: 32px;
       max-width: 460px;
+      width: 100%;
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -378,11 +448,11 @@
     .hero h1 {
       font-family: "IBM Plex Sans", sans-serif;
       font-weight: 600;
-      font-size: clamp(2.6rem, 6vw, 4.4rem);
-      line-height: 1.05;
+      font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+      line-height: 1.04;
       letter-spacing: -0.035em;
-      margin-bottom: 24px;
-      max-width: 18ch;
+      margin-bottom: 22px;
+      max-width: 16ch;
     }
 
     .hero h1 .accent-word {
@@ -479,7 +549,7 @@
 
     /* WHAT I BUILD - skill cards */
     .skills {
-      padding: 24px 0 56px;
+      padding: 48px 0 56px;
     }
 
     .skill-grid {
@@ -933,29 +1003,31 @@
   <main id="top">
     <!-- HERO -->
     <section class="hero shell">
-      <div class="reveal">
-        <span class="status">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span data-i18n="hero.status">available for work</span>
-        </span>
+      <div class="hero-grid reveal">
+        <div class="hero-left">
+          <span class="status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span data-i18n="hero.status">available for work</span>
+          </span>
 
-        <h1 class="serif" data-i18n="hero.title" data-i18n-html>
-          Hi, I'm Murat — I build <span class="accent-word">thoughtful</span> products across iOS, web &amp; backend.
-        </h1>
+          <h1 class="serif" data-i18n="hero.title" data-i18n-html>
+            Hi, I'm Murat — I build <span class="accent-word">thoughtful</span> products across iOS, web &amp; backend.
+          </h1>
 
-        <p class="hero-lead" data-i18n="hero.lead">
-          Computer Engineering student who'd rather ship than talk about shipping. iOS apps with paid subscriptions, web products with real users, and the backend glue that holds them together.
-        </p>
+          <p class="hero-lead" data-i18n="hero.lead">
+            Computer Engineering student who'd rather ship than talk about shipping. iOS apps with paid subscriptions, web products with real users, and the backend glue that holds them together.
+          </p>
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">
-            <span>see my work</span>
-            <span class="arrow">↓</span>
-          </a>
-          <a class="btn" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">
-            <span>say hi</span>
-            <span class="arrow">↗</span>
-          </a>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">
+              <span>see my work</span>
+              <span class="arrow">↓</span>
+            </a>
+            <a class="btn" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">
+              <span>say hi</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
         </div>
 
         <div class="terminal" aria-hidden="true">
@@ -988,6 +1060,39 @@
         </div>
       </div>
     </section>
+
+    <!-- TECH TICKER -->
+    <div class="ticker reveal" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item">Swift</span>
+        <span class="ticker-item">SwiftUI</span>
+        <span class="ticker-item">StoreKit 2</span>
+        <span class="ticker-item">React</span>
+        <span class="ticker-item">Next.js</span>
+        <span class="ticker-item">TypeScript</span>
+        <span class="ticker-item">Tailwind</span>
+        <span class="ticker-item">Node.js</span>
+        <span class="ticker-item">Supabase</span>
+        <span class="ticker-item">Cloudflare</span>
+        <span class="ticker-item">Vercel</span>
+        <span class="ticker-item">Vite</span>
+        <span class="ticker-item">macOS</span>
+        <!-- duplicate for seamless loop -->
+        <span class="ticker-item">Swift</span>
+        <span class="ticker-item">SwiftUI</span>
+        <span class="ticker-item">StoreKit 2</span>
+        <span class="ticker-item">React</span>
+        <span class="ticker-item">Next.js</span>
+        <span class="ticker-item">TypeScript</span>
+        <span class="ticker-item">Tailwind</span>
+        <span class="ticker-item">Node.js</span>
+        <span class="ticker-item">Supabase</span>
+        <span class="ticker-item">Cloudflare</span>
+        <span class="ticker-item">Vercel</span>
+        <span class="ticker-item">Vite</span>
+        <span class="ticker-item">macOS</span>
+      </div>
+    </div>
 
     <!-- WHAT I BUILD -->
     <section id="build" class="skills shell">
