@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Murat builds iOS apps, web products, and backend systems." />
+  <meta name="description" content="Murat — iOS, web and backend. Real products, shipped." />
   <meta name="author" content="Murat" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#f7f4ed" />
+  <meta name="theme-color" content="#ede5d4" />
   <meta property="og:title" content="Murat — iOS, Web & Backend" />
   <meta property="og:description" content="iOS apps, web products, and backend systems." />
   <meta property="og:type" content="website" />
@@ -15,1449 +15,616 @@
   <meta property="og:locale:alternate" content="tr_TR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@muartdev" />
-  <meta name="twitter:title" content="Murat — iOS, Web & Backend" />
-  <meta name="twitter:description" content="iOS apps, web products, and backend systems." />
   <title>Murat — iOS, Web & Backend</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23d2511f'/%3E%3Ctext x='50' y='66' text-anchor='middle' fill='%23faf6ee' font-family='IBM Plex Sans, sans-serif' font-size='58' font-weight='600'%3Em%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
-      --bg: #f7f4ed;
-      --bg-soft: #fbf8f1;
-      --card: #ffffff;
+      --bg: #ede5d4;
+      --bg-soft: #f4eddd;
+      --bg-card: #f8f3e6;
+      --bg-elev: #fbf6e9;
       --text: #1a1a1a;
-      --muted: #6b6660;
-      --line: rgba(26, 26, 26, 0.09);
-      --line-strong: rgba(26, 26, 26, 0.18);
-      --accent: #d2511f;
-      --accent-soft: rgba(210, 81, 31, 0.1);
+      --muted: #76706a;
+      --line: rgba(26, 26, 26, 0.1);
+      --line-2: rgba(26, 26, 26, 0.18);
+      --accent: #e85d2a;
+      --accent-soft: rgba(232, 93, 42, 0.13);
       --tag-bg: #1a1a1a;
-      --tag-text: #faf6ee;
-      --shadow-sm: 0 1px 2px rgba(26, 20, 14, 0.04);
-      --shadow-md: 0 8px 24px rgba(26, 20, 14, 0.06);
-      --max: 960px;
-      --max-narrow: 720px;
-      --scroll-progress: 0;
-      --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --tag-text: #f8f3e6;
+      --max: 1080px;
     }
 
     [data-theme="dark"] {
-      --bg: #14120e;
+      --bg: #15130f;
       --bg-soft: #1a1814;
-      --card: #1f1c17;
-      --text: #f4ede0;
-      --muted: #9a9388;
-      --line: rgba(244, 237, 224, 0.1);
-      --line-strong: rgba(244, 237, 224, 0.2);
+      --bg-card: #1f1c17;
+      --bg-elev: #25211b;
+      --text: #f3ecdc;
+      --muted: #968e80;
+      --line: rgba(243, 236, 220, 0.1);
+      --line-2: rgba(243, 236, 220, 0.2);
       --accent: #ff7a3d;
-      --accent-soft: rgba(255, 122, 61, 0.12);
-      --tag-bg: #f4ede0;
-      --tag-text: #14120e;
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.32);
+      --accent-soft: rgba(255, 122, 61, 0.16);
+      --tag-bg: #f3ecdc;
+      --tag-text: #15130f;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(210, 81, 31, 0.05), transparent 60%),
-        radial-gradient(ellipse 70% 50% at 90% 90%, rgba(110, 80, 60, 0.06), transparent 60%);
+      background: var(--bg);
       color: var(--text);
       font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden;
       transition: background 0.3s ease, color 0.3s ease;
-      position: relative;
     }
 
-    /* Paper / wall texture */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.55;
-      mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.26  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-      background-size: 240px 240px;
-      animation: texture-drift 26s linear infinite alternate;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: transparent; border: 0; cursor: pointer; padding: 0; }
+    img { max-width: 100%; display: block; }
 
-    /* Fine grain on top */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.32;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='2.4' numOctaves='1' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
-      background-size: 180px 180px;
-      animation: texture-drift 18s linear infinite alternate-reverse;
-    }
+    ::selection { background: var(--accent); color: #fff; }
 
-    [data-theme="dark"] body::before {
-      opacity: 0.5;
-      mix-blend-mode: screen;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.14  0 0 0 0 0.1  0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 
-    [data-theme="dark"] body::after {
-      opacity: 0.18;
-    }
-
-    /* Keep content above texture */
-    body > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    ::selection {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-      color: inherit;
-      background: transparent;
-      border: 0;
-      cursor: pointer;
-    }
-
-    .serif {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.025em;
-    }
-
-    .italic {
-      font-style: italic;
-    }
-
-    .mono {
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-    }
-
-    .shell {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    .shell-narrow {
-      width: min(var(--max-narrow), calc(100% - 40px));
-      margin: 0 auto;
-    }
+    .shell { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
     /* TOPBAR */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
-      animation: topbar-enter 0.7s var(--motion-ease) both;
     }
-
-    .topbar::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      height: 1px;
-      background: var(--accent);
-      transform: scaleX(var(--scroll-progress));
-      transform-origin: left;
-    }
-
     .topbar-inner {
       width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
       padding: 14px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
     }
-
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
-      transition: transform 0.24s var(--motion-ease);
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92rem;
+      font-weight: 500;
     }
-
-    .brand:hover {
-      transform: translateY(-1px);
-    }
-
     .brand-mark {
-      width: 26px;
-      height: 26px;
-      border-radius: 0;
+      width: 26px; height: 26px;
+      border-radius: 7px;
       background: var(--accent);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "IBM Plex Sans", sans-serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1;
-      transition: transform 0.26s var(--motion-ease);
+      color: #faf6ee;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 600;
     }
-
-    .brand:hover .brand-mark {
-      transform: rotate(-6deg) translateY(-1px);
-    }
-
-    .brand-name {
-      font-family: "Press Start 2P", "IBM Plex Mono", monospace;
-      font-size: 0.66rem;
-      font-weight: 400;
-      letter-spacing: 0;
-      line-height: 1;
-      text-transform: lowercase;
-      padding-top: 2px;
-    }
-
-    .nav {
-      display: flex;
-      gap: 22px;
-      align-items: center;
-    }
-
-    .nav a {
-      font-size: 0.88rem;
-      color: var(--muted);
-      position: relative;
-      transition: color 0.18s ease;
-    }
-
-    .nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -5px;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.24s var(--motion-ease);
-    }
-
-    .nav a:hover,
-    .nav a[aria-current="page"] {
-      color: var(--text);
-    }
-
-    .nav a:hover::after,
-    .nav a[aria-current="page"]::after {
-      transform: scaleX(1);
-    }
-
-    .nav-tools {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
+    .nav { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 0.9rem; color: var(--muted); transition: color 0.18s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); }
+    .nav-actions { display: flex; gap: 6px; }
     .icon-btn {
-      width: 32px;
-      height: 32px;
+      width: 34px; height: 28px;
+      display: inline-flex; align-items: center; justify-content: center;
       border: 1px solid var(--line);
-      border-radius: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 6px;
+      font-family: "IBM Plex Mono", monospace;
       font-size: 0.74rem;
       color: var(--muted);
-      transition: all 0.18s ease;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
     }
-
-    .icon-btn:hover {
-      border-color: var(--line-strong);
-      color: var(--text);
-      background: var(--bg-soft);
-    }
+    .icon-btn:hover { color: var(--text); border-color: var(--line-2); background: var(--bg-soft); }
 
     /* HERO */
-    .hero {
-      padding: 56px 0 32px;
-    }
+    main { padding: 60px 0 80px; }
+    .hero { padding-bottom: 80px; }
 
-    .hero-grid {
-      display: grid;
-      max-width: 620px;
-      gap: 0;
-    }
-
-    .motion-ready .hero-grid > * {
-      animation: hero-rise 0.75s var(--motion-ease) both;
-    }
-
-    .motion-ready .hero-grid > *:nth-child(2) {
-      animation-delay: 0.08s;
-    }
-
-    .motion-ready .hero-grid > *:nth-child(3) {
-      animation-delay: 0.16s;
-    }
-
-    .motion-ready .hero-grid > *:nth-child(4) {
-      animation-delay: 0.24s;
-    }
-
-    @media (max-width: 880px) {
-      .hero-grid {
-        gap: 0;
-      }
-    }
-
-    @keyframes blink {
-      0%, 49% { opacity: 1; }
-      50%, 100% { opacity: 0; }
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 7px 14px 7px 11px;
       border-radius: 999px;
       background: var(--accent-soft);
       color: var(--accent);
-      font-size: 0.78rem;
+      font-size: 0.86rem;
       font-weight: 500;
       margin-bottom: 24px;
-      transition: transform 0.22s var(--motion-ease), background 0.22s ease;
     }
-
-    .status:hover {
-      transform: translateY(-1px);
-    }
-
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+    .hero-pill::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 0 var(--accent);
-      animation: pulse 2.4s ease-out infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
-      70% { box-shadow: 0 0 0 8px transparent; }
-      100% { box-shadow: 0 0 0 0 transparent; }
+      box-shadow: 0 0 0 0 rgba(232, 93, 42, 0.5);
+      animation: pulse 2.4s ease-in-out infinite;
     }
 
     .hero h1 {
-      font-family: "IBM Plex Sans", sans-serif;
+      font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
       font-weight: 600;
-      font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-      line-height: 1.04;
-      letter-spacing: -0.035em;
-      margin-bottom: 18px;
       max-width: 14ch;
+      margin-bottom: 26px;
     }
-
-    .hero h1 .accent-word {
+    .hero h1 .accent {
+      display: inline-block;
+      color: var(--accent);
       font-style: italic;
-      color: var(--accent);
-      background-image: linear-gradient(currentColor, currentColor);
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-      background-size: 100% 2px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 2px;
     }
 
-    .hero-lead {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 44ch;
-      margin-bottom: 24px;
+    .hero-sub {
+      color: var(--text);
+      font-size: 1.06rem;
       line-height: 1.55;
+      max-width: 38ch;
+      margin-bottom: 36px;
     }
 
-    .cta-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: inline-flex; align-items: center; gap: 8px;
       padding: 11px 18px;
-      border-radius: 0;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border: 1px solid var(--line-strong);
-      transition: transform 0.22s var(--motion-ease), border-color 0.18s ease, box-shadow 0.22s ease, background 0.18s ease;
+      border: 1px solid var(--line-2);
+      border-radius: 8px;
+      font-size: 0.9rem; font-weight: 500;
+      transition: background 0.18s, border-color 0.18s, transform 0.18s;
     }
-
+    .btn:hover { transform: translateY(-1px); }
     .btn-primary {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-color: var(--tag-bg);
     }
+    .btn-primary:hover { filter: brightness(1.1); }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      border-color: var(--text);
-    }
-
-    .btn .arrow {
-      transition: transform 0.18s ease;
-    }
-
-    .btn:hover .arrow {
-      transform: translate(2px, -2px);
-    }
-
-    /* SECTION COMMON */
-    section {
-      scroll-margin-top: 80px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
+    /* SECTION HEAD */
+    section + section { margin-top: 80px; }
+    .section-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 12px;
       margin-bottom: 32px;
-      padding-bottom: 16px;
       border-bottom: 1px solid var(--line);
-      position: relative;
-    }
-
-    .section-header::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -1px;
-      width: 92px;
-      height: 1px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.65s var(--motion-ease);
-    }
-
-    .section-header.visible::after {
-      transform: scaleX(1);
-    }
-
-    .section-num {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .section-title {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-      font-weight: 600;
-      letter-spacing: -0.025em;
-    }
-
-    .section-title em {
-      color: var(--accent);
-    }
-
-    .section-note {
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 60ch;
-      margin-left: auto;
-    }
-
-    .skill-tags {
-      display: flex;
       flex-wrap: wrap;
-      gap: 6px;
     }
+    .section-left { display: grid; gap: 4px; }
+    .section-num { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 1.95rem); letter-spacing: -0.025em; font-weight: 600; line-height: 1; }
+    .section-title .italic { color: var(--accent); font-style: italic; font-weight: 400; }
+    .section-meta { color: var(--muted); font-size: 0.88rem; }
 
-    .skill-tag {
+    /* PROJECTS */
+    .projects { display: grid; gap: 14px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+    .project {
+      padding: 22px 22px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg-card);
+      display: grid; gap: 12px;
+      transition: border-color 0.18s, transform 0.18s;
+    }
+    .project:hover { border-color: var(--line-2); transform: translateY(-1px); }
+    .project--feature { padding: 26px; }
+
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    .project-title { font-size: 1.18rem; font-weight: 600; letter-spacing: -0.018em; }
+    .project--feature .project-title { font-size: 1.5rem; }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px;
+      border: 1px solid var(--line-2);
+      border-radius: 6px;
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.7rem;
+      font-size: 0.74rem;
       color: var(--muted);
-      padding: 3px 8px 3px 7px;
+    }
+    .tag.accent { border-color: var(--accent); color: var(--accent); }
+    .tag.accent::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+
+    .project-desc { color: var(--text); font-size: 0.96rem; line-height: 1.55; max-width: 64ch; }
+    .project--feature .project-desc { font-size: 1rem; }
+
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 9px;
       border: 1px solid var(--line);
-      border-radius: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .skill-tag::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--muted);
-      opacity: 0.6;
-    }
-
-    /* GitHub-style language dots */
-    .skill-tag[data-lang="swift"]::before    { background: #f05138; opacity: 1; }
-    .skill-tag[data-lang="ts"]::before       { background: #3178c6; opacity: 1; }
-    .skill-tag[data-lang="js"]::before       { background: #f1e05a; opacity: 1; }
-    .skill-tag[data-lang="react"]::before    { background: #61dafb; opacity: 1; }
-    .skill-tag[data-lang="next"]::before     { background: #1a1a1a; opacity: 1; box-shadow: inset 0 0 0 1px var(--line-strong); }
-    [data-theme="dark"] .skill-tag[data-lang="next"]::before { background: #fff; box-shadow: none; }
-    .skill-tag[data-lang="node"]::before     { background: #539e43; opacity: 1; }
-    .skill-tag[data-lang="supabase"]::before { background: #3ecf8e; opacity: 1; }
-    .skill-tag[data-lang="cloudflare"]::before { background: #f38020; opacity: 1; }
-    .skill-tag[data-lang="vercel"]::before   { background: #1a1a1a; opacity: 1; box-shadow: inset 0 0 0 1px var(--line-strong); }
-    [data-theme="dark"] .skill-tag[data-lang="vercel"]::before { background: #fff; box-shadow: none; }
-    .skill-tag[data-lang="tailwind"]::before { background: #38bdf8; opacity: 1; }
-    .skill-tag[data-lang="rest"]::before     { background: var(--accent); opacity: 1; }
-
-    /* WORK */
-    .work {
-      padding: 56px 0;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .project-card {
-      padding: 22px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: transform 0.28s var(--motion-ease), border-color 0.18s ease, box-shadow 0.28s ease, background 0.22s ease;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-    }
-
-    .project-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 34%);
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-    }
-
-    .project-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .project-card:hover {
-      transform: translate3d(0, -4px, 0) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
-      border-color: var(--line-strong);
-      box-shadow: var(--shadow-md);
-    }
-
-    .project-card:hover::after {
-      opacity: 1;
-    }
-
-    .project-card--featured {
-      grid-column: span 2;
-      background: linear-gradient(135deg, var(--card), var(--bg-soft));
-    }
-
-    .project-card--featured::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 0;
-      padding: 1px;
-      background: linear-gradient(135deg, var(--accent), transparent 60%);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      pointer-events: none;
-    }
-
-    .project-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .project-title {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-weight: 600;
-      font-size: 1.5rem;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-    }
-
-    .project-card--featured .project-title {
-      font-size: 2rem;
-    }
-
-    .project-badge {
+      border-radius: 6px;
+      background: var(--bg-elev);
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      padding: 3px 8px;
-      border: 1px solid var(--line);
-      border-radius: 0;
-      white-space: nowrap;
+      font-size: 0.74rem;
+      color: var(--text);
     }
+    .chip::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 
-    .project-badge--live {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-
-    .project-desc {
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 14px;
+    .project-foot {
+      display: flex; gap: 18px;
       padding-top: 12px;
       border-top: 1px dashed var(--line);
-      margin-top: auto;
-    }
-
-    .project-link {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: color 0.18s ease, transform 0.22s var(--motion-ease);
+      font-size: 0.84rem;
+      color: var(--muted);
     }
-
-    .project-link::before {
-      content: "/";
-      color: var(--accent);
-      margin-right: -2px;
-    }
-
-    .project-link:hover {
-      color: var(--accent);
-      transform: translateX(2px);
-    }
-
-    .project-link .arrow {
-      transition: transform 0.18s ease;
-    }
-
-    .project-link:hover .arrow {
-      transform: translate(2px, -2px);
-    }
+    .project-foot a { display: inline-flex; align-items: center; gap: 4px; transition: color 0.18s; }
+    .project-foot a::before { content: "/ "; opacity: 0.5; }
+    .project-foot a::after { content: "↗"; font-size: 0.86em; opacity: 0.7; margin-left: 2px; }
+    .project-foot a:hover { color: var(--accent); }
 
     /* ABOUT */
-    .about {
-      padding: 56px 0;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .about-copy {
-      font-size: 1.02rem;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    .about-copy p + p {
-      margin-top: 14px;
-    }
-
-    .about-copy .quiet {
-      color: var(--muted);
-    }
-
-    .about-side {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .info-block {
-      padding: 18px;
-      background: var(--card);
+    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: start; }
+    .about-prose { display: grid; gap: 18px; font-size: 1rem; max-width: 56ch; }
+    .about-side { display: grid; gap: 14px; }
+    .info-card {
+      padding: 18px 20px;
       border: 1px solid var(--line);
-      border-radius: 0;
-      transition: transform 0.24s var(--motion-ease), border-color 0.18s ease, box-shadow 0.24s ease;
+      border-radius: 12px;
+      background: var(--bg-card);
+      display: grid; gap: 6px;
     }
-
-    .info-block:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .info-label {
+    .info-card .label {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.7rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
     }
-
-    .info-value {
-      font-size: 0.95rem;
-    }
-
-    .info-value + .info-value {
-      margin-top: 4px;
-    }
+    .info-card ul { list-style: none; display: grid; gap: 2px; }
+    .info-card .val { font-size: 0.96rem; }
 
     /* CONTACT */
-    .contact {
-      padding: 56px 0 40px;
-    }
-
-    .contact-block {
-      padding: 40px;
-      background: var(--card);
+    .contact-card {
+      padding: 56px 36px;
       border: 1px solid var(--line);
-      border-radius: 0;
+      border-radius: 16px;
+      background: var(--bg-elev);
+      display: grid; gap: 16px;
       text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.28s var(--motion-ease), border-color 0.18s ease, box-shadow 0.28s ease;
     }
+    .contact-title { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -0.03em; font-weight: 600; line-height: 1.1; }
+    .contact-title .italic { color: var(--accent); font-style: italic; font-weight: 400; }
+    .contact-sub { color: var(--muted); font-size: 0.98rem; }
+    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
 
-    .contact-block:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      box-shadow: var(--shadow-md);
-    }
-
-    .contact-block h2 {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-weight: 600;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      letter-spacing: -0.025em;
-      margin-bottom: 10px;
-      line-height: 1.1;
-    }
-
-    .contact-block h2 em {
-      color: var(--accent);
-    }
-
-    .contact-block p {
-      color: var(--muted);
-      max-width: 50ch;
-      margin: 0 auto 26px;
-      font-size: 0.98rem;
-    }
-
-    .contact-row {
-      display: inline-flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* FOOTER */
     footer {
-      padding: 28px 0 36px;
+      margin-top: 56px;
+      padding-top: 18px;
       border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
       color: var(--muted);
       font-size: 0.82rem;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    footer a { display: inline-flex; align-items: center; gap: 5px; transition: color 0.18s; }
+    footer a:hover { color: var(--accent); }
+    footer a::after { content: "↗"; opacity: 0.7; }
+
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0   rgba(232, 93, 42, 0.5); }
+      70%  { box-shadow: 0 0 0 7px rgba(232, 93, 42, 0); }
+      100% { box-shadow: 0 0 0 0   rgba(232, 93, 42, 0); }
     }
 
-    footer a:hover {
-      color: var(--text);
+    @media (max-width: 880px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 24px; }
+      .nav-links { display: none; }
     }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      filter: blur(3px);
-      transition: opacity 0.72s var(--motion-ease), transform 0.72s var(--motion-ease), filter 0.72s var(--motion-ease);
-      transition-delay: var(--delay, 0s);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-
-    @keyframes topbar-enter {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes hero-rise {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-        filter: blur(4px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-      }
-    }
-
-    @keyframes texture-drift {
-      from {
-        background-position: 0 0;
-      }
-      to {
-        background-position: 38px -28px;
-      }
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 820px) {
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .project-card--featured {
-        grid-column: span 1;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .nav {
-        display: none;
-      }
-
-      .hero {
-        padding: 56px 0 36px;
-      }
-
-      .contact-block {
-        padding: 28px 22px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: clamp(2.2rem, 10vw, 3rem);
-      }
-
-      .section-header {
-        flex-direction: column;
-        gap: 6px;
-        align-items: flex-start;
-      }
-
-      .section-note {
-        margin-left: 0;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-        filter: none;
-      }
+    @media (max-width: 640px) {
+      main { padding: 40px 0 64px; }
+      .hero { padding-bottom: 56px; }
+      section + section { margin-top: 64px; }
+      .project { padding: 18px 16px 16px; }
+      .project--feature { padding: 22px 18px; }
+      .contact-card { padding: 40px 22px; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="#top" aria-label="Home">
+      <a class="brand" href="#top">
         <span class="brand-mark">m</span>
-        <span class="brand-name">murat</span>
+        <span data-i18n="brand">murat</span>
       </a>
-
       <nav class="nav" aria-label="Primary">
-        <a href="#work" data-i18n="nav.work">work</a>
-        <a href="#about" data-i18n="nav.about">about</a>
-        <a href="#contact" data-i18n="nav.contact">contact</a>
+        <div class="nav-links">
+          <a href="#work" data-i18n="nav.work">work</a>
+          <a href="#about" data-i18n="nav.about">about</a>
+          <a href="#contact" data-i18n="nav.contact">contact</a>
+        </div>
+        <div class="nav-actions">
+          <button class="icon-btn" id="langToggle" aria-label="Toggle language"><span id="langText">EN</span></button>
+          <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☾</span></button>
+        </div>
       </nav>
-
-      <div class="nav-tools">
-        <button class="icon-btn" id="langToggle" type="button" aria-label="Toggle language">
-          <span id="langText">EN</span>
-        </button>
-        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme">
-          <span id="themeIcon">☾</span>
-        </button>
-      </div>
     </div>
   </header>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero shell">
-      <div class="hero-grid reveal">
-        <span class="status">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span data-i18n="hero.status">available for work</span>
-        </span>
+  <main>
+    <section class="hero shell" id="top">
+      <span class="hero-pill" data-i18n="hero.pill">open to work</span>
+      <h1 data-i18n="hero.title" data-i18n-html>iOS apps, web products, and <span class="accent">backend systems</span>.</h1>
+      <p class="hero-sub" data-i18n="hero.sub">I build shipped products end to end: mobile apps, websites, auth, payments, and deploys.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">see work</a>
+        <a class="btn" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">email</a>
+      </div>
+    </section>
 
-          <h1 class="serif" data-i18n="hero.title" data-i18n-html>
-            iOS apps, web products, and <span class="accent-word">backend systems</span>.
-          </h1>
+    <section id="work" class="shell">
+      <div class="section-head">
+        <div class="section-left">
+          <div class="section-num">// 01</div>
+          <h2 class="section-title" data-i18n="work.title" data-i18n-html>selected <span class="italic">work</span></h2>
+        </div>
+        <span class="section-meta" data-i18n="work.meta">real work, shipped.</span>
+      </div>
 
-          <p class="hero-lead" data-i18n="hero.lead">
-            I build shipped products end to end: mobile apps, websites, auth, payments, and deploys.
-        </p>
+      <div class="projects">
+        <article class="project project--feature">
+          <div class="project-top">
+            <h3 class="project-title">MindShelf</h3>
+            <span class="tag accent" data-i18n="proj.mindshelf.tag">iOS + web · live</span>
+          </div>
+          <p class="project-desc" data-i18n="proj.mindshelf.desc">Book tracking app with a native iOS app and web companion. Paid, synced, and live.</p>
+          <div class="stack">
+            <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">StoreKit 2</span><span class="chip">Supabase</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Cloudflare</span>
+          </div>
+          <div class="project-foot">
+            <a href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener">live</a>
+            <a href="https://github.com/muartdev/shelf-mind" target="_blank" rel="noopener">iOS repo</a>
+            <a href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener">web repo</a>
+          </div>
+        </article>
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">
-            <span>see my work</span>
-            <span class="arrow">↓</span>
-          </a>
-          <a class="btn" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">
-            <span>email</span>
-            <span class="arrow">↗</span>
-          </a>
+        <div class="grid-2">
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">Softmendil</h3>
+              <span class="tag accent" data-i18n="proj.live">live</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.soft.desc">B2B custom packaging platform with quote flow, accounts, and cart.</p>
+            <div class="stack"><span class="chip">Next.js</span><span class="chip">B2B</span><span class="chip">e-commerce</span></div>
+            <div class="project-foot"><a href="https://softmendil.com" target="_blank" rel="noopener">visit</a></div>
+          </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">VogeRidersTR</h3>
+              <span class="tag accent" data-i18n="proj.live">live</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.voge.desc">Community site for Voge riders in Turkey with a lightweight CMS.</p>
+            <div class="stack"><span class="chip">Next.js</span><span class="chip">Vercel</span><span class="chip">Sheets API</span></div>
+            <div class="project-foot"><a href="https://www.vogeriderstr.com" target="_blank" rel="noopener">visit</a></div>
+          </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">Pace</h3>
+              <span class="tag" data-i18n="proj.pace.tag">in progress</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.pace.desc">A small typing rhythm experiment for the web.</p>
+            <div class="stack"><span class="chip">TypeScript</span><span class="chip">React</span></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/pace" target="_blank" rel="noopener">repo</a></div>
+          </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">Mind API</h3>
+              <span class="tag" data-i18n="proj.api.tag">backend</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.api.desc">MindShelf backend. Product logic, integrations, and sync.</p>
+            <div class="stack"><span class="chip">TypeScript</span><span class="chip">REST</span><span class="chip">Supabase</span></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/mind" target="_blank" rel="noopener">repo</a></div>
+          </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">System Monitor</h3>
+              <span class="tag" data-i18n="proj.mon.tag">macOS</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.mon.desc">A calmer take on the Mac system monitor.</p>
+            <div class="stack"><span class="chip">Swift</span><span class="chip">macOS</span></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener">repo</a></div>
+          </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">FoodSuggest</h3>
+              <span class="tag" data-i18n="proj.food.tag">prototype</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.food.desc">A small Swift experiment around recommendation flows.</p>
+            <div class="stack"><span class="chip">Swift</span><span class="chip">prototype</span></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener">repo</a></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- WORK -->
-    <section id="work" class="work shell">
-      <div class="section-header reveal">
-        <span class="section-num">// 01</span>
-        <h2 class="section-title" data-i18n="work.title" data-i18n-html>selected <em>work</em></h2>
-        <span class="section-note" data-i18n="work.note">real work, shipped.</span>
-      </div>
-
-      <div class="project-grid">
-        <!-- FEATURED -->
-        <article class="project-card project-card--featured reveal">
-          <div class="project-head">
-            <h3 class="project-title serif">MindShelf</h3>
-            <span class="project-badge project-badge--live" data-i18n="work.mindshelf.badge">iOS + web · live</span>
-          </div>
-          <p class="project-desc" data-i18n="work.mindshelf.desc">
-            A book-tracking product. Native iOS app + web companion, same account, live in production. Full StoreKit 2 paywall, Supabase sync.
-          </p>
-          <div class="project-stack">
-            <span class="skill-tag" data-lang="swift">Swift</span>
-            <span class="skill-tag" data-lang="swift">SwiftUI</span>
-            <span class="skill-tag" data-lang="swift">StoreKit 2</span>
-            <span class="skill-tag" data-lang="supabase">Supabase</span>
-            <span class="skill-tag" data-lang="react">React</span>
-            <span class="skill-tag" data-lang="js">Vite</span>
-            <span class="skill-tag" data-lang="cloudflare">Cloudflare</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.mindshelf.link1">live-web</span>
-              <span class="arrow">↗</span>
-            </a>
-            <a class="project-link" href="https://github.com/muartdev/Mind-Shelf" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.mindshelf.link2">ios-repo</span>
-              <span class="arrow">↗</span>
-            </a>
-            <a class="project-link" href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.mindshelf.link3">web-repo</span>
-              <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- SOFTMENDIL -->
-        <article class="project-card reveal" style="--delay: 0.04s;">
-          <div class="project-head">
-            <h3 class="project-title serif">Softmendil</h3>
-            <span class="project-badge project-badge--live" data-i18n="work.softmendil.badge">live</span>
-          </div>
-          <p class="project-desc" data-i18n="work.softmendil.desc">
-            B2B e-commerce platform for custom-branded packaging. Quote flow, accounts, cart.
-          </p>
-          <div class="project-stack">
-            <span class="skill-tag" data-lang="next">Next.js</span>
-            <span class="skill-tag">B2B</span>
-            <span class="skill-tag">e-commerce</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://softmendil.com" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.softmendil.link">visit</span>
-              <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- VOGE -->
-        <article class="project-card reveal" style="--delay: 0.08s;">
-          <div class="project-head">
-            <h3 class="project-title serif">VogeRidersTR</h3>
-            <span class="project-badge project-badge--live" data-i18n="work.voge.badge">live</span>
-          </div>
-          <p class="project-desc" data-i18n="work.voge.desc">
-            Community site for Voge motorcycle owners in Turkey. Custom domain, Google Sheets as a light CMS.
-          </p>
-          <div class="project-stack">
-            <span class="skill-tag" data-lang="next">Next.js</span>
-            <span class="skill-tag" data-lang="vercel">Vercel</span>
-            <span class="skill-tag" data-lang="rest">Sheets API</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://www.vogeriderstr.com" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.voge.link">visit</span>
-              <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- PACE -->
-        <article class="project-card reveal" style="--delay: 0.12s;">
-          <div class="project-head">
-            <h3 class="project-title serif">Pace</h3>
-            <span class="project-badge" data-i18n="work.pace.badge">in progress</span>
-          </div>
-          <p class="project-desc" data-i18n="work.pace.desc">
-            A small typing-rhythm web tool. Exploring how UI feel and tempo land.
-          </p>
-          <div class="project-stack">
-            <span class="skill-tag" data-lang="ts">TypeScript</span>
-            <span class="skill-tag" data-lang="react">React</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://github.com/muartdev/pace" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.pace.link">repo</span>
-              <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- MIND API -->
-        <article class="project-card reveal" style="--delay: 0.16s;">
-          <div class="project-head">
-            <h3 class="project-title serif">Mind API</h3>
-            <span class="project-badge" data-i18n="work.mind.badge">backend</span>
-          </div>
-          <p class="project-desc" data-i18n="work.mind.desc">
-            Backend service for MindShelf. Product logic, integrations, iOS-web sync.
-          </p>
-          <div class="project-stack">
-            <span class="skill-tag" data-lang="ts">TypeScript</span>
-            <span class="skill-tag" data-lang="rest">REST</span>
-            <span class="skill-tag" data-lang="supabase">Supabase</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://github.com/muartdev/mind" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.mind.link">repo</span>
-              <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- SYSTEM MONITOR -->
-        <article class="project-card reveal" style="--delay: 0.2s;">
-          <div class="project-head">
-            <h3 class="project-title serif">System Monitor</h3>
-            <span class="project-badge" data-i18n="work.monitor.badge">macOS</span>
-          </div>
-          <p class="project-desc" data-i18n="work.monitor.desc">
-            A calmer take on the Mac system monitor. Info hierarchy over flashy charts.
-          </p>
-          <div class="project-stack">
-            <span class="skill-tag" data-lang="swift">Swift</span>
-            <span class="skill-tag" data-lang="swift">macOS</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.monitor.link">repo</span>
-              <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- FOODSUGGEST -->
-        <article class="project-card reveal" style="--delay: 0.24s;">
-          <div class="project-head">
-            <h3 class="project-title serif">FoodSuggest</h3>
-            <span class="project-badge" data-i18n="work.food.badge">prototype</span>
-          </div>
-          <p class="project-desc" data-i18n="work.food.desc">
-            A small Swift experiment with lightweight recommendation flows.
-          </p>
-          <div class="project-stack">
-            <span class="skill-tag" data-lang="swift">Swift</span>
-            <span class="skill-tag">prototype</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="work.food.link">repo</span>
-              <span class="arrow">↗</span>
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="about shell">
-      <div class="section-header reveal">
-        <span class="section-num">// 02</span>
-        <h2 class="section-title" data-i18n="about.title" data-i18n-html>about <em>me</em></h2>
+    <section id="about" class="shell">
+      <div class="section-head">
+        <div class="section-left">
+          <div class="section-num">// 02</div>
+          <h2 class="section-title" data-i18n="about.title" data-i18n-html>about <span class="italic">me</span></h2>
+        </div>
       </div>
 
       <div class="about-grid">
-        <div class="about-copy reveal">
-          <p data-i18n="about.p1">
-            I build across iOS, web, and backend. Mostly products that are live, paid, or used by real people.
-          </p>
-          <p data-i18n="about.p2">
-            I care about the full path: interface, flow, data, deployment, and the small details that make it feel finished.
-          </p>
+        <div class="about-prose">
+          <p data-i18n="about.p1">I build across iOS, web, and backend. Mostly products that are live, paid, or used by real people.</p>
+          <p data-i18n="about.p2">I care about the full path: interface, flow, data, deployment, and the small details that make it feel finished.</p>
         </div>
-
-        <aside class="about-side">
-          <div class="info-block reveal" style="--delay: 0.04s;">
-            <div class="info-label" data-i18n="about.based">based in</div>
-            <div class="info-value">Turkey</div>
+        <div class="about-side">
+          <div class="info-card">
+            <span class="label" data-i18n="info.based">based in</span>
+            <span class="val" data-i18n="info.based.v">Turkey</span>
           </div>
-          <div class="info-block reveal" style="--delay: 0.08s;">
-            <div class="info-label" data-i18n="about.lang">languages</div>
-            <div class="info-value">English</div>
-            <div class="info-value">Türkçe</div>
+          <div class="info-card">
+            <span class="label" data-i18n="info.langs">languages</span>
+            <ul><li class="val">English</li><li class="val">Türkçe</li></ul>
           </div>
-          <div class="info-block reveal" style="--delay: 0.12s;">
-            <div class="info-label" data-i18n="about.open">open to</div>
-            <div class="info-value" data-i18n="about.open.v1">internships</div>
-            <div class="info-value" data-i18n="about.open.v2">junior roles</div>
-            <div class="info-value" data-i18n="about.open.v3">freelance work</div>
+          <div class="info-card">
+            <span class="label" data-i18n="info.open">open to</span>
+            <ul>
+              <li class="val" data-i18n="info.open.1">internships</li>
+              <li class="val" data-i18n="info.open.2">junior roles</li>
+              <li class="val" data-i18n="info.open.3">freelance work</li>
+            </ul>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="contact shell">
-      <div class="contact-block reveal">
-        <h2 class="serif" data-i18n="contact.title" data-i18n-html>let's build something <em>real</em>.</h2>
-        <p data-i18n="contact.p">
-          If you're building something real, let's talk.
-        </p>
-        <div class="contact-row">
-          <a class="btn btn-primary" href="mailto:muartmac@gmail.com">
-            <span data-i18n="contact.email">email me</span>
-            <span class="arrow">↗</span>
-          </a>
-          <a class="btn" href="https://github.com/muartdev" target="_blank" rel="noopener noreferrer">
-            <span>GitHub</span>
-            <span class="arrow">↗</span>
-          </a>
-          <a class="btn" href="https://x.com/muartdev" target="_blank" rel="noopener noreferrer">
-            <span>X</span>
-            <span class="arrow">↗</span>
-          </a>
+    <section id="contact" class="shell">
+      <div class="contact-card">
+        <h2 class="contact-title" data-i18n="contact.title" data-i18n-html>let's build something <span class="italic">real</span>.</h2>
+        <p class="contact-sub" data-i18n="contact.sub">If you're building something real, let's talk.</p>
+        <div class="contact-buttons">
+          <a class="btn btn-primary" href="mailto:muartmac@gmail.com">email</a>
+          <a class="btn" href="https://github.com/muartdev" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://x.com/muartdev" target="_blank" rel="noopener">X</a>
         </div>
       </div>
     </section>
 
     <footer class="shell">
-      <div data-i18n="footer.left">© 2026 Murat — built in Turkey, shipped to the world.</div>
-      <div>
-        <a href="https://github.com/muartdev/muartdev.github.io" target="_blank" rel="noopener noreferrer" data-i18n="footer.right">view source ↗</a>
-      </div>
+      <span data-i18n="footer.left">© 2026 Murat — Turkey.</span>
+      <a href="https://github.com/muartdev/muartdev.github.io" target="_blank" rel="noopener" data-i18n="footer.source">source</a>
     </footer>
   </main>
 
   <script>
-    const translations = {
+    const I18N = {
       en: {
-        "nav.work": "work",
-        "nav.about": "about",
-        "nav.contact": "contact",
-        "hero.status": "open to work",
-        "hero.title": "iOS apps, web products, and <span class=\"accent-word\">backend systems</span>.",
-        "hero.lead": "I build shipped products end to end: mobile apps, websites, auth, payments, and deploys.",
-        "hero.cta1": "see work",
-        "hero.cta2": "email",
-        "work.title": "selected <em>work</em>",
-        "work.note": "real work, shipped.",
-        "work.mindshelf.badge": "iOS + web · live",
-        "work.mindshelf.desc": "Book tracking app with a native iOS app and web companion. Paid, synced, and live.",
-        "work.mindshelf.link1": "live",
-        "work.mindshelf.link2": "iOS repo",
-        "work.mindshelf.link3": "web repo",
-        "work.softmendil.badge": "live",
-        "work.softmendil.desc": "B2B custom packaging platform with quote flow, accounts, and cart.",
-        "work.softmendil.link": "visit",
-        "work.voge.badge": "live",
-        "work.voge.desc": "Community site for Voge riders in Turkey with a lightweight CMS.",
-        "work.voge.link": "visit",
-        "work.pace.badge": "in progress",
-        "work.pace.desc": "A small typing rhythm experiment for the web.",
-        "work.pace.link": "repo",
-        "work.mind.badge": "backend",
-        "work.mind.desc": "MindShelf backend. Product logic, integrations, and sync.",
-        "work.mind.link": "repo",
-        "work.monitor.badge": "macOS",
-        "work.monitor.desc": "A calmer take on the Mac system monitor.",
-        "work.monitor.link": "repo",
-        "work.food.badge": "prototype",
-        "work.food.desc": "A small Swift experiment around recommendation flows.",
-        "work.food.link": "repo",
-        "about.title": "about <em>me</em>",
-        "about.p1": "I build across iOS, web, and backend. Mostly products that are live, paid, or used by real people.",
-        "about.p2": "I care about the full path: interface, flow, data, deployment, and the small details that make it feel finished.",
-        "about.based": "based in",
-        "about.lang": "languages",
-        "about.open": "open to",
-        "about.open.v1": "internships",
-        "about.open.v2": "junior roles",
-        "about.open.v3": "freelance work",
-        "contact.title": "let's build something <em>real</em>.",
-        "contact.p": "If you're building something real, let's talk.",
-        "contact.email": "email",
-        "footer.left": "© 2026 Murat — Turkey.",
-        "footer.right": "source ↗"
+        "brand":"murat",
+        "nav.work":"work","nav.about":"about","nav.contact":"contact",
+        "hero.pill":"open to work",
+        "hero.title":"iOS apps, web products, and <span class=\"accent\">backend systems</span>.",
+        "hero.sub":"I build shipped products end to end: mobile apps, websites, auth, payments, and deploys.",
+        "hero.cta1":"see work","hero.cta2":"email",
+        "work.title":"selected <span class=\"italic\">work</span>",
+        "work.meta":"real work, shipped.",
+        "proj.live":"live",
+        "proj.mindshelf.tag":"iOS + web · live",
+        "proj.mindshelf.desc":"Book tracking app with a native iOS app and web companion. Paid, synced, and live.",
+        "proj.soft.desc":"B2B custom packaging platform with quote flow, accounts, and cart.",
+        "proj.voge.desc":"Community site for Voge riders in Turkey with a lightweight CMS.",
+        "proj.pace.tag":"in progress",
+        "proj.pace.desc":"A small typing rhythm experiment for the web.",
+        "proj.api.tag":"backend",
+        "proj.api.desc":"MindShelf backend. Product logic, integrations, and sync.",
+        "proj.mon.tag":"macOS",
+        "proj.mon.desc":"A calmer take on the Mac system monitor.",
+        "proj.food.tag":"prototype",
+        "proj.food.desc":"A small Swift experiment around recommendation flows.",
+        "about.title":"about <span class=\"italic\">me</span>",
+        "about.p1":"I build across iOS, web, and backend. Mostly products that are live, paid, or used by real people.",
+        "about.p2":"I care about the full path: interface, flow, data, deployment, and the small details that make it feel finished.",
+        "info.based":"based in","info.based.v":"Turkey",
+        "info.langs":"languages",
+        "info.open":"open to",
+        "info.open.1":"internships","info.open.2":"junior roles","info.open.3":"freelance work",
+        "contact.title":"let's build something <span class=\"italic\">real</span>.",
+        "contact.sub":"If you're building something real, let's talk.",
+        "footer.left":"© 2026 Murat — Turkey.",
+        "footer.source":"source"
       },
       tr: {
-        "nav.work": "projeler",
-        "nav.about": "hakkımda",
-        "nav.contact": "iletişim",
-        "hero.status": "işe açık",
-        "hero.title": "iOS uygulamaları, web ürünleri ve <span class=\"accent-word\">backend sistemleri</span>.",
-        "hero.lead": "Mobil uygulama, web sitesi, auth, ödeme ve deploy dahil ürünleri uçtan uca geliştiriyorum.",
-        "hero.cta1": "projeler",
-        "hero.cta2": "e-posta",
-        "work.title": "seçili <em>projeler</em>",
-        "work.note": "gerçek işler, yayında.",
-        "work.mindshelf.badge": "iOS + web · canlı",
-        "work.mindshelf.desc": "Native iOS uygulaması ve web eşlikçisi olan kitap takip ürünü. Ücretli, senkron ve yayında.",
-        "work.mindshelf.link1": "canlı",
-        "work.mindshelf.link2": "iOS repo",
-        "work.mindshelf.link3": "web repo",
-        "work.softmendil.badge": "canlı",
-        "work.softmendil.desc": "Özel markalı paketleme için B2B platform. Teklif akışı, hesaplar ve sepet.",
-        "work.softmendil.link": "site",
-        "work.voge.badge": "canlı",
-        "work.voge.desc": "Türkiye'deki Voge kullanıcıları için topluluk sitesi. Hafif CMS ile yayında.",
-        "work.voge.link": "site",
-        "work.pace.badge": "devam ediyor",
-        "work.pace.desc": "Yazı ritmine odaklanan küçük bir web deneyi.",
-        "work.pace.link": "repo",
-        "work.mind.badge": "backend",
-        "work.mind.desc": "MindShelf backend'i. Ürün mantığı, entegrasyonlar ve senkron.",
-        "work.mind.link": "repo",
-        "work.monitor.badge": "macOS",
-        "work.monitor.desc": "Mac sistem monitörüne daha sakin bir yorum.",
-        "work.monitor.link": "repo",
-        "work.food.badge": "prototip",
-        "work.food.desc": "Öneri akışları üzerine küçük bir Swift denemesi.",
-        "work.food.link": "repo",
-        "about.title": "kısaca <em>benden</em>",
-        "about.p1": "iOS, web ve backend tarafında çalışıyorum. Çoğu işim yayında, ücretli ya da gerçek kullanıcıya dokunuyor.",
-        "about.p2": "Arayüzden akışa, veriden deploy'a kadar ürünün tamamını düşünmeyi seviyorum.",
-        "about.based": "konum",
-        "about.lang": "diller",
-        "about.open": "açık olduğum",
-        "about.open.v1": "stajlara",
-        "about.open.v2": "junior rollere",
-        "about.open.v3": "freelance işlere",
-        "contact.title": "gerçek bir şey <em>yapalım</em>.",
-        "contact.p": "Gerçek bir şey yapıyorsan konuşalım.",
-        "contact.email": "e-posta",
-        "footer.left": "© 2026 Murat — Türkiye.",
-        "footer.right": "kaynak ↗"
+        "brand":"murat",
+        "nav.work":"projeler","nav.about":"hakkımda","nav.contact":"iletişim",
+        "hero.pill":"iş için müsait",
+        "hero.title":"iOS uygulamaları, web ürünleri ve <span class=\"accent\">backend sistemleri</span>.",
+        "hero.sub":"Uçtan uca ürün yayına alıyorum: mobil uygulamalar, web siteleri, auth, ödeme ve deploy.",
+        "hero.cta1":"projelere bak","hero.cta2":"e-posta",
+        "work.title":"seçili <span class=\"italic\">işler</span>",
+        "work.meta":"gerçek işler, yayında.",
+        "proj.live":"yayında",
+        "proj.mindshelf.tag":"iOS + web · yayında",
+        "proj.mindshelf.desc":"Native iOS uygulaması ve web eşlikçisi olan kitap takip uygulaması. Ücretli, senkron ve yayında.",
+        "proj.soft.desc":"Teklif akışı, hesaplar ve sepetiyle özel paketleme için B2B platform.",
+        "proj.voge.desc":"Türkiye'deki Voge sürücüleri için hafif CMS'li topluluk sitesi.",
+        "proj.pace.tag":"geliştirmede",
+        "proj.pace.desc":"Web için küçük bir typing ritmi denemesi.",
+        "proj.api.tag":"backend",
+        "proj.api.desc":"MindShelf backend. Ürün mantığı, entegrasyonlar ve senkron.",
+        "proj.mon.tag":"macOS",
+        "proj.mon.desc":"Mac system monitor'un daha sakin bir yorumu.",
+        "proj.food.tag":"prototip",
+        "proj.food.desc":"Tavsiye akışları üzerine küçük bir Swift denemesi.",
+        "about.title":"hakkımda <span class=\"italic\">ben</span>",
+        "about.p1":"iOS, web ve backend tarafında inşa ediyorum. Çoğunlukla canlı, ücretli veya gerçek insanlar tarafından kullanılan ürünler.",
+        "about.p2":"Tüm yolu önemsiyorum: arayüz, akış, veri, deploy ve bir şeyi bitmiş hissettiren küçük detaylar.",
+        "info.based":"merkez","info.based.v":"Türkiye",
+        "info.langs":"diller",
+        "info.open":"açığım",
+        "info.open.1":"stajlara","info.open.2":"junior rollere","info.open.3":"freelance işe",
+        "contact.title":"hadi <span class=\"italic\">gerçek</span> bir şey inşa edelim.",
+        "contact.sub":"Eğer gerçek bir şey inşa ediyorsan, konuşalım.",
+        "footer.left":"© 2026 Murat — Türkiye.",
+        "footer.source":"kaynak"
       }
     };
 
-    const langText = document.getElementById("langText");
-    const themeIcon = document.getElementById("themeIcon");
-
-    function setTheme(theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-      localStorage.setItem("theme", theme);
-      if (themeIcon) themeIcon.textContent = theme === "dark" ? "☀" : "☾";
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", theme === "dark" ? "#14120e" : "#f7f4ed");
+    function setTheme(t) {
+      document.documentElement.setAttribute("data-theme", t);
+      localStorage.setItem("theme", t);
+      const i = document.getElementById("themeIcon");
+      if (i) i.textContent = t === "dark" ? "☀" : "☾";
+      const m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute("content", t === "dark" ? "#15130f" : "#ede5d4");
     }
 
-    function setLanguage(lang) {
-      document.documentElement.setAttribute("lang", lang);
-      localStorage.setItem("language", lang);
-      if (langText) langText.textContent = lang.toUpperCase();
-
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        const val = translations[lang][key];
-        if (!val) return;
-        if (el.hasAttribute("data-i18n-html")) {
-          el.innerHTML = val;
-        } else {
-          el.textContent = val;
-        }
-      });
-    }
-
-    function initReveal() {
-      const items = document.querySelectorAll(".reveal");
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!("IntersectionObserver" in window) || reduced) {
-        items.forEach((i) => i.classList.add("visible"));
-        return;
-      }
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("visible");
-            obs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: "0px 0px -32px 0px" });
-      items.forEach((i) => obs.observe(i));
-    }
-
-    function initActiveNav() {
-      const sections = document.querySelectorAll("main section[id]");
-      const links = document.querySelectorAll(".nav a[href^='#']");
-      if (!("IntersectionObserver" in window)) return;
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          links.forEach((l) => l.removeAttribute("aria-current"));
-          const a = document.querySelector(`.nav a[href="#${e.target.id}"]`);
-          if (a) a.setAttribute("aria-current", "page");
-        });
-      }, { threshold: 0.4, rootMargin: "-20% 0px -50% 0px" });
-      sections.forEach((s) => obs.observe(s));
-    }
-
-    function initMotion() {
-      const root = document.documentElement;
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      requestAnimationFrame(() => {
-        document.body.classList.add("motion-ready");
-      });
-
-      function updateScrollProgress() {
-        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
-        root.style.setProperty("--scroll-progress", progress.toFixed(4));
-      }
-
-      updateScrollProgress();
-      window.addEventListener("scroll", updateScrollProgress, { passive: true });
-      window.addEventListener("resize", updateScrollProgress);
-
-      if (reduced) return;
-
-      document.querySelectorAll(".project-card").forEach((card) => {
-        card.addEventListener("pointermove", (event) => {
-          const rect = card.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
-          const px = x / rect.width - 0.5;
-          const py = y / rect.height - 0.5;
-
-          card.style.setProperty("--mx", `${(x / rect.width) * 100}%`);
-          card.style.setProperty("--my", `${(y / rect.height) * 100}%`);
-          card.style.setProperty("--tilt-x", `${px * 2.4}deg`);
-          card.style.setProperty("--tilt-y", `${py * -2.4}deg`);
-        });
-
-        card.addEventListener("pointerleave", () => {
-          card.style.setProperty("--mx", "50%");
-          card.style.setProperty("--my", "0%");
-          card.style.setProperty("--tilt-x", "0deg");
-          card.style.setProperty("--tilt-y", "0deg");
-        });
+    function setLang(l) {
+      document.documentElement.setAttribute("lang", l);
+      localStorage.setItem("lang", l);
+      document.getElementById("langText").textContent = l.toUpperCase();
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.getAttribute("data-i18n");
+        const v = I18N[l][k];
+        if (v == null) return;
+        if (el.hasAttribute("data-i18n-html")) el.innerHTML = v;
+        else el.textContent = v;
       });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       setTheme(localStorage.getItem("theme") || "light");
-      setLanguage(localStorage.getItem("language") || "en");
+      setLang(localStorage.getItem("lang") || "en");
 
-      document.getElementById("themeToggle")?.addEventListener("click", () => {
-        const cur = document.documentElement.getAttribute("data-theme") || "light";
-        setTheme(cur === "dark" ? "light" : "dark");
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+      });
+      document.getElementById("langToggle").addEventListener("click", () => {
+        setLang(document.documentElement.getAttribute("lang") === "en" ? "tr" : "en");
       });
 
-      document.getElementById("langToggle")?.addEventListener("click", () => {
-        const cur = document.documentElement.getAttribute("lang") || "en";
-        setLanguage(cur === "en" ? "tr" : "en");
-      });
-
-      initMotion();
-      initReveal();
-      initActiveNav();
+      const links = document.querySelectorAll('.nav-links a[href^="#"]');
+      const sections = document.querySelectorAll("section[id]");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            links.forEach(l => l.removeAttribute("aria-current"));
+            const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+            if (a) a.setAttribute("aria-current", "page");
+          });
+        }, { threshold: 0.3, rootMargin: "-20% 0px -55% 0px" });
+        sections.forEach(s => io.observe(s));
+      }
     });
   </script>
 </body>
