@@ -68,6 +68,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; overflow-x: hidden; }
+    section[id] { scroll-margin-top: 96px; }
     body {
       min-height: 100vh;
       background: var(--bg);
@@ -139,33 +140,33 @@
     }
 
     /* Language Dropdown */
+    .lang-wrap { position: relative; }
     .lang-selector {
       display: flex; align-items: center; gap: 6px;
       color: var(--icon-color);
-      transition: color 0.2s;
-      position: relative;
+      transition: color 0.2s, background 0.2s;
       padding: 6px 8px;
       border-radius: 8px;
     }
     .lang-selector:hover { color: var(--icon-hover); background: var(--bg-soft); }
     .lang-selector svg { width: 20px; height: 20px; }
-    .lang-chevron { width: 14px; height: 14px; margin-left: 2px; }
-    
+    .lang-chevron { width: 14px; height: 14px; margin-left: 2px; transition: transform 0.2s; }
+    .lang-selector[aria-expanded="true"] .lang-chevron { transform: rotate(180deg); }
+
     .lang-menu {
-      position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+      position: absolute; top: 100%; right: 0; transform: translateY(10px);
       background: var(--bg-elev);
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 6px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.08);
       opacity: 0; pointer-events: none;
-      transition: all 0.2s ease;
-      min-width: 120px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      min-width: 140px;
       z-index: 100;
     }
-    .lang-selector:hover .lang-menu,
-    .lang-selector:focus-within .lang-menu {
-      opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(4px);
+    .lang-menu.open {
+      opacity: 1; pointer-events: auto; transform: translateY(4px);
     }
     .lang-option {
       display: block; width: 100%; text-align: left;
@@ -353,7 +354,14 @@
       background: var(--bg-soft); color: var(--text-soft);
       border: 1px solid var(--line);
     }
-    .tag.live { background: var(--orange-soft); color: var(--orange); border-color: transparent; }
+    .tag.live { background: rgba(22, 163, 74, 0.12); color: var(--green); border-color: transparent; }
+    .tag.progress { background: var(--orange-soft); color: var(--orange); border-color: transparent; }
+    .tag.backend { background: rgba(124, 58, 237, 0.12); color: var(--violet); border-color: transparent; }
+
+    .project { border-top: 2px solid transparent; }
+    .project:has(.tag.live)     { border-top-color: var(--green); }
+    .project:has(.tag.progress) { border-top-color: var(--orange); }
+    .project:has(.tag.backend)  { border-top-color: var(--violet); }
 
     .project-desc { color: var(--text-soft); font-size: 1rem; line-height: 1.6; margin-bottom: 24px; flex-grow: 1; }
 
@@ -373,7 +381,8 @@
       color: var(--text); display: inline-flex; align-items: center; gap: 4px; opacity: 0.7; transition: opacity 0.2s;
     }
     .project-foot a:hover { opacity: 1; color: var(--orange); }
-    .project-foot a::after { content: ">"; color: var(--orange); font-size: 0.95em; }
+    .project-foot a::after { content: "→"; color: var(--orange); font-size: 0.95em; transition: transform 0.2s; }
+    .project-foot a:hover::after { transform: translateX(3px); }
 
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; }
@@ -422,10 +431,19 @@
       .hero h1 { font-size: 4rem; }
       .hero-code { display: none; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     @media (max-width: 600px) {
       main { padding: 40px 0 80px; }
       .nav-divider { display: none; }
-      .social-links { display: none; }
+      .social-links a:not(:first-child) { display: none; }
       .hero-sub { max-width: 100%; }
       .project { padding: 24px; }
       .project-foot { gap: 10px 16px; }
@@ -448,16 +466,16 @@
       
       <div class="nav-controls">
         <!-- Language Selector -->
-        <div class="lang-selector" tabindex="0">
-          <!-- Translation Icon like A/文 -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
-          </svg>
-          <svg class="lang-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          
-          <div class="lang-menu">
-            <button class="lang-option" data-lang="en">English</button>
-            <button class="lang-option" data-lang="tr">Türkçe</button>
+        <div class="lang-wrap">
+          <button class="lang-selector" id="langTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Change language">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
+            </svg>
+            <svg class="lang-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="lang-menu" id="langMenu" role="listbox">
+            <button class="lang-option" data-lang="en" role="option">English</button>
+            <button class="lang-option" data-lang="tr" role="option">Türkçe</button>
           </div>
         </div>
 
@@ -478,9 +496,6 @@
           </a>
           <a href="https://x.com/muartdev" target="_blank" rel="noopener" aria-label="Twitter">
             <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="#" aria-label="Discord">
-            <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
           </a>
         </div>
       </div>
@@ -550,7 +565,7 @@
           <article class="project">
             <div class="project-top">
               <h3 class="project-title">Pace</h3>
-              <span class="tag" data-i18n="proj.pace.tag">In Progress</span>
+              <span class="tag progress" data-i18n="proj.pace.tag">In Progress</span>
             </div>
             <p class="project-desc" data-i18n="proj.pace.desc">A small typing rhythm experiment for the web.</p>
             <div class="stack"><span class="chip">TypeScript</span><span class="chip">React</span></div>
@@ -560,7 +575,7 @@
           <article class="project">
             <div class="project-top">
               <h3 class="project-title">Mind API</h3>
-              <span class="tag" data-i18n="proj.api.tag">Backend</span>
+              <span class="tag backend" data-i18n="proj.api.tag">Backend</span>
             </div>
             <p class="project-desc" data-i18n="proj.api.desc">Backend for MindShelf: product logic, integrations, and sync.</p>
             <div class="stack"><span class="chip">Node.js</span><span class="chip">Supabase</span></div>
@@ -683,6 +698,8 @@
       localStorage.setItem("theme", t);
       const m = document.querySelector('meta[name="theme-color"]');
       if (m) m.setAttribute("content", t === "dark" ? "#0a0a0a" : "#fdfdfc");
+      const tt = document.getElementById("themeToggle");
+      if (tt) tt.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
     }
 
     function setLang(l) {
@@ -712,10 +729,24 @@
         setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
       });
 
+      const langTrigger = document.getElementById("langTrigger");
+      const langMenu = document.getElementById("langMenu");
+      const closeLang = () => { langMenu.classList.remove("open"); langTrigger.setAttribute("aria-expanded", "false"); };
+      const openLang = () => { langMenu.classList.add("open"); langTrigger.setAttribute("aria-expanded", "true"); };
+
+      langTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        langMenu.classList.contains("open") ? closeLang() : openLang();
+      });
+      document.addEventListener("click", (e) => {
+        if (!langMenu.contains(e.target) && e.target !== langTrigger) closeLang();
+      });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLang(); });
+
       document.querySelectorAll('.lang-option').forEach(btn => {
         btn.addEventListener("click", (e) => {
-          setLang(e.target.dataset.lang);
-          document.activeElement.blur(); // Close dropdown by removing focus
+          setLang(e.currentTarget.dataset.lang);
+          closeLang();
         });
       });
     });
