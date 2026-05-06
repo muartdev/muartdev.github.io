@@ -527,62 +527,12 @@
       font-family: var(--mono); font-size: 0.75rem;
       color: var(--text-soft);
       padding: 6px 10px; border-radius: 8px;
-      border: 1px solid transparent;
+      border: 1px solid var(--line);
       background: var(--panel);
-      transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
       cursor: pointer;
-      position: relative;
-      isolation: isolate;
-      --chip-angle: 0deg;
     }
-    
-    @property --chip-angle {
-      syntax: "<angle>";
-      initial-value: 0deg;
-      inherits: false;
-    }
-
-    @keyframes chip-orbit {
-      from { --chip-angle: 0deg; }
-      to { --chip-angle: 360deg; }
-    }
-    @keyframes chip-orbit-reverse {
-      from { --chip-angle: 360deg; }
-      to { --chip-angle: 0deg; }
-    }
-
-    .chip::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: 9px;
-      padding: 1px;
-      background: conic-gradient(
-        from var(--chip-angle),
-        #e85d2a, #d99a3a, #10b981, #3b82f6, #8b5cf6, #e85d2a
-      );
-      opacity: 1;
-      z-index: -1;
-      pointer-events: none;
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      mask-composite: exclude;
-      animation: chip-orbit 3s linear infinite;
-    }
-
-    .chip:hover {
-      color: var(--text); background: var(--panel-hover);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    .chip:hover::before {
-      animation: chip-orbit-reverse 1.5s linear infinite;
-    }
-    [data-theme="dark"] .chip:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .chip:hover { border-color: var(--accent-line); color: var(--text); background: var(--panel-hover); }
     .chip i {
       font-size: 0.95rem;
       line-height: 1;
