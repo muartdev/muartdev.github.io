@@ -284,6 +284,7 @@
       line-height: 1.05; letter-spacing: 0;
       font-weight: 600; max-width: 15ch;
       margin-bottom: 20px;
+      min-height: 3.15em;
     }
     .hero h1 .accent {
       color: var(--orange);
@@ -524,9 +525,57 @@
       padding: 6px 10px; border-radius: 8px;
       border: 1px solid var(--line);
       background: var(--panel);
-      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      isolation: isolate;
+      --chip-angle: 0deg;
     }
-    .chip:hover { border-color: var(--accent-line); color: var(--text); background: var(--panel-hover); }
+    
+    @property --chip-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes chip-orbit {
+      to { --chip-angle: 360deg; }
+    }
+
+    .chip::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 9px;
+      padding: 1px;
+      background: conic-gradient(
+        from var(--chip-angle),
+        #e85d2a, #d99a3a, #10b981, #3b82f6, #8b5cf6, #e85d2a
+      );
+      opacity: 0;
+      z-index: -1;
+      pointer-events: none;
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      transition: opacity 0.2s ease;
+    }
+
+    .chip:hover {
+      color: var(--text); background: var(--panel-hover);
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .chip:hover::before {
+      opacity: 1;
+      animation: chip-orbit 3s linear infinite;
+    }
+    [data-theme="dark"] .chip:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
     .chip i {
       font-size: 0.95rem;
       line-height: 1;
@@ -705,7 +754,7 @@
       .hero-sub { max-width: 100%; margin-bottom: 28px; }
 
       .mobile-break { display: block; }
-      .hero h1 { font-size: 1.8rem; line-height: 1.14; max-width: 100%; margin-bottom: 16px; }
+      .hero h1 { font-size: 1.8rem; line-height: 1.14; max-width: 100%; margin-bottom: 16px; min-height: 3.42em; }
       .section-title { font-size: 1.4rem; }
       .contact-title { font-size: 1.6rem; }
       .contact-card { padding: 48px 24px; }
@@ -1001,13 +1050,13 @@
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.frontend">Frontend</span>
           <div class="stack-row-chips">
-            <button class="chip" data-tech="react"><i class="devicon-react-original"></i>React</button><button class="chip" data-tech="nextjs"><i class="devicon-nextjs-original"></i>Next.js</button><button class="chip" data-tech="vite"><i class="devicon-vitejs-plain"></i>Vite</button><button class="chip" data-tech="typescript"><i class="devicon-typescript-plain"></i>TypeScript</button><button class="chip" data-tech="javascript"><i class="devicon-javascript-plain"></i>JavaScript</button><button class="chip" data-tech="html5"><i class="devicon-html5-plain"></i>HTML5</button><button class="chip" data-tech="css3"><i class="devicon-css3-plain"></i>CSS3</button><button class="chip" data-tech="zustand"><span class="chip-icon">Z</span>Zustand</button>
+            <button class="chip" data-tech="react"><i class="devicon-react-original"></i>React</button><button class="chip" data-tech="nextjs"><i class="devicon-nextjs-plain"></i>Next.js</button><button class="chip" data-tech="vite"><i class="devicon-vitejs-plain"></i>Vite</button><button class="chip" data-tech="typescript"><i class="devicon-typescript-plain"></i>TypeScript</button><button class="chip" data-tech="javascript"><i class="devicon-javascript-plain"></i>JavaScript</button><button class="chip" data-tech="html5"><i class="devicon-html5-plain"></i>HTML5</button><button class="chip" data-tech="css3"><i class="devicon-css3-plain"></i>CSS3</button><button class="chip" data-tech="zustand"><span class="chip-icon">Z</span>Zustand</button>
           </div>
         </div>
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.mobile">Mobile</span>
           <div class="stack-row-chips">
-            <button class="chip" data-tech="swift"><i class="devicon-swift-plain"></i>Swift</button><button class="chip" data-tech="swiftui"><i class="devicon-swift-plain"></i>SwiftUI</button><button class="chip" data-tech="swiftdata"><span class="chip-icon">SD</span>SwiftData</button><button class="chip" data-tech="storekit"><span class="chip-icon">SK</span>StoreKit 2</button><button class="chip" data-tech="appkit"><span class="chip-icon">AK</span>AppKit</button><button class="chip" data-tech="expo"><i class="devicon-expo-original"></i>Expo</button><button class="chip" data-tech="reactnative"><i class="devicon-react-original"></i>React Native</button>
+            <button class="chip" data-tech="swift"><i class="devicon-swift-plain"></i>Swift</button><button class="chip" data-tech="swiftui"><i class="devicon-swift-plain"></i>SwiftUI</button><button class="chip" data-tech="swiftdata"><span class="chip-icon">SD</span>SwiftData</button><button class="chip" data-tech="storekit"><span class="chip-icon">SK</span>StoreKit 2</button><button class="chip" data-tech="appkit"><span class="chip-icon">AK</span>AppKit</button><button class="chip" data-tech="expo"><span class="chip-icon">EX</span>Expo</button><button class="chip" data-tech="reactnative"><i class="devicon-react-original"></i>React Native</button>
           </div>
         </div>
         <div class="stack-row">
