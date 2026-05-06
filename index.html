@@ -284,14 +284,15 @@
     .hero h1 {
       font-size: 3rem;
       line-height: 1.05; letter-spacing: 0;
-      font-weight: 600; max-width: 15ch;
+      font-weight: 600;
       margin-bottom: 20px;
-      min-height: calc(1.05em * 4);
     }
     .hero h1 .accent {
       color: var(--orange);
       font-family: var(--sans); font-style: normal; font-weight: 600;
       position: relative;
+      display: inline-block;
+      white-space: nowrap;
     }
     .cursor {
       display: inline-block;
@@ -743,7 +744,7 @@
       .hero-sub { max-width: 100%; margin-bottom: 28px; }
 
       .mobile-break { display: block; }
-      .hero h1 { font-size: 1.8rem; line-height: 1.14; max-width: 100%; margin-bottom: 16px; min-height: 3.42em; }
+      .hero h1 { font-size: 1.8rem; line-height: 1.14; max-width: 100%; margin-bottom: 16px; }
       .section-title { font-size: 1.4rem; }
       .contact-title { font-size: 1.6rem; }
       .contact-card { padding: 48px 24px; }
@@ -828,7 +829,7 @@
   <main>
     <section class="hero shell" id="top">
       <div class="hero-copy">
-        <h1 data-i18n="hero.title" data-i18n-html>Product engineer <br class="mobile-break" />shipping <span class="accent" id="typewriter"></span><span class="cursor"></span></h1>
+        <h1 data-i18n="hero.title" data-i18n-html>Product engineer<br />shipping<br /><span class="accent" id="typewriter"></span><span class="cursor"></span></h1>
         <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
@@ -1139,7 +1140,7 @@
     const I18N = {
       en: {
         "hero.pill":"Open to work",
-        "hero.title":"Product engineer <br class=\"mobile-break\" />shipping <span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
+        "hero.title":"Product engineer<br />shipping<br /><span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
         "hero.sub":"I build products end to end: mobile apps, websites, authentication, payments, and deployment.",
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
         "work.title":"Selected <span class=\"serif\">Work</span>",
@@ -1229,7 +1230,7 @@
       },
       tr: {
         "hero.pill":"İş için müsait",
-        "hero.title":"Product Engineer — <br class=\"mobile-break\" /><span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
+        "hero.title":"Product Engineer —<br /><span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
         "hero.sub":"Mobil uygulamadan web sitesine, kimlik doğrulamadan ödemeye ve yayına almaya kadar ürünleri uçtan uca geliştiriyorum.",
         "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
         "work.title":"Seçili <span class=\"serif\">İşler</span>",
