@@ -74,7 +74,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       transition: background 0.4s ease, color 0.4s ease;
@@ -225,7 +225,7 @@
     .social-links a:hover { color: var(--icon-hover); transform: translateY(-2px); }
 
     /* HERO */
-    main { padding: 80px 0 100px; position: relative; }
+    main { padding: 64px 0 88px; position: relative; }
     
     .hero-pill {
       display: inline-flex; align-items: center; gap: 8px;
@@ -244,43 +244,30 @@
     }
 
     .hero h1 {
-      font-size: 5.35rem;
+      font-size: 3rem;
       line-height: 1.05; letter-spacing: 0;
       font-weight: 600; max-width: 15ch;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .hero h1 .accent {
       color: var(--orange);
       font-family: var(--sans); font-style: normal; font-weight: 600;
       position: relative;
     }
+    .mobile-break { display: none; }
 
     .hero-sub {
       color: var(--text-soft);
-      font-size: 1.15rem; line-height: 1.6;
-      max-width: 46ch; margin-bottom: 48px;
+      font-size: 1rem; line-height: 1.65;
+      max-width: 46ch; margin-bottom: 36px;
     }
 
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
     .hero {
       position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
-      gap: 72px;
-      align-items: center;
+      max-width: 800px;
     }
     .hero-copy { min-width: 0; }
-    .hero-art {
-      justify-self: end;
-      align-self: center;
-      width: min(100%, 380px);
-      height: auto;
-      aspect-ratio: 1;
-      object-fit: contain;
-      object-position: center;
-      box-shadow: 0 30px 90px rgba(0,0,0,0.16);
-    }
-    [data-theme="dark"] .hero-art { box-shadow: 0 30px 90px rgba(0,0,0,0.45); }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 24px; border-radius: 12px;
@@ -303,148 +290,131 @@
     .btn-secondary:hover { background: var(--bg-soft); border-color: var(--text); transform: translateY(-2px); }
 
     /* SECTIONS */
-    section + section { margin-top: 120px; }
-    .section-head { margin-bottom: 48px; }
+    section + section { margin-top: 76px; }
+    .section-head { margin-bottom: 28px; }
     .section-num {
       font-family: var(--mono); font-size: 0.85rem;
       color: var(--orange); margin-bottom: 12px; display: block;
       letter-spacing: 0; text-transform: uppercase;
     }
     .section-title {
-      font-size: 3rem; font-weight: 600;
+      font-size: 1.6rem; font-weight: 600;
       letter-spacing: 0; line-height: 1.1;
     }
-    .section-title .serif { color: var(--text-soft); }
-
-    /* EDITORIAL PROJECT LIST */
-    .project-list {
-      display: grid;
-      border-top: 1px solid var(--line-2);
-    }
-
-    .project-row {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .project-link {
-      display: grid;
-      grid-template-columns: 72px minmax(0, 1fr) auto;
-      gap: 28px;
-      align-items: baseline;
-      padding: 42px 0;
-      transition: color 0.22s ease;
-    }
-
-    .project-index {
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      padding-top: 0.7em;
-    }
-
-    .project-copy {
-      min-width: 0;
-    }
-
-    .project-line {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 0 0.45em;
-      font-size: 4.35rem;
-      font-weight: 600;
-      letter-spacing: 0;
-      line-height: 0.98;
-    }
-
-    .project-name {
-      color: var(--text);
-      transition: color 0.22s ease;
-    }
-
-    .project-kind,
-    .project-meta {
+    .section-title .serif {
       color: var(--text-soft);
-      font-weight: 400;
     }
 
-    .project-separator {
-      color: var(--line-2);
-      font-weight: 400;
+    /* MARQUEE PROJECT CARDS */
+    .marquee-container {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      overflow: hidden;
+      padding: 20px 0 40px;
+      position: relative;
+      display: flex;
+    }
+    
+    .marquee-track {
+      display: flex;
+      gap: 20px;
+      padding-left: 20px;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+    
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    
+    @keyframes marquee {
+      to { transform: translateX(calc(-50% - 10px)); }
     }
 
-    .project-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      width: 320px;
+      height: 180px;
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      flex-shrink: 0;
+    }
+    
+    .project-card:hover {
+      border-color: var(--line-2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    }
+    
+    [data-theme="dark"] .project-card:hover {
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+    
+    .project-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    
+    .project-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
       color: var(--text);
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      white-space: nowrap;
-      padding-top: 0.82em;
     }
-
-    .project-arrow {
+    
+    .project-card-arrow {
+      color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+    
+    .project-card:hover .project-card-arrow {
       color: var(--orange);
-      transition: transform 0.22s ease;
+      transform: translateX(4px) translateY(-4px);
+    }
+    
+    .project-card-kind {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+    
+    .project-card-meta {
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      color: var(--muted);
+      margin-bottom: 16px;
     }
 
-    .project-stack {
+    .project-card-stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem 0.8rem;
-      max-height: 0;
-      margin-top: 0;
-      overflow: hidden;
-      color: var(--muted);
+      gap: 6px;
+      margin-top: auto;
+    }
+    
+    .project-card-stack span {
+      font-size: 0.65rem;
       font-family: var(--mono);
-      font-size: 0.78rem;
-      opacity: 0;
-      transform: translateY(-4px);
-      transition: max-height 0.22s ease, margin-top 0.22s ease, opacity 0.22s ease, transform 0.22s ease;
-    }
-
-    .project-stack span + span::before {
-      content: "/";
-      color: var(--line-2);
-      margin-right: 0.8rem;
-    }
-
-    .project-link:hover .project-name,
-    .project-link:focus-visible .project-name {
-      color: var(--orange);
-    }
-
-    .project-link:hover .project-arrow,
-    .project-link:focus-visible .project-arrow {
-      transform: translateX(4px);
-    }
-
-    .project-link:hover .project-stack,
-    .project-link:focus-visible .project-stack {
-      max-height: 80px;
-      margin-top: 18px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .project-link:focus-visible {
-      outline: 2px solid var(--orange);
-      outline-offset: 12px;
-    }
-
-    .chip {
-      padding: 6px 12px; border-radius: 8px;
-      font-family: var(--mono); font-size: 0.75rem;
-      background: color-mix(in srgb, var(--bg) 55%, transparent); border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 55%, transparent);
+      border: 1px solid var(--line);
+      padding: 3px 6px;
+      border-radius: 6px;
       color: var(--text-soft);
     }
 
     /* STACK */
     .stack-grid { display: grid; gap: 0; }
     .stack-row {
-      display: grid; grid-template-columns: 160px 1fr; gap: 32px;
-      padding: 24px 0; border-top: 1px solid var(--line);
+      display: grid; grid-template-columns: 140px 1fr; gap: 28px;
+      padding: 20px 0; border-top: 1px solid var(--line);
       align-items: start;
     }
     .stack-row:last-child { border-bottom: 1px solid var(--line); }
@@ -460,13 +430,13 @@
     }
 
     /* ABOUT */
-    .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; }
+    .about-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 42px; }
     .about-prose { font-size: 1.1rem; color: var(--text-soft); line-height: 1.7; display: grid; gap: 24px; }
     .about-prose .serif { font-size: 1.2em; color: var(--text); }
     
-    .info-list { display: grid; gap: 16px; }
+    .info-list { display: grid; gap: 12px; }
     .info-item {
-      padding: 20px; border-radius: 16px;
+      padding: 16px; border-radius: 12px;
       background: var(--bg-card); border: 1px solid var(--glass-border);
     }
     .info-label { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; display: block; }
@@ -474,7 +444,7 @@
 
     /* CONTACT */
     .contact-card {
-      padding: 80px 40px; border-radius: 32px; text-align: center;
+      padding: 64px 36px; border-radius: 20px; text-align: center;
       background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-soft) 100%);
       border: 1px solid var(--line); position: relative; overflow: hidden;
     }
@@ -483,7 +453,7 @@
       background: radial-gradient(circle at 50% 0%, var(--orange-soft), transparent 70%);
       pointer-events: none;
     }
-    .contact-title { font-size: 3.35rem; font-weight: 600; letter-spacing: 0; margin-bottom: 16px; }
+    .contact-title { font-size: 2.2rem; font-weight: 600; letter-spacing: 0; margin-bottom: 16px; }
     .contact-sub { color: var(--text-soft); font-size: 1.1rem; margin-bottom: 32px; }
     .contact-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
 
@@ -501,12 +471,10 @@
     }
 
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; gap: 44px; }
-      .hero-art { justify-self: start; width: min(360px, 100%); }
-      .project-link { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 20px; padding: 36px 0; }
-      .project-line { font-size: 3.25rem; }
+      
+      
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
-      .hero h1 { font-size: 4rem; }
+      .hero h1 { font-size: 2.5rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -518,27 +486,21 @@
     }
 
     @media (max-width: 600px) {
-      main { padding: 40px 0 80px; }
+      main { padding: 40px 0 72px; }
       .nav-divider { display: none; }
       .social-links a:not(:first-child) { display: none; }
       .brand-mark { width: 78px; height: 28px; }
-      .hero { gap: 32px; }
-      .hero-art { width: min(240px, 74vw); }
+      
       .hero-sub { max-width: 100%; }
-      .project-link { grid-template-columns: 42px minmax(0, 1fr); gap: 12px 16px; padding: 30px 0; }
-      .project-index { padding-top: 0.42em; }
-      .project-line { font-size: 2.1rem; line-height: 1.05; }
-      .project-action { grid-column: 2; padding-top: 0; }
-      .project-stack { max-height: none; margin-top: 12px; opacity: 1; transform: none; }
-      .hero h1 { font-size: 3rem; }
-      .section-title { font-size: 2.25rem; }
-      .contact-title { font-size: 2.25rem; }
-      .contact-card { padding: 56px 24px; }
+      
+      .mobile-break { display: block; }
+      .hero h1 { font-size: 1.8rem; line-height: 1.14; max-width: 100%; }
+      .section-title { font-size: 1.6rem; }
+      .contact-title { font-size: 1.8rem; }
+      .contact-card { padding: 48px 22px; }
     }
 
-    @media (hover: none) {
-      .project-stack { max-height: none; margin-top: 14px; opacity: 1; transform: none; }
-    }
+    
   </style>
 </head>
 <body>
@@ -593,14 +555,14 @@
     <section class="hero shell" id="top">
       <div class="hero-copy">
         <span class="hero-pill" data-i18n="hero.pill">Open to work</span>
-        <h1 data-i18n="hero.title" data-i18n-html>Product engineer shipping <span class="accent">iOS</span>, <span class="accent">web</span>, and <span class="accent">backend systems</span>.</h1>
+        <h1 data-i18n="hero.title" data-i18n-html>Product engineer <br class="mobile-break" />shipping <span class="accent">iOS</span>, <span class="accent">web</span>, and <span class="accent">backend systems</span>.</h1>
         <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
           <a class="btn btn-secondary" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">Get in touch</a>
         </div>
       </div>
-      <img class="hero-art" src="muart.png" alt="muart logo artwork" width="1254" height="1254" fetchpriority="high" decoding="async" />
+      
     </section>
 
     <section id="work" class="shell">
@@ -609,139 +571,166 @@
         <h2 class="section-title" data-i18n="work.title" data-i18n-html>Selected <span class="serif">Work</span></h2>
       </div>
 
-      <div class="project-list" role="list">
-        <article class="project-row" role="listitem">
-          <a class="project-link" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener">
-            <span class="project-index">01</span>
-            <span class="project-copy">
-              <span class="project-line">
-                <span class="project-name">MindShelf</span>
-                <span class="project-separator">—</span>
-                <span class="project-kind" data-i18n="proj.mindshelf.kind">bookmark manager</span>
-                <span class="project-separator">—</span>
-                <span class="project-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</span>
-              </span>
-              <span class="project-stack" aria-label="Stack">
-                <span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>StoreKit 2</span><span>React</span><span>Vite</span><span>Supabase</span>
-              </span>
-            </span>
-            <span class="project-action"><span data-i18n="link.live">Live</span><span class="project-arrow" aria-hidden="true">→</span></span>
+      <div class="marquee-container" role="marquee">
+        <div class="marquee-track">
+          <!-- 1st set -->
+          <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">MindShelf</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.mindshelf.kind">bookmark manager</div>
+            <div class="project-card-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</div>
+            <div class="project-card-stack">
+              <span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>StoreKit 2</span><span>React</span><span>Vite</span><span>Supabase</span>
+            </div>
           </a>
-        </article>
+          <a class="project-card" href="https://softmendil.com" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">Softmendil</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.soft.kind">packaging website</div>
+            <div class="project-card-meta" data-i18n="proj.soft.meta">Web · Live</div>
+            <div class="project-card-stack">
+              <span>Next.js</span><span>React</span><span>Supabase</span><span>Vercel</span>
+            </div>
+          </a>
+          <a class="project-card" href="https://www.vogeriderstr.com" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">VogeRidersTR</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.voge.kind">rider community</div>
+            <div class="project-card-meta" data-i18n="proj.voge.meta">Web · Live</div>
+            <div class="project-card-stack">
+              <span>Next.js</span><span>React</span><span>Sheets API</span><span>Vercel</span>
+            </div>
+          </a>
+          <a class="project-card" href="https://github.com/muartdev/pace" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">Pace</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.pace.kind">discipline app</div>
+            <div class="project-card-meta" data-i18n="proj.pace.meta">Mobile · In Progress</div>
+            <div class="project-card-stack">
+              <span>Expo</span><span>TypeScript</span><span>Zustand</span><span>Supabase</span>
+            </div>
+          </a>
+          <a class="project-card" href="https://github.com/muartdev/mind" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">Mind API</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.api.kind">product backend</div>
+            <div class="project-card-meta" data-i18n="proj.api.meta">API · Backend</div>
+            <div class="project-card-stack">
+              <span>TypeScript</span><span>Supabase</span>
+            </div>
+          </a>
+          <a class="project-card" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">FoodSuggest</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.food.kind">meal ideas</div>
+            <div class="project-card-meta" data-i18n="proj.food.meta">iOS · Experiment</div>
+            <div class="project-card-stack">
+              <span>Swift</span><span>SwiftUI</span>
+            </div>
+          </a>
+          <a class="project-card" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">macOS System Monitor</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.mon.kind">system utility</div>
+            <div class="project-card-meta" data-i18n="proj.mon.meta">macOS · Experiment</div>
+            <div class="project-card-stack">
+              <span>Swift</span><span>AppKit</span>
+            </div>
+          </a>
 
-        <article class="project-row" role="listitem">
-          <a class="project-link" href="https://softmendil.com" target="_blank" rel="noopener">
-            <span class="project-index">02</span>
-            <span class="project-copy">
-              <span class="project-line">
-                <span class="project-name">Softmendil</span>
-                <span class="project-separator">—</span>
-                <span class="project-kind" data-i18n="proj.soft.kind">packaging website</span>
-                <span class="project-separator">—</span>
-                <span class="project-meta" data-i18n="proj.soft.meta">Web · Live</span>
-              </span>
-              <span class="project-stack" aria-label="Stack">
-                <span>Next.js</span><span>React</span><span>Supabase</span><span>Vercel</span>
-              </span>
-            </span>
-            <span class="project-action"><span data-i18n="link.visit">Visit</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          <!-- 2nd set for infinite loop -->
+          <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">MindShelf</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.mindshelf.kind">bookmark manager</div>
+            <div class="project-card-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</div>
+            <div class="project-card-stack">
+              <span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>StoreKit 2</span><span>React</span><span>Vite</span><span>Supabase</span>
+            </div>
           </a>
-        </article>
-
-        <article class="project-row" role="listitem">
-          <a class="project-link" href="https://www.vogeriderstr.com" target="_blank" rel="noopener">
-            <span class="project-index">03</span>
-            <span class="project-copy">
-              <span class="project-line">
-                <span class="project-name">VogeRidersTR</span>
-                <span class="project-separator">—</span>
-                <span class="project-kind" data-i18n="proj.voge.kind">rider community</span>
-                <span class="project-separator">—</span>
-                <span class="project-meta" data-i18n="proj.voge.meta">Web · Live</span>
-              </span>
-              <span class="project-stack" aria-label="Stack">
-                <span>Next.js</span><span>React</span><span>Google Sheets API</span><span>Vercel</span>
-              </span>
-            </span>
-            <span class="project-action"><span data-i18n="link.visit">Visit</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          <a class="project-card" href="https://softmendil.com" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">Softmendil</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.soft.kind">packaging website</div>
+            <div class="project-card-meta" data-i18n="proj.soft.meta">Web · Live</div>
+            <div class="project-card-stack">
+              <span>Next.js</span><span>React</span><span>Supabase</span><span>Vercel</span>
+            </div>
           </a>
-        </article>
-
-        <article class="project-row" role="listitem">
-          <a class="project-link" href="https://github.com/muartdev/pace" target="_blank" rel="noopener">
-            <span class="project-index">04</span>
-            <span class="project-copy">
-              <span class="project-line">
-                <span class="project-name">Pace</span>
-                <span class="project-separator">—</span>
-                <span class="project-kind" data-i18n="proj.pace.kind">discipline app</span>
-                <span class="project-separator">—</span>
-                <span class="project-meta" data-i18n="proj.pace.meta">Mobile · In Progress</span>
-              </span>
-              <span class="project-stack" aria-label="Stack">
-                <span>Expo</span><span>TypeScript</span><span>Zustand</span><span>Supabase</span>
-              </span>
-            </span>
-            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          <a class="project-card" href="https://www.vogeriderstr.com" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">VogeRidersTR</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.voge.kind">rider community</div>
+            <div class="project-card-meta" data-i18n="proj.voge.meta">Web · Live</div>
+            <div class="project-card-stack">
+              <span>Next.js</span><span>React</span><span>Sheets API</span><span>Vercel</span>
+            </div>
           </a>
-        </article>
-
-        <article class="project-row" role="listitem">
-          <a class="project-link" href="https://github.com/muartdev/mind" target="_blank" rel="noopener">
-            <span class="project-index">05</span>
-            <span class="project-copy">
-              <span class="project-line">
-                <span class="project-name">Mind API</span>
-                <span class="project-separator">—</span>
-                <span class="project-kind" data-i18n="proj.api.kind">product backend</span>
-                <span class="project-separator">—</span>
-                <span class="project-meta" data-i18n="proj.api.meta">API · Backend</span>
-              </span>
-              <span class="project-stack" aria-label="Stack">
-                <span>TypeScript</span><span>Supabase</span>
-              </span>
-            </span>
-            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          <a class="project-card" href="https://github.com/muartdev/pace" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">Pace</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.pace.kind">discipline app</div>
+            <div class="project-card-meta" data-i18n="proj.pace.meta">Mobile · In Progress</div>
+            <div class="project-card-stack">
+              <span>Expo</span><span>TypeScript</span><span>Zustand</span><span>Supabase</span>
+            </div>
           </a>
-        </article>
-
-        <article class="project-row" role="listitem">
-          <a class="project-link" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener">
-            <span class="project-index">06</span>
-            <span class="project-copy">
-              <span class="project-line">
-                <span class="project-name">FoodSuggest</span>
-                <span class="project-separator">—</span>
-                <span class="project-kind" data-i18n="proj.food.kind">meal ideas</span>
-                <span class="project-separator">—</span>
-                <span class="project-meta" data-i18n="proj.food.meta">iOS · Experiment</span>
-              </span>
-              <span class="project-stack" aria-label="Stack">
-                <span>Swift</span><span>SwiftUI</span>
-              </span>
-            </span>
-            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          <a class="project-card" href="https://github.com/muartdev/mind" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">Mind API</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.api.kind">product backend</div>
+            <div class="project-card-meta" data-i18n="proj.api.meta">API · Backend</div>
+            <div class="project-card-stack">
+              <span>TypeScript</span><span>Supabase</span>
+            </div>
           </a>
-        </article>
-
-        <article class="project-row" role="listitem">
-          <a class="project-link" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener">
-            <span class="project-index">07</span>
-            <span class="project-copy">
-              <span class="project-line">
-                <span class="project-name">macOS System Monitor</span>
-                <span class="project-separator">—</span>
-                <span class="project-kind" data-i18n="proj.mon.kind">system utility</span>
-                <span class="project-separator">—</span>
-                <span class="project-meta" data-i18n="proj.mon.meta">macOS · Experiment</span>
-              </span>
-              <span class="project-stack" aria-label="Stack">
-                <span>Swift</span><span>AppKit</span>
-              </span>
-            </span>
-            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          <a class="project-card" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">FoodSuggest</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.food.kind">meal ideas</div>
+            <div class="project-card-meta" data-i18n="proj.food.meta">iOS · Experiment</div>
+            <div class="project-card-stack">
+              <span>Swift</span><span>SwiftUI</span>
+            </div>
           </a>
-        </article>
+          <a class="project-card" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">macOS System Monitor</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.mon.kind">system utility</div>
+            <div class="project-card-meta" data-i18n="proj.mon.meta">macOS · Experiment</div>
+            <div class="project-card-stack">
+              <span>Swift</span><span>AppKit</span>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -831,7 +820,7 @@
     const I18N = {
       en: {
         "hero.pill":"Open to work",
-        "hero.title":"Product engineer shipping <span class=\"accent\">iOS</span>, <span class=\"accent\">web</span>, and <span class=\"accent\">backend systems</span>.",
+        "hero.title":"Product engineer <br class=\"mobile-break\" />shipping <span class=\"accent\">iOS</span>, <span class=\"accent\">web</span>, and <span class=\"accent\">backend systems</span>.",
         "hero.sub":"I build products end to end: mobile apps, websites, authentication, payments, and deployment.",
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
         "work.title":"Selected <span class=\"serif\">Work</span>",
@@ -890,7 +879,7 @@
       },
       tr: {
         "hero.pill":"İş için müsait",
-        "hero.title":"Product Engineer — <span class=\"accent\">iOS</span>, <span class=\"accent\">web</span> ve <span class=\"accent\">backend sistemleri</span>.",
+        "hero.title":"Product Engineer — <br class=\"mobile-break\" /><span class=\"accent\">iOS</span>, <span class=\"accent\">web</span> ve <span class=\"accent\">backend sistemleri</span>.",
         "hero.sub":"Mobil uygulamadan web sitesine, kimlik doğrulamadan ödemeye ve yayına almaya kadar ürünleri uçtan uca geliştiriyorum.",
         "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
         "work.title":"Seçili <span class=\"serif\">İşler</span>",
