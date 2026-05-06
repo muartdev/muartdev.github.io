@@ -26,18 +26,13 @@
 
       --orange: #e85d2a;
       --orange-soft: rgba(232, 93, 42, 0.1);
-      --blue: #2563eb;
       --violet: #7c3aed;
       --green: #16a34a;
-      --rose: #e11d48;
-      --amber: #d97706;
-      --slate: #475569;
-
-      --tag-bg: #111110;
-      --tag-text: #ffffff;
       
       --accent-gradient: linear-gradient(135deg, #e85d2a, #f43f5e);
 
+      --sans: "Geist", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       --serif: "Instrument Serif", "Times New Roman", serif;
       --max: 1100px;
       
@@ -64,9 +59,6 @@
       --orange: #ff7a3d;
       --orange-soft: rgba(255, 122, 61, 0.15);
       
-      --tag-bg: #ffffff;
-      --tag-text: #0a0a0a;
-      
       --toggle-bg: #1a1a1a;
       --toggle-border: #333;
       --icon-color: #999;
@@ -75,12 +67,12 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       min-height: 100vh;
       background: var(--bg);
       color: var(--text);
-      font-family: "Geist", system-ui, -apple-system, sans-serif;
+      font-family: var(--sans);
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -94,26 +86,26 @@
     button { font: inherit; color: inherit; background: transparent; border: 0; cursor: pointer; padding: 0; }
     img { max-width: 100%; display: block; }
 
-    .mono { font-family: "Geist Mono", ui-monospace, monospace; }
+    .mono { font-family: var(--mono); }
     .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
     .shell { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
 
     /* BACKGROUND GLOWS */
     .bg-glow {
-      position: absolute; width: 600px; height: 600px;
+      position: fixed; width: min(600px, 100vw); height: min(600px, 100vw);
       border-radius: 50%; filter: blur(100px);
       opacity: 0.05; z-index: -1; pointer-events: none;
       transition: opacity 0.4s ease;
     }
-    .glow-1 { top: -200px; left: -100px; background: var(--orange); }
-    .glow-2 { top: 40%; right: -200px; background: var(--violet); }
+    .glow-1 { top: -200px; left: 0; background: var(--orange); }
+    .glow-2 { top: 40%; right: 0; background: var(--violet); }
     [data-theme="dark"] .bg-glow { opacity: 0.1; }
 
     /* TOPBAR & CONTROLS */
     .topbar {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(var(--bg), 0.7);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border-bottom: 1px solid var(--line);
@@ -251,8 +243,8 @@
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 1.05; letter-spacing: -0.04em;
+      font-size: 5.35rem;
+      line-height: 1.05; letter-spacing: 0;
       font-weight: 600; max-width: 15ch;
       margin-bottom: 24px;
     }
@@ -269,6 +261,21 @@
     }
 
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero { position: relative; }
+    .hero-code {
+      position: absolute;
+      right: 0;
+      top: 54px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--orange);
+      font-size: 2.4rem;
+      line-height: 1;
+      opacity: 0.2;
+      pointer-events: none;
+      transform: rotate(-2deg);
+    }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 24px; border-radius: 12px;
@@ -294,13 +301,13 @@
     section + section { margin-top: 120px; }
     .section-head { margin-bottom: 48px; }
     .section-num {
-      font-family: "Geist Mono", monospace; font-size: 0.85rem;
+      font-family: var(--mono); font-size: 0.85rem;
       color: var(--orange); margin-bottom: 12px; display: block;
-      letter-spacing: 0.05em; text-transform: uppercase;
+      letter-spacing: 0; text-transform: uppercase;
     }
     .section-title {
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 600;
-      letter-spacing: -0.03em; line-height: 1.1;
+      font-size: 3rem; font-weight: 600;
+      letter-spacing: 0; line-height: 1.1;
     }
     .section-title .serif { color: var(--text-soft); }
 
@@ -318,6 +325,7 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.02);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex; flex-direction: column;
+      min-width: 0;
       z-index: 1;
     }
     .project::before {
@@ -336,12 +344,12 @@
     [data-theme="dark"] .project:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 
     .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 16px; flex-wrap: wrap; }
-    .project-title { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.02em; }
+    .project-title { font-size: 1.3rem; font-weight: 600; letter-spacing: 0; }
     .project--feature .project-title { font-size: 1.8rem; }
 
     .tag {
       padding: 4px 12px; border-radius: 100px;
-      font-family: "Geist Mono", monospace; font-size: 0.75rem;
+      font-family: var(--mono); font-size: 0.75rem;
       background: var(--bg-soft); color: var(--text-soft);
       border: 1px solid var(--line);
     }
@@ -352,20 +360,20 @@
     .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
     .chip {
       padding: 6px 12px; border-radius: 8px;
-      font-family: "Geist Mono", monospace; font-size: 0.75rem;
-      background: rgba(var(--bg), 0.5); border: 1px solid var(--line);
+      font-family: var(--mono); font-size: 0.75rem;
+      background: color-mix(in srgb, var(--bg) 55%, transparent); border: 1px solid var(--line);
       color: var(--text-soft);
     }
 
     .project-foot {
-      display: flex; gap: 20px; font-family: "Geist Mono", monospace; font-size: 0.85rem;
+      display: flex; flex-wrap: wrap; gap: 12px 20px; font-family: var(--mono); font-size: 0.85rem;
       padding-top: 20px; border-top: 1px solid var(--line);
     }
     .project-foot a {
       color: var(--text); display: inline-flex; align-items: center; gap: 4px; opacity: 0.7; transition: opacity 0.2s;
     }
     .project-foot a:hover { opacity: 1; color: var(--orange); }
-    .project-foot a::after { content: "↗"; font-size: 0.9em; }
+    .project-foot a::after { content: ">"; color: var(--orange); font-size: 0.95em; }
 
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; }
@@ -377,7 +385,7 @@
       padding: 20px; border-radius: 16px;
       background: var(--bg-card); border: 1px solid var(--glass-border);
     }
-    .info-label { font-family: "Geist Mono", monospace; font-size: 0.8rem; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; display: block; }
+    .info-label { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; display: block; }
     .info-val { font-size: 1rem; color: var(--text); font-weight: 500; }
 
     /* CONTACT */
@@ -391,7 +399,7 @@
       background: radial-gradient(circle at 50% 0%, var(--orange-soft), transparent 70%);
       pointer-events: none;
     }
-    .contact-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 600; letter-spacing: -0.04em; margin-bottom: 16px; }
+    .contact-title { font-size: 3.35rem; font-weight: 600; letter-spacing: 0; margin-bottom: 16px; }
     .contact-sub { color: var(--text-soft); font-size: 1.1rem; margin-bottom: 32px; }
     .contact-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
 
@@ -411,12 +419,20 @@
     @media (max-width: 900px) {
       .grid-2 { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero h1 { font-size: 4rem; }
+      .hero-code { display: none; }
     }
     @media (max-width: 600px) {
       main { padding: 40px 0 80px; }
       .nav-divider { display: none; }
       .social-links { display: none; }
+      .hero-sub { max-width: 100%; }
       .project { padding: 24px; }
+      .project-foot { gap: 10px 16px; }
+      .hero h1 { font-size: 3rem; }
+      .section-title { font-size: 2.25rem; }
+      .contact-title { font-size: 2.25rem; }
+      .contact-card { padding: 56px 24px; }
     }
   </style>
 </head>
@@ -473,12 +489,17 @@
 
   <main>
     <section class="hero shell" id="top">
-      <span class="hero-pill" data-i18n="hero.pill">open to work</span>
+      <span class="hero-pill" data-i18n="hero.pill">Open to work</span>
       <h1 data-i18n="hero.title" data-i18n-html>iOS apps, web products, and <span class="accent">backend systems.</span></h1>
-      <p class="hero-sub" data-i18n="hero.sub">I build shipped products end to end: mobile apps, websites, auth, payments, and deploys.</p>
+      <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
         <a class="btn btn-secondary" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">Get in touch</a>
+      </div>
+      <div class="hero-code mono" aria-hidden="true">
+        <span>&gt;</span>
+        <span>{}</span>
+        <span>/</span>
       </div>
     </section>
 
@@ -494,14 +515,14 @@
             <h3 class="project-title">MindShelf</h3>
             <span class="tag live" data-i18n="proj.mindshelf.tag">iOS + Web · Live</span>
           </div>
-          <p class="project-desc" data-i18n="proj.mindshelf.desc">Book tracking app with a native iOS app and web companion. Paid, synced, and live.</p>
+          <p class="project-desc" data-i18n="proj.mindshelf.desc">A book tracking product with a native iOS app and a web companion. Paid, synced, and live.</p>
           <div class="stack">
             <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">StoreKit 2</span><span class="chip">Supabase</span><span class="chip">React</span>
           </div>
           <div class="project-foot">
-            <a href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener">Live Site</a>
-            <a href="https://github.com/muartdev/shelf-mind" target="_blank" rel="noopener">iOS Repo</a>
-            <a href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener">Web Repo</a>
+            <a href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" data-i18n="link.liveSite">Live Site</a>
+            <a href="https://github.com/muartdev/shelf-mind" target="_blank" rel="noopener" data-i18n="link.iosRepo">iOS Repo</a>
+            <a href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener" data-i18n="link.webRepo">Web Repo</a>
           </div>
         </article>
 
@@ -511,9 +532,9 @@
               <h3 class="project-title">Softmendil</h3>
               <span class="tag live" data-i18n="proj.live">Live</span>
             </div>
-            <p class="project-desc" data-i18n="proj.soft.desc">B2B custom packaging platform with quote flow, accounts, and cart.</p>
-            <div class="stack"><span class="chip">Next.js</span><span class="chip">E-commerce</span></div>
-            <div class="project-foot"><a href="https://softmendil.com" target="_blank" rel="noopener">Visit Site</a></div>
+            <p class="project-desc" data-i18n="proj.soft.desc">B2B custom packaging platform with quote flow, customer accounts, and cart.</p>
+            <div class="stack"><span class="chip">Next.js</span><span class="chip" data-i18n="chip.ecommerce">E-commerce</span></div>
+            <div class="project-foot"><a href="https://softmendil.com" target="_blank" rel="noopener" data-i18n="link.visitSite">Visit Site</a></div>
           </article>
 
           <article class="project">
@@ -523,7 +544,7 @@
             </div>
             <p class="project-desc" data-i18n="proj.voge.desc">Community site for Voge riders in Turkey with a lightweight CMS.</p>
             <div class="stack"><span class="chip">Next.js</span><span class="chip">Vercel</span></div>
-            <div class="project-foot"><a href="https://www.vogeriderstr.com" target="_blank" rel="noopener">Visit Site</a></div>
+            <div class="project-foot"><a href="https://www.vogeriderstr.com" target="_blank" rel="noopener" data-i18n="link.visitSite">Visit Site</a></div>
           </article>
 
           <article class="project">
@@ -533,7 +554,7 @@
             </div>
             <p class="project-desc" data-i18n="proj.pace.desc">A small typing rhythm experiment for the web.</p>
             <div class="stack"><span class="chip">TypeScript</span><span class="chip">React</span></div>
-            <div class="project-foot"><a href="https://github.com/muartdev/pace" target="_blank" rel="noopener">View Repo</a></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/pace" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
           </article>
 
           <article class="project">
@@ -541,9 +562,9 @@
               <h3 class="project-title">Mind API</h3>
               <span class="tag" data-i18n="proj.api.tag">Backend</span>
             </div>
-            <p class="project-desc" data-i18n="proj.api.desc">MindShelf backend. Product logic, integrations, and sync.</p>
+            <p class="project-desc" data-i18n="proj.api.desc">Backend for MindShelf: product logic, integrations, and sync.</p>
             <div class="stack"><span class="chip">Node.js</span><span class="chip">Supabase</span></div>
-            <div class="project-foot"><a href="https://github.com/muartdev/mind" target="_blank" rel="noopener">View Repo</a></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/mind" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
           </article>
         </div>
       </div>
@@ -567,7 +588,7 @@
           </div>
           <div class="info-item">
             <span class="info-label" data-i18n="info.langs">Languages</span>
-            <span class="info-val">English, Türkçe</span>
+            <span class="info-val" data-i18n="info.langs.v">English, Turkish</span>
           </div>
         </div>
       </div>
@@ -578,7 +599,7 @@
         <h2 class="contact-title" data-i18n="contact.title" data-i18n-html>Let's build something <span class="serif">real</span>.</h2>
         <p class="contact-sub" data-i18n="contact.sub">If you're building something real, let's talk.</p>
         <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:muartmac@gmail.com">Send Email</a>
+          <a class="btn btn-primary" href="mailto:muartmac@gmail.com" data-i18n="contact.email">Send Email</a>
         </div>
       </div>
     </section>
@@ -592,54 +613,68 @@
   <script>
     const I18N = {
       en: {
-        "hero.pill":"open to work",
+        "hero.pill":"Open to work",
         "hero.title":"iOS apps, web products, and <span class=\"accent\">backend systems.</span>",
-        "hero.sub":"I build shipped products end to end: mobile apps, websites, auth, payments, and deploys.",
+        "hero.sub":"I build products end to end: mobile apps, websites, authentication, payments, and deployment.",
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
         "work.title":"Selected <span class=\"serif\">Work</span>",
         "proj.live":"Live",
         "proj.mindshelf.tag":"iOS + Web · Live",
-        "proj.mindshelf.desc":"Book tracking app with a native iOS app and web companion. Paid, synced, and live.",
-        "proj.soft.desc":"B2B custom packaging platform with quote flow, accounts, and cart.",
+        "proj.mindshelf.desc":"A book tracking product with a native iOS app and a web companion. Paid, synced, and live.",
+        "proj.soft.desc":"B2B custom packaging platform with quote flow, customer accounts, and cart.",
         "proj.voge.desc":"Community site for Voge riders in Turkey with a lightweight CMS.",
         "proj.pace.tag":"In Progress",
         "proj.pace.desc":"A small typing rhythm experiment for the web.",
         "proj.api.tag":"Backend",
-        "proj.api.desc":"MindShelf backend. Product logic, integrations, and sync.",
+        "proj.api.desc":"Backend for MindShelf: product logic, integrations, and sync.",
         "about.title":"About <span class=\"serif\">Me</span>",
         "about.p1":"I build across iOS, web, and backend. Mostly products that are live, paid, or used by real people.",
         "about.p2":"I care about the <span class=\"serif\">full path</span>: interface, flow, data, deployment, and the small details that make it feel finished.",
         "info.based":"Location","info.based.v":"Turkey",
-        "info.langs":"Languages",
+        "info.langs":"Languages","info.langs.v":"English, Turkish",
         "contact.title":"Let's build something <span class=\"serif\">real</span>.",
         "contact.sub":"If you're building something real, let's talk.",
+        "contact.email":"Send Email",
+        "link.liveSite":"Live Site",
+        "link.iosRepo":"iOS Repo",
+        "link.webRepo":"Web Repo",
+        "link.visitSite":"Visit Site",
+        "link.viewRepo":"View Repo",
+        "chip.ecommerce":"E-commerce",
         "footer.left":"© 2026 Murat — Turkey.",
         "footer.source":"View Source"
       },
       tr: {
-        "hero.pill":"iş için müsait",
+        "hero.pill":"İş için müsait",
         "hero.title":"iOS uygulamaları, web ürünleri ve <span class=\"accent\">backend sistemleri.</span>",
-        "hero.sub":"Uçtan uca ürün yayına alıyorum: mobil uygulamalar, web siteleri, auth, ödeme ve deploy.",
-        "hero.cta1":"Projelere Bak","hero.cta2":"İletişime Geç",
+        "hero.sub":"Mobil uygulamadan web sitesine, kimlik doğrulamadan ödemeye ve yayına almaya kadar ürünleri uçtan uca geliştiriyorum.",
+        "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
         "work.title":"Seçili <span class=\"serif\">İşler</span>",
         "proj.live":"Yayında",
         "proj.mindshelf.tag":"iOS + Web · Yayında",
-        "proj.mindshelf.desc":"Native iOS uygulaması ve web eşlikçisi olan kitap takip uygulaması. Ücretli, senkron ve yayında.",
-        "proj.soft.desc":"Teklif akışı, hesaplar ve sepetiyle özel paketleme için B2B platform.",
-        "proj.voge.desc":"Türkiye'deki Voge sürücüleri için hafif CMS'li topluluk sitesi.",
+        "proj.mindshelf.desc":"Yerel iOS uygulaması ve web arayüzü olan kitap takip ürünü. Ücretli, senkronize ve yayında.",
+        "proj.soft.desc":"Teklif akışı, müşteri hesapları ve sepet yapısı olan özel paketleme B2B platformu.",
+        "proj.voge.desc":"Türkiye'deki Voge kullanıcıları için hafif CMS'li topluluk sitesi.",
         "proj.pace.tag":"Geliştirmede",
-        "proj.pace.desc":"Web için küçük bir typing ritmi denemesi.",
+        "proj.pace.desc":"Web için küçük bir yazma ritmi denemesi.",
         "proj.api.tag":"Backend",
-        "proj.api.desc":"MindShelf backend. Ürün mantığı, entegrasyonlar ve senkron.",
+        "proj.api.desc":"MindShelf'in backend katmanı: ürün mantığı, entegrasyonlar ve senkronizasyon.",
         "about.title":"Hakkımda <span class=\"serif\">Ben</span>",
-        "about.p1":"iOS, web ve backend tarafında inşa ediyorum. Çoğunlukla canlı, ücretli veya gerçek insanlar tarafından kullanılan ürünler.",
-        "about.p2":"<span class=\"serif\">Tüm yolu</span> önemsiyorum: arayüz, akış, veri, deploy ve bir şeyi bitmiş hissettiren küçük detaylar.",
-        "info.based":"Merkez","info.based.v":"Türkiye",
-        "info.langs":"Diller",
+        "about.p1":"iOS, web ve backend tarafında çalışıyorum; odağım yayında olan, ücretli kullanılan ya da gerçek kullanıcıya ulaşan ürünler.",
+        "about.p2":"Arayüzden akışa, veriden yayına almaya kadar <span class=\"serif\">tüm süreci</span> ve ürünü bitmiş hissettiren küçük detayları önemsiyorum.",
+        "info.based":"Konum","info.based.v":"Türkiye",
+        "info.langs":"Diller","info.langs.v":"İngilizce, Türkçe",
         "contact.title":"Hadi <span class=\"serif\">gerçek</span> bir şey inşa edelim.",
-        "contact.sub":"Eğer gerçek bir şey inşa ediyorsan, konuşalım.",
+        "contact.sub":"Gerçek bir ürün inşa ediyorsan, konuşalım.",
+        "contact.email":"E-posta Gönder",
+        "link.liveSite":"Canlı Site",
+        "link.iosRepo":"iOS Repo",
+        "link.webRepo":"Web Repo",
+        "link.visitSite":"Siteyi Aç",
+        "link.viewRepo":"Kodu Gör",
+        "chip.ecommerce":"E-ticaret",
         "footer.left":"© 2026 Murat — Türkiye.",
-        "footer.source":"Kaynak"
+        "footer.source":"Kaynak Kod"
       }
     };
 
