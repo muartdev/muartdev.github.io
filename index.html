@@ -428,29 +428,31 @@
       color: var(--text-soft);
     }
 
-    /* MARQUEE PROJECT CARDS */
+    /* PROJECT CARDS — manual horizontal scroll */
     .marquee-container {
       width: 100%;
       margin-left: 0;
-      overflow: hidden;
-      padding: 6px 0 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 6px 0 14px;
       position: relative;
-      mask-image: linear-gradient(to right, transparent 0, #000 36px, #000 calc(100% - 80px), transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 36px, #000 calc(100% - 80px), transparent 100%);
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-2) transparent;
+      mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 60px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 60px), transparent 100%);
+      scroll-snap-type: x proximity;
     }
+    .marquee-container::-webkit-scrollbar { height: 6px; }
+    .marquee-container::-webkit-scrollbar-track { background: transparent; }
+    .marquee-container::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 100px; }
 
     .marquee-track {
       display: flex;
       gap: 14px;
       width: max-content;
-      animation: marquee var(--marquee-duration, 30s) linear infinite;
-      will-change: transform;
+      padding-right: 48px;
     }
-
-    @keyframes marquee {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(calc(-1 * var(--marquee-distance, 2072px)), 0, 0); }
-    }
+    .project-card { scroll-snap-align: start; }
 
     .project-card {
       display: flex;
@@ -727,10 +729,6 @@
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
-      .marquee-track {
-        animation-duration: var(--marquee-duration, 22s) !important;
-        animation-iteration-count: infinite !important;
-      }
     }
 
     @media (max-width: 600px) {
@@ -952,95 +950,6 @@
             </div>
           </a>
 
-          <!-- 2nd set for infinite loop -->
-          <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">Ideloc Studio</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.ideloc.kind">creative tech studio</div>
-            <div class="project-card-meta" data-i18n="proj.ideloc.meta">Studio · Early</div>
-            <div class="project-card-stack">
-              <span>Brand</span><span>UI/UX</span><span>Web</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">MindShelf</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.mindshelf.kind">bookmark manager</div>
-            <div class="project-card-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</div>
-            <div class="project-card-stack">
-              <span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>StoreKit 2</span><span>React</span><span>Vite</span><span>Supabase</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://softmendil.com" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">Softmendil</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.soft.kind">packaging website</div>
-            <div class="project-card-meta" data-i18n="proj.soft.meta">Web · Live</div>
-            <div class="project-card-stack">
-              <span>Next.js</span><span>React</span><span>Supabase</span><span>Vercel</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://www.vogeriderstr.com" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">VogeRidersTR</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.voge.kind">rider community</div>
-            <div class="project-card-meta" data-i18n="proj.voge.meta">Web · Live</div>
-            <div class="project-card-stack">
-              <span>Next.js</span><span>React</span><span>Sheets API</span><span>Vercel</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://github.com/muartdev/pace" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">Pace</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.pace.kind">discipline app</div>
-            <div class="project-card-meta" data-i18n="proj.pace.meta">Mobile · In Progress</div>
-            <div class="project-card-stack">
-              <span>Expo</span><span>TypeScript</span><span>Zustand</span><span>Supabase</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://github.com/muartdev/mind" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">Mind API</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.api.kind">product backend</div>
-            <div class="project-card-meta" data-i18n="proj.api.meta">API · Backend</div>
-            <div class="project-card-stack">
-              <span>TypeScript</span><span>Supabase</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">FoodSuggest</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.food.kind">meal ideas</div>
-            <div class="project-card-meta" data-i18n="proj.food.meta">iOS · Experiment</div>
-            <div class="project-card-stack">
-              <span>Swift</span><span>SwiftUI</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener" aria-hidden="true">
-            <div class="project-card-top">
-              <span class="project-card-title">macOS System Monitor</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.mon.kind">system utility</div>
-            <div class="project-card-meta" data-i18n="proj.mon.meta">macOS · Experiment</div>
-            <div class="project-card-stack">
-              <span>Swift</span><span>AppKit</span>
-            </div>
-          </a>
         </div>
       </div>
     </section>
@@ -1487,19 +1396,6 @@
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && techOverlay.classList.contains("open")) closeTechCard();
       });
-
-      const marqueeTrack = document.querySelector(".marquee-track");
-      const tuneMarquee = () => {
-        if (!marqueeTrack) return;
-        const loopStart = marqueeTrack.querySelector('[aria-hidden="true"]');
-        if (!loopStart) return;
-        const distance = loopStart.offsetLeft - marqueeTrack.offsetLeft;
-        if (distance <= 0) return;
-        marqueeTrack.style.setProperty("--marquee-distance", `${distance}px`);
-        marqueeTrack.style.setProperty("--marquee-duration", `${Math.max(24, distance / 70)}s`);
-      };
-      tuneMarquee();
-      window.addEventListener("resize", tuneMarquee, { passive: true });
 
       initHeroGame();
     });
