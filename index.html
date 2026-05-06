@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="icon" type="image/png" href="muart.png" />
   <style>
     :root {
@@ -486,6 +487,7 @@
     }
     .stack-row-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
+      display: inline-flex; align-items: center; gap: 7px;
       font-family: var(--mono); font-size: 0.75rem;
       color: var(--text-soft);
       padding: 6px 10px; border-radius: 8px;
@@ -494,6 +496,19 @@
       transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
     }
     .chip:hover { border-color: var(--accent-line); color: var(--text); background: var(--panel-hover); }
+    .chip i {
+      font-size: 0.95rem;
+      line-height: 1;
+      color: color-mix(in srgb, var(--text) 72%, var(--orange));
+    }
+    .chip-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 16px; height: 16px; padding: 0 4px; border-radius: 4px;
+      font-family: var(--mono); font-size: 0.58rem; font-weight: 600;
+      line-height: 1; color: var(--orange);
+      background: var(--orange-soft);
+      border: 1px solid var(--accent-line);
+    }
 
     @media (max-width: 600px) {
       .stack-row { grid-template-columns: 1fr; gap: 12px; padding: 16px 0; }
@@ -890,25 +905,25 @@
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.frontend">Frontend</span>
           <div class="stack-row-chips">
-            <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vite</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Zustand</span>
+            <span class="chip"><i class="devicon-react-original"></i>React</span><span class="chip"><i class="devicon-nextjs-original"></i>Next.js</span><span class="chip"><i class="devicon-vitejs-plain"></i>Vite</span><span class="chip"><i class="devicon-typescript-plain"></i>TypeScript</span><span class="chip"><i class="devicon-javascript-plain"></i>JavaScript</span><span class="chip"><i class="devicon-html5-plain"></i>HTML5</span><span class="chip"><i class="devicon-css3-plain"></i>CSS3</span><span class="chip"><span class="chip-icon">Z</span>Zustand</span>
           </div>
         </div>
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.mobile">Mobile</span>
           <div class="stack-row-chips">
-            <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">SwiftData</span><span class="chip">StoreKit 2</span><span class="chip">AppKit</span><span class="chip">Expo</span><span class="chip">React Native</span>
+            <span class="chip"><i class="devicon-swift-plain"></i>Swift</span><span class="chip"><i class="devicon-swift-plain"></i>SwiftUI</span><span class="chip"><span class="chip-icon">SD</span>SwiftData</span><span class="chip"><span class="chip-icon">SK</span>StoreKit 2</span><span class="chip"><span class="chip-icon">AK</span>AppKit</span><span class="chip"><i class="devicon-expo-original"></i>Expo</span><span class="chip"><i class="devicon-react-original"></i>React Native</span>
           </div>
         </div>
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.backend">Backend / Data</span>
           <div class="stack-row-chips">
-            <span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">Row Level Security</span><span class="chip">Google Sheets API</span><span class="chip">REST</span>
+            <span class="chip"><i class="devicon-supabase-plain"></i>Supabase</span><span class="chip"><i class="devicon-postgresql-plain"></i>PostgreSQL</span><span class="chip"><span class="chip-icon">RLS</span>Row Level Security</span><span class="chip"><span class="chip-icon">GS</span>Google Sheets API</span><span class="chip"><span class="chip-icon">API</span>REST</span>
           </div>
         </div>
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.deploy">Deploy / Tools</span>
           <div class="stack-row-chips">
-            <span class="chip">Vercel</span><span class="chip">Cloudflare Pages</span><span class="chip">GitHub Pages</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Xcode</span><span class="chip">Figma</span>
+            <span class="chip"><i class="devicon-vercel-original"></i>Vercel</span><span class="chip"><i class="devicon-cloudflare-plain"></i>Cloudflare Pages</span><span class="chip"><i class="devicon-github-original"></i>GitHub Pages</span><span class="chip"><i class="devicon-git-plain"></i>Git</span><span class="chip"><i class="devicon-github-original"></i>GitHub</span><span class="chip"><i class="devicon-xcode-plain"></i>Xcode</span><span class="chip"><i class="devicon-figma-plain"></i>Figma</span>
           </div>
         </div>
       </div>
