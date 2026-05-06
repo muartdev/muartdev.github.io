@@ -312,77 +312,129 @@
     }
     .section-title .serif { color: var(--text-soft); }
 
-    /* GRID */
-    .projects { display: grid; gap: 24px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    /* EDITORIAL PROJECT LIST */
+    .project-list {
+      display: grid;
+      border-top: 1px solid var(--line-2);
+    }
 
-    /* CARDS */
-    .project {
-      position: relative;
-      padding: 32px; border-radius: 24px;
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.02);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex; flex-direction: column;
+    .project-row {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-link {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: baseline;
+      padding: 42px 0;
+      transition: color 0.22s ease;
+    }
+
+    .project-index {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      padding-top: 0.7em;
+    }
+
+    .project-copy {
       min-width: 0;
-      z-index: 1;
     }
-    .project::before {
-      content: ""; position: absolute; inset: 0;
-      border-radius: 24px; padding: 1px;
-      background: linear-gradient(135deg, var(--glass-border), transparent);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      pointer-events: none;
+
+    .project-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 0.45em;
+      font-size: 4.35rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.98;
     }
-    .project:hover {
+
+    .project-name {
+      color: var(--text);
+      transition: color 0.22s ease;
+    }
+
+    .project-kind,
+    .project-meta {
+      color: var(--text-soft);
+      font-weight: 400;
+    }
+
+    .project-separator {
+      color: var(--line-2);
+      font-weight: 400;
+    }
+
+    .project-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      padding-top: 0.82em;
+    }
+
+    .project-arrow {
+      color: var(--orange);
+      transition: transform 0.22s ease;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 0.8rem;
+      max-height: 0;
+      margin-top: 0;
+      overflow: hidden;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      opacity: 0;
       transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-      border-color: var(--line-2);
+      transition: max-height 0.22s ease, margin-top 0.22s ease, opacity 0.22s ease, transform 0.22s ease;
     }
-    [data-theme="dark"] .project:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 
-    .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 16px; flex-wrap: wrap; }
-    .project-title { font-size: 1.3rem; font-weight: 600; letter-spacing: 0; }
-    .project--feature .project-title { font-size: 1.8rem; }
-
-    .tag {
-      padding: 4px 12px; border-radius: 100px;
-      font-family: var(--mono); font-size: 0.75rem;
-      background: var(--bg-soft); color: var(--text-soft);
-      border: 1px solid var(--line);
+    .project-stack span + span::before {
+      content: "/";
+      color: var(--line-2);
+      margin-right: 0.8rem;
     }
-    .tag.live { background: rgba(22, 163, 74, 0.12); color: var(--green); border-color: transparent; }
-    .tag.progress { background: var(--orange-soft); color: var(--orange); border-color: transparent; }
-    .tag.backend { background: rgba(124, 58, 237, 0.12); color: var(--violet); border-color: transparent; }
 
-    .project { border-top: 2px solid transparent; }
-    .project:has(.tag.live)     { border-top-color: var(--green); }
-    .project:has(.tag.progress) { border-top-color: var(--orange); }
-    .project:has(.tag.backend)  { border-top-color: var(--violet); }
+    .project-link:hover .project-name,
+    .project-link:focus-visible .project-name {
+      color: var(--orange);
+    }
 
-    .project-desc { color: var(--text-soft); font-size: 1rem; line-height: 1.6; margin-bottom: 24px; flex-grow: 1; }
+    .project-link:hover .project-arrow,
+    .project-link:focus-visible .project-arrow {
+      transform: translateX(4px);
+    }
 
-    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .project-link:hover .project-stack,
+    .project-link:focus-visible .project-stack {
+      max-height: 80px;
+      margin-top: 18px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-link:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 12px;
+    }
+
     .chip {
       padding: 6px 12px; border-radius: 8px;
       font-family: var(--mono); font-size: 0.75rem;
       background: color-mix(in srgb, var(--bg) 55%, transparent); border: 1px solid var(--line);
       color: var(--text-soft);
     }
-
-    .project-foot {
-      display: flex; flex-wrap: wrap; gap: 12px 20px; font-family: var(--mono); font-size: 0.85rem;
-      padding-top: 20px; border-top: 1px solid var(--line);
-    }
-    .project-foot a {
-      color: var(--text); display: inline-flex; align-items: center; gap: 4px; opacity: 0.7; transition: opacity 0.2s;
-    }
-    .project-foot a:hover { opacity: 1; color: var(--orange); }
-    .project-foot a::after { content: "→"; color: var(--orange); font-size: 0.95em; transition: transform 0.2s; }
-    .project-foot a:hover::after { transform: translateX(3px); }
 
     /* STACK */
     .stack-grid { display: grid; gap: 0; }
@@ -445,7 +497,8 @@
     }
 
     @media (max-width: 900px) {
-      .grid-2 { grid-template-columns: 1fr; }
+      .project-link { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 20px; padding: 36px 0; }
+      .project-line { font-size: 3.25rem; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero h1 { font-size: 4rem; }
       .hero-code { display: none; }
@@ -464,12 +517,19 @@
       .nav-divider { display: none; }
       .social-links a:not(:first-child) { display: none; }
       .hero-sub { max-width: 100%; }
-      .project { padding: 24px; }
-      .project-foot { gap: 10px 16px; }
+      .project-link { grid-template-columns: 42px minmax(0, 1fr); gap: 12px 16px; padding: 30px 0; }
+      .project-index { padding-top: 0.42em; }
+      .project-line { font-size: 2.1rem; line-height: 1.05; }
+      .project-action { grid-column: 2; padding-top: 0; }
+      .project-stack { max-height: none; margin-top: 12px; opacity: 1; transform: none; }
       .hero h1 { font-size: 3rem; }
       .section-title { font-size: 2.25rem; }
       .contact-title { font-size: 2.25rem; }
       .contact-card { padding: 56px 24px; }
+    }
+
+    @media (hover: none) {
+      .project-stack { max-height: none; margin-top: 14px; opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -543,84 +603,139 @@
         <h2 class="section-title" data-i18n="work.title" data-i18n-html>Selected <span class="serif">Work</span></h2>
       </div>
 
-      <div class="projects">
-        <article class="project project--feature">
-          <div class="project-top">
-            <h3 class="project-title">MindShelf</h3>
-            <span class="tag live" data-i18n="proj.mindshelf.tag">iOS + Web · Live</span>
-          </div>
-          <p class="project-desc" data-i18n="proj.mindshelf.desc">Bookmark manager with a native iOS app and a web companion. Cross-device sync, paywall, subscriptions — paid and live.</p>
-          <div class="stack">
-            <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">SwiftData</span><span class="chip">StoreKit 2</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Supabase</span>
-          </div>
-          <div class="project-foot">
-            <a href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" data-i18n="link.liveSite">Live Site</a>
-            <a href="https://github.com/muartdev/shelf-mind" target="_blank" rel="noopener" data-i18n="link.iosRepo">iOS Repo</a>
-            <a href="https://github.com/muartdev/mindshelf" target="_blank" rel="noopener" data-i18n="link.webRepo">Web Repo</a>
-          </div>
+      <div class="project-list" role="list">
+        <article class="project-row" role="listitem">
+          <a class="project-link" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener">
+            <span class="project-index">01</span>
+            <span class="project-copy">
+              <span class="project-line">
+                <span class="project-name">MindShelf</span>
+                <span class="project-separator">—</span>
+                <span class="project-kind" data-i18n="proj.mindshelf.kind">bookmark manager</span>
+                <span class="project-separator">—</span>
+                <span class="project-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</span>
+              </span>
+              <span class="project-stack" aria-label="Stack">
+                <span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>StoreKit 2</span><span>React</span><span>Vite</span><span>Supabase</span>
+              </span>
+            </span>
+            <span class="project-action"><span data-i18n="link.live">Live</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          </a>
         </article>
 
-        <div class="grid-2">
-          <article class="project">
-            <div class="project-top">
-              <h3 class="project-title">Softmendil</h3>
-              <span class="tag live" data-i18n="proj.live">Live</span>
-            </div>
-            <p class="project-desc" data-i18n="proj.soft.desc">Business site for custom-branded wet wipe packaging. Clean product presentation, trust-building layout, conversion-focused flow.</p>
-            <div class="stack"><span class="chip">Next.js</span><span class="chip">React</span><span class="chip">Supabase</span><span class="chip">Vercel</span></div>
-            <div class="project-foot"><a href="https://softmendil.com" target="_blank" rel="noopener" data-i18n="link.visitSite">Visit Site</a></div>
-          </article>
+        <article class="project-row" role="listitem">
+          <a class="project-link" href="https://softmendil.com" target="_blank" rel="noopener">
+            <span class="project-index">02</span>
+            <span class="project-copy">
+              <span class="project-line">
+                <span class="project-name">Softmendil</span>
+                <span class="project-separator">—</span>
+                <span class="project-kind" data-i18n="proj.soft.kind">packaging website</span>
+                <span class="project-separator">—</span>
+                <span class="project-meta" data-i18n="proj.soft.meta">Web · Live</span>
+              </span>
+              <span class="project-stack" aria-label="Stack">
+                <span>Next.js</span><span>React</span><span>Supabase</span><span>Vercel</span>
+              </span>
+            </span>
+            <span class="project-action"><span data-i18n="link.visit">Visit</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          </a>
+        </article>
 
-          <article class="project">
-            <div class="project-top">
-              <h3 class="project-title">VogeRidersTR</h3>
-              <span class="tag live" data-i18n="proj.live">Live</span>
-            </div>
-            <p class="project-desc" data-i18n="proj.voge.desc">Community platform for Voge motorcycle riders in Turkey. Dynamic content managed via Google Sheets API.</p>
-            <div class="stack"><span class="chip">Next.js</span><span class="chip">React</span><span class="chip">Google Sheets API</span><span class="chip">Vercel</span></div>
-            <div class="project-foot"><a href="https://www.vogeriderstr.com" target="_blank" rel="noopener" data-i18n="link.visitSite">Visit Site</a></div>
-          </article>
+        <article class="project-row" role="listitem">
+          <a class="project-link" href="https://www.vogeriderstr.com" target="_blank" rel="noopener">
+            <span class="project-index">03</span>
+            <span class="project-copy">
+              <span class="project-line">
+                <span class="project-name">VogeRidersTR</span>
+                <span class="project-separator">—</span>
+                <span class="project-kind" data-i18n="proj.voge.kind">rider community</span>
+                <span class="project-separator">—</span>
+                <span class="project-meta" data-i18n="proj.voge.meta">Web · Live</span>
+              </span>
+              <span class="project-stack" aria-label="Stack">
+                <span>Next.js</span><span>React</span><span>Google Sheets API</span><span>Vercel</span>
+              </span>
+            </span>
+            <span class="project-action"><span data-i18n="link.visit">Visit</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          </a>
+        </article>
 
-          <article class="project">
-            <div class="project-top">
-              <h3 class="project-title">Pace</h3>
-              <span class="tag progress" data-i18n="proj.pace.tag">In Progress</span>
-            </div>
-            <p class="project-desc" data-i18n="proj.pace.desc">A dark, minimal discipline app: plan the day, follow it with light reminders, review at night, restructure tomorrow.</p>
-            <div class="stack"><span class="chip">Expo</span><span class="chip">TypeScript</span><span class="chip">Zustand</span><span class="chip">Supabase</span></div>
-            <div class="project-foot"><a href="https://github.com/muartdev/pace" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
-          </article>
+        <article class="project-row" role="listitem">
+          <a class="project-link" href="https://github.com/muartdev/pace" target="_blank" rel="noopener">
+            <span class="project-index">04</span>
+            <span class="project-copy">
+              <span class="project-line">
+                <span class="project-name">Pace</span>
+                <span class="project-separator">—</span>
+                <span class="project-kind" data-i18n="proj.pace.kind">discipline app</span>
+                <span class="project-separator">—</span>
+                <span class="project-meta" data-i18n="proj.pace.meta">Mobile · In Progress</span>
+              </span>
+              <span class="project-stack" aria-label="Stack">
+                <span>Expo</span><span>TypeScript</span><span>Zustand</span><span>Supabase</span>
+              </span>
+            </span>
+            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          </a>
+        </article>
 
-          <article class="project">
-            <div class="project-top">
-              <h3 class="project-title">Mind API</h3>
-              <span class="tag backend" data-i18n="proj.api.tag">Backend</span>
-            </div>
-            <p class="project-desc" data-i18n="proj.api.desc">Backend for MindShelf: product logic, integrations, and sync.</p>
-            <div class="stack"><span class="chip">TypeScript</span><span class="chip">Supabase</span></div>
-            <div class="project-foot"><a href="https://github.com/muartdev/mind" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
-          </article>
+        <article class="project-row" role="listitem">
+          <a class="project-link" href="https://github.com/muartdev/mind" target="_blank" rel="noopener">
+            <span class="project-index">05</span>
+            <span class="project-copy">
+              <span class="project-line">
+                <span class="project-name">Mind API</span>
+                <span class="project-separator">—</span>
+                <span class="project-kind" data-i18n="proj.api.kind">product backend</span>
+                <span class="project-separator">—</span>
+                <span class="project-meta" data-i18n="proj.api.meta">API · Backend</span>
+              </span>
+              <span class="project-stack" aria-label="Stack">
+                <span>TypeScript</span><span>Supabase</span>
+              </span>
+            </span>
+            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          </a>
+        </article>
 
-          <article class="project">
-            <div class="project-top">
-              <h3 class="project-title">FoodSuggest</h3>
-              <span class="tag" data-i18n="proj.food.tag">iOS · Experiment</span>
-            </div>
-            <p class="project-desc" data-i18n="proj.food.desc">Native iOS experiment for surfacing meal ideas.</p>
-            <div class="stack"><span class="chip">Swift</span><span class="chip">SwiftUI</span></div>
-            <div class="project-foot"><a href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
-          </article>
+        <article class="project-row" role="listitem">
+          <a class="project-link" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener">
+            <span class="project-index">06</span>
+            <span class="project-copy">
+              <span class="project-line">
+                <span class="project-name">FoodSuggest</span>
+                <span class="project-separator">—</span>
+                <span class="project-kind" data-i18n="proj.food.kind">meal ideas</span>
+                <span class="project-separator">—</span>
+                <span class="project-meta" data-i18n="proj.food.meta">iOS · Experiment</span>
+              </span>
+              <span class="project-stack" aria-label="Stack">
+                <span>Swift</span><span>SwiftUI</span>
+              </span>
+            </span>
+            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          </a>
+        </article>
 
-          <article class="project">
-            <div class="project-top">
-              <h3 class="project-title">macOS System Monitor</h3>
-              <span class="tag" data-i18n="proj.mon.tag">macOS · Experiment</span>
-            </div>
-            <p class="project-desc" data-i18n="proj.mon.desc">Lightweight native macOS app for monitoring system stats.</p>
-            <div class="stack"><span class="chip">Swift</span><span class="chip">AppKit</span></div>
-            <div class="project-foot"><a href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
-          </article>
-        </div>
+        <article class="project-row" role="listitem">
+          <a class="project-link" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener">
+            <span class="project-index">07</span>
+            <span class="project-copy">
+              <span class="project-line">
+                <span class="project-name">macOS System Monitor</span>
+                <span class="project-separator">—</span>
+                <span class="project-kind" data-i18n="proj.mon.kind">system utility</span>
+                <span class="project-separator">—</span>
+                <span class="project-meta" data-i18n="proj.mon.meta">macOS · Experiment</span>
+              </span>
+              <span class="project-stack" aria-label="Stack">
+                <span>Swift</span><span>AppKit</span>
+              </span>
+            </span>
+            <span class="project-action"><span data-i18n="link.repo">Repo</span><span class="project-arrow" aria-hidden="true">→</span></span>
+          </a>
+        </article>
       </div>
     </section>
 
@@ -716,16 +831,30 @@
         "work.title":"Selected <span class=\"serif\">Work</span>",
         "proj.live":"Live",
         "proj.mindshelf.tag":"iOS + Web · Live",
+        "proj.mindshelf.kind":"bookmark manager",
+        "proj.mindshelf.meta":"iOS + Web · Live",
         "proj.mindshelf.desc":"Bookmark manager with a native iOS app and a web companion. Cross-device sync, paywall, subscriptions — paid and live.",
+        "proj.soft.kind":"packaging website",
+        "proj.soft.meta":"Web · Live",
         "proj.soft.desc":"Business site for custom-branded wet wipe packaging. Clean product presentation, trust-building layout, conversion-focused flow.",
+        "proj.voge.kind":"rider community",
+        "proj.voge.meta":"Web · Live",
         "proj.voge.desc":"Community platform for Voge motorcycle riders in Turkey. Dynamic content managed via Google Sheets API.",
         "proj.pace.tag":"In Progress",
+        "proj.pace.kind":"discipline app",
+        "proj.pace.meta":"Mobile · In Progress",
         "proj.pace.desc":"A dark, minimal discipline app: plan the day, follow it with light reminders, review at night, restructure tomorrow.",
         "proj.api.tag":"Backend",
+        "proj.api.kind":"product backend",
+        "proj.api.meta":"API · Backend",
         "proj.api.desc":"Backend for MindShelf: product logic, integrations, and sync.",
         "proj.food.tag":"iOS · Experiment",
+        "proj.food.kind":"meal ideas",
+        "proj.food.meta":"iOS · Experiment",
         "proj.food.desc":"Native iOS experiment for surfacing meal ideas.",
         "proj.mon.tag":"macOS · Experiment",
+        "proj.mon.kind":"system utility",
+        "proj.mon.meta":"macOS · Experiment",
         "proj.mon.desc":"Lightweight native macOS app for monitoring system stats.",
         "stack.title":"Tech <span class=\"serif\">Stack</span>",
         "stack.frontend":"Frontend",
@@ -742,6 +871,9 @@
         "contact.title":"Let's build something <span class=\"serif\">real</span>.",
         "contact.sub":"If you're building something real, let's talk.",
         "contact.email":"Send Email",
+        "link.live":"Live",
+        "link.visit":"Visit",
+        "link.repo":"Repo",
         "link.liveSite":"Live Site",
         "link.iosRepo":"iOS Repo",
         "link.webRepo":"Web Repo",
@@ -758,16 +890,30 @@
         "work.title":"Seçili <span class=\"serif\">İşler</span>",
         "proj.live":"Yayında",
         "proj.mindshelf.tag":"iOS + Web · Yayında",
+        "proj.mindshelf.kind":"bookmark yöneticisi",
+        "proj.mindshelf.meta":"iOS + Web · Yayında",
         "proj.mindshelf.desc":"Yerel iOS uygulaması ve web arayüzü olan bookmark yöneticisi. Cihazlar arası senkron, paywall, abonelik — ücretli ve yayında.",
+        "proj.soft.kind":"ambalaj sitesi",
+        "proj.soft.meta":"Web · Yayında",
         "proj.soft.desc":"Özel markalı ıslak mendil paketleme için kurumsal site. Temiz ürün sunumu, güven veren tasarım, dönüşüm odaklı akış.",
+        "proj.voge.kind":"sürücü topluluğu",
+        "proj.voge.meta":"Web · Yayında",
         "proj.voge.desc":"Türkiye'deki Voge motosiklet kullanıcıları için topluluk platformu. Dinamik içerik Google Sheets API ile yönetiliyor.",
         "proj.pace.tag":"Geliştirmede",
+        "proj.pace.kind":"disiplin uygulaması",
+        "proj.pace.meta":"Mobil · Geliştirmede",
         "proj.pace.desc":"Karanlık ve sade bir disiplin uygulaması: günü planla, hafif hatırlatıcılarla takip et, akşam değerlendir, yarını yeniden kur.",
         "proj.api.tag":"Backend",
+        "proj.api.kind":"ürün backend'i",
+        "proj.api.meta":"API · Backend",
         "proj.api.desc":"MindShelf'in backend katmanı: ürün mantığı, entegrasyonlar ve senkronizasyon.",
         "proj.food.tag":"iOS · Deneme",
+        "proj.food.kind":"yemek fikirleri",
+        "proj.food.meta":"iOS · Deneme",
         "proj.food.desc":"Yemek önerileri için native iOS denemesi.",
         "proj.mon.tag":"macOS · Deneme",
+        "proj.mon.kind":"sistem aracı",
+        "proj.mon.meta":"macOS · Deneme",
         "proj.mon.desc":"Sistem istatistiklerini izleyen hafif, native macOS uygulaması.",
         "stack.title":"Teknoloji <span class=\"serif\">Yığını</span>",
         "stack.frontend":"Frontend",
@@ -784,6 +930,9 @@
         "contact.title":"Hadi <span class=\"serif\">gerçek</span> bir şey inşa edelim.",
         "contact.sub":"Gerçek bir ürün inşa ediyorsan, konuşalım.",
         "contact.email":"E-posta Gönder",
+        "link.live":"Canlı",
+        "link.visit":"Aç",
+        "link.repo":"Repo",
         "link.liveSite":"Canlı Site",
         "link.iosRepo":"iOS Repo",
         "link.webRepo":"Web Repo",
