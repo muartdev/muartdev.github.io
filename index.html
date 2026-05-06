@@ -323,7 +323,7 @@
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 26px; border-radius: 100px;
       font-size: 0.95rem; font-weight: 500;
-      transition: color 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease;
       position: relative;
       isolation: isolate;
       --btn-angle: 0deg;
@@ -336,12 +336,9 @@
       padding: 2px;
       background: conic-gradient(
         from var(--btn-angle),
-        color-mix(in srgb, var(--orange) 82%, transparent),
-        color-mix(in srgb, var(--amber) 36%, transparent),
-        color-mix(in srgb, var(--rose) 62%, transparent),
-        color-mix(in srgb, var(--orange) 82%, transparent)
+        #e85d2a, #d99a3a, #10b981, #3b82f6, #8b5cf6, #e85d2a
       );
-      opacity: 0;
+      opacity: 1;
       z-index: -1;
       pointer-events: none;
       -webkit-mask:
@@ -352,18 +349,20 @@
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
       mask-composite: exclude;
-      transition: opacity 0.22s ease;
+      animation: btn-border-orbit 3s linear infinite;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
     }
     .btn:hover::before {
-      opacity: 1;
-      animation: btn-border-orbit 3.6s linear infinite;
+      animation: btn-border-orbit-reverse 1.5s linear infinite;
     }
     .btn-primary {
       background: var(--text); color: var(--bg);
     }
     .btn-secondary {
       background: var(--bg-card); color: var(--text);
-      border: 1px solid var(--line);
+      border: 1px solid transparent;
       backdrop-filter: blur(12px);
     }
 
@@ -374,7 +373,12 @@
     }
 
     @keyframes btn-border-orbit {
+      from { --btn-angle: 0deg; }
       to { --btn-angle: 360deg; }
+    }
+    @keyframes btn-border-orbit-reverse {
+      from { --btn-angle: 360deg; }
+      to { --btn-angle: 0deg; }
     }
 
     /* SECTIONS */
@@ -523,9 +527,9 @@
       font-family: var(--mono); font-size: 0.75rem;
       color: var(--text-soft);
       padding: 6px 10px; border-radius: 8px;
-      border: 1px solid var(--line);
+      border: 1px solid transparent;
       background: var(--panel);
-      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
       position: relative;
       isolation: isolate;
@@ -539,7 +543,12 @@
     }
 
     @keyframes chip-orbit {
+      from { --chip-angle: 0deg; }
       to { --chip-angle: 360deg; }
+    }
+    @keyframes chip-orbit-reverse {
+      from { --chip-angle: 360deg; }
+      to { --chip-angle: 0deg; }
     }
 
     .chip::before {
@@ -552,7 +561,7 @@
         from var(--chip-angle),
         #e85d2a, #d99a3a, #10b981, #3b82f6, #8b5cf6, #e85d2a
       );
-      opacity: 0;
+      opacity: 1;
       z-index: -1;
       pointer-events: none;
       -webkit-mask:
@@ -563,17 +572,15 @@
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
       mask-composite: exclude;
-      transition: opacity 0.2s ease;
+      animation: chip-orbit 3s linear infinite;
     }
 
     .chip:hover {
       color: var(--text); background: var(--panel-hover);
-      border-color: transparent;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
     .chip:hover::before {
-      opacity: 1;
-      animation: chip-orbit 3s linear infinite;
+      animation: chip-orbit-reverse 1.5s linear infinite;
     }
     [data-theme="dark"] .chip:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
     .chip i {
