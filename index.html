@@ -293,28 +293,37 @@
       transition: color 0.2s ease;
       position: relative;
       isolation: isolate;
+      --btn-angle: 0deg;
     }
     .btn::before {
       content: "";
       position: absolute;
-      inset: -5px;
+      inset: -2px;
       border-radius: inherit;
+      padding: 2px;
       background: conic-gradient(
-        from 0deg,
-        color-mix(in srgb, var(--orange) 42%, transparent),
-        color-mix(in srgb, var(--amber) 24%, transparent),
-        color-mix(in srgb, var(--rose) 28%, transparent),
-        color-mix(in srgb, var(--orange) 42%, transparent)
+        from var(--btn-angle),
+        color-mix(in srgb, var(--orange) 82%, transparent),
+        color-mix(in srgb, var(--amber) 36%, transparent),
+        color-mix(in srgb, var(--rose) 62%, transparent),
+        color-mix(in srgb, var(--orange) 82%, transparent)
       );
-      filter: blur(11px);
       opacity: 0;
       z-index: -1;
-      transform: translate3d(0, 2px, 0) rotate(0deg) scale(0.98);
-      transition: opacity 0.25s ease;
+      pointer-events: none;
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      transition: opacity 0.22s ease;
     }
     .btn:hover::before {
-      opacity: 0.42;
-      animation: btn-shadow-orbit 4.2s linear infinite;
+      opacity: 1;
+      animation: btn-border-orbit 3.6s linear infinite;
     }
     .btn-primary {
       background: var(--text); color: var(--bg);
@@ -325,10 +334,14 @@
       backdrop-filter: blur(12px);
     }
 
-    @keyframes btn-shadow-orbit {
-      to {
-        transform: translate3d(0, 2px, 0) rotate(360deg) scale(1.02);
-      }
+    @property --btn-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes btn-border-orbit {
+      to { --btn-angle: 360deg; }
     }
 
     /* SECTIONS */
