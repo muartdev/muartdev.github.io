@@ -290,6 +290,20 @@
       font-family: var(--sans); font-style: normal; font-weight: 600;
       position: relative;
     }
+    .cursor {
+      display: inline-block;
+      width: 4px;
+      height: 0.95em;
+      background-color: var(--orange);
+      margin-left: 4px;
+      vertical-align: -2px;
+      animation: blink 1s step-end infinite;
+      border-radius: 2px;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
     .mobile-break { display: none; }
 
     .hero-sub {
@@ -531,6 +545,46 @@
       .stack-row { grid-template-columns: 1fr; gap: 12px; padding: 16px 0; }
     }
 
+    /* TECH CARD MODAL */
+    .tech-card-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      z-index: 100; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+    [data-theme="dark"] .tech-card-overlay { background: rgba(0, 0, 0, 0.6); }
+    .tech-card-overlay.open { opacity: 1; pointer-events: auto; }
+    .tech-card {
+      background: var(--bg-elev); border: 1px solid var(--line);
+      border-radius: 16px; padding: 28px; width: 100%; max-width: 400px;
+      box-shadow: var(--shadow-soft);
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    .tech-card-overlay.open .tech-card { transform: translateY(0) scale(1); }
+    .tech-card-close {
+      position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); border-radius: 50%; background: var(--bg-soft);
+      transition: color 0.2s, background 0.2s;
+    }
+    .tech-card-close:hover { color: var(--text); background: var(--line); }
+    .tech-card-close svg { width: 16px; height: 16px; }
+    .tech-card-icon {
+      font-size: 2.5rem; color: var(--text); margin-bottom: 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border-radius: 14px;
+      background: var(--bg-soft); border: 1px solid var(--line);
+    }
+    .tech-card-icon svg { width: 32px; height: 32px; fill: currentColor; }
+    .tech-card-icon .chip-icon {
+      font-size: 1.2rem; width: 32px; height: 32px; border-radius: 8px;
+    }
+    .tech-card-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .tech-card-desc { font-size: 0.95rem; color: var(--text-soft); line-height: 1.6; }
+
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 44px; align-items: start; }
     .about-prose { font-size: 1.05rem; color: var(--text-soft); line-height: 1.7; display: grid; gap: 20px; }
@@ -736,7 +790,7 @@
   <main>
     <section class="hero shell" id="top">
       <div class="hero-copy">
-        <h1 data-i18n="hero.title" data-i18n-html>Product engineer <br class="mobile-break" />shipping <span class="accent">iOS</span>, <span class="accent">web</span>, and <span class="accent">backend systems</span>.</h1>
+        <h1 data-i18n="hero.title" data-i18n-html>Product engineer <br class="mobile-break" />shipping <span class="accent" id="typewriter"></span><span class="cursor"></span></h1>
         <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
@@ -947,25 +1001,25 @@
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.frontend">Frontend</span>
           <div class="stack-row-chips">
-            <span class="chip"><i class="devicon-react-original"></i>React</span><span class="chip"><i class="devicon-nextjs-original"></i>Next.js</span><span class="chip"><i class="devicon-vitejs-plain"></i>Vite</span><span class="chip"><i class="devicon-typescript-plain"></i>TypeScript</span><span class="chip"><i class="devicon-javascript-plain"></i>JavaScript</span><span class="chip"><i class="devicon-html5-plain"></i>HTML5</span><span class="chip"><i class="devicon-css3-plain"></i>CSS3</span><span class="chip"><span class="chip-icon">Z</span>Zustand</span>
+            <button class="chip" data-tech="react"><i class="devicon-react-original"></i>React</button><button class="chip" data-tech="nextjs"><i class="devicon-nextjs-original"></i>Next.js</button><button class="chip" data-tech="vite"><i class="devicon-vitejs-plain"></i>Vite</button><button class="chip" data-tech="typescript"><i class="devicon-typescript-plain"></i>TypeScript</button><button class="chip" data-tech="javascript"><i class="devicon-javascript-plain"></i>JavaScript</button><button class="chip" data-tech="html5"><i class="devicon-html5-plain"></i>HTML5</button><button class="chip" data-tech="css3"><i class="devicon-css3-plain"></i>CSS3</button><button class="chip" data-tech="zustand"><span class="chip-icon">Z</span>Zustand</button>
           </div>
         </div>
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.mobile">Mobile</span>
           <div class="stack-row-chips">
-            <span class="chip"><i class="devicon-swift-plain"></i>Swift</span><span class="chip"><i class="devicon-swift-plain"></i>SwiftUI</span><span class="chip"><span class="chip-icon">SD</span>SwiftData</span><span class="chip"><span class="chip-icon">SK</span>StoreKit 2</span><span class="chip"><span class="chip-icon">AK</span>AppKit</span><span class="chip"><i class="devicon-expo-original"></i>Expo</span><span class="chip"><i class="devicon-react-original"></i>React Native</span>
+            <button class="chip" data-tech="swift"><i class="devicon-swift-plain"></i>Swift</button><button class="chip" data-tech="swiftui"><i class="devicon-swift-plain"></i>SwiftUI</button><button class="chip" data-tech="swiftdata"><span class="chip-icon">SD</span>SwiftData</button><button class="chip" data-tech="storekit"><span class="chip-icon">SK</span>StoreKit 2</button><button class="chip" data-tech="appkit"><span class="chip-icon">AK</span>AppKit</button><button class="chip" data-tech="expo"><i class="devicon-expo-original"></i>Expo</button><button class="chip" data-tech="reactnative"><i class="devicon-react-original"></i>React Native</button>
           </div>
         </div>
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.backend">Backend / Data</span>
           <div class="stack-row-chips">
-            <span class="chip"><i class="devicon-supabase-plain"></i>Supabase</span><span class="chip"><i class="devicon-postgresql-plain"></i>PostgreSQL</span><span class="chip"><span class="chip-icon">RLS</span>Row Level Security</span><span class="chip"><span class="chip-icon">GS</span>Google Sheets API</span><span class="chip"><span class="chip-icon">API</span>REST</span>
+            <button class="chip" data-tech="supabase"><i class="devicon-supabase-plain"></i>Supabase</button><button class="chip" data-tech="postgresql"><i class="devicon-postgresql-plain"></i>PostgreSQL</button><button class="chip" data-tech="rls"><span class="chip-icon">RLS</span>Row Level Security</button><button class="chip" data-tech="sheets"><span class="chip-icon">GS</span>Google Sheets API</button><button class="chip" data-tech="rest"><span class="chip-icon">API</span>REST</button>
           </div>
         </div>
         <div class="stack-row">
           <span class="stack-row-label" data-i18n="stack.deploy">Deploy / Tools</span>
           <div class="stack-row-chips">
-            <span class="chip"><i class="devicon-vercel-original"></i>Vercel</span><span class="chip"><i class="devicon-cloudflare-plain"></i>Cloudflare Pages</span><span class="chip"><i class="devicon-github-original"></i>GitHub Pages</span><span class="chip"><i class="devicon-git-plain"></i>Git</span><span class="chip"><i class="devicon-github-original"></i>GitHub</span><span class="chip"><i class="devicon-xcode-plain"></i>Xcode</span><span class="chip"><i class="devicon-figma-plain"></i>Figma</span>
+            <button class="chip" data-tech="vercel"><i class="devicon-vercel-original"></i>Vercel</button><button class="chip" data-tech="cloudflare"><i class="devicon-cloudflare-plain"></i>Cloudflare Pages</button><button class="chip" data-tech="githubpages"><i class="devicon-github-original"></i>GitHub Pages</button><button class="chip" data-tech="git"><i class="devicon-git-plain"></i>Git</button><button class="chip" data-tech="github"><i class="devicon-github-original"></i>GitHub</button><button class="chip" data-tech="xcode"><i class="devicon-xcode-plain"></i>Xcode</button><button class="chip" data-tech="figma"><i class="devicon-figma-plain"></i>Figma</button>
           </div>
         </div>
       </div>
@@ -1020,6 +1074,17 @@
     </footer>
   </main>
 
+  <div class="tech-card-overlay" id="techOverlay" role="dialog" aria-modal="true">
+    <div class="tech-card" id="techCard">
+      <button class="tech-card-close" id="techClose" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div class="tech-card-icon" id="techIcon"></div>
+      <h3 class="tech-card-title" id="techTitle"></h3>
+      <p class="tech-card-desc" id="techDesc"></p>
+    </div>
+  </div>
+
   <button class="to-top" id="toTop" type="button" aria-label="Scroll to top">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
   </button>
@@ -1028,7 +1093,7 @@
     const I18N = {
       en: {
         "hero.pill":"Open to work",
-        "hero.title":"Product engineer <br class=\"mobile-break\" />shipping <span class=\"accent\">iOS</span>, <span class=\"accent\">web</span>, and <span class=\"accent\">backend systems</span>.",
+        "hero.title":"Product engineer <br class=\"mobile-break\" />shipping <span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
         "hero.sub":"I build products end to end: mobile apps, websites, authentication, payments, and deployment.",
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
         "work.title":"Selected <span class=\"serif\">Work</span>",
@@ -1067,6 +1132,33 @@
         "stack.mobile":"Mobile",
         "stack.backend":"Backend / Data",
         "stack.deploy":"Deploy / Tools",
+        "tech.react":"My primary library for building interactive web interfaces with components.",
+        "tech.nextjs":"The framework I use for SEO-friendly, full-stack React applications.",
+        "tech.vite":"My go-to build tool for fast, lightweight web projects.",
+        "tech.typescript":"Provides type safety to catch errors early and write scalable code.",
+        "tech.javascript":"The core language I use across all my web projects.",
+        "tech.html5":"The foundation of all web content and semantic structure.",
+        "tech.css3":"I prefer custom CSS for precise, minimal, and performant styling.",
+        "tech.zustand":"My favorite state management library for React — small, fast, and scalable.",
+        "tech.swift":"The main language I use for all native Apple platform development.",
+        "tech.swiftui":"My tool of choice for building modern, declarative iOS and macOS interfaces.",
+        "tech.swiftdata":"Used for fast and modern local data persistence on Apple devices.",
+        "tech.storekit":"I implement in-app purchases and subscriptions using StoreKit 2.",
+        "tech.appkit":"For macOS-specific features that go beyond SwiftUI's capabilities.",
+        "tech.expo":"Helps me build and iterate React Native apps quickly.",
+        "tech.reactnative":"When I need to deploy across both iOS and Android from one codebase.",
+        "tech.supabase":"My default backend-as-a-service for auth, database, and edge functions.",
+        "tech.postgresql":"The robust, relational database powering my backend systems.",
+        "tech.rls":"I use Row Level Security to ensure data is safely isolated at the database level.",
+        "tech.sheets":"A lightweight, collaborative CMS solution using Google Sheets as a database.",
+        "tech.rest":"Designing clean, predictable REST APIs for client-server communication.",
+        "tech.vercel":"My go-to platform for deploying frontends and serverless functions instantly.",
+        "tech.cloudflare":"Used for lightning-fast global edge hosting and DNS management.",
+        "tech.githubpages":"Great for hosting static sites and open-source documentation.",
+        "tech.git":"Essential version control for tracking code changes and history.",
+        "tech.github":"Where I host code, manage projects, and collaborate.",
+        "tech.xcode":"The central IDE for all my Apple platform engineering.",
+        "tech.figma":"Where I design interfaces, system architectures, and visual assets.",
         "about.title":"About <span class=\"serif\">Me</span>",
         "about.p1":"I'm a product engineer — full-stack across iOS, web, and backend. Mostly products that are live, paid, or used by real people.",
         "about.p2":"I care about the <span class=\"serif\">full path</span>: interface, flow, data, deployment, and the small details that make it feel finished.",
@@ -1091,7 +1183,7 @@
       },
       tr: {
         "hero.pill":"İş için müsait",
-        "hero.title":"Product Engineer — <br class=\"mobile-break\" /><span class=\"accent\">iOS</span>, <span class=\"accent\">web</span> ve <span class=\"accent\">backend sistemleri</span>.",
+        "hero.title":"Product Engineer — <br class=\"mobile-break\" /><span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
         "hero.sub":"Mobil uygulamadan web sitesine, kimlik doğrulamadan ödemeye ve yayına almaya kadar ürünleri uçtan uca geliştiriyorum.",
         "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
         "work.title":"Seçili <span class=\"serif\">İşler</span>",
@@ -1130,6 +1222,33 @@
         "stack.mobile":"Mobil",
         "stack.backend":"Backend / Veri",
         "stack.deploy":"Yayın / Araçlar",
+        "tech.react":"İnteraktif web arayüzleri ve komponent mimarisi için ana kütüphanem.",
+        "tech.nextjs":"SEO dostu, full-stack React uygulamaları geliştirdiğim ana framework.",
+        "tech.vite":"Hızlı ve hafif web projeleri için tercih ettiğim derleme aracı.",
+        "tech.typescript":"Hataları erken yakalamak ve ölçeklenebilir kod yazmak için kullandığım tip güvenliği.",
+        "tech.javascript":"Tüm web projelerimde kullandığım temel dil.",
+        "tech.html5":"Tüm web içeriğinin ve anlamsal yapının temeli.",
+        "tech.css3":"Hassas, minimal ve performanslı tasarımlar için özel CSS yazmayı tercih ediyorum.",
+        "tech.zustand":"React için en sevdiğim state yönetim kütüphanesi — küçük, hızlı ve ölçeklenebilir.",
+        "tech.swift":"Tüm native Apple platformu geliştirmelerim için ana dilim.",
+        "tech.swiftui":"Modern ve deklaratif iOS ve macOS arayüzleri inşa etmek için tercihim.",
+        "tech.swiftdata":"Apple cihazlarında hızlı ve modern yerel veri saklama için kullanıyorum.",
+        "tech.storekit":"Uygulama içi satın alma ve abonelikleri StoreKit 2 ile entegre ediyorum.",
+        "tech.appkit":"SwiftUI'ın yeteneklerinin ötesine geçen macOS'e özel özellikler için.",
+        "tech.expo":"React Native uygulamalarını hızlıca geliştirmek ve test etmek için kullanıyorum.",
+        "tech.reactnative":"Tek kod tabanından hem iOS hem de Android'e çıkmam gerektiğinde.",
+        "tech.supabase":"Kimlik doğrulama, veritabanı ve edge fonksiyonlar için varsayılan backend çözümüm.",
+        "tech.postgresql":"Backend sistemlerime güç veren sağlam, ilişkisel veritabanım.",
+        "tech.rls":"Verilerin veritabanı seviyesinde güvenle izole edilmesi için Row Level Security (RLS) kullanıyorum.",
+        "tech.sheets":"Google Sheets'i veritabanı gibi kullanarak hafif ve işbirlikçi bir CMS çözümü.",
+        "tech.rest":"İstemci-sunucu iletişimi için temiz, öngörülebilir REST API tasarımları.",
+        "tech.vercel":"Frontend ve serverless fonksiyonları anında yayına almak için ana platformum.",
+        "tech.cloudflare":"Yıldırım hızında global edge barındırma ve DNS yönetimi için.",
+        "tech.githubpages":"Statik siteler ve açık kaynak dökümantasyonlar barındırmak için ideal.",
+        "tech.git":"Kod değişikliklerini ve geçmişini takip etmek için vazgeçilmez sürüm kontrolüm.",
+        "tech.github":"Kod barındırdığım, projeleri yönettiğim ve işbirliği yaptığım yer.",
+        "tech.xcode":"Tüm Apple platformu geliştirmelerim için merkezi geliştirme ortamım (IDE).",
+        "tech.figma":"Arayüzleri, sistem mimarilerini ve görsel materyalleri tasarladığım yer.",
         "about.title":"Hakkımda <span class=\"serif\">Ben</span>",
         "about.p1":"Product Engineer'ım — iOS, web ve backend tarafında uçtan uca çalışıyorum. Odağım yayında olan, ücretli kullanılan ya da gerçek kullanıcıya ulaşan ürünler.",
         "about.p2":"Arayüzden akışa, veriden yayına almaya kadar <span class=\"serif\">tüm süreci</span> ve ürünü bitmiş hissettiren küçük detayları önemsiyorum.",
@@ -1163,6 +1282,59 @@
       if (tt) tt.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
     }
 
+    const typeWords = {
+      en: ["iOS apps.", "web platforms.", "backend systems.", "digital products."],
+      tr: ["iOS uygulamaları.", "web platformları.", "backend sistemleri.", "dijital ürünler."]
+    };
+    
+    let typeIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeTimeout;
+
+    window.resetTypewriter = () => {
+      clearTimeout(typeTimeout);
+      isDeleting = false;
+      charIndex = 0;
+      typeIndex = 0;
+      const tw = document.getElementById("typewriter");
+      if(tw) tw.textContent = "";
+      typeCycle();
+    };
+
+    const typeCycle = () => {
+      const lang = document.documentElement.getAttribute("lang") || "en";
+      const words = typeWords[lang] || typeWords.en;
+      if (typeIndex >= words.length) typeIndex = 0;
+
+      const currentWord = words[typeIndex];
+      const tw = document.getElementById("typewriter");
+      if (!tw) {
+        typeTimeout = setTimeout(typeCycle, 1000);
+        return;
+      }
+
+      if (isDeleting) charIndex--;
+      else charIndex++;
+
+      tw.textContent = currentWord.substring(0, charIndex);
+
+      let typeSpeed = isDeleting ? 30 : 60;
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 2500;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        typeIndex = (typeIndex + 1) % words.length;
+        typeSpeed = 400;
+      }
+
+      if (!isDeleting && typeSpeed === 60) typeSpeed += Math.random() * 30 - 15;
+
+      typeTimeout = setTimeout(typeCycle, typeSpeed);
+    };
+
     function setLang(l) {
       document.documentElement.setAttribute("lang", l);
       localStorage.setItem("lang", l);
@@ -1180,6 +1352,8 @@
         if (el.hasAttribute("data-i18n-html")) el.innerHTML = v;
         else el.textContent = v;
       });
+
+      if (window.resetTypewriter) window.resetTypewriter();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -1220,6 +1394,44 @@
       onScroll();
       toTop.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Tech Card Modal
+      const techOverlay = document.getElementById("techOverlay");
+      const techClose = document.getElementById("techClose");
+      const techIcon = document.getElementById("techIcon");
+      const techTitle = document.getElementById("techTitle");
+      const techDesc = document.getElementById("techDesc");
+      
+      const openTechCard = (techKey, iconHTML, titleText) => {
+        const lang = document.documentElement.getAttribute("lang") || "en";
+        const desc = I18N[lang][`tech.${techKey}`] || "";
+        techIcon.innerHTML = iconHTML;
+        techTitle.textContent = titleText;
+        techDesc.textContent = desc;
+        techOverlay.classList.add("open");
+      };
+
+      const closeTechCard = () => {
+        techOverlay.classList.remove("open");
+      };
+
+      document.querySelectorAll(".chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+          const techKey = chip.getAttribute("data-tech");
+          const titleText = chip.textContent.trim();
+          const iconEl = chip.querySelector("i") || chip.querySelector(".chip-icon");
+          const iconHTML = iconEl ? iconEl.outerHTML : "";
+          openTechCard(techKey, iconHTML, titleText);
+        });
+      });
+
+      techClose.addEventListener("click", closeTechCard);
+      techOverlay.addEventListener("click", (e) => {
+        if (e.target === techOverlay) closeTechCard();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && techOverlay.classList.contains("open")) closeTechCard();
       });
 
       const marqueeTrack = document.querySelector(".marquee-track");
