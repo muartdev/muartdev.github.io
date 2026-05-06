@@ -375,7 +375,7 @@
       display: flex;
       gap: 14px;
       width: max-content;
-      animation: marquee var(--marquee-duration, 22s) linear infinite;
+      animation: marquee var(--marquee-duration, 30s) linear infinite;
       will-change: transform;
     }
 
@@ -598,6 +598,10 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+      }
+      .marquee-track {
+        animation-duration: var(--marquee-duration, 22s) !important;
+        animation-iteration-count: infinite !important;
       }
     }
 
@@ -1160,7 +1164,7 @@
         const distance = loopStart.offsetLeft - marqueeTrack.offsetLeft;
         if (distance <= 0) return;
         marqueeTrack.style.setProperty("--marquee-distance", `${distance}px`);
-        marqueeTrack.style.setProperty("--marquee-duration", `${Math.max(16, distance / 92)}s`);
+        marqueeTrack.style.setProperty("--marquee-duration", `${Math.max(24, distance / 70)}s`);
       };
       tuneMarquee();
       window.addEventListener("resize", tuneMarquee, { passive: true });
