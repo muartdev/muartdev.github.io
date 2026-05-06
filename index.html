@@ -384,6 +384,25 @@
     .project-foot a::after { content: "→"; color: var(--orange); font-size: 0.95em; transition: transform 0.2s; }
     .project-foot a:hover::after { transform: translateX(3px); }
 
+    /* STACK */
+    .stack-grid { display: grid; gap: 0; }
+    .stack-row {
+      display: grid; grid-template-columns: 160px 1fr; gap: 32px;
+      padding: 24px 0; border-top: 1px solid var(--line);
+      align-items: start;
+    }
+    .stack-row:last-child { border-bottom: 1px solid var(--line); }
+    .stack-row-label {
+      font-family: var(--mono); font-size: 0.85rem;
+      text-transform: uppercase; color: var(--muted);
+      letter-spacing: 0.05em; padding-top: 4px;
+    }
+    .stack-row-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    @media (max-width: 600px) {
+      .stack-row { grid-template-columns: 1fr; gap: 12px; padding: 20px 0; }
+    }
+
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; }
     .about-prose { font-size: 1.1rem; color: var(--text-soft); line-height: 1.7; display: grid; gap: 24px; }
@@ -567,8 +586,8 @@
               <h3 class="project-title">Pace</h3>
               <span class="tag progress" data-i18n="proj.pace.tag">In Progress</span>
             </div>
-            <p class="project-desc" data-i18n="proj.pace.desc">A small typing rhythm experiment for the web.</p>
-            <div class="stack"><span class="chip">TypeScript</span><span class="chip">React</span></div>
+            <p class="project-desc" data-i18n="proj.pace.desc">A dark, minimal discipline app: plan the day, follow it with light reminders, review at night, restructure tomorrow.</p>
+            <div class="stack"><span class="chip">Expo</span><span class="chip">TypeScript</span><span class="chip">Zustand</span><span class="chip">Supabase</span></div>
             <div class="project-foot"><a href="https://github.com/muartdev/pace" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
           </article>
 
@@ -578,16 +597,70 @@
               <span class="tag backend" data-i18n="proj.api.tag">Backend</span>
             </div>
             <p class="project-desc" data-i18n="proj.api.desc">Backend for MindShelf: product logic, integrations, and sync.</p>
-            <div class="stack"><span class="chip">Node.js</span><span class="chip">Supabase</span></div>
+            <div class="stack"><span class="chip">TypeScript</span><span class="chip">Supabase</span></div>
             <div class="project-foot"><a href="https://github.com/muartdev/mind" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
           </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">FoodSuggest</h3>
+              <span class="tag" data-i18n="proj.food.tag">iOS · Experiment</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.food.desc">Native iOS experiment for surfacing meal ideas.</p>
+            <div class="stack"><span class="chip">Swift</span><span class="chip">SwiftUI</span></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
+          </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3 class="project-title">macOS System Monitor</h3>
+              <span class="tag" data-i18n="proj.mon.tag">macOS · Experiment</span>
+            </div>
+            <p class="project-desc" data-i18n="proj.mon.desc">Lightweight native macOS app for monitoring system stats.</p>
+            <div class="stack"><span class="chip">Swift</span><span class="chip">AppKit</span></div>
+            <div class="project-foot"><a href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener" data-i18n="link.viewRepo">View Repo</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="shell">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2 class="section-title" data-i18n="stack.title" data-i18n-html>Tech <span class="serif">Stack</span></h2>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-row">
+          <span class="stack-row-label" data-i18n="stack.frontend">Frontend</span>
+          <div class="stack-row-chips">
+            <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vite</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Zustand</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-row-label" data-i18n="stack.mobile">Mobile</span>
+          <div class="stack-row-chips">
+            <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">SwiftData</span><span class="chip">StoreKit 2</span><span class="chip">AppKit</span><span class="chip">Expo</span><span class="chip">React Native</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-row-label" data-i18n="stack.backend">Backend / Data</span>
+          <div class="stack-row-chips">
+            <span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">Row Level Security</span><span class="chip">Google Sheets API</span><span class="chip">REST</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="stack-row-label" data-i18n="stack.deploy">Deploy / Tools</span>
+          <div class="stack-row-chips">
+            <span class="chip">Vercel</span><span class="chip">Cloudflare Pages</span><span class="chip">GitHub Pages</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Xcode</span><span class="chip">Figma</span>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="about" class="shell">
       <div class="section-head">
-        <span class="section-num">02</span>
+        <span class="section-num">03</span>
         <h2 class="section-title" data-i18n="about.title" data-i18n-html>About <span class="serif">Me</span></h2>
       </div>
 
@@ -647,9 +720,18 @@
         "proj.soft.desc":"Business site for custom-branded wet wipe packaging. Clean product presentation, trust-building layout, conversion-focused flow.",
         "proj.voge.desc":"Community platform for Voge motorcycle riders in Turkey. Dynamic content managed via Google Sheets API.",
         "proj.pace.tag":"In Progress",
-        "proj.pace.desc":"A small typing rhythm experiment for the web.",
+        "proj.pace.desc":"A dark, minimal discipline app: plan the day, follow it with light reminders, review at night, restructure tomorrow.",
         "proj.api.tag":"Backend",
         "proj.api.desc":"Backend for MindShelf: product logic, integrations, and sync.",
+        "proj.food.tag":"iOS · Experiment",
+        "proj.food.desc":"Native iOS experiment for surfacing meal ideas.",
+        "proj.mon.tag":"macOS · Experiment",
+        "proj.mon.desc":"Lightweight native macOS app for monitoring system stats.",
+        "stack.title":"Tech <span class=\"serif\">Stack</span>",
+        "stack.frontend":"Frontend",
+        "stack.mobile":"Mobile",
+        "stack.backend":"Backend / Data",
+        "stack.deploy":"Deploy / Tools",
         "about.title":"About <span class=\"serif\">Me</span>",
         "about.p1":"I'm a product engineer — full-stack across iOS, web, and backend. Mostly products that are live, paid, or used by real people.",
         "about.p2":"I care about the <span class=\"serif\">full path</span>: interface, flow, data, deployment, and the small details that make it feel finished.",
@@ -680,9 +762,18 @@
         "proj.soft.desc":"Özel markalı ıslak mendil paketleme için kurumsal site. Temiz ürün sunumu, güven veren tasarım, dönüşüm odaklı akış.",
         "proj.voge.desc":"Türkiye'deki Voge motosiklet kullanıcıları için topluluk platformu. Dinamik içerik Google Sheets API ile yönetiliyor.",
         "proj.pace.tag":"Geliştirmede",
-        "proj.pace.desc":"Web için küçük bir yazma ritmi denemesi.",
+        "proj.pace.desc":"Karanlık ve sade bir disiplin uygulaması: günü planla, hafif hatırlatıcılarla takip et, akşam değerlendir, yarını yeniden kur.",
         "proj.api.tag":"Backend",
         "proj.api.desc":"MindShelf'in backend katmanı: ürün mantığı, entegrasyonlar ve senkronizasyon.",
+        "proj.food.tag":"iOS · Deneme",
+        "proj.food.desc":"Yemek önerileri için native iOS denemesi.",
+        "proj.mon.tag":"macOS · Deneme",
+        "proj.mon.desc":"Sistem istatistiklerini izleyen hafif, native macOS uygulaması.",
+        "stack.title":"Teknoloji <span class=\"serif\">Yığını</span>",
+        "stack.frontend":"Frontend",
+        "stack.mobile":"Mobil",
+        "stack.backend":"Backend / Veri",
+        "stack.deploy":"Yayın / Araçlar",
         "about.title":"Hakkımda <span class=\"serif\">Ben</span>",
         "about.p1":"Product Engineer'ım — iOS, web ve backend tarafında uçtan uca çalışıyorum. Odağım yayında olan, ücretli kullanılan ya da gerçek kullanıcıya ulaşan ürünler.",
         "about.p2":"Arayüzden akışa, veriden yayına almaya kadar <span class=\"serif\">tüm süreci</span> ve ürünü bitmiş hissettiren küçük detayları önemsiyorum.",
