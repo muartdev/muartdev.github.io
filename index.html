@@ -165,6 +165,23 @@
       display: flex; align-items: center; gap: 14px;
     }
 
+    .studio-link {
+      display: inline-flex; align-items: center; height: 28px;
+      padding: 0 10px; border-radius: 100px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text-soft);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .studio-link:hover {
+      color: var(--orange);
+      border-color: var(--accent-line);
+      background: var(--panel-hover);
+    }
+
     .nav-divider {
       width: 1px; height: 20px;
       background: var(--line-2);
@@ -627,6 +644,7 @@
       .section-head { margin-bottom: 24px; }
       .nav-divider { display: none; }
       .social-links a:not(:first-child) { display: none; }
+      .studio-link { display: none; }
       .brand-mark { width: 78px; height: 28px; }
       .nav-controls { gap: 10px; }
 
@@ -676,6 +694,8 @@
       </div>
 
       <div class="nav-controls">
+        <a class="studio-link" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener">Studio</a>
+
         <!-- Language Selector -->
         <div class="lang-wrap">
           <button class="lang-selector" id="langTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Change language">
@@ -735,6 +755,17 @@
       <div class="marquee-container" role="marquee">
         <div class="marquee-track">
           <!-- 1st set -->
+          <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <span class="project-card-title">Ideloc Studio</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.ideloc.kind">creative tech studio</div>
+            <div class="project-card-meta" data-i18n="proj.ideloc.meta">Studio · Early</div>
+            <div class="project-card-stack">
+              <span>Brand</span><span>UI/UX</span><span>Web</span>
+            </div>
+          </a>
           <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener">
             <div class="project-card-top">
               <span class="project-card-title">MindShelf</span>
@@ -814,6 +845,17 @@
           </a>
 
           <!-- 2nd set for infinite loop -->
+          <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" aria-hidden="true">
+            <div class="project-card-top">
+              <span class="project-card-title">Ideloc Studio</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </div>
+            <div class="project-card-kind" data-i18n="proj.ideloc.kind">creative tech studio</div>
+            <div class="project-card-meta" data-i18n="proj.ideloc.meta">Studio · Early</div>
+            <div class="project-card-stack">
+              <span>Brand</span><span>UI/UX</span><span>Web</span>
+            </div>
+          </a>
           <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" aria-hidden="true">
             <div class="project-card-top">
               <span class="project-card-title">MindShelf</span>
@@ -939,6 +981,7 @@
         <div class="about-prose">
           <p data-i18n="about.p1">I'm a product engineer — full-stack across iOS, web, and backend. Mostly products that are live, paid, or used by real people.</p>
           <p data-i18n="about.p2" data-i18n-html>I care about the <span class="serif">full path</span>: interface, flow, data, deployment, and the small details that make it feel finished.</p>
+          <p data-i18n="about.p3" data-i18n-html>I also run <span class="serif">Ideloc Studio</span>, a young creative tech studio for brands and founders who need design and engineering in one place.</p>
         </div>
         <div class="info-list">
           <div class="info-item">
@@ -964,9 +1007,9 @@
     <section id="contact" class="shell">
       <div class="contact-card">
         <h2 class="contact-title" data-i18n="contact.title" data-i18n-html>Let's build something <span class="serif">real</span>.</h2>
-        <p class="contact-sub" data-i18n="contact.sub">If you're building something real, let's talk.</p>
+        <p class="contact-sub" data-i18n="contact.sub">Need a product, website, or studio-grade digital system? Let's talk.</p>
         <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:muartmac@gmail.com" data-i18n="contact.email">Send Email</a>
+          <a class="btn btn-primary" href="mailto:muartmac@gmail.com" data-i18n="contact.email">Start a Project</a>
         </div>
       </div>
     </section>
@@ -990,23 +1033,26 @@
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
         "work.title":"Selected <span class=\"serif\">Work</span>",
         "proj.live":"Live",
+        "proj.ideloc.kind":"creative tech studio",
+        "proj.ideloc.meta":"Studio · Early",
+        "proj.ideloc.desc":"A young creative tech studio for brand identities, interfaces, and software systems.",
         "proj.mindshelf.tag":"iOS + Web · Live",
         "proj.mindshelf.kind":"bookmark manager",
-        "proj.mindshelf.meta":"iOS + Web · Live",
+        "proj.mindshelf.meta":"Product · Live",
         "proj.mindshelf.desc":"Bookmark manager with a native iOS app and a web companion. Cross-device sync, paywall, subscriptions — paid and live.",
         "proj.soft.kind":"packaging website",
-        "proj.soft.meta":"Web · Live",
+        "proj.soft.meta":"Client · Live",
         "proj.soft.desc":"Business site for custom-branded wet wipe packaging. Clean product presentation, trust-building layout, conversion-focused flow.",
         "proj.voge.kind":"rider community",
-        "proj.voge.meta":"Web · Live",
+        "proj.voge.meta":"Community · Live",
         "proj.voge.desc":"Community platform for Voge motorcycle riders in Turkey. Dynamic content managed via Google Sheets API.",
         "proj.pace.tag":"In Progress",
         "proj.pace.kind":"discipline app",
-        "proj.pace.meta":"Mobile · In Progress",
+        "proj.pace.meta":"Product · In Progress",
         "proj.pace.desc":"A dark, minimal discipline app: plan the day, follow it with light reminders, review at night, restructure tomorrow.",
         "proj.api.tag":"Backend",
         "proj.api.kind":"product backend",
-        "proj.api.meta":"API · Backend",
+        "proj.api.meta":"System · Backend",
         "proj.api.desc":"Backend for MindShelf: product logic, integrations, and sync.",
         "proj.food.tag":"iOS · Experiment",
         "proj.food.kind":"meal ideas",
@@ -1024,13 +1070,14 @@
         "about.title":"About <span class=\"serif\">Me</span>",
         "about.p1":"I'm a product engineer — full-stack across iOS, web, and backend. Mostly products that are live, paid, or used by real people.",
         "about.p2":"I care about the <span class=\"serif\">full path</span>: interface, flow, data, deployment, and the small details that make it feel finished.",
+        "about.p3":"I also run <span class=\"serif\">Ideloc Studio</span>, a young creative tech studio for brands and founders who need design and engineering in one place.",
         "info.role":"Role","info.role.v":"Product Engineer · Full-stack",
         "info.builds":"Builds","info.builds.v":"iOS · Web · Backend · Payments",
         "info.based":"Location","info.based.v":"Turkey",
         "info.langs":"Languages","info.langs.v":"English, Turkish",
         "contact.title":"Let's build something <span class=\"serif\">real</span>.",
-        "contact.sub":"If you're building something real, let's talk.",
-        "contact.email":"Send Email",
+        "contact.sub":"Need a product, website, or studio-grade digital system? Let's talk.",
+        "contact.email":"Start a Project",
         "link.live":"Live",
         "link.visit":"Visit",
         "link.repo":"Repo",
@@ -1049,23 +1096,26 @@
         "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
         "work.title":"Seçili <span class=\"serif\">İşler</span>",
         "proj.live":"Yayında",
+        "proj.ideloc.kind":"yaratıcı teknoloji stüdyosu",
+        "proj.ideloc.meta":"Stüdyo · Erken aşama",
+        "proj.ideloc.desc":"Marka kimliği, arayüz ve yazılım sistemleri için genç bir yaratıcı teknoloji stüdyosu.",
         "proj.mindshelf.tag":"iOS + Web · Yayında",
         "proj.mindshelf.kind":"bookmark yöneticisi",
-        "proj.mindshelf.meta":"iOS + Web · Yayında",
+        "proj.mindshelf.meta":"Ürün · Yayında",
         "proj.mindshelf.desc":"Yerel iOS uygulaması ve web arayüzü olan bookmark yöneticisi. Cihazlar arası senkron, paywall, abonelik — ücretli ve yayında.",
         "proj.soft.kind":"ambalaj sitesi",
-        "proj.soft.meta":"Web · Yayında",
+        "proj.soft.meta":"Müşteri · Yayında",
         "proj.soft.desc":"Özel markalı ıslak mendil paketleme için kurumsal site. Temiz ürün sunumu, güven veren tasarım, dönüşüm odaklı akış.",
         "proj.voge.kind":"sürücü topluluğu",
-        "proj.voge.meta":"Web · Yayında",
+        "proj.voge.meta":"Topluluk · Yayında",
         "proj.voge.desc":"Türkiye'deki Voge motosiklet kullanıcıları için topluluk platformu. Dinamik içerik Google Sheets API ile yönetiliyor.",
         "proj.pace.tag":"Geliştirmede",
         "proj.pace.kind":"disiplin uygulaması",
-        "proj.pace.meta":"Mobil · Geliştirmede",
+        "proj.pace.meta":"Ürün · Geliştirmede",
         "proj.pace.desc":"Karanlık ve sade bir disiplin uygulaması: günü planla, hafif hatırlatıcılarla takip et, akşam değerlendir, yarını yeniden kur.",
         "proj.api.tag":"Backend",
         "proj.api.kind":"ürün backend'i",
-        "proj.api.meta":"API · Backend",
+        "proj.api.meta":"Sistem · Backend",
         "proj.api.desc":"MindShelf'in backend katmanı: ürün mantığı, entegrasyonlar ve senkronizasyon.",
         "proj.food.tag":"iOS · Deneme",
         "proj.food.kind":"yemek fikirleri",
@@ -1083,13 +1133,14 @@
         "about.title":"Hakkımda <span class=\"serif\">Ben</span>",
         "about.p1":"Product Engineer'ım — iOS, web ve backend tarafında uçtan uca çalışıyorum. Odağım yayında olan, ücretli kullanılan ya da gerçek kullanıcıya ulaşan ürünler.",
         "about.p2":"Arayüzden akışa, veriden yayına almaya kadar <span class=\"serif\">tüm süreci</span> ve ürünü bitmiş hissettiren küçük detayları önemsiyorum.",
+        "about.p3":"Ayrıca marka, arayüz ve yazılımı aynı yerde isteyen ekipler için genç bir yaratıcı teknoloji stüdyosu olan <span class=\"serif\">Ideloc Studio</span>'yu geliştiriyorum.",
         "info.role":"Rol","info.role.v":"Product Engineer · Full-stack",
         "info.builds":"Ürettiği","info.builds.v":"iOS · Web · Backend · Ödeme sistemleri",
         "info.based":"Konum","info.based.v":"Türkiye",
         "info.langs":"Diller","info.langs.v":"İngilizce, Türkçe",
         "contact.title":"Hadi <span class=\"serif\">gerçek</span> bir şey inşa edelim.",
-        "contact.sub":"Gerçek bir ürün inşa ediyorsan, konuşalım.",
-        "contact.email":"E-posta Gönder",
+        "contact.sub":"Ürün, web sitesi ya da stüdyo kalitesinde bir dijital sistem gerekiyorsa konuşalım.",
+        "contact.email":"Proje Başlat",
         "link.live":"Canlı",
         "link.visit":"Aç",
         "link.repo":"Repo",
