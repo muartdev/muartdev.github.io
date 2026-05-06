@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23e85d2a'/%3E%3Ctext x='50' y='66' text-anchor='middle' fill='%23fff' font-family='Geist, sans-serif' font-size='58' font-weight='600'%3Em%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" href="muart.png" />
   <style>
     :root {
       /* Light theme (Premium minimal) */
@@ -29,7 +29,7 @@
       --violet: #7c3aed;
       --green: #16a34a;
       
-      --accent-gradient: linear-gradient(135deg, #e85d2a, #f43f5e);
+      --cyan: #22d3ee;
 
       --sans: "Geist", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -117,17 +117,17 @@
     }
     
     .brand {
-      display: inline-flex; align-items: center; gap: 12px;
-      font-weight: 600; font-size: 1rem;
+      display: inline-flex; align-items: center;
       transition: opacity 0.2s;
     }
     .brand:hover { opacity: 0.8; }
     .brand-mark {
-      width: 32px; height: 32px; border-radius: 10px;
-      background: var(--accent-gradient); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 1.1rem;
-      box-shadow: 0 4px 20px var(--orange-soft);
+      width: 92px;
+      height: 32px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 6px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
 
     .nav-controls {
@@ -262,21 +262,25 @@
     }
 
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero { position: relative; }
-    .hero-code {
-      position: absolute;
-      right: 0;
-      top: 54px;
-      display: flex;
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+      gap: 72px;
       align-items: center;
-      gap: 18px;
-      color: var(--orange);
-      font-size: 2.4rem;
-      line-height: 1;
-      opacity: 0.2;
-      pointer-events: none;
-      transform: rotate(-2deg);
     }
+    .hero-copy { min-width: 0; }
+    .hero-art {
+      justify-self: end;
+      align-self: center;
+      width: min(100%, 380px);
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.16);
+    }
+    [data-theme="dark"] .hero-art { box-shadow: 0 30px 90px rgba(0,0,0,0.45); }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 24px; border-radius: 12px;
@@ -497,11 +501,12 @@
     }
 
     @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 44px; }
+      .hero-art { justify-self: start; width: min(360px, 100%); }
       .project-link { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 20px; padding: 36px 0; }
       .project-line { font-size: 3.25rem; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero h1 { font-size: 4rem; }
-      .hero-code { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -516,6 +521,9 @@
       main { padding: 40px 0 80px; }
       .nav-divider { display: none; }
       .social-links a:not(:first-child) { display: none; }
+      .brand-mark { width: 78px; height: 28px; }
+      .hero { gap: 32px; }
+      .hero-art { width: min(240px, 74vw); }
       .hero-sub { max-width: 100%; }
       .project-link { grid-template-columns: 42px minmax(0, 1fr); gap: 12px 16px; padding: 30px 0; }
       .project-index { padding-top: 0.42em; }
@@ -539,8 +547,8 @@
 
   <header class="topbar">
     <div class="shell topbar-inner">
-      <a class="brand" href="#top">
-        <span class="brand-mark">m</span>
+      <a class="brand" href="#top" aria-label="Murat home">
+        <img class="brand-mark" src="muart.png" alt="" width="92" height="32" decoding="async" />
       </a>
       
       <div class="nav-controls">
@@ -583,18 +591,16 @@
 
   <main>
     <section class="hero shell" id="top">
-      <span class="hero-pill" data-i18n="hero.pill">Open to work</span>
-      <h1 data-i18n="hero.title" data-i18n-html>Product engineer shipping iOS, web, and <span class="accent">backend systems.</span></h1>
-      <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
-        <a class="btn btn-secondary" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">Get in touch</a>
+      <div class="hero-copy">
+        <span class="hero-pill" data-i18n="hero.pill">Open to work</span>
+        <h1 data-i18n="hero.title" data-i18n-html>Product engineer shipping iOS, web, and <span class="accent">backend systems.</span></h1>
+        <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
+          <a class="btn btn-secondary" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">Get in touch</a>
+        </div>
       </div>
-      <div class="hero-code mono" aria-hidden="true">
-        <span>&gt;</span>
-        <span>{}</span>
-        <span>/</span>
-      </div>
+      <img class="hero-art" src="muart.png" alt="muart logo artwork" width="1254" height="1254" fetchpriority="high" decoding="async" />
     </section>
 
     <section id="work" class="shell">
