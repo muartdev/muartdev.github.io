@@ -330,38 +330,9 @@
 
     .hero-game {
       position: relative;
-      flex: 0 0 auto;
-      width: 280px;
+      flex: 0 1 460px;
+      width: min(460px, 100%);
       user-select: none;
-    }
-    .hero-game canvas {
-      display: block;
-      width: 280px;
-      height: 160px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--bg-soft);
-      cursor: pointer;
-      transition: border-color 0.25s ease;
-      outline: none;
-    }
-    .hero-game canvas:focus-visible { border-color: var(--line-2); }
-    .hero-game:hover canvas { border-color: var(--line-2); }
-    .hero-game-meta {
-      position: absolute; top: 10px; left: 14px; right: 14px;
-      display: flex; justify-content: space-between;
-      font-family: var(--mono); font-size: 0.62rem;
-      color: var(--muted); pointer-events: none;
-      letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .hero-game-score { color: var(--text-soft); font-weight: 500; }
-    .hero-game-hint {
-      position: absolute; bottom: 8px; left: 0; right: 0;
-      text-align: center;
-      font-family: var(--mono); font-size: 0.58rem;
-      color: var(--muted); pointer-events: none;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      opacity: 0.75;
     }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -646,6 +617,81 @@
     }
     .info-val { font-size: 0.95rem; color: var(--text); font-weight: 500; }
 
+    /* MINI GAMES */
+    .game-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+    .game-toolbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .game-tabs {
+      display: inline-flex; align-items: center; gap: 2px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--bg-soft);
+    }
+    .game-tab {
+      height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .game-tab.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+    .game-score {
+      font-family: var(--mono); font-size: 0.7rem;
+      color: var(--text-soft); letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .game-score-value { display: none; }
+    .game-score-value.active { display: inline; }
+    .game-pane { display: none; }
+    .game-pane.active { display: block; }
+    .game-pane canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      background: var(--bg-soft);
+      outline: none;
+    }
+    .game-pane canvas:focus-visible { box-shadow: 0 0 0 1px var(--line-2); }
+    #runCanvas {
+      aspect-ratio: 420 / 240;
+      cursor: pointer;
+    }
+    #bowlCanvas {
+      aspect-ratio: 420 / 256;
+      cursor: grab;
+      touch-action: none;
+    }
+    #bowlCanvas:active { cursor: grabbing; }
+    .game-hint {
+      display: block;
+      text-align: center;
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      opacity: 0.78;
+    }
+
     /* CONTACT */
     .contact-card {
       padding: 58px 32px; border-radius: 12px; text-align: center;
@@ -719,8 +765,7 @@
       .hero h1 { font-size: 2.5rem; }
       section + section { margin-top: 64px; }
       .hero { flex-direction: column; align-items: stretch; gap: 32px; }
-      .hero-game { width: 100%; max-width: 360px; }
-      .hero-game canvas { width: 100%; height: auto; aspect-ratio: 280 / 160; }
+      .hero-game { width: 100%; max-width: 460px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -842,13 +887,29 @@
         </div>
       </div>
 
-      <div class="hero-game" id="heroGame" aria-label="Mini game">
-        <canvas id="gameCanvas" width="280" height="160" tabindex="0"></canvas>
-        <div class="hero-game-meta">
-          <span>DEV.RUN</span>
-          <span class="hero-game-score" id="gameScore">0000</span>
+      <div class="hero-game" aria-label="Mini games">
+        <div class="game-card">
+          <div class="game-toolbar">
+            <div class="game-tabs" role="tablist" aria-label="Choose mini game">
+              <button class="game-tab active" id="runGameTab" type="button" role="tab" aria-selected="true" aria-controls="runPane" data-game-target="run">RUN</button>
+              <button class="game-tab" id="bowlGameTab" type="button" role="tab" aria-selected="false" aria-controls="bowlPane" data-game-target="bowl">BOWL</button>
+            </div>
+            <div class="game-score">
+              <span class="game-score-value active" data-game-score="run" id="runScore">0000</span>
+              <span class="game-score-value" data-game-score="bowl" id="bowlScore">0/6</span>
+            </div>
+          </div>
+          <div class="game-stage">
+            <div class="game-pane active" id="runPane" role="tabpanel" aria-labelledby="runGameTab" data-game-pane="run">
+              <canvas id="runCanvas" width="420" height="240" tabindex="0" aria-label="Mini runner"></canvas>
+              <div class="game-hint" id="runHint">click or space</div>
+            </div>
+            <div class="game-pane" id="bowlPane" role="tabpanel" aria-labelledby="bowlGameTab" data-game-pane="bowl" hidden>
+              <canvas id="bowlCanvas" width="420" height="256" aria-label="Mini bowling"></canvas>
+              <div class="game-hint" id="bowlHint">drag ball · release to bowl</div>
+            </div>
+          </div>
         </div>
-        <div class="hero-game-hint" id="gameHint">click or space</div>
       </div>
     </section>
 
@@ -1397,22 +1458,51 @@
         if (e.key === "Escape" && techOverlay.classList.contains("open")) closeTechCard();
       });
 
-      initHeroGame();
+      initGameSwitch();
+      initRunGame();
+      initBowlGame();
     });
 
-    function initHeroGame() {
-      const canvas = document.getElementById("gameCanvas");
+    function initGameSwitch() {
+      const tabs = Array.from(document.querySelectorAll("[data-game-target]"));
+      const panes = Array.from(document.querySelectorAll("[data-game-pane]"));
+      const scores = Array.from(document.querySelectorAll("[data-game-score]"));
+      if (!tabs.length || !panes.length) return;
+
+      function selectGame(game) {
+        tabs.forEach((tab) => {
+          const active = tab.dataset.gameTarget === game;
+          tab.classList.toggle("active", active);
+          tab.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        panes.forEach((pane) => {
+          const active = pane.dataset.gamePane === game;
+          pane.classList.toggle("active", active);
+          pane.hidden = !active;
+        });
+        scores.forEach((score) => {
+          score.classList.toggle("active", score.dataset.gameScore === game);
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => selectGame(tab.dataset.gameTarget));
+      });
+    }
+
+    function initRunGame() {
+      const canvas = document.getElementById("runCanvas");
       if (!canvas) return;
-      const scoreEl = document.getElementById("gameScore");
-      const hintEl = document.getElementById("gameHint");
+      const scoreEl = document.getElementById("runScore");
+      const hintEl = document.getElementById("runHint");
       const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
       const W = canvas.width, H = canvas.height;
       canvas.width = W * dpr; canvas.height = H * dpr;
-      canvas.style.width = W + "px"; canvas.style.height = H + "px";
+      canvas.style.width = ""; canvas.style.height = "";
       const ctx = canvas.getContext("2d");
       ctx.scale(dpr, dpr);
 
-      const ground = H - 28;
+      const ground = H - 38;
       const isDark = () => document.documentElement.getAttribute("data-theme") === "dark";
       const fg = () => isDark() ? "#ffffff" : "#111110";
       const line = () => isDark() ? "rgba(255,255,255,0.14)" : "rgba(0,0,0,0.12)";
@@ -1422,12 +1512,12 @@
       let player, obstacles, speed, score, alive, started, spawnTimer, last;
 
       function reset() {
-        player = { x: 28, y: ground - 14, w: 14, h: 14, vy: 0 };
+        player = { x: 44, y: ground - 22, w: 22, h: 22, vy: 0 };
         obstacles = [];
-        speed = 110;
+        speed = 150;
         score = 0;
         alive = true;
-        spawnTimer = 1.2;
+        spawnTimer = 1.1;
         last = performance.now();
       }
       reset();
@@ -1436,24 +1526,24 @@
       function jump() {
         if (!alive) { reset(); started = true; hintEl.style.opacity = "0"; return; }
         if (!started) { started = true; hintEl.style.opacity = "0"; }
-        if (player.y + player.h >= ground - 0.5) player.vy = -260;
+        if (player.y + player.h >= ground - 0.5) player.vy = -330;
       }
 
       function update(dt) {
         if (!started) return;
-        player.vy += 760 * dt;
+        player.vy += 900 * dt;
         player.y += player.vy * dt;
         if (player.y + player.h > ground) { player.y = ground - player.h; player.vy = 0; }
         spawnTimer -= dt;
         if (spawnTimer <= 0) {
-          const tall = Math.random() < 0.3;
-          const w = 9 + Math.random() * 6;
-          const h = tall ? 22 : 16;
-          obstacles.push({ x: W + 8, y: ground - h, w, h });
-          spawnTimer = 0.85 + Math.random() * 0.9;
+          const tall = Math.random() < 0.34;
+          const w = 12 + Math.random() * 8;
+          const h = tall ? 34 : 24;
+          obstacles.push({ x: W + 10, y: ground - h, w, h });
+          spawnTimer = 0.78 + Math.random() * 0.75;
         }
         for (const o of obstacles) o.x -= speed * dt;
-        obstacles = obstacles.filter(o => o.x + o.w > -4);
+        obstacles = obstacles.filter(o => o.x + o.w > -6);
         for (const o of obstacles) {
           if (player.x < o.x + o.w - 1 && player.x + player.w > o.x + 1 &&
               player.y < o.y + o.h && player.y + player.h > o.y) {
@@ -1462,7 +1552,7 @@
         }
         if (alive) {
           score += dt * 12;
-          speed = 110 + Math.min(140, score * 0.55);
+          speed = 150 + Math.min(170, score * 0.7);
         }
       }
 
@@ -1475,9 +1565,9 @@
         ctx.moveTo(0, ground + 0.5);
         ctx.lineTo(W, ground + 0.5);
         ctx.stroke();
-        for (let i = 0; i < W; i += 12) {
+        for (let i = 0; i < W; i += 16) {
           ctx.fillStyle = line();
-          ctx.fillRect(i, ground + 5, 4, 1);
+          ctx.fillRect(i, ground + 8, 6, 1);
         }
         ctx.fillStyle = fg();
         ctx.fillRect(player.x, player.y, player.w, player.h);
@@ -1487,7 +1577,7 @@
           ctx.fillStyle = isDark() ? "rgba(10,10,10,0.55)" : "rgba(247,245,242,0.7)";
           ctx.fillRect(0, 0, W, H);
           ctx.fillStyle = fg();
-          ctx.font = "600 11px ui-monospace, Menlo, monospace";
+          ctx.font = "600 13px ui-monospace, Menlo, monospace";
           ctx.textAlign = "center";
           ctx.fillText("CLICK TO RETRY", W / 2, H / 2 + 4);
         }
@@ -1512,6 +1602,181 @@
           e.preventDefault(); jump();
         }
       });
+    }
+
+    function initBowlGame() {
+      const canvas = document.getElementById("bowlCanvas");
+      if (!canvas) return;
+      const scoreEl = document.getElementById("bowlScore");
+      const hintEl = document.getElementById("bowlHint");
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      const W = canvas.width, H = canvas.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = ""; canvas.style.height = "";
+      const ctx = canvas.getContext("2d");
+      ctx.scale(dpr, dpr);
+
+      const isDark = () => document.documentElement.getAttribute("data-theme") === "dark";
+      const fg = () => isDark() ? "#ededed" : "#111110";
+      const line = () => isDark() ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)";
+      const bg = () => isDark() ? "#131313" : "#f7f5f2";
+      const orange = "#e85d2a";
+
+      let ball, pins, dragging = false, dragStart = null, dragVec = null, last = performance.now();
+
+      function resetBoard() {
+        ball = { x: W / 2, y: H - 30, r: 9, vx: 0, vy: 0 };
+        pins = [];
+        const cx = W / 2, top = 42, sp = 22, dy = sp * 0.866;
+        for (let i = 0; i < 3; i++) pins.push({ x: cx - sp + i * sp, y: top, r: 6, vx: 0, vy: 0, hit: false });
+        for (let i = 0; i < 2; i++) pins.push({ x: cx - sp / 2 + i * sp, y: top + dy, r: 6, vx: 0, vy: 0, hit: false });
+        pins.push({ x: cx, y: top + 2 * dy, r: 6, vx: 0, vy: 0, hit: false });
+      }
+      resetBoard();
+
+      const allDown = () => pins.every(p => p.hit);
+      const ballStopped = () => Math.hypot(ball.vx, ball.vy) < 4;
+      const ballOff = () => ball.y < -20 || ball.y > H + 20 || ball.x < -20 || ball.x > W + 20;
+      const isOver = () => allDown() || (ballOff() && ballStopped()) || (ballStopped() && ball.y < 80);
+
+      function getPos(ev) {
+        const rect = canvas.getBoundingClientRect();
+        return { x: (ev.clientX - rect.left) * (W / rect.width), y: (ev.clientY - rect.top) * (H / rect.height) };
+      }
+
+      canvas.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        if (isOver()) { resetBoard(); hintEl.style.opacity = "0.78"; return; }
+        const p = getPos(e);
+        const d = Math.hypot(p.x - ball.x, p.y - ball.y);
+        if (d < 30 && ballStopped()) {
+          dragging = true; dragStart = p; dragVec = { x: 0, y: 0 };
+          canvas.setPointerCapture(e.pointerId);
+          hintEl.style.opacity = "0";
+        }
+      });
+      canvas.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        const p = getPos(e);
+        let vx = p.x - dragStart.x, vy = p.y - dragStart.y;
+        const max = 75, len = Math.hypot(vx, vy);
+        if (len > max) { vx *= max / len; vy *= max / len; }
+        dragVec = { x: vx, y: vy };
+      });
+      function release() {
+        if (!dragging) return;
+        dragging = false;
+        if (dragVec) {
+          const k = 7;
+          ball.vx = -dragVec.x * k;
+          ball.vy = -dragVec.y * k;
+        }
+        dragVec = null;
+      }
+      canvas.addEventListener("pointerup", release);
+      canvas.addEventListener("pointercancel", release);
+
+      function step(dt) {
+        ball.x += ball.vx * dt; ball.y += ball.vy * dt;
+        const f = Math.pow(0.42, dt);
+        ball.vx *= f; ball.vy *= f;
+        if (ball.x - ball.r < 0) { ball.x = ball.r; ball.vx = -ball.vx * 0.7; }
+        if (ball.x + ball.r > W) { ball.x = W - ball.r; ball.vx = -ball.vx * 0.7; }
+        for (const p of pins) {
+          p.x += p.vx * dt; p.y += p.vy * dt;
+          const pf = Math.pow(0.18, dt);
+          p.vx *= pf; p.vy *= pf;
+          const dx = p.x - ball.x, dy = p.y - ball.y;
+          const d = Math.hypot(dx, dy), minD = p.r + ball.r;
+          if (d < minD && d > 0.001) {
+            p.hit = true;
+            const nx = dx / d, ny = dy / d;
+            const overlap = minD - d;
+            p.x += nx * overlap; p.y += ny * overlap;
+            const vrel = (ball.vx - p.vx) * nx + (ball.vy - p.vy) * ny;
+            if (vrel > 0) {
+              const j = vrel * 1.5;
+              p.vx += nx * j; p.vy += ny * j;
+              ball.vx -= nx * j * 0.4; ball.vy -= ny * j * 0.4;
+            }
+          }
+        }
+        for (let i = 0; i < pins.length; i++) {
+          for (let j = i + 1; j < pins.length; j++) {
+            const a = pins[i], b = pins[j];
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const d = Math.hypot(dx, dy), minD = a.r + b.r;
+            if (d < minD && d > 0.001) {
+              const nx = dx / d, ny = dy / d;
+              const overlap = (minD - d) / 2;
+              a.x -= nx * overlap; a.y -= ny * overlap;
+              b.x += nx * overlap; b.y += ny * overlap;
+              const va = a.vx * nx + a.vy * ny, vb = b.vx * nx + b.vy * ny;
+              const ex = (vb - va);
+              a.vx += nx * ex; a.vy += ny * ex;
+              b.vx -= nx * ex; b.vy -= ny * ex;
+              if (Math.abs(ex) > 5) { a.hit = true; b.hit = true; }
+            }
+          }
+        }
+        scoreEl.textContent = `${pins.filter(p => p.hit).length}/${pins.length}`;
+      }
+
+      function draw() {
+        ctx.fillStyle = bg();
+        ctx.fillRect(0, 0, W, H);
+        ctx.strokeStyle = line();
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 5]);
+        ctx.beginPath();
+        ctx.moveTo(W * 0.15, 14); ctx.lineTo(W * 0.15, H - 16);
+        ctx.moveTo(W * 0.85, 14); ctx.lineTo(W * 0.85, H - 16);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        for (const p of pins) {
+          ctx.fillStyle = p.hit ? "rgba(232, 93, 42, 0.35)" : fg();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = orange;
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (dragging && dragVec) {
+          ctx.strokeStyle = orange;
+          ctx.lineWidth = 2;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(ball.x, ball.y);
+          ctx.lineTo(ball.x - dragVec.x, ball.y - dragVec.y);
+          ctx.stroke();
+          const ax = ball.x - dragVec.x, ay = ball.y - dragVec.y;
+          ctx.fillStyle = orange;
+          ctx.beginPath();
+          ctx.arc(ax, ay, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (isOver()) {
+          ctx.fillStyle = isDark() ? "rgba(11,11,11,0.6)" : "rgba(247,245,242,0.72)";
+          ctx.fillRect(0, 0, W, H);
+          ctx.fillStyle = fg();
+          ctx.font = "600 11px ui-monospace, Menlo, monospace";
+          ctx.textAlign = "center";
+          ctx.fillText(allDown() ? "STRIKE — TAP TO RESET" : "TAP TO RESET", W / 2, H / 2 + 4);
+        }
+      }
+
+      function loop(now) {
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        step(dt); draw();
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
     }
   </script>
 </body>
