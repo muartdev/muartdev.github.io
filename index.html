@@ -115,7 +115,10 @@
     .topbar-inner {
       display: flex; align-items: center; justify-content: space-between;
     }
-    
+    .topbar-left {
+      display: flex; align-items: center; gap: 12px;
+    }
+
     .brand {
       display: inline-flex; align-items: center;
       transition: opacity 0.2s;
@@ -128,6 +131,25 @@
       object-position: center;
       border-radius: 6px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 12px 4px 10px; border-radius: 100px;
+      background: rgba(22, 163, 74, 0.08);
+      border: 1px solid rgba(22, 163, 74, 0.22);
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .status-pill::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
+      animation: pulse 2s infinite;
     }
 
     .nav-controls {
@@ -227,22 +249,6 @@
     /* HERO */
     main { padding: 80px 0; position: relative; }
 
-    .hero-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 16px; border-radius: 100px;
-      background: rgba(22, 163, 74, 0.1);
-      border: 1px solid rgba(22, 163, 74, 0.2);
-      color: var(--green); font-size: 0.85rem; font-weight: 500;
-      margin-bottom: 32px;
-      backdrop-filter: blur(8px);
-    }
-    .hero-pill::before {
-      content: ""; width: 8px; height: 8px; border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 12px var(--green);
-      animation: pulse 2s infinite;
-    }
-
     .hero h1 {
       font-size: 3rem;
       line-height: 1.05; letter-spacing: 0;
@@ -272,31 +278,85 @@
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 26px; border-radius: 100px;
       font-size: 0.95rem; font-weight: 500;
-      transition: box-shadow 0.4s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       position: relative;
+      isolation: isolate;
     }
-    .btn-primary {
-      background: var(--text); color: var(--bg);
-      box-shadow: 0 0 0 0 rgba(232, 93, 42, 0);
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: inherit;
+      padding: 3px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        var(--orange),
+        var(--violet),
+        var(--cyan),
+        var(--orange)
+      );
+      filter: blur(14px);
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.35s ease;
     }
-    .btn-primary:hover {
-      box-shadow:
-        0 0 0 4px color-mix(in srgb, var(--orange) 12%, transparent),
-        0 8px 30px -6px color-mix(in srgb, var(--orange) 55%, transparent),
-        0 4px 16px -4px color-mix(in srgb, var(--violet) 40%, transparent);
+    .btn:hover::before {
+      opacity: 0.85;
+      animation: btn-spin 3.5s linear infinite;
+    }
+    @property --angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+    @keyframes btn-spin {
+      to { --angle: 360deg; }
+    }
+    @supports not (background: conic-gradient(from 0deg, red, blue)) {
+      .btn::before { display: none; }
     }
 
+    .btn-primary {
+      background: var(--text); color: var(--bg);
+    }
     .btn-secondary {
       background: var(--bg-card); color: var(--text);
       border: 1px solid var(--line-2);
       backdrop-filter: blur(12px);
-      box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
     }
     .btn-secondary:hover {
-      border-color: color-mix(in srgb, var(--orange) 60%, var(--line-2));
-      box-shadow:
-        0 0 0 4px color-mix(in srgb, var(--orange) 8%, transparent),
-        0 6px 24px -6px color-mix(in srgb, var(--violet) 40%, transparent);
+      border-color: color-mix(in srgb, var(--orange) 50%, var(--line-2));
+    }
+
+    /* Fallback animated glow for browsers without @property support */
+    @keyframes btn-glow-pulse {
+      0% {
+        box-shadow:
+          0 0 0 4px color-mix(in srgb, var(--orange) 14%, transparent),
+          0 8px 28px -4px color-mix(in srgb, var(--orange) 55%, transparent),
+          0 4px 18px -4px color-mix(in srgb, var(--violet) 35%, transparent);
+      }
+      33% {
+        box-shadow:
+          0 0 0 4px color-mix(in srgb, var(--violet) 14%, transparent),
+          0 8px 28px -4px color-mix(in srgb, var(--violet) 55%, transparent),
+          0 4px 18px -4px color-mix(in srgb, var(--cyan) 35%, transparent);
+      }
+      66% {
+        box-shadow:
+          0 0 0 4px color-mix(in srgb, var(--cyan) 14%, transparent),
+          0 8px 28px -4px color-mix(in srgb, var(--cyan) 55%, transparent),
+          0 4px 18px -4px color-mix(in srgb, var(--orange) 35%, transparent);
+      }
+      100% {
+        box-shadow:
+          0 0 0 4px color-mix(in srgb, var(--orange) 14%, transparent),
+          0 8px 28px -4px color-mix(in srgb, var(--orange) 55%, transparent),
+          0 4px 18px -4px color-mix(in srgb, var(--violet) 35%, transparent);
+      }
+    }
+    .btn:hover {
+      animation: btn-glow-pulse 3.5s ease-in-out infinite;
     }
 
     /* SECTIONS */
@@ -322,7 +382,6 @@
       overflow: hidden;
       padding: 8px 0 16px;
       position: relative;
-      display: flex;
       mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
       -webkit-mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
     }
@@ -331,7 +390,8 @@
       display: flex;
       gap: 16px;
       width: max-content;
-      animation: marquee 50s linear infinite;
+      animation: marquee 45s linear infinite;
+      will-change: transform;
     }
 
     .marquee-container:hover .marquee-track {
@@ -339,8 +399,8 @@
     }
 
     @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(calc(-50% - 8px)); }
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(calc(-50% - 8px), 0, 0); }
     }
 
     .project-card {
@@ -461,34 +521,36 @@
     .about-prose { font-size: 1.05rem; color: var(--text-soft); line-height: 1.7; display: grid; gap: 20px; }
     .about-prose .serif { font-size: 1.2em; color: var(--text); }
 
-    .info-list { display: grid; gap: 8px; }
+    .info-list { display: grid; gap: 0; border-top: 1px solid var(--line); }
     .info-item {
-      padding: 16px 20px; border-radius: 12px;
-      background: transparent; border: 1px solid var(--line);
-      transition: border-color 0.2s ease;
+      display: grid; grid-template-columns: 110px 1fr; gap: 16px;
+      padding: 14px 0; border-bottom: 1px solid var(--line);
+      align-items: baseline;
+      transition: padding 0.2s ease;
     }
-    .info-item:hover { border-color: var(--line-2); }
     .info-label {
       font-family: var(--mono); font-size: 0.7rem;
       color: var(--muted); text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-bottom: 6px; display: block;
+      display: block;
     }
     .info-val { font-size: 0.95rem; color: var(--text); font-weight: 500; }
 
     /* CONTACT */
     .contact-card {
-      padding: 64px 32px; border-radius: 16px; text-align: center;
-      background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-soft) 100%);
+      padding: 56px 32px; border-radius: 16px; text-align: center;
+      background: transparent;
       border: 1px solid var(--line); position: relative; overflow: hidden;
     }
     .contact-card::before {
       content: ""; position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 0%, var(--orange-soft), transparent 70%);
+      background: radial-gradient(circle at 50% 0%, var(--orange-soft), transparent 65%);
       pointer-events: none;
+      opacity: 0.6;
     }
+    .contact-card > * { position: relative; }
     .contact-title { font-size: 2rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; line-height: 1.15; }
-    .contact-sub { color: var(--text-soft); font-size: 1rem; margin-bottom: 32px; }
+    .contact-sub { color: var(--text-soft); font-size: 0.95rem; margin-bottom: 28px; }
     .contact-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
     /* SCROLL TO TOP */
@@ -576,6 +638,16 @@
 
       .project-card { width: 260px; height: 160px; padding: 18px; }
       footer { padding: 24px 0; flex-direction: column; gap: 8px; }
+
+      .info-item { grid-template-columns: 96px 1fr; gap: 12px; padding: 14px 0; }
+      .info-val { font-size: 0.9rem; }
+      .contact-card { padding: 40px 20px; }
+      .status-pill {
+        font-size: 0; gap: 0;
+        padding: 6px;
+        border-radius: 50%;
+      }
+      .status-pill::before { width: 8px; height: 8px; }
     }
 
     
@@ -587,10 +659,13 @@
 
   <header class="topbar">
     <div class="shell topbar-inner">
-      <a class="brand" href="#top" aria-label="Murat home">
-        <img class="brand-mark" src="muart.png" alt="" width="92" height="32" decoding="async" />
-      </a>
-      
+      <div class="topbar-left">
+        <a class="brand" href="#top" aria-label="Murat home">
+          <img class="brand-mark" src="muart.png" alt="" width="92" height="32" decoding="async" />
+        </a>
+        <span class="status-pill" data-i18n="hero.pill">Open to work</span>
+      </div>
+
       <div class="nav-controls">
         <!-- Language Selector -->
         <div class="lang-wrap">
@@ -632,7 +707,6 @@
   <main>
     <section class="hero shell" id="top">
       <div class="hero-copy">
-        <span class="hero-pill" data-i18n="hero.pill">Open to work</span>
         <h1 data-i18n="hero.title" data-i18n-html>Product engineer <br class="mobile-break" />shipping <span class="accent">iOS</span>, <span class="accent">web</span>, and <span class="accent">backend systems</span>.</h1>
         <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
         <div class="hero-cta">
