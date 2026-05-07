@@ -419,17 +419,18 @@
     .project-card {
       display: flex;
       flex-direction: column;
-      width: 280px;
-      height: 168px;
-      padding: 20px;
+      width: 300px;
+      height: 240px;
+      padding: 0;
       border-radius: var(--radius-md);
       background: var(--panel);
       border: 1px solid var(--line);
       box-shadow: var(--shadow-panel);
-      transition: border-color 0.25s ease, background 0.25s ease;
+      transition: border-color 0.3s ease, background 0.3s ease;
       text-decoration: none;
       color: inherit;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
     .project-card:hover {
@@ -437,71 +438,100 @@
       background: var(--panel-hover);
     }
 
-    .project-card-top {
+    .project-card-img {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      background: var(--bg-soft);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .project-card-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      transform: scale(1.04);
+    }
+    .project-card-img img.active { opacity: 1; }
+    .project-card-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 70%, color-mix(in srgb, var(--bg) 22%, transparent) 100%);
+      pointer-events: none;
+    }
+    .project-card-img-fallback {
+      position: absolute;
+      inset: 0;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 16px;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background:
+        repeating-linear-gradient(
+          45deg,
+          transparent 0,
+          transparent 10px,
+          var(--line) 10px,
+          var(--line) 11px
+        );
+    }
+    .project-card-arrow-overlay {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 30px; height: 30px;
+      border-radius: 100px;
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      backdrop-filter: blur(8px);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--text);
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      z-index: 1;
+    }
+    .project-card-arrow-overlay svg { width: 14px; height: 14px; }
+    .project-card:hover .project-card-arrow-overlay {
+      background: var(--orange);
+      color: #fff;
+      transform: translate(2px, -2px);
+    }
+
+    .project-card-body {
+      padding: 14px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
     }
 
     .project-card-title {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 600;
       letter-spacing: -0.01em;
       color: var(--text);
     }
 
-    .project-card-arrow {
-      color: var(--muted);
-      transition: color 0.2s ease, transform 0.2s ease;
-    }
-    .project-card-arrow svg { width: 16px; height: 16px; }
-
-    .project-card:hover .project-card-arrow {
-      color: var(--orange);
-      transform: translate(2px, -2px);
-    }
-
     .project-card-kind {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-soft);
-      margin-bottom: 6px;
     }
 
     .project-card-meta {
       font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: auto;
+      margin-top: auto;
     }
-
-    .project-card-stack {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      gap: 0;
-      margin-top: 16px;
-      overflow: hidden;
-    }
-
-    .project-card-stack span {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--text-soft);
-      white-space: nowrap;
-      background: transparent;
-      border: 0;
-      padding: 0;
-      border-radius: 0;
-    }
-    .project-card-stack span + span::before {
-      content: "·";
-      margin: 0 8px;
-      color: var(--muted);
-    }
-    .project-card-stack span:nth-child(n+4) { display: none; }
 
     /* STACK */
     .stack-grid {
@@ -806,7 +836,9 @@
         -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 44px), transparent 100%);
       }
       .marquee-track { gap: 12px; }
-      .project-card { width: 260px; height: 160px; padding: 18px; border-radius: var(--radius-md); }
+      .project-card { width: 270px; height: 220px; padding: 0; border-radius: var(--radius-md); }
+      .project-card-img { height: 120px; }
+      .project-card-body { padding: 12px 16px 14px; }
       footer { padding: 24px 0; flex-direction: column; gap: 8px; }
 
       .info-item { grid-template-columns: 96px 1fr; gap: 12px; padding: 12px 14px; }
@@ -919,92 +951,84 @@
       <div class="marquee-container" role="marquee">
         <div class="marquee-track">
           <!-- 1st set -->
-          <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener">
-            <div class="project-card-top">
+          <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" data-project="ideloc">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
               <span class="project-card-title">Ideloc Studio</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.ideloc.kind">creative tech studio</div>
-            <div class="project-card-meta" data-i18n="proj.ideloc.meta">Studio · Early</div>
-            <div class="project-card-stack">
-              <span>Brand</span><span>UI/UX</span><span>Web</span>
+              <span class="project-card-kind" data-i18n="proj.ideloc.kind">creative tech studio</span>
+              <span class="project-card-meta" data-i18n="proj.ideloc.meta">Studio · Early</span>
             </div>
           </a>
-          <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener">
-            <div class="project-card-top">
+          <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" data-project="mindshelf">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
               <span class="project-card-title">MindShelf</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.mindshelf.kind">bookmark manager</div>
-            <div class="project-card-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</div>
-            <div class="project-card-stack">
-              <span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>StoreKit 2</span><span>React</span><span>Vite</span><span>Supabase</span>
+              <span class="project-card-kind" data-i18n="proj.mindshelf.kind">bookmark manager</span>
+              <span class="project-card-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</span>
             </div>
           </a>
-          <a class="project-card" href="https://softmendil.com" target="_blank" rel="noopener">
-            <div class="project-card-top">
+          <a class="project-card" href="https://softmendil.com" target="_blank" rel="noopener" data-project="soft">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
               <span class="project-card-title">Softmendil</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.soft.kind">packaging website</div>
-            <div class="project-card-meta" data-i18n="proj.soft.meta">Web · Live</div>
-            <div class="project-card-stack">
-              <span>Next.js</span><span>React</span><span>Supabase</span><span>Vercel</span>
+              <span class="project-card-kind" data-i18n="proj.soft.kind">packaging website</span>
+              <span class="project-card-meta" data-i18n="proj.soft.meta">Web · Live</span>
             </div>
           </a>
-          <a class="project-card" href="https://www.vogeriderstr.com" target="_blank" rel="noopener">
-            <div class="project-card-top">
+          <a class="project-card" href="https://www.vogeriderstr.com" target="_blank" rel="noopener" data-project="voge">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
               <span class="project-card-title">VogeRidersTR</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.voge.kind">rider community</div>
-            <div class="project-card-meta" data-i18n="proj.voge.meta">Web · Live</div>
-            <div class="project-card-stack">
-              <span>Next.js</span><span>React</span><span>Sheets API</span><span>Vercel</span>
+              <span class="project-card-kind" data-i18n="proj.voge.kind">rider community</span>
+              <span class="project-card-meta" data-i18n="proj.voge.meta">Web · Live</span>
             </div>
           </a>
-          <a class="project-card" href="https://github.com/muartdev/pace" target="_blank" rel="noopener">
-            <div class="project-card-top">
+          <a class="project-card" href="https://github.com/muartdev/pace" target="_blank" rel="noopener" data-project="pace">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
               <span class="project-card-title">Pace</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.pace.kind">discipline app</div>
-            <div class="project-card-meta" data-i18n="proj.pace.meta">Mobile · In Progress</div>
-            <div class="project-card-stack">
-              <span>Expo</span><span>TypeScript</span><span>Zustand</span><span>Supabase</span>
+              <span class="project-card-kind" data-i18n="proj.pace.kind">discipline app</span>
+              <span class="project-card-meta" data-i18n="proj.pace.meta">Mobile · In Progress</span>
             </div>
           </a>
-          <a class="project-card" href="https://github.com/muartdev/mind" target="_blank" rel="noopener">
-            <div class="project-card-top">
+          <a class="project-card" href="https://github.com/muartdev/mind" target="_blank" rel="noopener" data-project="api">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
               <span class="project-card-title">Mind API</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.api.kind">product backend</div>
-            <div class="project-card-meta" data-i18n="proj.api.meta">API · Backend</div>
-            <div class="project-card-stack">
-              <span>TypeScript</span><span>Supabase</span>
+              <span class="project-card-kind" data-i18n="proj.api.kind">product backend</span>
+              <span class="project-card-meta" data-i18n="proj.api.meta">API · Backend</span>
             </div>
           </a>
-          <a class="project-card" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener">
-            <div class="project-card-top">
+          <a class="project-card" href="https://github.com/muartdev/FoodSuggest" target="_blank" rel="noopener" data-project="food">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
               <span class="project-card-title">FoodSuggest</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-            </div>
-            <div class="project-card-kind" data-i18n="proj.food.kind">meal ideas</div>
-            <div class="project-card-meta" data-i18n="proj.food.meta">iOS · Experiment</div>
-            <div class="project-card-stack">
-              <span>Swift</span><span>SwiftUI</span>
+              <span class="project-card-kind" data-i18n="proj.food.kind">meal ideas</span>
+              <span class="project-card-meta" data-i18n="proj.food.meta">iOS · Experiment</span>
             </div>
           </a>
-          <a class="project-card" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener">
-            <div class="project-card-top">
-              <span class="project-card-title">macOS System Monitor</span>
-              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          <a class="project-card" href="https://github.com/muartdev/macos-system-monitor" target="_blank" rel="noopener" data-project="mon">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
             </div>
-            <div class="project-card-kind" data-i18n="proj.mon.kind">system utility</div>
-            <div class="project-card-meta" data-i18n="proj.mon.meta">macOS · Experiment</div>
-            <div class="project-card-stack">
-              <span>Swift</span><span>AppKit</span>
+            <div class="project-card-body">
+              <span class="project-card-title">macOS System Monitor</span>
+              <span class="project-card-kind" data-i18n="proj.mon.kind">system utility</span>
+              <span class="project-card-meta" data-i18n="proj.mon.meta">macOS · Experiment</span>
             </div>
           </a>
 
@@ -1458,7 +1482,71 @@
       initGameSwitch();
       initRunGame();
       initBowlGame();
+      initProjectShots();
     });
+
+    function initProjectShots() {
+      const ms = (u) => `https://api.microlink.io/?url=${encodeURIComponent(u)}&screenshot=true&meta=false&embed=screenshot.url`;
+      const ghOg = (repo) => `https://opengraph.githubassets.com/1/${repo}`;
+      const shots = {
+        ideloc: [ms("https://ideloc-studio.pages.dev")],
+        mindshelf: [ms("https://mindshelf-web.pages.dev")],
+        soft: [ms("https://softmendil.com")],
+        voge: [ms("https://www.vogeriderstr.com")],
+        pace: [ghOg("muartdev/pace")],
+        api: [ghOg("muartdev/mind")],
+        food: [ghOg("muartdev/FoodSuggest")],
+        mon: [ghOg("muartdev/macos-system-monitor")],
+      };
+
+      document.querySelectorAll(".project-card[data-project]").forEach((card) => {
+        const key = card.dataset.project;
+        const urls = shots[key];
+        const wrap = card.querySelector(".project-card-img");
+        if (!wrap) return;
+        if (!urls || urls.length === 0) {
+          const fb = document.createElement("div");
+          fb.className = "project-card-img-fallback";
+          fb.textContent = card.querySelector(".project-card-title")?.textContent || "";
+          wrap.appendChild(fb);
+          return;
+        }
+
+        const ensureFallback = () => {
+          if (wrap.querySelector(".project-card-img-fallback")) return;
+          const fb = document.createElement("div");
+          fb.className = "project-card-img-fallback";
+          fb.textContent = card.querySelector(".project-card-title")?.textContent || "";
+          wrap.insertBefore(fb, wrap.firstChild);
+        };
+
+        const imgs = urls.map((url, i) => {
+          const img = document.createElement("img");
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.alt = "";
+          img.referrerPolicy = "no-referrer";
+          img.src = url;
+          img.addEventListener("error", () => {
+            img.style.display = "none";
+            const others = wrap.querySelectorAll("img");
+            const allFailed = [...others].every((o) => o.style.display === "none");
+            if (allFailed) ensureFallback();
+          });
+          if (i === 0) img.classList.add("active");
+          wrap.insertBefore(img, wrap.firstChild);
+          return img;
+        });
+
+        if (imgs.length < 2) return;
+        let idx = 0;
+        setInterval(() => {
+          imgs[idx].classList.remove("active");
+          idx = (idx + 1) % imgs.length;
+          imgs[idx].classList.add("active");
+        }, 4200);
+      });
+    }
 
     function initGameSwitch() {
       const tabs = Array.from(document.querySelectorAll("[data-game-target]"));
