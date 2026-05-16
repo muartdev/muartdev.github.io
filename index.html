@@ -962,6 +962,16 @@
       <div class="marquee-container" role="marquee">
         <div class="marquee-track">
           <!-- 1st set -->
+          <a class="project-card" href="/corewords/" rel="noopener" data-project="corewords">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-title">CoreWords</span>
+              <span class="project-card-kind" data-i18n="proj.corewords.kind">vocabulary learning app</span>
+              <span class="project-card-meta" data-i18n="proj.corewords.meta">Mobile · Live</span>
+            </div>
+          </a>
           <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" data-project="ideloc">
             <div class="project-card-img">
               <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
@@ -1154,6 +1164,9 @@
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
         "work.title":"Selected <span class=\"serif\">Work</span>",
         "proj.live":"Live",
+        "proj.corewords.kind":"vocabulary learning app",
+        "proj.corewords.meta":"Mobile · Live",
+        "proj.corewords.desc":"Offline-first English vocabulary app: definitions, context, spaced repetition and quizzes. React Native + Expo, by Ideloc Studio.",
         "proj.ideloc.kind":"creative tech studio",
         "proj.ideloc.meta":"Studio · Early",
         "proj.ideloc.desc":"A young creative tech studio for brand identities, interfaces, and software systems.",
@@ -1244,6 +1257,9 @@
         "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
         "work.title":"Seçili <span class=\"serif\">İşler</span>",
         "proj.live":"Yayında",
+        "proj.corewords.kind":"kelime öğrenme uygulaması",
+        "proj.corewords.meta":"Mobil · Yayında",
+        "proj.corewords.desc":"Çevrimdışı çalışan İngilizce kelime uygulaması: tanımlar, bağlam, aralıklı tekrar ve testler. React Native + Expo, Ideloc Studio.",
         "proj.ideloc.kind":"yaratıcı teknoloji stüdyosu",
         "proj.ideloc.meta":"Stüdyo · Erken aşama",
         "proj.ideloc.desc":"Marka kimliği, arayüz ve yazılım sistemleri için genç bir yaratıcı teknoloji stüdyosu.",
@@ -1538,6 +1554,7 @@
       const ms = (u) => `https://api.microlink.io/?url=${encodeURIComponent(u)}&screenshot=true&meta=false&embed=screenshot.url`;
       const ghOg = (repo) => `https://opengraph.githubassets.com/1/${repo}`;
       const shots = {
+        corewords: [ms("https://muartdev.github.io/corewords/")],
         ideloc: [ms("https://ideloc-studio.pages.dev")],
         mindshelf: [ms("https://mindshelf-web.pages.dev")],
         soft: [ms("https://softmendil.com")],
