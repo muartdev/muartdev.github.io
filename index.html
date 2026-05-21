@@ -326,6 +326,53 @@
       max-width: var(--max);
     }
     .hero-copy { max-width: 720px; }
+    .scroll-rail {
+      position: fixed;
+      right: clamp(36px, calc((100vw - var(--max)) / 4), 152px);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      color: var(--text-soft);
+      opacity: 0.72;
+      transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+    }
+    .scroll-rail:hover {
+      color: var(--text);
+      opacity: 1;
+    }
+    .scroll-rail.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-42%);
+    }
+    .scroll-rail span {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .scroll-rail i {
+      display: block;
+      width: 1px;
+      height: 78px;
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--text) 18%, transparent),
+        color-mix(in srgb, var(--orange) 72%, transparent)
+      );
+      transform-origin: top;
+      animation: scroll-line 2.4s ease-in-out infinite;
+    }
+    @keyframes scroll-line {
+      0%, 100% { transform: scaleY(0.72); opacity: 0.52; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 26px; border-radius: 100px;
@@ -699,6 +746,7 @@
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero h1 { font-size: 2.5rem; }
       section + section { margin-top: 52px; }
+      .scroll-rail { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -806,6 +854,11 @@
       </div>
     </div>
   </header>
+
+  <a class="scroll-rail" id="scrollRail" href="#work" aria-label="Scroll to selected work">
+    <span>Scroll</span>
+    <i aria-hidden="true"></i>
+  </a>
 
   <main>
     <section class="hero shell" id="top">
@@ -1270,9 +1323,14 @@
       });
 
       const toTop = document.getElementById("toTop");
+      const scrollRail = document.getElementById("scrollRail");
       const onScroll = () => {
         if (window.scrollY > 320) toTop.classList.add("visible");
         else toTop.classList.remove("visible");
+        if (scrollRail) {
+          if (window.scrollY > 160) scrollRail.classList.add("is-hidden");
+          else scrollRail.classList.remove("is-hidden");
+        }
       };
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
