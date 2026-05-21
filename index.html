@@ -22,7 +22,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="icon" type="image/png" href="muart.png" />
   <style>
     :root {
@@ -537,95 +536,72 @@
 
     /* STACK */
     .stack-grid {
-      display: grid; gap: 0;
-      padding: 0 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
       background: var(--panel);
       box-shadow: var(--shadow-panel);
+      overflow: hidden;
     }
-    .stack-row {
-      display: grid; grid-template-columns: 140px 1fr; gap: 24px;
-      padding: 16px 0; border-top: 1px solid var(--line);
-      align-items: start;
+    .stack-item {
+      padding: 22px;
+      background: color-mix(in srgb, var(--panel) 92%, var(--bg-soft));
+      min-height: 168px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    .stack-row:last-child { border-bottom: 1px solid var(--line); }
-    .stack-row-label {
-      font-family: var(--mono); font-size: 0.75rem;
-      text-transform: uppercase; color: var(--muted);
-      letter-spacing: 0.06em; padding-top: 6px;
+    .stack-item-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
     }
-    .stack-row-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-family: var(--mono); font-size: 0.75rem;
+    .stack-kicker {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .stack-item-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       color: var(--text);
-      height: 32px; padding: 0 10px; border-radius: 100px;
-      border: 1px solid var(--line-2);
-      background: color-mix(in srgb, var(--bg-elev) 86%, var(--bg-soft));
-      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-      cursor: pointer;
     }
-    .chip:hover { border-color: var(--accent-line); color: var(--text); background: var(--panel-hover); }
-    .chip i {
-      font-size: 1rem;
-      line-height: 1;
-      color: var(--text);
-      transition: color 0.2s ease;
+    .stack-item-desc {
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      line-height: 1.55;
+      max-width: 42ch;
     }
-    .chip:hover i { color: var(--orange); }
-    .chip-icon {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-width: 16px; height: 16px; padding: 0 4px; border-radius: var(--radius-sm);
-      font-family: var(--mono); font-size: 0.58rem; font-weight: 600;
-      line-height: 1; color: var(--text);
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+    }
+    .stack-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 100px;
+      border: 1px solid var(--line);
       background: var(--bg-soft);
-      border: 1px solid var(--line-2);
+      color: var(--text-soft);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.02em;
     }
 
     @media (max-width: 600px) {
-      .stack-row { grid-template-columns: 1fr; gap: 12px; padding: 16px 0; }
+      .stack-grid { grid-template-columns: 1fr; }
+      .stack-item { min-height: 0; padding: 18px; }
     }
-
-    /* TECH CARD MODAL */
-    .tech-card-overlay {
-      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-      z-index: 100; display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-      padding: 20px;
-    }
-    [data-theme="dark"] .tech-card-overlay { background: rgba(0, 0, 0, 0.6); }
-    .tech-card-overlay.open { opacity: 1; pointer-events: auto; }
-    .tech-card {
-      background: var(--bg-elev); border: 1px solid var(--line);
-      border-radius: var(--radius-lg); padding: 28px; width: 100%; max-width: 400px;
-      box-shadow: var(--shadow-panel);
-      transform: translateY(16px) scale(0.98);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-    }
-    .tech-card-overlay.open .tech-card { transform: translateY(0) scale(1); }
-    .tech-card-close {
-      position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); border-radius: 50%; background: var(--bg-soft);
-      transition: color 0.2s, background 0.2s;
-    }
-    .tech-card-close:hover { color: var(--text); background: var(--line); }
-    .tech-card-close svg { width: 16px; height: 16px; }
-    .tech-card-icon {
-      font-size: 2.5rem; color: var(--text); margin-bottom: 16px;
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 56px; height: 56px; border-radius: var(--radius-md);
-      background: var(--bg-soft); border: 1px solid var(--line);
-    }
-    .tech-card-icon svg { width: 32px; height: 32px; fill: currentColor; }
-    .tech-card-icon .chip-icon {
-      font-size: 1.2rem; width: 32px; height: 32px; border-radius: 8px;
-    }
-    .tech-card-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
-    .tech-card-desc { font-size: 0.95rem; color: var(--text-soft); line-height: 1.6; }
 
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 36px; align-items: start; }
@@ -948,32 +924,56 @@
     <section id="stack" class="shell">
       <div class="section-head">
         <span class="section-num">02</span>
-        <h2 class="section-title" data-i18n="stack.title" data-i18n-html>Tech <span class="serif">Stack</span></h2>
+        <h2 class="section-title" data-i18n="stack.title" data-i18n-html>What I <span class="serif">Handle</span></h2>
       </div>
 
       <div class="stack-grid">
-        <div class="stack-row">
-          <span class="stack-row-label" data-i18n="stack.frontend">Frontend</span>
-          <div class="stack-row-chips">
-            <button class="chip" data-tech="react"><i class="devicon-react-original"></i>React</button><button class="chip" data-tech="nextjs"><i class="devicon-nextjs-plain"></i>Next.js</button><button class="chip" data-tech="vite"><i class="devicon-vitejs-plain"></i>Vite</button><button class="chip" data-tech="typescript"><i class="devicon-typescript-plain"></i>TypeScript</button><button class="chip" data-tech="javascript"><i class="devicon-javascript-plain"></i>JavaScript</button><button class="chip" data-tech="html5"><i class="devicon-html5-plain"></i>HTML5</button><button class="chip" data-tech="css3"><i class="devicon-css3-plain"></i>CSS3</button><button class="chip" data-tech="zustand"><span class="chip-icon">Z</span>Zustand</button>
+        <div class="stack-item">
+          <div class="stack-item-head">
+            <span class="stack-kicker">01</span>
+            <h3 class="stack-item-title" data-i18n="stack.web.title">Websites and interfaces</h3>
+          </div>
+          <p class="stack-item-desc" data-i18n="stack.web.desc">Clear product pages, landing pages, dashboards and admin screens that feel fast and finished.</p>
+          <div class="stack-tags" aria-label="Web tools">
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">TypeScript</span>
           </div>
         </div>
-        <div class="stack-row">
-          <span class="stack-row-label" data-i18n="stack.mobile">Mobile</span>
-          <div class="stack-row-chips">
-            <button class="chip" data-tech="swift"><i class="devicon-swift-plain"></i>Swift</button><button class="chip" data-tech="swiftui"><i class="devicon-swift-plain"></i>SwiftUI</button><button class="chip" data-tech="swiftdata"><span class="chip-icon">SD</span>SwiftData</button><button class="chip" data-tech="storekit"><span class="chip-icon">SK</span>StoreKit 2</button><button class="chip" data-tech="appkit"><span class="chip-icon">AK</span>AppKit</button><button class="chip" data-tech="expo"><span class="chip-icon">EX</span>Expo</button><button class="chip" data-tech="reactnative"><i class="devicon-react-original"></i>React Native</button>
+        <div class="stack-item">
+          <div class="stack-item-head">
+            <span class="stack-kicker">02</span>
+            <h3 class="stack-item-title" data-i18n="stack.mobile.title">Mobile apps</h3>
+          </div>
+          <p class="stack-item-desc" data-i18n="stack.mobile.desc">iOS and cross-platform apps with onboarding, local data, payments and App Store-ready flows.</p>
+          <div class="stack-tags" aria-label="Mobile tools">
+            <span class="stack-tag">Swift</span>
+            <span class="stack-tag">SwiftUI</span>
+            <span class="stack-tag">Expo</span>
           </div>
         </div>
-        <div class="stack-row">
-          <span class="stack-row-label" data-i18n="stack.backend">Backend / Data</span>
-          <div class="stack-row-chips">
-            <button class="chip" data-tech="supabase"><i class="devicon-supabase-plain"></i>Supabase</button><button class="chip" data-tech="postgresql"><i class="devicon-postgresql-plain"></i>PostgreSQL</button><button class="chip" data-tech="rls"><span class="chip-icon">RLS</span>Row Level Security</button><button class="chip" data-tech="sheets"><span class="chip-icon">GS</span>Google Sheets API</button><button class="chip" data-tech="rest"><span class="chip-icon">API</span>REST</button>
+        <div class="stack-item">
+          <div class="stack-item-head">
+            <span class="stack-kicker">03</span>
+            <h3 class="stack-item-title" data-i18n="stack.backend.title">Backend and data</h3>
+          </div>
+          <p class="stack-item-desc" data-i18n="stack.backend.desc">Accounts, databases, secure content, APIs and the data layer behind the product.</p>
+          <div class="stack-tags" aria-label="Backend tools">
+            <span class="stack-tag">Supabase</span>
+            <span class="stack-tag">PostgreSQL</span>
+            <span class="stack-tag">REST APIs</span>
           </div>
         </div>
-        <div class="stack-row">
-          <span class="stack-row-label" data-i18n="stack.deploy">Deploy / Tools</span>
-          <div class="stack-row-chips">
-            <button class="chip" data-tech="vercel"><i class="devicon-vercel-original"></i>Vercel</button><button class="chip" data-tech="cloudflare"><i class="devicon-cloudflare-plain"></i>Cloudflare Pages</button><button class="chip" data-tech="githubpages"><i class="devicon-github-original"></i>GitHub Pages</button><button class="chip" data-tech="git"><i class="devicon-git-plain"></i>Git</button><button class="chip" data-tech="github"><i class="devicon-github-original"></i>GitHub</button><button class="chip" data-tech="xcode"><i class="devicon-xcode-plain"></i>Xcode</button><button class="chip" data-tech="figma"><i class="devicon-figma-plain"></i>Figma</button>
+        <div class="stack-item">
+          <div class="stack-item-head">
+            <span class="stack-kicker">04</span>
+            <h3 class="stack-item-title" data-i18n="stack.launch.title">Launch and care</h3>
+          </div>
+          <p class="stack-item-desc" data-i18n="stack.launch.desc">Deployment, performance, bug fixes, updates and the practical handoff after launch.</p>
+          <div class="stack-tags" aria-label="Launch tools">
+            <span class="stack-tag">Vercel</span>
+            <span class="stack-tag">Cloudflare</span>
+            <span class="stack-tag">GitHub</span>
           </div>
         </div>
       </div>
@@ -1028,17 +1028,6 @@
     </footer>
   </main>
 
-  <div class="tech-card-overlay" id="techOverlay" role="dialog" aria-modal="true">
-    <div class="tech-card" id="techCard">
-      <button class="tech-card-close" id="techClose" aria-label="Close">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      </button>
-      <div class="tech-card-icon" id="techIcon"></div>
-      <h3 class="tech-card-title" id="techTitle"></h3>
-      <p class="tech-card-desc" id="techDesc"></p>
-    </div>
-  </div>
-
   <button class="to-top" id="toTop" type="button" aria-label="Scroll to top">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
   </button>
@@ -1084,11 +1073,15 @@
         "proj.mon.kind":"system utility",
         "proj.mon.meta":"macOS · Experiment",
         "proj.mon.desc":"Lightweight native macOS app for monitoring system stats.",
-        "stack.title":"Tech <span class=\"serif\">Stack</span>",
-        "stack.frontend":"Frontend",
-        "stack.mobile":"Mobile",
-        "stack.backend":"Backend / Data",
-        "stack.deploy":"Deploy / Tools",
+        "stack.title":"What I <span class=\"serif\">Handle</span>",
+        "stack.web.title":"Websites and interfaces",
+        "stack.web.desc":"Clear product pages, landing pages, dashboards and admin screens that feel fast and finished.",
+        "stack.mobile.title":"Mobile apps",
+        "stack.mobile.desc":"iOS and cross-platform apps with onboarding, local data, payments and App Store-ready flows.",
+        "stack.backend.title":"Backend and data",
+        "stack.backend.desc":"Accounts, databases, secure content, APIs and the data layer behind the product.",
+        "stack.launch.title":"Launch and care",
+        "stack.launch.desc":"Deployment, performance, bug fixes, updates and the practical handoff after launch.",
         "tech.react":"My primary library for building interactive web interfaces with components.",
         "tech.nextjs":"The framework I use for SEO-friendly, full-stack React applications.",
         "tech.vite":"My go-to build tool for fast, lightweight web projects.",
@@ -1177,11 +1170,15 @@
         "proj.mon.kind":"sistem aracı",
         "proj.mon.meta":"macOS · Deneme",
         "proj.mon.desc":"Sistem istatistiklerini izleyen hafif, native macOS uygulaması.",
-        "stack.title":"Teknoloji <span class=\"serif\">Yığını</span>",
-        "stack.frontend":"Frontend",
-        "stack.mobile":"Mobil",
-        "stack.backend":"Backend / Veri",
-        "stack.deploy":"Yayın / Araçlar",
+        "stack.title":"Neleri <span class=\"serif\">Üstlenirim</span>",
+        "stack.web.title":"Web siteleri ve arayüzler",
+        "stack.web.desc":"Hızlı, anlaşılır ve bitmiş hissi veren ürün sayfaları, landing page'ler, paneller ve yönetim ekranları.",
+        "stack.mobile.title":"Mobil uygulamalar",
+        "stack.mobile.desc":"Onboarding, yerel veri, ödeme ve App Store'a hazır akışları olan iOS ve çapraz platform uygulamalar.",
+        "stack.backend.title":"Backend ve veri",
+        "stack.backend.desc":"Hesap sistemi, veritabanı, güvenli içerik, API'ler ve ürünün arkasındaki veri katmanı.",
+        "stack.launch.title":"Yayınlama ve bakım",
+        "stack.launch.desc":"Yayına alma, performans, hata düzeltmeleri, güncellemeler ve lansman sonrası pratik teslim süreci.",
         "tech.react":"İnteraktif web arayüzleri ve komponent mimarisi için ana kütüphanem.",
         "tech.nextjs":"SEO dostu, full-stack React uygulamaları geliştirdiğim ana framework.",
         "tech.vite":"Hızlı ve hafif web projeleri için tercih ettiğim derleme aracı.",
@@ -1354,44 +1351,6 @@
       onScroll();
       toTop.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      // Tech Card Modal
-      const techOverlay = document.getElementById("techOverlay");
-      const techClose = document.getElementById("techClose");
-      const techIcon = document.getElementById("techIcon");
-      const techTitle = document.getElementById("techTitle");
-      const techDesc = document.getElementById("techDesc");
-      
-      const openTechCard = (techKey, iconHTML, titleText) => {
-        const lang = document.documentElement.getAttribute("lang") || "en";
-        const desc = I18N[lang][`tech.${techKey}`] || "";
-        techIcon.innerHTML = iconHTML;
-        techTitle.textContent = titleText;
-        techDesc.textContent = desc;
-        techOverlay.classList.add("open");
-      };
-
-      const closeTechCard = () => {
-        techOverlay.classList.remove("open");
-      };
-
-      document.querySelectorAll(".chip").forEach(chip => {
-        chip.addEventListener("click", () => {
-          const techKey = chip.getAttribute("data-tech");
-          const titleText = chip.textContent.trim();
-          const iconEl = chip.querySelector("i") || chip.querySelector(".chip-icon");
-          const iconHTML = iconEl ? iconEl.outerHTML : "";
-          openTechCard(techKey, iconHTML, titleText);
-        });
-      });
-
-      techClose.addEventListener("click", closeTechCard);
-      techOverlay.addEventListener("click", (e) => {
-        if (e.target === techOverlay) closeTechCard();
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && techOverlay.classList.contains("open")) closeTechCard();
       });
 
       initProjectShots();
