@@ -891,6 +891,16 @@
               <span class="project-card-meta" data-i18n="proj.corewords.meta">Mobile · In Progress</span>
             </div>
           </a>
+          <a class="project-card" href="/boxiq/" rel="noopener" data-project="boxiq">
+            <div class="project-card-img">
+              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-title">Boxiq</span>
+              <span class="project-card-kind" data-i18n="proj.boxiq.kind">daily logic puzzle game</span>
+              <span class="project-card-meta" data-i18n="proj.boxiq.meta">Mobile · In Progress</span>
+            </div>
+          </a>
           <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" data-project="ideloc">
             <div class="project-card-img">
               <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
@@ -1058,6 +1068,9 @@
         "proj.corewords.kind":"vocabulary learning app",
         "proj.corewords.meta":"Mobile · In Progress",
         "proj.corewords.desc":"Offline-first English vocabulary app: definitions, context, spaced repetition and quizzes. React Native + Expo, by Ideloc Studio.",
+        "proj.boxiq.kind":"daily logic puzzle game",
+        "proj.boxiq.meta":"Mobile · In Progress",
+        "proj.boxiq.desc":"Minimal daily puzzle game built with Expo and React Native. Local progress, daily challenge, stats, and a calm premium mobile UI.",
         "proj.ideloc.kind":"creative tech studio",
         "proj.ideloc.meta":"Studio · Early",
         "proj.ideloc.desc":"A young creative tech studio for brand identities, interfaces, and software systems.",
@@ -1138,6 +1151,9 @@
         "proj.corewords.kind":"kelime öğrenme uygulaması",
         "proj.corewords.meta":"Mobil · Geliştiriliyor",
         "proj.corewords.desc":"Çevrimdışı çalışan İngilizce kelime uygulaması: tanımlar, bağlam, aralıklı tekrar ve testler. React Native + Expo, Ideloc Studio.",
+        "proj.boxiq.kind":"günlük mantık bulmaca oyunu",
+        "proj.boxiq.meta":"Mobil · Geliştiriliyor",
+        "proj.boxiq.desc":"Expo ve React Native ile geliştirilen minimal günlük puzzle oyunu. Yerel ilerleme, günlük bulmaca, istatistikler ve sakin premium mobil arayüz.",
         "proj.ideloc.kind":"yaratıcı teknoloji stüdyosu",
         "proj.ideloc.meta":"Stüdyo · Erken aşama",
         "proj.ideloc.desc":"Marka kimliği, arayüz ve yazılım sistemleri için genç bir yaratıcı teknoloji stüdyosu.",
@@ -1383,6 +1399,7 @@
       const ms = (u) => `https://api.microlink.io/?url=${encodeURIComponent(u)}&screenshot=true&meta=false&embed=screenshot.url`;
       const shots = {
         corewords: [ms("https://muartdev.github.io/corewords/")],
+        boxiq: [ms("https://muartdev.github.io/boxiq/")],
         ideloc: [ms("https://ideloc-studio.pages.dev")],
         mindshelf: [ms("https://mindshelf-web.pages.dev")],
         soft: [ms("https://softmendil.com")],
