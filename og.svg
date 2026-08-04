@@ -1,64 +1,46 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fdfdfc"/>
-      <stop offset="1" stop-color="#f5f3ee"/>
+    <linearGradient id="beamFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff3615" stop-opacity="0.5"/>
+      <stop offset="0.75" stop-color="#ff3615" stop-opacity="0"/>
     </linearGradient>
-    <radialGradient id="glow" cx="20%" cy="80%" r="60%">
-      <stop offset="0" stop-color="#e85d2a" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="#e85d2a" stop-opacity="0"/>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ff3615" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#ff3615" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow2" cx="85%" cy="20%" r="55%">
-      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.12"/>
-      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="1" fill="rgba(0,0,0,0.05)"/>
+    <pattern id="rules" x="0" y="0" width="88" height="630" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="630" fill="#111110" fill-opacity="0.085"/>
     </pattern>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+    <filter id="softer" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="38"/>
+    </filter>
   </defs>
 
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#dots)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
-  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <rect width="1200" height="630" fill="#fdfdfc"/>
+  <rect width="1200" height="630" fill="url(#rules)"/>
 
-  <!-- top status bar -->
-  <g transform="translate(80, 80)">
-    <rect width="60" height="22" rx="11" fill="#16a34a" fill-opacity="0.1" stroke="#16a34a" stroke-opacity="0.25"/>
-    <circle cx="14" cy="11" r="3.2" fill="#16a34a"/>
-    <text x="24" y="15" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="500" fill="#16a34a" letter-spacing="0.5">OPEN</text>
+  <!-- light beam, same lamp position as the site's theme toggle -->
+  <polygon points="1032,30 1064,30 1250,630 770,630" fill="url(#beamFade)" filter="url(#soft)"/>
+  <ellipse cx="1050" cy="5" rx="75" ry="75" fill="url(#lamp)" filter="url(#softer)"/>
+
+  <!-- mark -->
+  <g transform="translate(80 74) scale(0.376)">
+    <path fill="#111110" fill-rule="evenodd" d="M60 0.7 L114.7 55.4 L170.1 0 L200 0 L200 117 L171.1 117 L171.1 39.6 L115.9 94.8 L37.4 16.3 L1.8 16.3 L1.8 0.7 Z M1.8 26.6 L17.1 26.6 L55.7 65.2 L11.1 109.7 L0 98.6 L33.4 65.2 L1.8 33.6 Z M59.4 81.5 L59.4 117 L28.8 117 L28.8 112.1 Z"/>
   </g>
 
-  <!-- name plate -->
-  <g transform="translate(1010, 70)">
-    <rect width="110" height="40" rx="8" fill="#111110"/>
-    <text x="55" y="26" text-anchor="middle" font-family="Geist, system-ui, sans-serif" font-size="18" font-weight="600" fill="#fdfdfc">muart.</text>
+  <!-- headline -->
+  <g font-family="Geist, system-ui, sans-serif" font-size="78" font-weight="600" letter-spacing="-2.2">
+    <text x="80" y="320" fill="#111110">Product engineer</text>
+    <text x="80" y="414" fill="#111110">building <tspan fill="#ff3615">digital products.</tspan></text>
   </g>
 
-  <!-- main title -->
-  <g transform="translate(80, 230)">
-    <text font-family="Geist, system-ui, sans-serif" font-size="92" font-weight="600" fill="#111110" letter-spacing="-2">
-      <tspan x="0" y="0">Product engineer</tspan>
-      <tspan x="0" y="98">building </tspan>
-      <tspan font-family="Instrument Serif, serif" font-style="italic" font-weight="400" font-size="100" fill="#e85d2a">real things</tspan>
-      <tspan font-family="Geist, system-ui, sans-serif" font-style="normal" font-weight="600" font-size="92" fill="#111110">.</tspan>
-    </text>
-  </g>
+  <!-- footer -->
+  <text x="80" y="529" font-family="Geist Mono, ui-monospace, monospace" font-size="15" fill="#888888" letter-spacing="2.4">MOBILE · WEB · BACKEND · PAYMENTS</text>
+  <text x="80" y="564" font-family="Geist, system-ui, sans-serif" font-size="19" fill="#666666">muartdev.github.io</text>
 
-  <!-- bottom row -->
-  <g transform="translate(80, 540)">
-    <text font-family="ui-monospace, Menlo, monospace" font-size="14" font-weight="500" fill="#666" letter-spacing="2">
-      iOS · WEB · BACKEND · PAYMENTS
-    </text>
-  </g>
-
-  <g transform="translate(80, 575)">
-    <text font-family="Geist, system-ui, sans-serif" font-size="18" fill="#888">
-      muart.dev
-    </text>
-  </g>
-
-  <!-- accent line bottom right -->
-  <line x1="900" y1="555" x2="1120" y2="555" stroke="#e85d2a" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="1130" cy="555" r="5" fill="#e85d2a"/>
+  <rect x="1006" y="551" width="98" height="4" rx="2" fill="#ff3615"/>
+  <circle cx="1118" cy="553" r="6" fill="#ff3615"/>
 </svg>

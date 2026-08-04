@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Murat — Product Engineer building real products across mobile, web, and backend." />
   <meta name="author" content="Murat" />
-  <meta name="theme-color" content="#fdfdfc" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)" />
+  <!-- one unscoped tag: the site's own theme wins, not the OS preference -->
+  <meta name="theme-color" content="#fdfdfc" />
   <title>Murat — Product Engineer</title>
   <meta property="og:title" content="Murat — Product Engineer" />
   <meta property="og:description" content="Product engineer building real products across mobile, web, and backend." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://muartdev.github.io/" />
-  <meta property="og:image" content="https://muartdev.github.io/og.png" />
+  <meta property="og:image" content="https://muartdev.github.io/og.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Murat — Product Engineer" />
   <meta name="twitter:description" content="Product engineer building real products across mobile, web, and backend." />
-  <meta name="twitter:image" content="https://muartdev.github.io/og.png" />
+  <meta name="twitter:image" content="https://muartdev.github.io/og.png?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -73,6 +73,8 @@
       --panel-hover: rgba(255, 255, 255, 0.78);
       --glass: blur(16px) saturate(170%);
       --rail-w: 232px;
+      --layout-max: 1440px;
+      --gutter: 0px; /* set from JS on wide screens so rail + content centre as one block */
 
       /* Hero backdrop */
       --fx-line: rgba(17, 17, 16, 0.085);
@@ -131,11 +133,17 @@
       -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: transparent;
       -webkit-text-size-adjust: 100%;
-      transition: background 0.4s ease, color 0.4s ease;
       overflow-x: clip;
     }
 
-    h1, h2, h3 { text-wrap: balance; }
+    /* held for one beat while data-theme flips, so nothing is caught mid-fade */
+    .theme-switching *,
+    .theme-switching *::before,
+    .theme-switching *::after { transition: none !important; }
+    /* the lamp is the one thing that should still fade — it reads as switching off */
+    .theme-switching .bg-fx { transition: opacity 0.5s ease !important; }
+
+    h2, h3 { text-wrap: balance; }
     p { text-wrap: pretty; }
 
     body.drawer-open { overflow: hidden; }
@@ -489,10 +497,15 @@
     .hero h1 .accent {
       color: var(--orange);
       font-family: var(--sans); font-style: normal; font-weight: 600;
-      position: relative;
-      display: inline-block;
-      white-space: nowrap;
+      /* ghost + live text share one cell, so the line is always as wide as the
+         longest word and the typewriter can never reflow anything */
+      display: inline-grid;
+      vertical-align: top;
     }
+    .hero h1 .accent > * { grid-area: 1 / 1; white-space: nowrap; }
+    /* padding = the cursor's own 4px width + its 4px margin */
+    .tw-ghost { visibility: hidden; padding-right: 8px; }
+    .tw-live { justify-self: start; }
     .cursor {
       display: inline-block;
       width: 4px;
@@ -941,12 +954,22 @@
 
     /* Wide screens: the panel stops being an overlay and becomes a permanent rail */
     @media (min-width: 1200px) {
-      body { padding-left: var(--rail-w); }
-      /* header spans the whole window, rail sits under it */
-      .topbar { margin-left: calc(-1 * var(--rail-w)); }
-      .topbar .shell { width: calc(100% - 56px); }
+      body {
+        padding-left: calc(var(--gutter) + var(--rail-w));
+        padding-right: var(--gutter);
+      }
+      /* header spans the whole window, its contents line up with the layout block */
+      .topbar {
+        margin-left: calc(-1 * (var(--gutter) + var(--rail-w)));
+        margin-right: calc(-1 * var(--gutter));
+      }
+      .topbar .shell { width: min(calc(100% - 56px), calc(var(--layout-max) - 56px)); }
+      .scroll-rail { display: none; }
+      .marquee-container { scrollbar-width: none; }
+      .marquee-container::-webkit-scrollbar { display: none; }
       .menu-btn, .drawer-scrim, .drawer-head { display: none; }
       .drawer {
+        left: var(--gutter);
         top: var(--topbar-h, 65px);
         height: calc(100dvh - var(--topbar-h, 65px));
         width: var(--rail-w);
@@ -1179,7 +1202,7 @@
   <main>
     <section class="hero shell" id="top">
       <div class="hero-copy">
-        <h1 data-i18n="hero.title" data-i18n-html>Product engineer<br />building<br /><span class="accent" id="typewriter"></span><span class="cursor"></span></h1>
+        <h1 data-i18n="hero.title" data-i18n-html>Product engineer<br />building<br /><span class="accent"><span class="tw-ghost" aria-hidden="true"></span><span class="tw-live"><span id="typewriter"></span><span class="cursor"></span></span></span></h1>
         <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
@@ -1408,7 +1431,7 @@
   <script>
     const I18N = {
       en: {
-        "hero.title":"Product engineer<br />building<br /><span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
+        "hero.title":"Product engineer<br />building<br /><span class=\"accent\"><span class=\"tw-ghost\" aria-hidden=\"true\"></span><span class=\"tw-live\"><span id=\"typewriter\"></span><span class=\"cursor\"></span></span></span>",
         "hero.sub":"I build products end to end: mobile apps, websites, authentication, payments, and deployment.",
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
         "nav.home":"Home","nav.work":"Selected Work","nav.stack":"What I Handle","nav.about":"About","nav.contact":"Contact",
@@ -1491,7 +1514,7 @@
         "footer.left":"© 2026 Murat — Turkey."
       },
       tr: {
-        "hero.title":"Product Engineer —<br /><span class=\"accent\" id=\"typewriter\"></span><span class=\"cursor\"></span>",
+        "hero.title":"Product Engineer —<br /><span class=\"accent\"><span class=\"tw-ghost\" aria-hidden=\"true\"></span><span class=\"tw-live\"><span id=\"typewriter\"></span><span class=\"cursor\"></span></span></span>",
         "hero.sub":"Mobil uygulamadan web sitesine, kimlik doğrulamadan ödemeye ve yayına almaya kadar ürünleri uçtan uca geliştiriyorum.",
         "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
         "nav.home":"Ana Sayfa","nav.work":"Seçili İşler","nav.stack":"Neleri Üstlenirim","nav.about":"Hakkımda","nav.contact":"İletişim",
@@ -1576,12 +1599,17 @@
     };
 
     function setTheme(t) {
-      document.documentElement.setAttribute("data-theme", t);
+      const root = document.documentElement;
+      // Custom properties don't animate, so a timed fade would leave panels and
+      // borders snapping while the page background lags. Swap everything at once.
+      root.classList.add("theme-switching");
+      root.setAttribute("data-theme", t);
       localStorage.setItem("theme", t);
       const m = document.querySelector('meta[name="theme-color"]');
-      if (m) m.setAttribute("content", t === "dark" ? "#0a0a0a" : "#fdfdfc");
+      if (m) m.setAttribute("content", t === "dark" ? "#0b0b0b" : "#fdfdfc");
       const tt = document.getElementById("themeToggle");
       if (tt) tt.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
+      setTimeout(() => root.classList.remove("theme-switching"), 60);
     }
 
     const typeWords = {
@@ -1601,7 +1629,24 @@
       typeIndex = 0;
       const tw = document.getElementById("typewriter");
       if(tw) tw.textContent = "";
+      sizeTypewriterGhost();
       typeCycle();
+    };
+
+    /* Reserve the widest word of the active language. Measured, not counted —
+       the longest string is not always the widest one. */
+    window.sizeTypewriterGhost = () => {
+      const ghost = document.querySelector(".tw-ghost");
+      if (!ghost) return;
+      const lang = document.documentElement.getAttribute("lang") || "en";
+      const words = typeWords[lang] || typeWords.en;
+      let widest = "", max = -1;
+      for (const w of words) {
+        ghost.textContent = w;
+        const px = ghost.getBoundingClientRect().width;
+        if (px > max) { max = px; widest = w; }
+      }
+      ghost.textContent = widest;
     };
 
     const typeCycle = () => {
@@ -1649,6 +1694,11 @@
       root.setProperty("--fx-lamp-x", (k.left + k.width / 2).toFixed(1) + "px");
       root.setProperty("--fx-lamp-top", (k.bottom - barTop - 2).toFixed(1) + "px");
       root.setProperty("--topbar-h", bar.offsetHeight + "px");
+
+      // centre the rail + content block once the window is wider than the layout
+      const avail = document.documentElement.clientWidth;
+      const max = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--layout-max")) || 1440;
+      root.setProperty("--gutter", Math.max(0, Math.round((avail - max) / 2)) + "px");
     }
 
     function setLang(l) {
@@ -1680,7 +1730,9 @@
       syncLightSource();
       window.addEventListener("resize", syncLightSource, { passive: true });
       // the toggle shifts when Geist finishes loading and the topbar reflows
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncLightSource);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => { syncLightSource(); window.sizeTypewriterGhost(); });
+      }
       if (window.ResizeObserver) {
         new ResizeObserver(syncLightSource).observe(document.querySelector(".topbar"));
       }
