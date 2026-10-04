@@ -18,6 +18,12 @@
   <meta property="og:image" content="https://muartdev.github.io/og.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
+  <script>
+    (() => {
+      const t = localStorage.getItem("theme");
+      if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+    })();
+  </script>
   <style>
     :root {
       --bg: #fdfdfc;
@@ -27,7 +33,7 @@
       --muted: #888888;
       --line: rgba(0, 0, 0, 0.08);
       --line-2: rgba(0, 0, 0, 0.14);
-      --orange: #e85d2a;
+      --orange: #ff3615;
       --violet: #8b5cf6;
       --cyan: #22d3ee;
       --sans: "Geist", system-ui, -apple-system, sans-serif;
@@ -42,7 +48,7 @@
       --muted: #5e5e5e;
       --line: rgba(255, 255, 255, 0.06);
       --line-2: rgba(255, 255, 255, 0.14);
-      --orange: #ff7a3d;
+      --orange: #ff3615;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -143,11 +149,5 @@
       <a class="btn btn-secondary" href="mailto:muartmac@gmail.com">Tell me what was here</a>
     </div>
   </div>
-  <script>
-    (() => {
-      const t = localStorage.getItem("theme");
-      if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
-    })();
-  </script>
 </body>
 </html>

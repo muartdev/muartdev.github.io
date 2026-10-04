@@ -48,12 +48,9 @@
 
       --orange: #ff3615;
       --orange-soft: rgba(255, 54, 21, 0.1);
-      --amber: #ff3615;
-      --rose: #ff3615;
       --accent-line: rgba(255, 54, 21, 0.2);
       --shadow-soft: 0 18px 45px -32px rgba(17, 17, 16, 0.28);
       --shadow-panel: 0 18px 42px -36px rgba(17, 17, 16, 0.36);
-      --radius-sm: 6px;
       --radius-md: 8px;
       --radius-lg: 10px;
 
@@ -68,7 +65,6 @@
       --toggle-active: var(--orange);
       --icon-color: #666;
       --icon-hover: #111;
-      --glass-border: rgba(0,0,0,0.05);
       --panel: rgba(255, 255, 255, 0.52);
       --panel-hover: rgba(255, 255, 255, 0.78);
       --glass: blur(16px) saturate(170%);
@@ -97,8 +93,6 @@
 
       --orange: #ff3615;
       --orange-soft: rgba(255, 54, 21, 0.1);
-      --amber: #ff3615;
-      --rose: #ff3615;
       --accent-line: rgba(255, 54, 21, 0.22);
       --shadow-soft: 0 20px 55px -40px rgba(0, 0, 0, 0.9);
       --shadow-panel: 0 20px 58px -42px rgba(0, 0, 0, 0.95);
@@ -108,7 +102,6 @@
       --toggle-active: #ededed;
       --icon-color: #8e8e8e;
       --icon-hover: #ededed;
-      --glass-border: rgba(255,255,255,0.06);
       --panel: rgba(22, 22, 22, 0.46);
       --panel-hover: rgba(34, 34, 34, 0.76);
 
@@ -139,9 +132,10 @@
     /* held for one beat while data-theme flips, so nothing is caught mid-fade */
     .theme-switching *,
     .theme-switching *::before,
-    .theme-switching *::after { transition: none !important; }
-    /* the lamp is the one thing that should still fade — it reads as switching off */
-    .theme-switching .bg-fx { transition: opacity 0.5s ease !important; }
+    .theme-switching *::after { 
+      transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease, fill 0.8s ease, box-shadow 0.8s ease !important; 
+    }
+    .theme-switching .bg-fx { transition: opacity 0.4s ease !important; }
 
     h2, h3 { text-wrap: balance; }
     p { text-wrap: pretty; }
@@ -199,6 +193,8 @@
       background: linear-gradient(to bottom, var(--fx-beam), transparent 78%);
       clip-path: polygon(47% 0, 53% 0, 94% 100%, 6% 100%);
       filter: blur(26px);
+      animation: beam-pulse 4s ease-in-out infinite alternate;
+      mix-blend-mode: color-dodge;
     }
 
     .bg-glow {
@@ -208,6 +204,13 @@
       height: 620px;
       transform: translateX(-50%);
       background: radial-gradient(closest-side, var(--fx-glow), transparent 72%);
+      animation: beam-pulse 5s ease-in-out infinite alternate-reverse;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes beam-pulse {
+      0% { opacity: 0.85; filter: blur(28px); }
+      100% { opacity: 1; filter: blur(22px); }
     }
 
     .bg-wash {
@@ -326,10 +329,10 @@
     .drawer-nav a:hover { background: var(--bg-soft); color: var(--orange); }
     .drawer-num {
       font-family: var(--mono);
-      font-size: 0.66rem;
-      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
       color: var(--muted);
-      transition: color 0.2s ease;
+      transition: color 0.25s ease;
     }
     .drawer-nav a:hover .drawer-num { color: var(--orange); }
 
@@ -342,10 +345,10 @@
     .drawer-studio {
       display: inline-flex; align-items: center; gap: 7px;
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.02em;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
       color: var(--text-soft);
-      transition: color 0.2s ease;
+      transition: color 0.25s ease;
     }
     .drawer-studio:hover { color: var(--orange); }
     .drawer-studio svg { width: 12px; height: 12px; }
@@ -372,9 +375,9 @@
       background: var(--panel);
       color: var(--text-soft);
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.02em;
-      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
     .studio-link:hover {
       color: var(--orange);
@@ -438,39 +441,58 @@
       display: flex; align-items: center;
       cursor: pointer;
       padding: 2px;
-      /* soft spill around the housing; the knob itself is the emitter */
-      box-shadow: 0 8px 22px -12px color-mix(in srgb, var(--orange) 45%, transparent);
-      transition: border-color 0.3s, box-shadow 0.4s ease;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
     }
-    [data-theme="dark"] .theme-pill { border-color: var(--toggle-active); box-shadow: none; }
+    .theme-pill:hover {
+      border-color: color-mix(in srgb, var(--orange) 30%, transparent);
+    }
+    [data-theme="dark"] .theme-pill { border-color: var(--toggle-active); background: var(--bg-soft); }
 
     .theme-handle {
       position: absolute;
       width: 20px; height: 20px;
-      background: #fff;
+      background: var(--bg-elev);
       border-radius: 50%;
-      /* this circle is where the beam comes from */
       box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.12),
-        0 0 13px 1px color-mix(in srgb, var(--orange) 52%, transparent),
-        0 8px 20px -5px color-mix(in srgb, var(--orange) 58%, transparent);
+        0 2px 6px rgba(0, 0, 0, 0.1),
+        0 0 24px 6px color-mix(in srgb, var(--orange) 35%, transparent);
       display: flex; align-items: center; justify-content: center;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
       left: 2px;
     }
+    .theme-pill:hover .theme-handle {
+      box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.1),
+        0 0 28px 8px color-mix(in srgb, var(--orange) 45%, transparent);
+    }
     [data-theme="dark"] .theme-handle {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        0 0 24px 6px color-mix(in srgb, var(--bg-elev) 35%, transparent);
       transform: translateX(26px);
       background: var(--toggle-active);
     }
+    [data-theme="dark"] .theme-pill:hover .theme-handle {
+      box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        0 0 28px 8px color-mix(in srgb, var(--bg-elev) 45%, transparent);
+    }
 
-    .theme-icon { width: 11px; height: 11px; color: #333; transition: opacity 0.2s, transform 0.4s; position: absolute; }
-    [data-theme="dark"] .theme-icon { color: #0b0b0b; }
+    .theme-icon { width: 11px; height: 11px; color: var(--text); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); position: absolute; }
+    [data-theme="dark"] .theme-icon { color: var(--bg); }
     
-    .icon-sun { opacity: 1; transform: rotate(0deg); }
-    .icon-moon { opacity: 0; transform: rotate(-90deg); }
-    [data-theme="dark"] .icon-sun { opacity: 0; transform: rotate(90deg); }
-    [data-theme="dark"] .icon-moon { opacity: 1; transform: rotate(0deg); }
+    @keyframes sun-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .icon-sun { opacity: 1; animation: sun-spin 14s linear infinite; }
+    .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+    [data-theme="dark"] .icon-sun { opacity: 0; animation: none; transform: rotate(90deg) scale(0.5); }
+    [data-theme="dark"] .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
+    
+    /* Slight click ripple on the pill itself */
+    .theme-pill:active { transform: scale(0.96); }
 
     /* Social Icons */
     .social-links { display: flex; align-items: center; gap: 12px; }
@@ -561,8 +583,8 @@
       writing-mode: vertical-rl;
       text-orientation: mixed;
       font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
     .scroll-rail i {
@@ -585,9 +607,10 @@
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 26px; border-radius: 100px;
       font-size: 0.95rem; font-weight: 500;
-      transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.4s ease;
+      transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       box-shadow: 0 0 0 0 transparent;
+      transform: translateY(0);
     }
     .btn-primary {
       background: var(--text); color: var(--bg);
@@ -597,37 +620,19 @@
       border: 1px solid var(--line-2);
       backdrop-filter: blur(12px);
     }
-    .btn-secondary:hover { border-color: color-mix(in srgb, #8b5cf6 45%, var(--line-2)); }
-
-    .btn:hover {
-      animation: btn-glow-cycle 4s ease-in-out infinite;
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 0 3px color-mix(in srgb, var(--orange) 10%, transparent),
+        0 8px 24px -6px color-mix(in srgb, var(--orange) 45%, transparent),
+        0 4px 10px -2px color-mix(in srgb, var(--orange) 25%, transparent);
     }
-
-    @keyframes btn-glow-cycle {
-      0% {
-        box-shadow:
-          0 0 0 3px color-mix(in srgb, var(--orange) 14%, transparent),
-          0 6px 22px -4px color-mix(in srgb, var(--orange) 55%, transparent),
-          0 2px 14px -2px color-mix(in srgb, #8b5cf6 35%, transparent);
-      }
-      33% {
-        box-shadow:
-          0 0 0 3px color-mix(in srgb, #8b5cf6 14%, transparent),
-          0 6px 22px -4px color-mix(in srgb, #8b5cf6 55%, transparent),
-          0 2px 14px -2px color-mix(in srgb, #22d3ee 35%, transparent);
-      }
-      66% {
-        box-shadow:
-          0 0 0 3px color-mix(in srgb, #22d3ee 14%, transparent),
-          0 6px 22px -4px color-mix(in srgb, #22d3ee 55%, transparent),
-          0 2px 14px -2px color-mix(in srgb, var(--orange) 35%, transparent);
-      }
-      100% {
-        box-shadow:
-          0 0 0 3px color-mix(in srgb, var(--orange) 14%, transparent),
-          0 6px 22px -4px color-mix(in srgb, var(--orange) 55%, transparent),
-          0 2px 14px -2px color-mix(in srgb, #8b5cf6 35%, transparent);
-      }
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--line);
+      background: var(--bg-elev);
+      box-shadow: 0 6px 20px -6px rgba(0,0,0,0.12);
     }
 
     /* SECTIONS */
@@ -670,9 +675,8 @@
       width: max-content;
       padding-right: 48px;
     }
-    .project-card { scroll-snap-align: start; }
-
     .project-card {
+      scroll-snap-align: start;
       display: flex;
       flex-direction: column;
       width: 300px;
@@ -881,7 +885,9 @@
       display: grid; grid-template-columns: 110px 1fr; gap: 16px;
       padding: 16px 18px; border-bottom: 1px solid var(--line);
       align-items: baseline;
-      transition: padding 0.2s ease;
+    }
+    .info-item:last-child {
+      border-bottom: 0;
     }
     .info-label {
       font-family: var(--mono); font-size: 0.7rem;
@@ -893,7 +899,7 @@
 
     /* CONTACT */
     .contact-card {
-      padding: 28px 30px; border-radius: var(--radius-md); text-align: left;
+      padding: 28px 30px; border-radius: var(--radius-md);
       background: var(--panel);
       backdrop-filter: var(--glass);
       -webkit-backdrop-filter: var(--glass);
@@ -1019,9 +1025,9 @@
       .bg-glow { width: 108vw; top: calc(var(--fx-lamp-top) - 250px); height: 520px; }
 
       .shell { width: min(var(--max), calc(100% - 40px)); }
-      main { padding: 44px 0 52px; }
+      main { padding: 66px 0 52px; }
       section[id] { scroll-margin-top: 72px; }
-      section + section { margin-top: 66px; }
+      section + section { margin-top: 56px; }
       .section-head { margin-bottom: 20px; }
 
       /* Topbar: same set of controls as desktop, just tighter */
@@ -1127,6 +1133,8 @@
     }
     @media (max-width: 360px) {
       .shell { width: calc(100% - 32px); }
+      .marquee-container { padding: 4px 16px 14px; scroll-padding-left: 16px; }
+      .marquee-track { padding-right: 16px; }
       .hero-cta { flex-wrap: wrap; }
       .hero-cta .btn { flex: 1 1 100%; }
       .brand-mark { height: 22px; }
@@ -1217,7 +1225,7 @@
         <h2 class="section-title" data-i18n="work.title" data-i18n-html>Selected <span class="serif">Work</span></h2>
       </div>
 
-      <div class="marquee-container" role="marquee">
+      <div class="marquee-container" role="region" aria-label="Selected Projects">
         <div class="marquee-track">
           <!-- 1st set -->
           <a class="project-card" href="/corewords/" rel="noopener" data-project="corewords">
@@ -1378,10 +1386,12 @@
 
     <section id="contact" class="shell">
       <div class="contact-card">
-        <h2 class="contact-title" data-i18n="contact.title" data-i18n-html>Let's build something <span class="serif">real</span>.</h2>
-        <p class="contact-sub" data-i18n="contact.sub">Need a product, website, or studio-grade digital system? Let's talk.</p>
+        <div>
+          <h2 class="contact-title" data-i18n="contact.title" data-i18n-html>Let's build something <span class="serif">real</span>.</h2>
+          <p class="contact-sub" data-i18n="contact.sub">Need a product, website, or studio-grade digital system? Let's talk.</p>
+        </div>
         <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:ideloc.studio@gmail.com" data-i18n="contact.email">Start a Project</a>
+          <a class="btn btn-primary" href="mailto:muartmac@gmail.com" data-i18n="contact.email">Start a Project</a>
         </div>
       </div>
     </section>
