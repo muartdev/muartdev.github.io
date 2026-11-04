@@ -489,10 +489,10 @@
     main { padding: 104px 0 64px; position: relative; z-index: 1; }
 
     .hero h1 {
-      font-size: clamp(3rem, 4.4vw, 3.6rem);
-      line-height: 1.05; letter-spacing: -0.03em;
+      font-size: clamp(2.35rem, 3.4vw, 3.1rem);
+      line-height: 1.06; letter-spacing: -0.03em;
       font-weight: 600;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
     }
     .hero h1 .accent {
       color: var(--orange);
@@ -552,8 +552,8 @@
     }
     .pixel-mosaic-canvas {
       width: 100%;
-      max-width: 470px;
-      height: 290px;
+      max-width: 500px;
+      height: 310px;
       display: block;
       cursor: pointer;
       touch-action: pan-y;
@@ -561,25 +561,22 @@
     .mosaic-bar {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      margin-top: 6px;
-      padding: 3px;
-      border-radius: 100px;
-      border: 1px solid var(--line);
-      background: var(--bg);
+      gap: 6px;
+      margin-top: 2px;
     }
     .mosaic-chip {
       font-family: var(--mono);
-      font-size: 0.66rem;
-      letter-spacing: 0.04em;
-      padding: 4px 10px;
-      border-radius: 100px;
+      font-size: 0.68rem;
+      letter-spacing: 0.03em;
+      padding: 3px 8px;
+      border-radius: 6px;
       color: var(--muted);
       cursor: pointer;
+      transition: color 0.2s ease, background-color 0.2s ease;
     }
     .mosaic-chip.active {
-      background: var(--orange-soft);
       color: var(--orange);
+      background: var(--orange-soft);
       font-weight: 500;
     }
     .btn {
@@ -1601,57 +1598,156 @@
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
 
-      // 16 Susan-Kare-inspired 8x8 pixel bitmaps (1 = foreground pixel)
-      const GLYPHS = [
-        // 0: OK button
-        [0xff,0x81,0xbd,0xa5,0xa5,0xbd,0x81,0xff],
-        // 1: Classic cursor arrow
-        [0x80,0xc0,0xe0,0xf0,0xf8,0xd0,0x98,0x08],
+      // 20 razor-sharp 12x12 pixel-art sprites (12-bit rows: 0x000..0xfff) inspired by Susan Kare's Macintosh icons
+      const SPRITES_12 = [
+        // 0: "OK" dialog button
+        [0xfff,0x801,0x801,0x9cd,0xa52,0xa58,0xa54,0x9d2,0x801,0x801,0x801,0xfff],
+        // 1: Classic Macintosh arrow cursor
+        [0x400,0x600,0x700,0x780,0x7c0,0x7e0,0x7f0,0x7c0,0x6c0,0x460,0x060,0x000],
         // 2: Happy Mac face
-        [0x7e,0x81,0xa5,0x81,0xa5,0x99,0x81,0x7e],
-        // 3: Floppy disk
-        [0xfe,0x92,0x92,0xfe,0x82,0xba,0xba,0xfe],
-        // 4: Folder
-        [0x70,0x8e,0x82,0xfe,0x82,0x82,0x82,0xfe],
-        // 5: Trash can
-        [0x38,0xfe,0x82,0xaa,0xaa,0xaa,0x82,0x7c],
-        // 6: Command loop ⌘
-        [0x66,0x99,0x66,0x3c,0x3c,0x66,0x99,0x66],
-        // 7: Terminal >_
-        [0x00,0xc0,0x60,0x30,0x60,0xc0,0x1e,0x00],
-        // 8: Window chrome
-        [0xff,0xa1,0xff,0x81,0x81,0x81,0x81,0xff],
-        // 9: Watch / clock
-        [0x3c,0x3c,0x7e,0x91,0x97,0x7e,0x3c,0x3c],
-        // 10: Pixel heart
-        [0x00,0x66,0xff,0xff,0x7e,0x3c,0x18,0x00],
-        // 11: Magnifying glass
-        [0x38,0x44,0x82,0x44,0x38,0x14,0x0a,0x04],
-        // 12: Key
-        [0x70,0x88,0x88,0x70,0x20,0x38,0x20,0x38],
-        // 13: Question mark ?
-        [0x3c,0x66,0x06,0x1c,0x18,0x00,0x18,0x18],
-        // 14: Bar chart
-        [0x06,0x06,0x36,0x36,0xb6,0xb6,0xf6,0xff],
-        // 15: Checkerboard dither
-        [0xaa,0x55,0xaa,0x55,0xaa,0x55,0xaa,0x55]
+        [0x7fe,0x801,0x919,0x919,0x811,0x831,0x801,0x909,0x8f1,0x801,0x801,0x7fe],
+        // 3: Pixel person portrait
+        [0x1e0,0x3f0,0x210,0x2d0,0x210,0x1e0,0x0c0,0x3f0,0x7f8,0x7f8,0x7f8,0x000],
+        // 4: Floppy disk
+        [0xffe,0x923,0x921,0x9e1,0x801,0x801,0xbf9,0xa09,0xbf9,0xa09,0x801,0xfff],
+        // 5: Folder tab
+        [0x3c0,0x43e,0xfff,0x801,0xfff,0x801,0x801,0x801,0x801,0x801,0xfff,0x000],
+        // 6: Trash can with flutes
+        [0x0f0,0x7fe,0x402,0x552,0x552,0x552,0x552,0x552,0x552,0x402,0x3fc,0x000],
+        // 7: Command clover ⌘
+        [0x318,0x4a4,0x4a4,0x3f8,0x090,0x090,0x3f8,0x4a4,0x4a4,0x318,0x000,0x000],
+        // 8: Window chrome with titlebar
+        [0xfff,0xa01,0xfff,0x809,0x80f,0x809,0x809,0x809,0x80f,0x809,0xfff,0x000],
+        // 9: Watch / timepiece
+        [0x1e0,0x1e0,0x3f0,0x408,0x448,0x448,0x438,0x408,0x3f0,0x1e0,0x1e0,0x000],
+        // 10: "83" pixel number tile
+        [0x000,0x000,0x000,0x73c,0x504,0x71c,0x504,0x73c,0x000,0x000,0x000,0x000],
+        // 11: "2.0" pixel number tile
+        [0x000,0x000,0x000,0x71e,0x112,0x712,0x412,0x75e,0x000,0x000,0x000,0x000],
+        // 12: Question mark ? in diamond
+        [0x0c0,0x120,0x270,0x498,0x814,0x864,0x448,0x200,0x140,0x0c0,0x000,0x000],
+        // 13: Bar chart
+        [0x800,0x806,0x806,0x836,0x836,0x836,0x9b6,0x9b6,0x9b6,0x9b6,0xfff,0x000],
+        // 14: Checkerboard dither
+        [0xccc,0xccc,0x333,0x333,0xccc,0xccc,0x333,0x333,0xccc,0xccc,0x333,0x333],
+        // 15: Diagonal stripe pattern
+        [0x888,0x444,0x222,0x111,0x888,0x444,0x222,0x111,0x888,0x444,0x222,0x111],
+        // 16: Key
+        [0x3c0,0x420,0x5a0,0x420,0x3c0,0x080,0x0f0,0x080,0x0e0,0x080,0x000,0x000],
+        // 17: Music note ♪
+        [0x03e,0x032,0x022,0x022,0x022,0x0e2,0x1f6,0x1fe,0x0cc,0x000,0x000,0x000],
+        // 18: Terminal >_
+        [0x000,0x000,0x600,0x300,0x180,0x300,0x600,0x000,0x07e,0x000,0x000,0x000],
+        // 19: Magnifying glass
+        [0x1e0,0x210,0x408,0x408,0x408,0x210,0x1f0,0x018,0x00c,0x006,0x000,0x000]
       ];
 
-      // Multi-zone vibrant palette inspired by Apple's Susan Kare "hello" mosaic
+      // Hand-sculpted 44x15 pixel-mosaic maps ('#' = full icon tile, '+' = half-size edge tile)
+      const MAPS = {
+        hello: [
+          ".....+##+..............+##+....+##+.........",
+          "....+###+.............+###+...+###+.........",
+          "....###+..............+###....+###..........",
+          "...+###...............###+....###+..........",
+          "...###+...............###.....###...........",
+          "...###...............+###....+###...........",
+          "..+######+....+####+..###....+###....+#####+",
+          "..########+..+######+.###....###+...+#######",
+          ".+###..####+.###..###.###....###+..+###..###",
+          ".###+...###+.########.###....###...+###..###",
+          ".###....###+.########.###+...###...###+..###",
+          "+###....###..###+.....###+..+###...###+..###",
+          "###+....###..###+.###+.###+.####+..+###..###",
+          "###.....###+..######+..####+.####+..#######+",
+          "##+.....+###...+####+...+###+..###+..+#####+"
+        ],
+        murat: [
+          "........................................+#+.",
+          ".......................................+###+",
+          ".......................................+###+",
+          "+#####+..###..###.+####+...+#####+....+#####",
+          "########.###..###.######+..#######+...######",
+          "###.###..###..###.###.###.+###.###+.....###.",
+          "###.###..###..###.###.....+###.###......###.",
+          "###.###..###..###.###.....########......###.",
+          "###.###..###..###.###....+###..###......###.",
+          "###.###..###..###.###....###+..###......###+",
+          "###.###..+#######.###....+########+.....####",
+          "###.###...+###.##.###.....+####.##+.....+###"
+        ],
+        code: [
+          "...................+###+....................",
+          "..................+####+....................",
+          "........+###+.....+###+......+###+..........",
+          "......+#####+....+####+......+#####+........",
+          "....+#####+......+###+.........+#####+......",
+          "..+#####+.......+####+...........+#####+....",
+          ".+#####+........+###+.............+#####+...",
+          "..+#####+......+####+............+#####+....",
+          "....+#####+....+###+...........+#####+......",
+          "......+#####+..####+.........+#####+........",
+          "........+###+..###+..........+###+..........",
+          ".............+####+.........................",
+          ".............+###+.........................."
+        ]
+      };
+
+      // Authentic multi-zone palette: each entry is [tileBg, iconFg] with strong contrast
       const ZONES = [
-        // Warm crimson / orange / gold
-        ["#ff3615", "#f97316", "#f59e0b", "#ef4444", "#eab308", "#fb7185", "#9333ea"],
-        // Teal / cyan / cobalt
-        ["#06b6d4", "#0ea5e9", "#2563eb", "#3b82f6", "#10b981", "#6366f1", "#38bdf8"],
-        // Fiery orange / magenta / violet
-        ["#ff3615", "#f97316", "#ec4899", "#8b5cf6", "#eab308", "#4f46e5", "#f43f5e"],
-        // Golden amber / coral
-        ["#f59e0b", "#fbbf24", "#ff3615", "#f97316", "#06b6d4", "#eab308", "#fb923c"],
-        // Electric blue / indigo / sky
-        ["#2563eb", "#3b82f6", "#0ea5e9", "#6366f1", "#7c3aed", "#06b6d4", "#60a5fa"]
+        // Zone 0 (h): crimson, scarlet, orange, amber, deep plum
+        [
+          ["#dc2626", "#fef08a"], ["#ff3615", "#ffffff"], ["#ea580c", "#fff7ed"],
+          ["#f59e0b", "#1e1b4b"], ["#fbbf24", "#7f1d1d"], ["#581c87", "#fb923c"],
+          ["#b91c1c", "#fde047"], ["#f97316", "#111110"]
+        ],
+        // Zone 1 (e): teal, cyan, sky, cobalt, emerald
+        [
+          ["#0284c7", "#e0f2fe"], ["#06b6d4", "#0f172a"], ["#2563eb", "#fef08a"],
+          ["#0d9488", "#ffffff"], ["#38bdf8", "#1e1b4b"], ["#4f46e5", "#a5f3fc"],
+          ["#10b981", "#064e3b"], ["#1d4ed8", "#ffffff"]
+        ],
+        // Zone 2 (first l): royal indigo/violet top, fiery orange/red bottom
+        [
+          ["#3730a3", "#fde047"], ["#4f46e5", "#ffffff"], ["#6d28d9", "#fb923c"],
+          ["#ff3615", "#fef08a"], ["#ea580c", "#ffffff"], ["#e11d48", "#fff1f2"],
+          ["#2563eb", "#a5f3fc"], ["#f97316", "#1e1b4b"]
+        ],
+        // Zone 3 (second l): golden yellow, bright amber, orange, coral
+        [
+          ["#f59e0b", "#1e1b4b"], ["#facc15", "#7c2d12"], ["#ea580c", "#fef08a"],
+          ["#ff3615", "#ffffff"], ["#fb923c", "#1e1b4b"], ["#0891b2", "#cffafe"],
+          ["#d97706", "#ffffff"], ["#fde047", "#1e1b4b"]
+        ],
+        // Zone 4 (o + tail): electric blue, cyan, deep cobalt, violet
+        [
+          ["#1d4ed8", "#bae6fd"], ["#0284c7", "#ffffff"], ["#2563eb", "#fde047"],
+          ["#06b6d4", "#0f172a"], ["#4338ca", "#f472b6"], ["#38bdf8", "#172554"],
+          ["#3b82f6", "#ffffff"], ["#6366f1", "#fef08a"]
+        ]
       ];
 
-      const CRUMB_LABELS = ["hello", "OK", "1984", "Pro", "2.0", "RAM", "iOS", "API", "11", "it", "⌘", "{}"];
+      // Curated unique floating micro-items positioned around the mosaic
+      const FLOATING_SPECS = [
+        { rx: -0.38, ry: -0.38, kind: "text", text: "hello", italic: true, color: "#f97316" },
+        { rx: -0.07, ry: -0.44, kind: "text", text: "it", color: "#ea580c" },
+        { rx: -0.11, ry: -0.30, kind: "text", text: "Pro", color: "#f59e0b" },
+        { rx: -0.45, ry: 0.01,  kind: "text", text: "11", serif: true, color: "#0284c7" },
+        { rx: -0.41, ry: -0.12, kind: "text", text: "1/x", color: "#10b981" },
+        { rx: -0.22, ry: 0.36,  kind: "text", text: "RAM", color: "#e11d48" },
+        { rx: -0.08, ry: 0.42,  kind: "text", text: "A", serif: true, color: "#ea580c" },
+        { rx: -0.04, ry: 0.48,  kind: "text", text: "A", serif: true, color: "#7c3aed" },
+        { rx: 0.09,  ry: 0.35,  kind: "text", text: "Text", color: "#4f46e5" },
+        { rx: 0.25,  ry: -0.32, kind: "text", text: "(b)", color: "#e11d48" },
+        { rx: 0.31,  ry: -0.08, kind: "text", text: "255", color: "#db2777" },
+        { rx: 0.19,  ry: -0.41, kind: "folder", color: "#0284c7" },
+        { rx: 0.32,  ry: -0.25, kind: "plus", color: "#f59e0b" },
+        { rx: 0.36,  ry: -0.25, kind: "ring", color: "#0284c7" },
+        { rx: -0.11, ry: 0.39,  kind: "diamond", color: "#2563eb" },
+        { rx: 0.19,  ry: 0.38,  kind: "crossArrows", color: "#2563eb" },
+        { rx: 0.33,  ry: 0.32,  kind: "diamond", color: "#1d4ed8" },
+        { rx: -0.34, ry: 0.35,  kind: "text", text: "{ }", color: "#d97706" }
+      ];
+
       const WORDS = ["hello", "murat", "code"];
       let currentWord = "hello";
       let width = 0, height = 0, dpr = 1;
@@ -1659,59 +1755,11 @@
       let crumbs = [];
       const pointer = { x: -9999, y: -9999, active: false };
 
-      function pickColor(nx, ny, idx) {
-        const z = Math.min(ZONES.length - 1, Math.max(0, Math.floor(nx * ZONES.length)));
+      function pickPair(nx, ny, idx) {
+        let z = Math.min(ZONES.length - 1, Math.max(0, Math.floor(nx * ZONES.length)));
+        if (z === 2 && ny > 0.55) z = 3;
         const bucket = ZONES[z];
-        return bucket[(idx * 7 + Math.floor(ny * 11)) % bucket.length];
-      }
-
-      // Draw word silhouette onto an offscreen grid and sample active cells
-      function sampleWordCells(word, cols, rows) {
-        const off = document.createElement("canvas");
-        off.width = cols;
-        off.height = rows;
-        const octx = off.getContext("2d");
-        octx.clearRect(0, 0, cols, rows);
-        octx.fillStyle = "#fff";
-        octx.strokeStyle = "#fff";
-        octx.lineCap = "round";
-        octx.lineJoin = "round";
-
-        if (word === "hello") {
-          // Iconic connected cursive/pixel silhouette matching the "hello" mosaic
-          octx.font = "italic 900 " + Math.round(rows * 0.78) + "px Georgia, serif";
-          octx.textAlign = "center";
-          octx.textBaseline = "middle";
-          octx.lineWidth = 1.35;
-          octx.strokeText("hello", cols * 0.5, rows * 0.54);
-          octx.fillText("hello", cols * 0.5, rows * 0.54);
-        } else if (word === "murat") {
-          octx.font = "800 " + Math.round(rows * 0.64) + "px Geist, system-ui, sans-serif";
-          octx.textAlign = "center";
-          octx.textBaseline = "middle";
-          octx.lineWidth = 1.1;
-          octx.strokeText("murat.", cols * 0.5, rows * 0.53);
-          octx.fillText("murat.", cols * 0.5, rows * 0.53);
-        } else {
-          octx.font = "800 " + Math.round(rows * 0.72) + "px monospace";
-          octx.textAlign = "center";
-          octx.textBaseline = "middle";
-          octx.lineWidth = 1.4;
-          octx.strokeText("</>", cols * 0.5, rows * 0.52);
-          octx.fillText("</>", cols * 0.5, rows * 0.52);
-        }
-
-        const data = octx.getImageData(0, 0, cols, rows).data;
-        const cells = [];
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            const a = data[(r * cols + c) * 4 + 3];
-            if (a > 72) {
-              cells.push({ c, r, nx: c / Math.max(1, cols - 1), ny: r / Math.max(1, rows - 1) });
-            }
-          }
-        }
-        return cells;
+        return bucket[(idx * 5 + Math.floor(ny * 11)) % bucket.length];
       }
 
       function buildMosaic(word, scatter = false) {
@@ -1722,65 +1770,85 @@
         canvas.width = width * dpr;
         canvas.height = height * dpr;
 
-        const isMobile = width < 390;
-        const cols = isMobile ? 30 : 34;
-        const rows = isMobile ? 16 : 18;
-        const tileSize = Math.max(8, Math.min(12, Math.floor((width * 0.84) / cols)));
+        const grid = MAPS[word] || MAPS.hello;
+        const rows = grid.length;
+        const cols = grid[0].length;
+        // Tile size: 10px..11px on desktop, 7px..9px on mobile so all 44 columns fit with breathing room
+        const tileSize = Math.max(7, Math.min(11, Math.floor((width * 0.88) / cols)));
         const gridW = cols * tileSize;
         const gridH = rows * tileSize;
         const ox = Math.round((width - gridW) / 2);
         const oy = Math.round((height - gridH) / 2);
 
-        const cells = sampleWordCells(word, cols, rows);
-        const nextTiles = cells.map((cell, i) => {
-          const tx = ox + cell.c * tileSize;
-          const ty = oy + cell.r * tileSize;
-          const prev = tiles[i];
-          const color = pickColor(cell.nx, cell.ny, i);
-          const fg = (i % 5 === 0) ? "#111110" : "#ffffff";
-          return {
-            x: prev ? prev.x : tx + (Math.random() - 0.5) * 40,
-            y: prev ? prev.y : ty + (Math.random() - 0.5) * 40,
-            vx: scatter ? (Math.random() - 0.5) * 11 : (prev ? prev.vx : 0),
-            vy: scatter ? (Math.random() - 0.5) * 11 : (prev ? prev.vy : 0),
-            tx,
-            ty,
-            size: tileSize,
-            color,
-            fg,
-            glyph: GLYPHS[(i * 3 + cell.c + cell.r) % GLYPHS.length]
-          };
-        });
+        const nextTiles = [];
+        let idx = 0;
+        const halfSize = Math.max(4, Math.round(tileSize * 0.54));
+        for (let r = 0; r < rows; r++) {
+          const line = grid[r];
+          for (let c = 0; c < cols; c++) {
+            const ch = line[c];
+            if (ch !== "#" && ch !== "+") continue;
+            const isHalf = ch === "+";
+            const sz = isHalf ? halfSize : tileSize;
+            const padOffset = isHalf ? Math.floor((tileSize - halfSize) / 2) : 0;
+            const nx = c / Math.max(1, cols - 1);
+            const ny = r / Math.max(1, rows - 1);
+            const tx = ox + c * tileSize + padOffset;
+            const ty = oy + r * tileSize + padOffset;
+            const prev = tiles[idx];
+            const [bg, fg] = pickPair(nx, ny, idx + c * 3 + r * 7);
+            nextTiles.push({
+              x: prev ? prev.x : tx + (Math.random() - 0.5) * 32,
+              y: prev ? prev.y : ty + (Math.random() - 0.5) * 32,
+              vx: scatter ? (Math.random() - 0.5) * 10 : (prev ? prev.vx : 0),
+              vy: scatter ? (Math.random() - 0.5) * 10 : (prev ? prev.vy : 0),
+              tx,
+              ty,
+              size: sz,
+              isHalf,
+              color: bg,
+              fg,
+              sprite: SPRITES_12[(idx * 3 + c * 5 + r * 2) % SPRITES_12.length]
+            });
+            idx++;
+          }
+        }
         tiles = nextTiles;
 
-        if (!crumbs.length || !scatter) {
-          const crumbCount = isMobile ? 36 : 54;
-          crumbs = Array.from({ length: crumbCount }, (_, i) => {
-            const angle = (i / crumbCount) * Math.PI * 2 + (i % 3) * 0.25;
-            const rx = width * (0.34 + (i % 5) * 0.032);
-            const ry = height * (0.33 + ((i * 3) % 5) * 0.035);
-            const bx = Math.round(width * 0.5 + Math.cos(angle) * rx);
-            const by = Math.round(height * 0.5 + Math.sin(angle) * ry);
-            const nx = Math.min(1, Math.max(0, bx / width));
-            return {
-              bx: Math.max(10, Math.min(width - 18, bx)),
-              by: Math.max(10, Math.min(height - 12, by)),
-              x: bx,
-              y: by,
-              vx: 0,
-              vy: 0,
-              phase: i * 0.7,
-              kind: i % 6,
-              label: CRUMB_LABELS[i % CRUMB_LABELS.length],
-              color: pickColor(nx, (i % 7) / 7, i + 3)
-            };
-          });
-        } else {
-          crumbs.forEach((cr) => {
-            cr.vx += (Math.random() - 0.5) * 6;
-            cr.vy += (Math.random() - 0.5) * 6;
+        const list = FLOATING_SPECS.map((sp, i) => {
+          const bx = Math.round(width * 0.5 + sp.rx * gridW);
+          const by = Math.round(height * 0.5 + sp.ry * (gridH * 1.35));
+          return {
+            bx, by,
+            x: bx, y: by,
+            vx: scatter ? (Math.random() - 0.5) * 5 : 0,
+            vy: scatter ? (Math.random() - 0.5) * 5 : 0,
+            phase: i * 0.65,
+            kind: sp.kind,
+            text: sp.text || "",
+            italic: !!sp.italic,
+            serif: !!sp.serif,
+            color: sp.color
+          };
+        });
+
+        for (let i = 0; i < 36; i++) {
+          const ang = (i / 36) * Math.PI * 2 + 0.2;
+          const rx = gridW * (0.42 + (i % 5) * 0.035);
+          const ry = gridH * (0.52 + ((i * 3) % 5) * 0.05);
+          const bx = Math.round(width * 0.5 + Math.cos(ang) * rx);
+          const by = Math.round(height * 0.5 + Math.sin(ang) * ry);
+          const [bg] = pickPair(Math.min(1, Math.max(0, bx / width)), (i % 7) / 7, i + 9);
+          list.push({
+            bx, by,
+            x: bx, y: by,
+            vx: 0, vy: 0,
+            phase: i * 0.9,
+            kind: i % 4 === 0 ? "miniCluster" : "dot",
+            color: bg
           });
         }
+        crumbs = list;
       }
 
       function drawTile(t, isDark) {
@@ -1790,59 +1858,74 @@
         ctx.fillStyle = t.color;
         ctx.fillRect(x, y, s, s);
 
-        // 1px tile frame
-        ctx.strokeStyle = isDark ? "rgba(0,0,0,0.45)" : "rgba(17,17,16,0.16)";
+        // Crisp 1px dark mosaic grid line between tiles
+        ctx.strokeStyle = isDark ? "rgba(8, 8, 16, 0.72)" : "rgba(17, 17, 16, 0.22)";
         ctx.lineWidth = 1;
         ctx.strokeRect(x + 0.5, y + 0.5, s - 1, s - 1);
 
-        // Draw crisp 8x8 bitmap glyph inside the tile
-        const pad = s >= 11 ? 2 : 1;
-        const inner = s - pad * 2;
-        const pxSize = inner / 8;
+        if (t.isHalf) {
+          ctx.fillStyle = t.fg;
+          const m = Math.max(1, Math.floor(s * 0.35));
+          ctx.fillRect(x + m, y + m, Math.max(1, s - m * 2), Math.max(1, s - m * 2));
+          return;
+        }
+
+        // Draw 12x12 pixel-art sprite inside the tile using 1px crisp dots
+        const pad = 1;
+        const inner = Math.max(4, s - pad * 2);
+        const sp = t.sprite;
         ctx.fillStyle = t.fg;
-        const g = t.glyph;
-        for (let r = 0; r < 8; r++) {
-          const rowBits = g[r];
-          for (let c = 0; c < 8; c++) {
-            if ((rowBits >> (7 - c)) & 1) {
-              ctx.fillRect(
-                Math.round(x + pad + c * pxSize),
-                Math.round(y + pad + r * pxSize),
-                Math.max(1, Math.ceil(pxSize)),
-                Math.max(1, Math.ceil(pxSize))
-              );
+        for (let r = 0; r < 12; r++) {
+          const rowBits = sp[r];
+          if (!rowBits) continue;
+          const py = y + pad + Math.floor((r * inner) / 12);
+          for (let c = 0; c < 12; c++) {
+            if ((rowBits >> (11 - c)) & 1) {
+              const px = x + pad + Math.floor((c * inner) / 12);
+              ctx.fillRect(px, py, 1, 1);
             }
           }
         }
       }
 
       function drawCrumb(cr, time) {
-        const cx = Math.round(cr.x + Math.sin(time * 0.0016 + cr.phase) * 2.2);
-        const cy = Math.round(cr.y + Math.cos(time * 0.0014 + cr.phase) * 2.2);
+        const cx = Math.round(cr.x + Math.sin(time * 0.0015 + cr.phase) * 1.8);
+        const cy = Math.round(cr.y + Math.cos(time * 0.0013 + cr.phase) * 1.8);
         ctx.fillStyle = cr.color;
-        if (cr.kind === 0) {
-          ctx.font = "600 8px 'Geist Mono', monospace";
-          ctx.fillText(cr.label, cx, cy);
-        } else if (cr.kind === 1) {
-          // Tiny pixel cross +
-          ctx.fillRect(cx, cy - 2, 2, 6);
-          ctx.fillRect(cx - 2, cy, 6, 2);
-        } else if (cr.kind === 2) {
-          // Tiny hollow pixel box
-          ctx.strokeStyle = cr.color;
-          ctx.lineWidth = 1;
-          ctx.strokeRect(cx + 0.5, cy + 0.5, 5, 5);
-        } else if (cr.kind === 3) {
-          // Tiny 2x2 dither cluster
+        ctx.strokeStyle = cr.color;
+        ctx.lineWidth = 1;
+
+        if (cr.kind === "text") {
+          ctx.font = cr.italic
+            ? "italic 600 9px Georgia, serif"
+            : (cr.serif ? "700 11px Georgia, serif" : "600 8px 'Geist Mono', monospace");
+          ctx.fillText(cr.text, cx, cy);
+        } else if (cr.kind === "folder") {
+          ctx.strokeRect(cx + 0.5, cy + 2.5, 9, 6);
+          ctx.fillRect(cx + 1, cy + 1, 4, 2);
+        } else if (cr.kind === "plus") {
+          ctx.fillRect(cx + 2, cy, 1, 5);
+          ctx.fillRect(cx, cy + 2, 5, 1);
+        } else if (cr.kind === "ring") {
+          ctx.beginPath();
+          ctx.arc(cx + 3, cy + 3, 3.2, 0, Math.PI * 2);
+          ctx.stroke();
+        } else if (cr.kind === "diamond") {
+          ctx.beginPath();
+          ctx.moveTo(cx + 4, cy);
+          ctx.lineTo(cx + 8, cy + 4);
+          ctx.lineTo(cx + 4, cy + 8);
+          ctx.lineTo(cx, cy + 4);
+          ctx.closePath();
+          ctx.fill();
+        } else if (cr.kind === "crossArrows") {
+          ctx.fillRect(cx + 3, cy, 1, 7);
+          ctx.fillRect(cx, cy + 3, 7, 1);
+        } else if (cr.kind === "miniCluster") {
           ctx.fillRect(cx, cy, 2, 2);
           ctx.fillRect(cx + 3, cy + 2, 2, 2);
-        } else if (cr.kind === 4) {
-          // Tiny pixel diamond
-          ctx.fillRect(cx + 1, cy, 2, 2);
-          ctx.fillRect(cx, cy + 1, 4, 2);
-          ctx.fillRect(cx + 1, cy + 3, 2, 2);
         } else {
-          ctx.fillRect(cx, cy, 3, 3);
+          ctx.fillRect(cx, cy, 2, 2);
         }
       }
 
