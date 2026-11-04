@@ -366,9 +366,51 @@
       font-size: 0.98rem;
       color: var(--text);
       border-bottom: 1px solid var(--line);
+      overflow: hidden;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
-    .drawer-nav a.active { background: var(--bg-soft); color: var(--orange); }
+    .drawer-nav a::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 22%;
+      height: 56%;
+      width: 2.5px;
+      border-radius: 2px;
+      background: #f16001;
+      box-shadow:
+        0 0 8px 1px rgba(241, 96, 1, 0.8),
+        0 0 18px 3px rgba(193, 8, 1, 0.45);
+      opacity: 0;
+      transform: scaleY(0.4);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .drawer-nav a::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 8%;
+      width: 110px;
+      height: 84%;
+      background: linear-gradient(90deg, rgba(241, 96, 1, 0.20) 0%, rgba(193, 8, 1, 0.06) 52%, transparent 100%);
+      clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 85%);
+      filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .drawer-nav a.active {
+      background: transparent;
+      color: var(--orange);
+      font-weight: 500;
+    }
+    .drawer-nav a.active::before {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+    .drawer-nav a.active::after {
+      opacity: 1;
+    }
 
     .nav-controls {
       display: flex; align-items: center; gap: 14px;
@@ -513,35 +555,11 @@
     .tw-ghost { visibility: hidden; padding-right: 8px; }
     .tw-live { justify-self: start; }
     .cursor {
-      position: relative;
-      display: inline-block;
-      width: 3px;
-      height: 0.96em;
-      background: #f16001;
-      box-shadow:
-        0 0 10px 1px rgba(241, 96, 1, 0.85),
-        0 0 24px 4px rgba(193, 8, 1, 0.55);
-      margin-left: 5px;
-      vertical-align: -2px;
-      animation: blink 1.05s ease-in-out infinite;
-      border-radius: 2px;
+      display: inline-block; width: 2.5px; height: 0.92em;
+      background: var(--orange); margin-left: 4px; vertical-align: -2px;
+      animation: blink 1s step-end infinite;
     }
-    .cursor::after {
-      content: "";
-      position: absolute;
-      top: -18%;
-      left: 2px;
-      width: 68px;
-      height: 136%;
-      background: linear-gradient(90deg, rgba(241, 96, 1, 0.34) 0%, rgba(193, 8, 1, 0.12) 48%, transparent 100%);
-      clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 82%);
-      filter: blur(5px);
-      pointer-events: none;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.28; }
-    }
+    @keyframes blink { 50% { opacity: 0; } }
     .mobile-break { display: none; }
 
     .hero-sub {
@@ -555,61 +573,27 @@
       position: relative;
       max-width: var(--max);
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
       align-items: center;
-      gap: 32px;
+      gap: 28px;
     }
     .hero-copy { max-width: 620px; }
 
-    /* ARCHITECTURAL EMBER PIXEL MODULE (Inspired by Moodboard 1, 2, 3, 5) */
     .hero-mosaic-wrap {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       width: 100%;
-      max-width: 480px;
-      justify-self: end;
-      border-radius: 12px;
-      background: #0a0a0a;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow:
-        0 24px 54px -28px rgba(0, 0, 0, 0.55),
-        inset 0 1px 0 rgba(255, 255, 255, 0.14);
-      overflow: hidden;
+      min-height: 260px;
       user-select: none;
       -webkit-user-select: none;
     }
-    [data-theme="dark"] .hero-mosaic-wrap {
-      border-color: rgba(255, 255, 255, 0.11);
-      box-shadow:
-        0 28px 64px -30px rgba(0, 0, 0, 0.95),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    .mosaic-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 11px 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      background: rgba(255, 255, 255, 0.015);
-    }
-    .mosaic-meta-left {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 0.66rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #a7a7a7;
-    }
-    .mosaic-rings {
-      display: inline-flex;
-      align-items: center;
-      color: #d9c3ab;
-      opacity: 0.85;
-    }
-    .mosaic-rings svg { width: 18px; height: 11px; }
     .pixel-mosaic-canvas {
       width: 100%;
+      max-width: 460px;
       height: 248px;
       display: block;
       cursor: pointer;
@@ -618,100 +602,26 @@
     .mosaic-bar {
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
+      padding: 3px;
+      border-radius: 100px;
+      background: var(--surface-pill);
+      border: 1px solid var(--line);
     }
     .mosaic-chip {
       font-family: var(--mono);
-      font-size: 0.64rem;
-      letter-spacing: 0.03em;
-      padding: 3px 8px;
-      border-radius: 5px;
-      color: #787878;
+      font-size: 0.66rem;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 100px;
+      color: var(--muted);
       cursor: pointer;
       transition: color 0.2s ease, background-color 0.2s ease;
     }
     .mosaic-chip.active {
-      color: #f9f9f9;
-      background: rgba(232, 80, 2, 0.24);
-      border: 1px solid rgba(241, 96, 1, 0.42);
+      color: var(--orange);
+      background: var(--orange-soft);
       font-weight: 500;
-    }
-    .mosaic-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 9px 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.04em;
-      color: #85888f;
-      background: rgba(0, 0, 0, 0.42);
-    }
-    .mosaic-palettes {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      flex-wrap: wrap;
-    }
-    .palette-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      height: 21px;
-      padding: 0 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      color: #85888f;
-      font-family: var(--mono);
-      font-size: 0.59rem;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-    }
-    .palette-pill.active {
-      background: rgba(255, 255, 255, 0.94);
-      color: #080808;
-      border-color: #ffffff;
-      font-weight: 600;
-    }
-    .palette-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .mosaic-foot-right {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .mosaic-mini-strip {
-      display: inline-flex;
-      height: 14px;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-    }
-    .mosaic-mini-strip span {
-      width: 10px;
-      height: 100%;
-      display: block;
-    }
-    .mosaic-next-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 4px;
-      background: #e85002;
-      color: #f9f9f9;
-      font-size: 0.72rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, background-color 0.2s ease;
     }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -1054,6 +964,14 @@
         font-size: 0.93rem;
         color: var(--text-soft);
       }
+      .drawer-nav a::before {
+        left: 13px;
+        top: 23%;
+        height: 54%;
+      }
+      .drawer-nav a::after {
+        left: 15px;
+      }
       .drawer-nav a:hover,
       .drawer-nav a.active { background: transparent; color: var(--orange); }
       .drawer-nav a.active { font-weight: 500; }
@@ -1251,44 +1169,11 @@
         </div>
       </div>
       <div class="hero-mosaic-wrap">
-        <div class="mosaic-head">
-          <span class="mosaic-meta-left">
-            <span class="mosaic-rings" aria-hidden="true">
-              <svg viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9.5" cy="8" r="6.5"/><circle cx="18.5" cy="8" r="6.5"/></svg>
-            </span>
-            <span>lab // 001</span>
-          </span>
-          <div class="mosaic-bar" role="group" aria-label="Pixel mosaic shape">
-            <button type="button" class="mosaic-chip active" data-mosaic-word="hello">hello</button>
-            <button type="button" class="mosaic-chip" data-mosaic-word="murat">murat.</button>
-            <button type="button" class="mosaic-chip" data-mosaic-word="code">&lt;/&gt;</button>
-          </div>
-        </div>
         <canvas id="heroMosaic" class="pixel-mosaic-canvas" role="img" aria-label="Interactive pixel mosaic artwork"></canvas>
-        <div class="mosaic-foot">
-          <div class="mosaic-palettes" role="group" aria-label="Color palette">
-            <button type="button" class="palette-pill active" data-palette="ember">
-              <span class="palette-dot" style="background:linear-gradient(135deg,#e85002,#c10801)"></span>
-              <span>#e85002</span>
-            </button>
-            <button type="button" class="palette-pill" data-palette="ruby">
-              <span class="palette-dot" style="background:linear-gradient(135deg,#ee0039,#54091b)"></span>
-              <span>#ee0039</span>
-            </button>
-            <button type="button" class="palette-pill" data-palette="signal">
-              <span class="palette-dot" style="background:linear-gradient(135deg,#ff0000,#2c2f36)"></span>
-              <span>#ff0000</span>
-            </button>
-          </div>
-          <div class="mosaic-foot-right">
-            <span class="mosaic-mini-strip" id="mosaicMiniStrip" aria-hidden="true">
-              <span style="background:#e85002"></span>
-              <span style="background:#c10801"></span>
-              <span style="background:#b95118"></span>
-              <span style="background:#d9c3ab"></span>
-            </span>
-            <button type="button" class="mosaic-next-btn" id="mosaicNextBtn" aria-label="Cycle pixel sculpture">→</button>
-          </div>
+        <div class="mosaic-bar" role="group" aria-label="Pixel mosaic shape">
+          <button type="button" class="mosaic-chip active" data-mosaic-word="hello">hello</button>
+          <button type="button" class="mosaic-chip" data-mosaic-word="murat">murat.</button>
+          <button type="button" class="mosaic-chip" data-mosaic-word="code">&lt;/&gt;</button>
         </div>
       </div>
     </section>
@@ -2105,15 +1990,15 @@
         ctx.fillRect(0, 0, width, height);
       }
 
-      function drawTile(t) {
+      function drawTile(t, isDark) {
         const x = Math.round(t.x);
         const y = Math.round(t.y);
         const s = t.size;
         ctx.fillStyle = t.color;
         ctx.fillRect(x, y, s, s);
 
-        // Crisp 1px obsidian mosaic grid line between tiles
-        ctx.strokeStyle = "rgba(8, 8, 10, 0.78)";
+        // Crisp 1px mosaic grid line matching page background (light or dark)
+        ctx.strokeStyle = isDark ? "rgba(8, 8, 10, 0.82)" : "rgba(249, 249, 249, 0.88)";
         ctx.lineWidth = 1;
         ctx.strokeRect(x + 0.5, y + 0.5, s - 1, s - 1);
 
@@ -2187,7 +2072,7 @@
         ctx.save();
         ctx.scale(dpr, dpr);
         ctx.clearRect(0, 0, width, height);
-        drawBackgroundGrid(time);
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
 
         for (let i = 0; i < crumbs.length; i++) {
           const cr = crumbs[i];
@@ -2230,7 +2115,7 @@
           t.vy *= 0.76;
           t.x += t.vx;
           t.y += t.vy;
-          drawTile(t);
+          drawTile(t, isDark);
         }
 
         ctx.restore();
@@ -2273,8 +2158,15 @@
         buildMosaic(currentWord, true);
       }
 
+      const WORD_PALETTE = {
+        hello: "ember",
+        murat: "ruby",
+        code: "signal"
+      };
+
       function selectWord(w) {
         currentWord = w;
+        currentPalette = WORD_PALETTE[w] || "ember";
         chips.forEach((btn) => btn.classList.toggle("active", btn.dataset.mosaicWord === w));
         buildMosaic(w, true);
       }
