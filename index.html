@@ -39,22 +39,25 @@
   <style>
     :root {
       color-scheme: light;
-      /* Light theme (Premium minimal) */
-      --bg: #fdfdfc;
-      --bg-soft: #f7f5f2;
-      --bg-card: rgba(255, 255, 255, 0.72);
+      /* Light theme — Branding Orange (#E85002) & Swiss Monochrome */
+      --bg: #f9f9f9;
+      --bg-soft: #efefef;
+      --bg-card: rgba(255, 255, 255, 0.78);
       --bg-elev: #ffffff;
-      --topbar-stuck: rgba(253, 253, 252, 0.84);
-      --menu-bg: rgba(255, 255, 255, 0.94);
+      --topbar-stuck: rgba(249, 249, 249, 0.86);
+      --menu-bg: rgba(255, 255, 255, 0.96);
       --text: #111110;
-      --text-soft: #666666;
-      --muted: #888888;
-      --line: rgba(0, 0, 0, 0.06);
-      --line-2: rgba(0, 0, 0, 0.12);
+      --text-soft: #646464;
+      --muted: #8a8a8a;
+      --line: rgba(0, 0, 0, 0.07);
+      --line-2: rgba(0, 0, 0, 0.14);
 
-      --orange: #ff3615;
-      --orange-soft: rgba(255, 54, 21, 0.1);
-      --accent-line: rgba(255, 54, 21, 0.2);
+      --orange: #e85002;
+      --orange-bright: #f16001;
+      --crimson: #c10801;
+      --sand: #d9c3ab;
+      --orange-soft: rgba(232, 80, 2, 0.1);
+      --accent-line: rgba(232, 80, 2, 0.22);
       --shadow-soft: 0 18px 45px -32px rgba(17, 17, 16, 0.28);
       --shadow-panel: 0 18px 42px -36px rgba(17, 17, 16, 0.36);
       --radius-md: 8px;
@@ -65,60 +68,63 @@
       --max: 1100px;
       
       /* Toggle UI Colors */
-      --toggle-bg: #f0f0f0;
-      --toggle-border: #e2e2e2;
+      --toggle-bg: #ececec;
+      --toggle-border: #dcdcdc;
       --toggle-active: var(--orange);
-      --icon-color: #666;
-      --icon-hover: #111;
-      --panel: rgba(255, 255, 255, 0.52);
-      --panel-hover: rgba(255, 255, 255, 0.78);
+      --icon-color: #646464;
+      --icon-hover: #111110;
+      --panel: rgba(255, 255, 255, 0.56);
+      --panel-hover: rgba(255, 255, 255, 0.84);
       --glass: blur(16px) saturate(170%);
       --rail-w: 232px;
       --layout-max: 1440px;
       --gutter: 0px; /* set from JS on wide screens so rail + content centre as one block */
 
       /* Hero backdrop */
-      --fx-line: rgba(17, 17, 16, 0.085);
-      --fx-line-lit: rgba(255, 54, 21, 0.22);
-      --fx-beam: rgba(255, 54, 21, 0.16);
-      --fx-beam-mid: rgba(255, 54, 21, 0.095);
-      --fx-glow: rgba(255, 54, 21, 0.13);
+      --fx-line: rgba(17, 17, 16, 0.075);
+      --fx-line-lit: rgba(232, 80, 2, 0.22);
+      --fx-beam: rgba(232, 80, 2, 0.15);
+      --fx-beam-mid: rgba(193, 8, 1, 0.085);
+      --fx-glow: rgba(232, 80, 2, 0.12);
       --fx-lamp-top: 96px;
     }
 
     [data-theme="dark"] {
       color-scheme: dark;
-      --bg: #0b0b0b;
-      --bg-soft: #131313;
-      --bg-card: rgba(22, 22, 22, 0.5);
-      --bg-elev: #161616;
-      --topbar-stuck: rgba(11, 11, 11, 0.84);
-      --menu-bg: rgba(22, 22, 22, 0.94);
-      --text: #ededed;
-      --text-soft: #8e8e8e;
-      --muted: #5e5e5e;
-      --line: rgba(255, 255, 255, 0.06);
-      --line-2: rgba(255, 255, 255, 0.14);
+      --bg: #080808;
+      --bg-soft: #141414;
+      --bg-card: rgba(20, 20, 20, 0.65);
+      --bg-elev: #1a1a1a;
+      --topbar-stuck: rgba(8, 8, 8, 0.86);
+      --menu-bg: rgba(20, 20, 20, 0.96);
+      --text: #f9f9f9;
+      --text-soft: #a7a7a7;
+      --muted: #646464;
+      --line: rgba(255, 255, 255, 0.07);
+      --line-2: rgba(255, 255, 255, 0.15);
 
-      --orange: #ff3615;
-      --orange-soft: rgba(255, 54, 21, 0.1);
-      --accent-line: rgba(255, 54, 21, 0.22);
+      --orange: #e85002;
+      --orange-bright: #f16001;
+      --crimson: #c10801;
+      --sand: #d9c3ab;
+      --orange-soft: rgba(232, 80, 2, 0.12);
+      --accent-line: rgba(232, 80, 2, 0.25);
       --shadow-soft: 0 20px 55px -40px rgba(0, 0, 0, 0.9);
       --shadow-panel: 0 20px 58px -42px rgba(0, 0, 0, 0.95);
 
       --toggle-bg: #161616;
       --toggle-border: rgba(255,255,255,0.1);
-      --toggle-active: #ededed;
-      --icon-color: #8e8e8e;
-      --icon-hover: #ededed;
+      --toggle-active: #f9f9f9;
+      --icon-color: #a7a7a7;
+      --icon-hover: #f9f9f9;
       --panel: rgba(22, 22, 22, 0.46);
       --panel-hover: rgba(34, 34, 34, 0.76);
 
-      --fx-line: rgba(255, 255, 255, 0.1);
-      --fx-line-lit: rgba(255, 54, 21, 0.22);
-      --fx-beam: rgba(255, 54, 21, 0.24);
-      --fx-beam-mid: rgba(255, 54, 21, 0.14);
-      --fx-glow: rgba(255, 54, 21, 0.18);
+      --fx-line: rgba(255, 255, 255, 0.08);
+      --fx-line-lit: rgba(232, 80, 2, 0.24);
+      --fx-beam: rgba(232, 80, 2, 0.22);
+      --fx-beam-mid: rgba(193, 8, 1, 0.13);
+      --fx-glow: rgba(232, 80, 2, 0.17);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -507,18 +513,34 @@
     .tw-ghost { visibility: hidden; padding-right: 8px; }
     .tw-live { justify-self: start; }
     .cursor {
+      position: relative;
       display: inline-block;
-      width: 4px;
-      height: 0.95em;
-      background-color: var(--orange);
-      margin-left: 4px;
+      width: 3px;
+      height: 0.96em;
+      background: #f16001;
+      box-shadow:
+        0 0 10px 1px rgba(241, 96, 1, 0.85),
+        0 0 24px 4px rgba(193, 8, 1, 0.55);
+      margin-left: 5px;
       vertical-align: -2px;
-      animation: blink 1s step-end infinite;
+      animation: blink 1.05s ease-in-out infinite;
       border-radius: 2px;
+    }
+    .cursor::after {
+      content: "";
+      position: absolute;
+      top: -18%;
+      left: 2px;
+      width: 68px;
+      height: 136%;
+      background: linear-gradient(90deg, rgba(241, 96, 1, 0.34) 0%, rgba(193, 8, 1, 0.12) 48%, transparent 100%);
+      clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 82%);
+      filter: blur(5px);
+      pointer-events: none;
     }
     @keyframes blink {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+      50% { opacity: 0.28; }
     }
     .mobile-break { display: none; }
 
@@ -533,27 +555,62 @@
       position: relative;
       max-width: var(--max);
       display: grid;
-      grid-template-columns: minmax(0, 1.06fr) minmax(300px, 0.94fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
       align-items: center;
-      gap: 28px;
+      gap: 32px;
     }
     .hero-copy { max-width: 620px; }
 
-    /* SUSAN KARE PIXEL MOSAIC */
+    /* ARCHITECTURAL EMBER PIXEL MODULE (Inspired by Moodboard 1, 2, 3, 5) */
     .hero-mosaic-wrap {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-width: 0;
+      width: 100%;
+      max-width: 480px;
+      justify-self: end;
+      border-radius: 12px;
+      background: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 24px 54px -28px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      overflow: hidden;
       user-select: none;
       -webkit-user-select: none;
     }
+    [data-theme="dark"] .hero-mosaic-wrap {
+      border-color: rgba(255, 255, 255, 0.11);
+      box-shadow:
+        0 28px 64px -30px rgba(0, 0, 0, 0.95),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .mosaic-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.015);
+    }
+    .mosaic-meta-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #a7a7a7;
+    }
+    .mosaic-rings {
+      display: inline-flex;
+      align-items: center;
+      color: #d9c3ab;
+      opacity: 0.85;
+    }
+    .mosaic-rings svg { width: 18px; height: 11px; }
     .pixel-mosaic-canvas {
       width: 100%;
-      max-width: 500px;
-      height: 310px;
+      height: 248px;
       display: block;
       cursor: pointer;
       touch-action: pan-y;
@@ -561,23 +618,60 @@
     .mosaic-bar {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 2px;
+      gap: 3px;
     }
     .mosaic-chip {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.64rem;
       letter-spacing: 0.03em;
       padding: 3px 8px;
-      border-radius: 6px;
-      color: var(--muted);
+      border-radius: 5px;
+      color: #787878;
       cursor: pointer;
       transition: color 0.2s ease, background-color 0.2s ease;
     }
     .mosaic-chip.active {
-      color: var(--orange);
-      background: var(--orange-soft);
+      color: #f9f9f9;
+      background: rgba(232, 80, 2, 0.24);
+      border: 1px solid rgba(241, 96, 1, 0.42);
       font-weight: 500;
+    }
+    .mosaic-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      color: #646464;
+      background: rgba(0, 0, 0, 0.35);
+    }
+    .mosaic-swatch-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mosaic-swatch {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: #e85002;
+      box-shadow: 0 0 8px rgba(232, 80, 2, 0.65);
+    }
+    .mosaic-next-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      background: #e85002;
+      color: #f9f9f9;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
     }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -654,10 +748,13 @@
       color: var(--muted);
     }
     .project-card-arrow {
-      width: 15px;
-      height: 15px;
-      color: var(--muted);
-      transition: transform 0.22s ease, color 0.22s ease;
+      width: 22px;
+      height: 22px;
+      padding: 4px;
+      border-radius: 5px;
+      border: 1px solid var(--line-2);
+      color: var(--text-soft);
+      transition: transform 0.22s ease, color 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
       flex-shrink: 0;
     }
     .project-card-desc {
@@ -719,7 +816,13 @@
       }
       .project-card:hover { background: var(--bg-soft); }
       .project-card:hover .project-card-title { color: var(--orange); }
-      .project-card:hover .project-card-arrow { color: var(--orange); transform: translate(2px, -2px); }
+      .project-card:hover .project-card-arrow {
+        color: #f9f9f9;
+        background: var(--orange);
+        border-color: var(--orange);
+        transform: translate(1px, -1px);
+      }
+      .mosaic-next-btn:hover { background: #f16001; transform: translateX(1px); }
     }
 
     /* STACK */
@@ -917,8 +1020,9 @@
     }
 
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; gap: 22px; }
-      .pixel-mosaic-canvas { max-width: 420px; height: 230px; }
+      .hero { grid-template-columns: 1fr; gap: 24px; }
+      .hero-mosaic-wrap { max-width: 100%; justify-self: stretch; }
+      .pixel-mosaic-canvas { height: 224px; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero h1 { font-size: 2.5rem; }
       section + section { margin-top: 80px; }
@@ -996,8 +1100,8 @@
       }
       .hero-cta { gap: 10px; flex-wrap: wrap; }
       .hero-cta .btn { flex: 0 0 auto; height: 44px; padding: 0 20px; font-size: 0.88rem; }
-      .pixel-mosaic-canvas { max-width: 100%; height: 196px; }
-      .mosaic-chip { font-size: 0.62rem; padding: 4px 9px; }
+      .pixel-mosaic-canvas { height: 192px; }
+      .mosaic-chip { font-size: 0.62rem; padding: 3px 7px; }
 
       .section-title { font-size: 1.28rem; letter-spacing: -0.025em; }
       .contact-title { font-size: 1.28rem; letter-spacing: -0.025em; }
@@ -1107,11 +1211,26 @@
         </div>
       </div>
       <div class="hero-mosaic-wrap">
+        <div class="mosaic-head">
+          <span class="mosaic-meta-left">
+            <span class="mosaic-rings" aria-hidden="true">
+              <svg viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9.5" cy="8" r="6.5"/><circle cx="18.5" cy="8" r="6.5"/></svg>
+            </span>
+            <span>lab // 001</span>
+          </span>
+          <div class="mosaic-bar" role="group" aria-label="Pixel mosaic shape">
+            <button type="button" class="mosaic-chip active" data-mosaic-word="hello">hello</button>
+            <button type="button" class="mosaic-chip" data-mosaic-word="murat">murat.</button>
+            <button type="button" class="mosaic-chip" data-mosaic-word="code">&lt;/&gt;</button>
+          </div>
+        </div>
         <canvas id="heroMosaic" class="pixel-mosaic-canvas" role="img" aria-label="Interactive pixel mosaic artwork"></canvas>
-        <div class="mosaic-bar" role="group" aria-label="Pixel mosaic shape">
-          <button type="button" class="mosaic-chip active" data-mosaic-word="hello">hello</button>
-          <button type="button" class="mosaic-chip" data-mosaic-word="murat">murat.</button>
-          <button type="button" class="mosaic-chip" data-mosaic-word="code">&lt;/&gt;</button>
+        <div class="mosaic-foot">
+          <span class="mosaic-swatch-row">
+            <span class="mosaic-swatch" id="mosaicSwatch"></span>
+            <span id="mosaicSpec">HEX #E85002 · RGB 232, 80, 2</span>
+          </span>
+          <button type="button" class="mosaic-next-btn" id="mosaicNextBtn" aria-label="Cycle pixel sculpture">→</button>
         </div>
       </div>
     </section>
@@ -1692,68 +1811,76 @@
         ]
       };
 
-      // Authentic multi-zone palette: each entry is [tileBg, iconFg] with strong contrast
+      // Disciplined Branding Gradient Palette (from Moodboard Image 4 & 5):
+      // Deep Black/Charcoal (#181818, #262626) -> Deep Ember (#8a0a02, #c10801) -> Branding Orange (#e85002, #f16001) -> Copper & Warm Sand (#b95118, #d9c3ab, #f9f9f9)
       const ZONES = [
-        // Zone 0 (h): crimson, scarlet, orange, amber, deep plum
+        // Zone 0 (left): Deep Ember Crimson & Branding Orange
         [
-          ["#dc2626", "#fef08a"], ["#ff3615", "#ffffff"], ["#ea580c", "#fff7ed"],
-          ["#f59e0b", "#1e1b4b"], ["#fbbf24", "#7f1d1d"], ["#581c87", "#fb923c"],
-          ["#b91c1c", "#fde047"], ["#f97316", "#111110"]
+          ["#c10801", "#f9f9f9"], ["#e85002", "#ffffff"], ["#8a0a02", "#d9c3ab"],
+          ["#222222", "#f16001"], ["#f16001", "#111110"], ["#b95118", "#f9f9f9"],
+          ["#181818", "#e85002"], ["#d9c3ab", "#111110"]
         ],
-        // Zone 1 (e): teal, cyan, sky, cobalt, emerald
+        // Zone 1 (mid-left): Charcoal, Copper & Warm Sand
         [
-          ["#0284c7", "#e0f2fe"], ["#06b6d4", "#0f172a"], ["#2563eb", "#fef08a"],
-          ["#0d9488", "#ffffff"], ["#38bdf8", "#1e1b4b"], ["#4f46e5", "#a5f3fc"],
-          ["#10b981", "#064e3b"], ["#1d4ed8", "#ffffff"]
+          ["#262626", "#f9f9f9"], ["#e85002", "#111110"], ["#333333", "#d9c3ab"],
+          ["#c10801", "#d9c3ab"], ["#b95118", "#ffffff"], ["#1a1a1a", "#f16001"],
+          ["#d9c3ab", "#181818"], ["#f16001", "#ffffff"]
         ],
-        // Zone 2 (first l): royal indigo/violet top, fiery orange/red bottom
+        // Zone 2 (center): Branding Orange & Ember Core
         [
-          ["#3730a3", "#fde047"], ["#4f46e5", "#ffffff"], ["#6d28d9", "#fb923c"],
-          ["#ff3615", "#fef08a"], ["#ea580c", "#ffffff"], ["#e11d48", "#fff1f2"],
-          ["#2563eb", "#a5f3fc"], ["#f97316", "#1e1b4b"]
+          ["#e85002", "#f9f9f9"], ["#f16001", "#111110"], ["#c10801", "#ffffff"],
+          ["#1f1f1f", "#e85002"], ["#b95118", "#d9c3ab"], ["#f9f9f9", "#111110"],
+          ["#990b02", "#f9f9f9"], ["#e85002", "#d9c3ab"]
         ],
-        // Zone 3 (second l): golden yellow, bright amber, orange, coral
+        // Zone 3 (mid-right): Copper Skillet & Warm Sand
         [
-          ["#f59e0b", "#1e1b4b"], ["#facc15", "#7c2d12"], ["#ea580c", "#fef08a"],
-          ["#ff3615", "#ffffff"], ["#fb923c", "#1e1b4b"], ["#0891b2", "#cffafe"],
-          ["#d97706", "#ffffff"], ["#fde047", "#1e1b4b"]
+          ["#f16001", "#111110"], ["#d9c3ab", "#181818"], ["#e85002", "#ffffff"],
+          ["#b95118", "#f9f9f9"], ["#2b2b2b", "#d9c3ab"], ["#c10801", "#f9f9f9"],
+          ["#f9f9f9", "#c10801"], ["#333333", "#f16001"]
         ],
-        // Zone 4 (o + tail): electric blue, cyan, deep cobalt, violet
+        // Zone 4 (right): Deep Charcoal, Sand & Ember Accents
         [
-          ["#1d4ed8", "#bae6fd"], ["#0284c7", "#ffffff"], ["#2563eb", "#fde047"],
-          ["#06b6d4", "#0f172a"], ["#4338ca", "#f472b6"], ["#38bdf8", "#172554"],
-          ["#3b82f6", "#ffffff"], ["#6366f1", "#fef08a"]
+          ["#242424", "#d9c3ab"], ["#e85002", "#f9f9f9"], ["#333333", "#ffffff"],
+          ["#c10801", "#d9c3ab"], ["#d9c3ab", "#111110"], ["#191919", "#f16001"],
+          ["#b95118", "#f9f9f9"], ["#f16001", "#111110"]
         ]
       ];
 
-      // Curated unique floating micro-items positioned around the mosaic
+      // Curated technical & pixel micro-artifacts in the Branding Orange / Sand / Gray palette
       const FLOATING_SPECS = [
-        { rx: -0.38, ry: -0.38, kind: "text", text: "hello", italic: true, color: "#f97316" },
-        { rx: -0.07, ry: -0.44, kind: "text", text: "it", color: "#ea580c" },
-        { rx: -0.11, ry: -0.30, kind: "text", text: "Pro", color: "#f59e0b" },
-        { rx: -0.45, ry: 0.01,  kind: "text", text: "11", serif: true, color: "#0284c7" },
-        { rx: -0.41, ry: -0.12, kind: "text", text: "1/x", color: "#10b981" },
-        { rx: -0.22, ry: 0.36,  kind: "text", text: "RAM", color: "#e11d48" },
-        { rx: -0.08, ry: 0.42,  kind: "text", text: "A", serif: true, color: "#ea580c" },
-        { rx: -0.04, ry: 0.48,  kind: "text", text: "A", serif: true, color: "#7c3aed" },
-        { rx: 0.09,  ry: 0.35,  kind: "text", text: "Text", color: "#4f46e5" },
-        { rx: 0.25,  ry: -0.32, kind: "text", text: "(b)", color: "#e11d48" },
-        { rx: 0.31,  ry: -0.08, kind: "text", text: "255", color: "#db2777" },
-        { rx: 0.19,  ry: -0.41, kind: "folder", color: "#0284c7" },
-        { rx: 0.32,  ry: -0.25, kind: "plus", color: "#f59e0b" },
-        { rx: 0.36,  ry: -0.25, kind: "ring", color: "#0284c7" },
-        { rx: -0.11, ry: 0.39,  kind: "diamond", color: "#2563eb" },
-        { rx: 0.19,  ry: 0.38,  kind: "crossArrows", color: "#2563eb" },
-        { rx: 0.33,  ry: 0.32,  kind: "diamond", color: "#1d4ed8" },
-        { rx: -0.34, ry: 0.35,  kind: "text", text: "{ }", color: "#d97706" }
+        { rx: -0.38, ry: -0.38, kind: "text", text: "hello", italic: true, color: "#f16001" },
+        { rx: -0.07, ry: -0.44, kind: "text", text: "001", color: "#d9c3ab" },
+        { rx: -0.11, ry: -0.30, kind: "text", text: "Pro", color: "#e85002" },
+        { rx: -0.44, ry: 0.01,  kind: "text", text: "11", serif: true, color: "#a7a7a7" },
+        { rx: -0.40, ry: -0.14, kind: "text", text: "sys//", color: "#646464" },
+        { rx: -0.22, ry: 0.36,  kind: "text", text: "RAM", color: "#c10801" },
+        { rx: -0.06, ry: 0.42,  kind: "text", text: "A", serif: true, color: "#e85002" },
+        { rx: 0.09,  ry: 0.36,  kind: "text", text: "HEX", color: "#a7a7a7" },
+        { rx: 0.25,  ry: -0.34, kind: "text", text: "(b)", color: "#c10801" },
+        { rx: 0.32,  ry: -0.08, kind: "text", text: "255", color: "#d9c3ab" },
+        { rx: 0.19,  ry: -0.41, kind: "folder", color: "#d9c3ab" },
+        { rx: 0.32,  ry: -0.25, kind: "plus", color: "#f16001" },
+        { rx: 0.36,  ry: -0.25, kind: "ring", color: "#a7a7a7" },
+        { rx: -0.12, ry: 0.39,  kind: "diamond", color: "#e85002" },
+        { rx: 0.20,  ry: 0.38,  kind: "crossArrows", color: "#d9c3ab" },
+        { rx: 0.33,  ry: 0.32,  kind: "diamond", color: "#c10801" },
+        { rx: -0.34, ry: 0.35,  kind: "text", text: "{ }", color: "#b95118" }
       ];
 
       const WORDS = ["hello", "murat", "code"];
+      const WORD_SPECS = {
+        hello: { hex: "#E85002", rgb: "232, 80, 2" },
+        murat: { hex: "#C10801", rgb: "193, 8, 1" },
+        code:  { hex: "#D9C3AB", rgb: "217, 195, 171" }
+      };
       let currentWord = "hello";
       let width = 0, height = 0, dpr = 1;
       let tiles = [];
       let crumbs = [];
+      let bgCells = [];
       const pointer = { x: -9999, y: -9999, active: false };
+      const specEl = document.getElementById("mosaicSpec");
+      const swatchEl = document.getElementById("mosaicSwatch");
 
       function pickPair(nx, ny, idx) {
         let z = Math.min(ZONES.length - 1, Math.max(0, Math.floor(nx * ZONES.length)));
@@ -1770,11 +1897,27 @@
         canvas.width = width * dpr;
         canvas.height = height * dpr;
 
+        // Build Image-1 style architectural background grid squares (44x44px matte cells)
+        const cellS = 44;
+        const bCols = Math.ceil(width / cellS);
+        const bRows = Math.ceil(height / cellS);
+        bgCells = [];
+        for (let r = 0; r < bRows; r++) {
+          for (let c = 0; c < bCols; c++) {
+            const checker = (r + c) % 2 === 0;
+            bgCells.push({
+              x: c * cellS,
+              y: r * cellS,
+              s: cellS,
+              checker
+            });
+          }
+        }
+
         const grid = MAPS[word] || MAPS.hello;
         const rows = grid.length;
         const cols = grid[0].length;
-        // Tile size: 10px..11px on desktop, 7px..9px on mobile so all 44 columns fit with breathing room
-        const tileSize = Math.max(7, Math.min(11, Math.floor((width * 0.88) / cols)));
+        const tileSize = Math.max(6, Math.min(10, Math.floor((width * 0.86) / cols)));
         const gridW = cols * tileSize;
         const gridH = rows * tileSize;
         const ox = Math.round((width - gridW) / 2);
@@ -1832,8 +1975,8 @@
           };
         });
 
-        for (let i = 0; i < 36; i++) {
-          const ang = (i / 36) * Math.PI * 2 + 0.2;
+        for (let i = 0; i < 32; i++) {
+          const ang = (i / 32) * Math.PI * 2 + 0.2;
           const rx = gridW * (0.42 + (i % 5) * 0.035);
           const ry = gridH * (0.52 + ((i * 3) % 5) * 0.05);
           const bx = Math.round(width * 0.5 + Math.cos(ang) * rx);
@@ -1851,15 +1994,49 @@
         crumbs = list;
       }
 
-      function drawTile(t, isDark) {
+      function drawBackgroundGrid(time) {
+        // 1. Matte architectural checkerboard squares (Moodboard Image 1)
+        const spotX = pointer.active ? pointer.x : width * (0.5 + Math.sin(time * 0.0008) * 0.16);
+        const spotY = pointer.active ? pointer.y : height * 0.5;
+
+        for (let i = 0; i < bgCells.length; i++) {
+          const cell = bgCells[i];
+          const cx = cell.x + cell.s * 0.5;
+          const cy = cell.y + cell.s * 0.5;
+          const dist = Math.hypot(cx - spotX, cy - spotY);
+          const heat = Math.max(0, 1 - dist / 160);
+
+          if (cell.checker) {
+            ctx.fillStyle = heat > 0.05
+              ? `rgba(${Math.round(24 + heat * 65)}, ${Math.round(14 + heat * 12)}, 12, ${0.45 + heat * 0.35})`
+              : "rgba(255, 255, 255, 0.022)";
+            ctx.fillRect(cell.x, cell.y, cell.s, cell.s);
+          }
+          ctx.strokeStyle = heat > 0.08
+            ? `rgba(232, 80, 2, ${(0.06 + heat * 0.24).toFixed(3)})`
+            : "rgba(255, 255, 255, 0.032)";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(cell.x + 0.5, cell.y + 0.5, cell.s - 1, cell.s - 1);
+        }
+
+        // 2. Volumetric Ember Spotlight Plume (Moodboard Image 1 & 5)
+        const grad = ctx.createRadialGradient(spotX, spotY, 8, spotX, spotY, 155);
+        grad.addColorStop(0, "rgba(241, 96, 1, 0.24)");
+        grad.addColorStop(0.45, "rgba(193, 8, 1, 0.12)");
+        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, width, height);
+      }
+
+      function drawTile(t) {
         const x = Math.round(t.x);
         const y = Math.round(t.y);
         const s = t.size;
         ctx.fillStyle = t.color;
         ctx.fillRect(x, y, s, s);
 
-        // Crisp 1px dark mosaic grid line between tiles
-        ctx.strokeStyle = isDark ? "rgba(8, 8, 16, 0.72)" : "rgba(17, 17, 16, 0.22)";
+        // Crisp 1px obsidian mosaic grid line between tiles
+        ctx.strokeStyle = "rgba(8, 8, 10, 0.78)";
         ctx.lineWidth = 1;
         ctx.strokeRect(x + 0.5, y + 0.5, s - 1, s - 1);
 
@@ -1933,7 +2110,7 @@
         ctx.save();
         ctx.scale(dpr, dpr);
         ctx.clearRect(0, 0, width, height);
-        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        drawBackgroundGrid(time);
 
         for (let i = 0; i < crumbs.length; i++) {
           const cr = crumbs[i];
@@ -1976,7 +2153,7 @@
           t.vy *= 0.76;
           t.x += t.vx;
           t.y += t.vy;
-          drawTile(t, isDark);
+          drawTile(t);
         }
 
         ctx.restore();
@@ -2005,13 +2182,24 @@
       function selectWord(w) {
         currentWord = w;
         chips.forEach((btn) => btn.classList.toggle("active", btn.dataset.mosaicWord === w));
+        const spec = WORD_SPECS[w];
+        if (spec) {
+          if (specEl) specEl.textContent = spec.label;
+          if (swatchEl) {
+            swatchEl.style.background = spec.hex;
+            swatchEl.style.boxShadow = `0 0 8px ${spec.hex}a6`;
+          }
+        }
         buildMosaic(w, true);
       }
 
-      canvas.addEventListener("click", () => {
+      function cycleNextWord() {
         const nextIdx = (WORDS.indexOf(currentWord) + 1) % WORDS.length;
         selectWord(WORDS[nextIdx]);
-      });
+      }
+
+      canvas.addEventListener("click", cycleNextWord);
+      if (nextBtn) nextBtn.addEventListener("click", cycleNextWord);
 
       chips.forEach((btn) => {
         btn.addEventListener("click", () => selectWord(btn.dataset.mosaicWord));

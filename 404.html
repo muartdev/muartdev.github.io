@@ -27,27 +27,27 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #fdfdfc;
-      --bg-soft: #f7f5f2;
-      --text: #111110;
-      --text-soft: #666666;
+      --bg: #f9f9f9;
+      --bg-soft: #f2f1ef;
+      --text: #080808;
+      --text-soft: #646464;
       --muted: #888888;
       --line: rgba(0, 0, 0, 0.08);
       --line-2: rgba(0, 0, 0, 0.14);
-      --orange: #ff3615;
+      --orange: #e85002;
       --sans: "Geist", system-ui, -apple-system, sans-serif;
       --mono: "Geist Mono", ui-monospace, monospace;
     }
     [data-theme="dark"] {
       color-scheme: dark;
-      --bg: #0b0b0b;
-      --bg-soft: #131313;
-      --text: #ededed;
-      --text-soft: #8e8e8e;
-      --muted: #5e5e5e;
+      --bg: #080808;
+      --bg-soft: #121212;
+      --text: #f9f9f9;
+      --text-soft: #a7a7a7;
+      --muted: #646464;
       --line: rgba(255, 255, 255, 0.06);
       --line-2: rgba(255, 255, 255, 0.14);
-      --orange: #ff3615;
+      --orange: #e85002;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; background-color: var(--bg); color: var(--text); }
@@ -169,7 +169,7 @@
         [0xaa,0x55,0xaa,0x55,0xaa,0x55,0xaa,0x55],
         [0x38,0xfe,0x82,0xaa,0xaa,0xaa,0x82,0x7c]
       ];
-      const COLORS = ["#ff3615","#f97316","#f59e0b","#06b6d4","#2563eb","#6366f1","#8b5cf6","#ec4899"];
+      const COLORS = ["#e85002","#f16001","#c10801","#b95118","#d9c3ab","#333333","#262626","#e85002"];
       let width = 0, height = 0, dpr = 1, tiles = [];
       const pointer = { x: -9999, y: -9999, active: false };
 
