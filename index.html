@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://muartdev.github.io/og.png?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png" />
   <link rel="apple-touch-icon" href="icon-180.png" />
@@ -56,7 +56,6 @@
 
       --sans: "Geist", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --serif: "Instrument Serif", "Times New Roman", serif;
       --max: 1100px;
       
       /* Toggle UI Colors */
@@ -76,7 +75,6 @@
       --fx-line: rgba(17, 17, 16, 0.085);
       --fx-beam: rgba(255, 54, 21, 0.16);
       --fx-glow: rgba(255, 54, 21, 0.13);
-      --fx-wash: rgba(17, 17, 16, 0.035);
       --fx-lamp-top: 96px;
     }
 
@@ -108,7 +106,6 @@
       --fx-line: rgba(255, 255, 255, 0.1);
       --fx-beam: rgba(255, 54, 21, 0.24);
       --fx-glow: rgba(255, 54, 21, 0.18);
-      --fx-wash: rgba(255, 255, 255, 0.04);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -129,13 +126,16 @@
       overflow-x: clip;
     }
 
-    /* held for one beat while data-theme flips, so nothing is caught mid-fade */
+    /* Smooth theme transition when user toggles */
+    .theme-switching,
     .theme-switching *,
     .theme-switching *::before,
     .theme-switching *::after { 
-      transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease, fill 0.8s ease, box-shadow 0.8s ease !important; 
+      transition: background-color 0.42s cubic-bezier(0.22, 1, 0.36, 1), color 0.42s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.42s cubic-bezier(0.22, 1, 0.36, 1), fill 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1) !important; 
     }
-    .theme-switching .bg-fx { transition: opacity 0.4s ease !important; }
+    .theme-switching .bg-fx {
+      transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1), transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
 
     h2, h3 { text-wrap: balance; }
     p { text-wrap: pretty; }
@@ -149,7 +149,6 @@
     img { max-width: 100%; display: block; }
 
     .mono { font-family: var(--mono); }
-    .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
     .shell {
       width: min(var(--max), calc(100% - 48px));
@@ -179,48 +178,81 @@
       z-index: -1;
       pointer-events: none;
       overflow: hidden;
-      transition: opacity 0.5s ease;
+      transform-origin: var(--fx-lamp-x, 78%) var(--fx-lamp-top, 30px);
+      transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1), transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .bg-fx > * { position: absolute; }
 
+    /* Ruled lines illuminated near the flashlight source */
+    .bg-lines-lit {
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--orange) 22%, transparent) 0 1px,
+        transparent 1px 88px
+      );
+      mask-image: radial-gradient(540px circle at var(--fx-lamp-x, 78%) var(--fx-lamp-top, 30px), #000 0%, transparent 74%);
+      -webkit-mask-image: radial-gradient(540px circle at var(--fx-lamp-x, 78%) var(--fx-lamp-top, 30px), #000 0%, transparent 74%);
+    }
+
+    /* Conical beam: clip-path lives on ::before so parent filter:blur feathers all edges without sharp polygon cutoffs */
     .bg-beam {
       top: var(--fx-lamp-top);
       left: var(--fx-lamp-x, 78%);
-      width: min(560px, 76vw);
-      height: 76%;
+      width: min(600px, 80vw);
+      height: 78%;
       transform: translateX(-50%) rotate(17deg);
       transform-origin: top center;
-      background: linear-gradient(to bottom, var(--fx-beam), transparent 78%);
-      clip-path: polygon(47% 0, 53% 0, 94% 100%, 6% 100%);
-      filter: blur(26px);
-      animation: beam-pulse 4s ease-in-out infinite alternate;
-      mix-blend-mode: color-dodge;
+      filter: blur(32px);
+      animation: beam-pulse 4.5s ease-in-out infinite alternate;
+    }
+    .bg-beam::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(48% 0, 52% 0, 96% 100%, 4% 100%);
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--fx-beam) 4%,
+        color-mix(in srgb, var(--fx-beam) 58%, transparent) 44%,
+        transparent 82%
+      );
     }
 
     .bg-glow {
-      top: calc(var(--fx-lamp-top) - 300px);
+      top: calc(var(--fx-lamp-top) - 310px);
       left: var(--fx-lamp-x, 78%);
       width: min(760px, 108vw);
       height: 620px;
       transform: translateX(-50%);
       background: radial-gradient(closest-side, var(--fx-glow), transparent 72%);
-      animation: beam-pulse 5s ease-in-out infinite alternate-reverse;
-      mix-blend-mode: screen;
+      animation: glow-pulse 5.5s ease-in-out infinite alternate-reverse;
     }
 
     @keyframes beam-pulse {
-      0% { opacity: 0.85; filter: blur(28px); }
-      100% { opacity: 1; filter: blur(22px); }
+      0% { opacity: 0.86; }
+      100% { opacity: 1; }
     }
-
-    .bg-wash {
-      inset: auto 0 0 0;
-      height: 46%;
-      background: linear-gradient(to bottom, transparent, var(--fx-wash));
+    @keyframes glow-pulse {
+      0% { opacity: 0.84; transform: translateX(-50%) scale(0.97); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.03); }
+    }
+    @keyframes lamp-ignite {
+      0% { opacity: 0; transform: scale(0.92); }
+      35% { opacity: 1; transform: scale(1.01); }
+      55% { opacity: 0.84; transform: scale(0.995); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .bg-fx.igniting {
+      animation: lamp-ignite 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     /* the toggle is a light switch: dark theme = lamp off, only the ruling stays */
-    [data-theme="dark"] .bg-fx { opacity: 0; }
+    [data-theme="dark"] .bg-fx {
+      opacity: 0;
+      transform: scale(0.94);
+    }
 
     /* TOPBAR & CONTROLS */
     .topbar {
@@ -246,15 +278,19 @@
     }
 
     .brand {
-      display: inline-flex; align-items: center;
-      transition: opacity 0.2s;
-    }
-    .brand:hover { opacity: 0.8; }
-    .brand-mark {
-      width: auto;
-      height: 26px;
+      display: inline-flex;
+      align-items: baseline;
+      font-family: var(--sans);
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1;
       color: var(--text);
-      display: block;
+      transition: opacity 0.2s ease;
+    }
+    .brand:hover { opacity: 0.78; }
+    .brand-dot {
+      color: var(--orange);
     }
 
     /* LEFT DRAWER */
@@ -282,12 +318,10 @@
 
     .drawer {
       position: fixed; top: 0; left: 0; z-index: 95;
-      width: min(320px, 84vw);
+      width: min(300px, 82vw);
       height: 100dvh;
       display: flex; flex-direction: column;
-      background: color-mix(in srgb, var(--bg-elev) 72%, transparent);
-      backdrop-filter: blur(22px) saturate(170%);
-      -webkit-backdrop-filter: blur(22px) saturate(170%);
+      background: var(--bg);
       border-right: 1px solid var(--line);
       box-shadow: 0 0 60px -20px rgba(0, 0, 0, 0.35);
       transform: translateX(-101%);
@@ -304,7 +338,6 @@
       padding: 16px 18px;
       border-bottom: 1px solid var(--line);
     }
-    .drawer-head .brand-mark { height: 28px; }
     .drawer-close {
       display: inline-flex; align-items: center; justify-content: center;
       width: 38px; height: 38px;
@@ -318,71 +351,19 @@
 
     .drawer-nav { display: grid; }
     .drawer-nav a {
-      display: grid; grid-template-columns: 28px 1fr;
-      align-items: baseline; gap: 10px;
+      position: relative;
+      display: block;
       padding: 15px 18px;
       font-size: 0.98rem;
       color: var(--text);
       border-bottom: 1px solid var(--line);
       transition: background 0.2s ease, color 0.2s ease;
     }
-    .drawer-nav a:hover { background: var(--bg-soft); color: var(--orange); }
-    .drawer-num {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      transition: color 0.25s ease;
-    }
-    .drawer-nav a:hover .drawer-num { color: var(--orange); }
-
-    .drawer-foot {
-      margin-top: auto;
-      display: grid; gap: 16px;
-      padding: 18px 18px calc(20px + env(safe-area-inset-bottom));
-      border-top: 1px solid var(--line);
-    }
-    .drawer-studio {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-      color: var(--text-soft);
-      transition: color 0.25s ease;
-    }
-    .drawer-studio:hover { color: var(--orange); }
-    .drawer-studio svg { width: 12px; height: 12px; }
-    .drawer-social { display: flex; align-items: center; gap: 6px; }
-    .drawer-social a {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 34px; height: 34px;
-      margin-left: -6px;
-      border-radius: var(--radius-md);
-      color: var(--icon-color);
-      transition: color 0.2s ease, background 0.2s ease;
-    }
-    .drawer-social a:hover { color: var(--icon-hover); background: var(--bg-soft); }
-    .drawer-social a svg { width: 17px; height: 17px; fill: currentColor; }
+    .drawer-nav a:hover,
+    .drawer-nav a.active { background: var(--bg-soft); color: var(--orange); }
 
     .nav-controls {
       display: flex; align-items: center; gap: 14px;
-    }
-
-    .studio-link {
-      display: inline-flex; align-items: center; height: 28px;
-      padding: 0 10px; border-radius: 100px;
-      border: 1px solid var(--line);
-      background: var(--panel);
-      color: var(--text-soft);
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-      transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-    }
-    .studio-link:hover {
-      color: var(--orange);
-      border-color: var(--accent-line);
-      background: var(--panel-hover);
     }
 
     .nav-divider {
@@ -431,22 +412,38 @@
     .lang-option:hover { background: var(--bg-soft); color: var(--text); }
     .lang-option.active { color: var(--orange); font-weight: 500; background: var(--orange-soft); }
 
-    /* Theme Pill Toggle */
+    /* Theme Pill Toggle — Flashlight Emitter */
     .theme-pill {
       position: relative;
       width: 52px; height: 26px;
       border-radius: 100px;
-      background: var(--toggle-bg);
-      border: 1px solid var(--toggle-border);
+      background: color-mix(in srgb, var(--orange) 6%, var(--toggle-bg));
+      border: 1px solid color-mix(in srgb, var(--orange) 24%, var(--toggle-border));
+      box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.04),
+        0 4px 18px -6px color-mix(in srgb, var(--orange) 38%, transparent);
       display: flex; align-items: center;
       cursor: pointer;
       padding: 2px;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, transform 0.15s ease;
     }
     .theme-pill:hover {
-      border-color: color-mix(in srgb, var(--orange) 30%, transparent);
+      border-color: color-mix(in srgb, var(--orange) 45%, var(--toggle-border));
+      box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.04),
+        0 6px 22px -5px color-mix(in srgb, var(--orange) 52%, transparent);
     }
-    [data-theme="dark"] .theme-pill { border-color: var(--toggle-active); background: var(--bg-soft); }
+    [data-theme="dark"] .theme-pill {
+      border-color: var(--line-2);
+      background: var(--bg-soft);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+    [data-theme="dark"] .theme-pill:hover {
+      border-color: rgba(255, 255, 255, 0.26);
+      box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.4),
+        0 0 16px -4px rgba(255, 255, 255, 0.18);
+    }
 
     .theme-handle {
       position: absolute;
@@ -454,31 +451,36 @@
       background: var(--bg-elev);
       border-radius: 50%;
       box-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.1),
-        0 0 24px 6px color-mix(in srgb, var(--orange) 35%, transparent);
+        0 1px 4px rgba(0, 0, 0, 0.12),
+        0 0 18px 4px color-mix(in srgb, var(--orange) 34%, transparent);
       display: flex; align-items: center; justify-content: center;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+      transition: transform 0.46s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, background 0.35s ease;
       left: 2px;
     }
     .theme-pill:hover .theme-handle {
       box-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.1),
-        0 0 28px 8px color-mix(in srgb, var(--orange) 45%, transparent);
+        0 2px 6px rgba(0, 0, 0, 0.14),
+        0 0 22px 6px color-mix(in srgb, var(--orange) 46%, transparent);
     }
     [data-theme="dark"] .theme-handle {
       box-shadow: 
-        0 2px 6px rgba(0, 0, 0, 0.2),
-        0 0 24px 6px color-mix(in srgb, var(--bg-elev) 35%, transparent);
+        0 2px 6px rgba(0, 0, 0, 0.45),
+        0 0 14px 2px rgba(255, 255, 255, 0.16);
       transform: translateX(26px);
       background: var(--toggle-active);
     }
     [data-theme="dark"] .theme-pill:hover .theme-handle {
       box-shadow: 
-        0 2px 6px rgba(0, 0, 0, 0.2),
-        0 0 28px 8px color-mix(in srgb, var(--bg-elev) 45%, transparent);
+        0 2px 6px rgba(0, 0, 0, 0.5),
+        0 0 18px 4px rgba(255, 255, 255, 0.25);
     }
 
-    .theme-icon { width: 11px; height: 11px; color: var(--text); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); position: absolute; }
+    .theme-icon {
+      width: 11px; height: 11px;
+      color: var(--orange);
+      transition: opacity 0.35s ease, transform 0.46s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.35s ease;
+      position: absolute;
+    }
     [data-theme="dark"] .theme-icon { color: var(--bg); }
     
     @keyframes sun-spin {
@@ -486,13 +488,12 @@
       to { transform: rotate(360deg); }
     }
     
-    .icon-sun { opacity: 1; animation: sun-spin 14s linear infinite; }
+    .icon-sun { opacity: 1; animation: sun-spin 16s linear infinite; }
     .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
     [data-theme="dark"] .icon-sun { opacity: 0; animation: none; transform: rotate(90deg) scale(0.5); }
     [data-theme="dark"] .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
     
-    /* Slight click ripple on the pill itself */
-    .theme-pill:active { transform: scale(0.96); }
+    .theme-pill:active { transform: scale(0.95); }
 
     /* Social Icons */
     .social-links { display: flex; align-items: center; gap: 12px; }
@@ -556,53 +557,6 @@
       max-width: var(--max);
     }
     .hero-copy { max-width: 720px; }
-    .scroll-rail {
-      position: fixed;
-      right: clamp(36px, calc((100vw - var(--max)) / 4), 152px);
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 40;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-      color: var(--text-soft);
-      opacity: 0.72;
-      transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
-    }
-    .scroll-rail:hover {
-      color: var(--text);
-      opacity: 1;
-    }
-    .scroll-rail.is-hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-42%);
-    }
-    .scroll-rail span {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .scroll-rail i {
-      display: block;
-      width: 1px;
-      height: 78px;
-      background: linear-gradient(
-        to bottom,
-        color-mix(in srgb, var(--text) 18%, transparent),
-        color-mix(in srgb, var(--orange) 72%, transparent)
-      );
-      transform-origin: top;
-      animation: scroll-line 2.4s ease-in-out infinite;
-    }
-    @keyframes scroll-line {
-      0%, 100% { transform: scaleY(0.72); opacity: 0.52; }
-      50% { transform: scaleY(1); opacity: 1; }
-    }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 26px; border-radius: 100px;
@@ -637,162 +591,90 @@
 
     /* SECTIONS */
     section + section { margin-top: 96px; }
-    .section-head { margin-bottom: 32px; }
-    .section-num {
-      font-family: var(--mono); font-size: 0.8rem;
-      color: var(--orange); margin-bottom: 8px; display: block;
-      letter-spacing: 0.04em; text-transform: uppercase;
-    }
+    .section-head { margin-bottom: 28px; }
     .section-title {
-      font-size: 1.6rem; font-weight: 600;
-      letter-spacing: -0.022em; line-height: 1.1;
-    }
-    .section-title .serif {
-      color: var(--text-soft);
+      font-size: 1.5rem; font-weight: 600;
+      letter-spacing: -0.024em; line-height: 1.15;
     }
 
-    /* PROJECT CARDS — manual horizontal scroll */
-    .marquee-container {
-      width: 100%;
-      margin-left: 0;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 10px 0 22px;
-      position: relative;
-      scrollbar-width: thin;
-      scrollbar-color: var(--line-2) transparent;
-      mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 60px), transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 60px), transparent 100%);
-      scroll-snap-type: x proximity;
-    }
-    .marquee-container::-webkit-scrollbar { height: 6px; }
-    .marquee-container::-webkit-scrollbar-track { background: transparent; }
-    .marquee-container::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 100px; }
-
-    .marquee-track {
-      display: flex;
-      gap: 18px;
-      width: max-content;
-      padding-right: 48px;
+    /* PROJECT SHOWCASE — Minimalist 1px architectural grid */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--line);
+      box-shadow: var(--shadow-panel);
+      overflow: hidden;
     }
     .project-card {
-      scroll-snap-align: start;
+      padding: 26px 28px;
+      background: var(--bg);
       display: flex;
       flex-direction: column;
-      width: 300px;
-      height: 240px;
-      padding: 0;
-      border-radius: var(--radius-md);
-      background: var(--panel);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-panel);
-      transition: border-color 0.3s ease, background 0.3s ease;
+      gap: 10px;
+      transition: background 0.22s ease;
       text-decoration: none;
       color: inherit;
-      flex-shrink: 0;
-      overflow: hidden;
     }
-
     .project-card:hover {
-      border-color: var(--accent-line);
-      background: var(--panel-hover);
-    }
-
-    .project-card-img {
-      position: relative;
-      width: 100%;
-      height: 140px;
       background: var(--bg-soft);
-      overflow: hidden;
-      flex-shrink: 0;
     }
-    .project-card-img img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.7s ease;
-      transform: scale(1.04);
+    .project-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
     }
-    .project-card-img img.active { opacity: 1; }
-    .project-card-img::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 70%, color-mix(in srgb, var(--bg) 22%, transparent) 100%);
-      pointer-events: none;
-    }
-    .project-card-img-fallback {
-      position: absolute;
-      inset: 0;
+    .project-card-head {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background:
-        repeating-linear-gradient(
-          45deg,
-          transparent 0,
-          transparent 10px,
-          var(--line) 10px,
-          var(--line) 11px
-        );
+      justify-content: space-between;
+      gap: 12px;
     }
-    .project-card-arrow-overlay {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 30px; height: 30px;
-      border-radius: 100px;
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
-      backdrop-filter: blur(8px);
-      display: inline-flex; align-items: center; justify-content: center;
-      color: var(--text);
-      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
-      z-index: 1;
-    }
-    .project-card-arrow-overlay svg { width: 14px; height: 14px; }
-    .project-card:hover .project-card-arrow-overlay {
-      background: var(--orange);
-      color: #fff;
-      transform: translate(2px, -2px);
-    }
-
-    .project-card-body {
-      padding: 14px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      flex: 1;
-    }
-
     .project-card-title {
-      font-size: 1.02rem;
+      font-size: 1.04rem;
       font-weight: 600;
       letter-spacing: -0.01em;
       color: var(--text);
+      transition: color 0.2s ease;
     }
-
+    .project-card:hover .project-card-title {
+      color: var(--orange);
+    }
+    .project-card-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
     .project-card-kind {
-      font-size: 0.85rem;
-      color: var(--text-soft);
-    }
-
-    .project-card-meta {
       font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--muted);
+    }
+    .project-card-arrow {
+      width: 15px;
+      height: 15px;
+      color: var(--muted);
+      transition: transform 0.22s ease, color 0.22s ease;
+      flex-shrink: 0;
+    }
+    .project-card:hover .project-card-arrow {
+      color: var(--orange);
+      transform: translate(2px, -2px);
+    }
+    .project-card-desc {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-soft);
+    }
+    .project-card-meta {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.02em;
+      color: var(--muted);
       margin-top: auto;
+      padding-top: 8px;
     }
 
     /* STACK */
@@ -803,34 +685,18 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
       background: var(--line);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
       box-shadow: var(--shadow-panel);
       overflow: hidden;
     }
     .stack-item {
-      padding: 28px 30px;
-      background: color-mix(in srgb, var(--panel) 92%, transparent);
-      min-height: 174px;
+      padding: 26px 28px;
+      background: var(--bg);
       display: flex;
       flex-direction: column;
-      gap: 14px;
-    }
-    .stack-item-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: flex-start;
       gap: 12px;
     }
-    .stack-kicker {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--orange);
-    }
     .stack-item-title {
-      font-size: 1.05rem;
+      font-size: 1.04rem;
       font-weight: 600;
       letter-spacing: -0.01em;
       color: var(--text);
@@ -868,16 +734,14 @@
 
     /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 52px; align-items: start; }
-    .about-prose { font-size: 1.02rem; color: var(--text-soft); line-height: 1.68; display: grid; gap: 22px; }
-    .about-prose .serif { font-size: 1.2em; color: var(--text); }
+    .about-prose { font-size: 1.02rem; color: var(--text-soft); line-height: 1.68; display: grid; gap: 20px; }
+    .about-prose strong { color: var(--text); font-weight: 500; }
 
     .info-list {
       display: grid; gap: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
-      background: var(--panel);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
+      background: var(--bg);
       box-shadow: var(--shadow-panel);
       overflow: hidden;
     }
@@ -895,14 +759,22 @@
       letter-spacing: 0.06em;
       display: block;
     }
-    .info-val { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+    .info-val { font-size: 0.94rem; color: var(--text); font-weight: 500; }
+    .info-val a {
+      text-decoration: underline;
+      text-decoration-color: var(--line-2);
+      text-underline-offset: 3px;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .info-val a:hover {
+      color: var(--orange);
+      text-decoration-color: var(--orange);
+    }
 
     /* CONTACT */
     .contact-card {
       padding: 28px 30px; border-radius: var(--radius-md);
-      background: var(--panel);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
+      background: var(--bg);
       border: 1px solid var(--line); position: relative; overflow: hidden;
       box-shadow: var(--shadow-panel);
       display: grid;
@@ -944,7 +816,7 @@
       box-shadow:
         0 0 0 4px color-mix(in srgb, var(--orange) 12%, transparent),
         0 8px 30px -6px color-mix(in srgb, var(--orange) 55%, transparent),
-        0 4px 16px -4px color-mix(in srgb, var(--amber) 36%, transparent);
+        0 4px 16px -4px color-mix(in srgb, var(--orange) 36%, transparent);
     }
     .to-top svg { width: 18px; height: 18px; }
 
@@ -970,9 +842,6 @@
         margin-right: calc(-1 * var(--gutter));
       }
       .topbar .shell { width: min(calc(100% - 56px), calc(var(--layout-max) - 56px)); }
-      .scroll-rail { display: none; }
-      .marquee-container { scrollbar-width: none; }
-      .marquee-container::-webkit-scrollbar { display: none; }
       .menu-btn, .drawer-scrim, .drawer-head { display: none; }
       .drawer {
         left: var(--gutter);
@@ -995,15 +864,15 @@
         font-size: 0.93rem;
         color: var(--text-soft);
       }
-      .drawer-nav a:hover { background: transparent; color: var(--orange); }
-      .drawer-foot { border-top: 1px solid var(--line); padding: 20px 26px 26px; }
+      .drawer-nav a:hover,
+      .drawer-nav a.active { background: transparent; color: var(--orange); }
+      .drawer-nav a.active { font-weight: 500; }
     }
 
     @media (max-width: 900px) {
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero h1 { font-size: 2.5rem; }
       section + section { margin-top: 80px; }
-      .scroll-rail { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1014,14 +883,22 @@
       }
     }
 
+    @media (max-width: 680px) {
+      .work-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 600px) {
       body { font-size: 15px; }
 
       .bg-fx { height: min(700px, 88vh); }
-      .bg-lines {
+      .bg-lines,
+      .bg-lines-lit {
         background-image: repeating-linear-gradient(90deg, var(--fx-line) 0 1px, transparent 1px 58px);
       }
-      .bg-beam { width: 88vw; filter: blur(22px); transform: translateX(-50%) rotate(21deg); }
+      .bg-lines-lit {
+        background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--orange) 22%, transparent) 0 1px, transparent 1px 58px);
+      }
+      .bg-beam { width: 88vw; filter: blur(26px); transform: translateX(-50%) rotate(21deg); }
       .bg-glow { width: 108vw; top: calc(var(--fx-lamp-top) - 250px); height: 520px; }
 
       .shell { width: min(var(--max), calc(100% - 40px)); }
@@ -1038,9 +915,8 @@
       .social-links a { width: 32px; height: 32px; }
       .social-links a:last-child { margin-right: -6px; }
       .social-links a svg { width: 17px; height: 17px; }
-      .brand-mark { height: 24px; }
+      .brand { font-size: 1.02rem; }
       .nav-controls { gap: 6px; }
-      .studio-link { padding: 0 9px; height: 26px; font-size: 0.67rem; }
       .lang-selector {
         width: 32px; height: 32px;
         padding: 0; justify-content: center; gap: 2px;
@@ -1051,14 +927,14 @@
       .lang-option { padding: 12px 14px; font-size: 0.95rem; }
       .theme-pill { width: 44px; height: 24px; }
       .theme-handle { width: 18px; height: 18px; }
-      [data-theme="dark"] .theme-handle { transform: translateX(22px); }
+      [data-theme="dark"] .theme-handle { transform: translateX(20px); }
       .menu-btn { width: 32px; height: 32px; }
       .menu-btn svg { width: 18px; height: 18px; }
 
       /* Hero */
       .mobile-break { display: block; }
       .hero h1 {
-        font-size: clamp(1.72rem, 7.8vw, 2.1rem);
+        font-size: clamp(1.6rem, 7.4vw, 2.05rem);
         line-height: 1.08;
         letter-spacing: -0.032em;
         max-width: 100%;
@@ -1073,33 +949,14 @@
       .hero-cta { gap: 10px; flex-wrap: wrap; }
       .hero-cta .btn { flex: 0 0 auto; height: 44px; padding: 0 20px; font-size: 0.88rem; }
 
-      .section-num { font-size: 0.72rem; margin-bottom: 6px; }
       .section-title { font-size: 1.28rem; letter-spacing: -0.025em; }
       .contact-title { font-size: 1.28rem; letter-spacing: -0.025em; }
 
-      /* Work: full-bleed snap carousel */
-      .marquee-container {
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
-        padding: 4px 20px 14px;
-        scroll-snap-type: x mandatory;
-        scroll-padding-left: 20px;
-        scrollbar-width: none;
-        mask-image: none;
-        -webkit-mask-image: none;
-      }
-      .marquee-container::-webkit-scrollbar { display: none; }
-      .marquee-track { gap: 12px; width: max-content; padding-right: 20px; }
-      .project-card {
-        width: min(72vw, 276px);
-        height: auto;
-        border-radius: var(--radius-md);
-      }
-      .project-card-img { height: auto; aspect-ratio: 16 / 9; }
-      .project-card-body { padding: 12px 14px 14px; gap: 3px; }
-      .project-card-title { font-size: 0.95rem; }
-      .project-card-kind { font-size: 0.82rem; }
-      .project-card-meta { font-size: 0.62rem; margin-top: 7px; }
+      /* Work cards on mobile */
+      .project-card { padding: 20px; gap: 8px; }
+      .project-card-title { font-size: 0.98rem; flex-shrink: 0; }
+      .project-card-kind { font-size: 0.62rem; letter-spacing: 0.02em; }
+      .project-card-desc { font-size: 0.88rem; }
 
       /* Stack */
       .stack-item { padding: 22px 20px; gap: 10px; }
@@ -1127,28 +984,19 @@
       .to-top { bottom: calc(16px + env(safe-area-inset-bottom)); }
     }
 
-    @media (max-width: 380px) {
-      /* only at this width does something have to give */
-      .studio-link { display: none; }
-    }
     @media (max-width: 360px) {
       .shell { width: calc(100% - 32px); }
-      .marquee-container { padding: 4px 16px 14px; scroll-padding-left: 16px; }
-      .marquee-track { padding-right: 16px; }
       .hero-cta { flex-wrap: wrap; }
       .hero-cta .btn { flex: 1 1 100%; }
-      .brand-mark { height: 22px; }
     }
-
-    
   </style>
 </head>
 <body>
   <div class="bg-lines" aria-hidden="true"></div>
   <div class="bg-fx" aria-hidden="true">
+    <div class="bg-lines-lit"></div>
     <div class="bg-glow"></div>
     <div class="bg-beam"></div>
-    <div class="bg-wash"></div>
   </div>
 
   <header class="topbar">
@@ -1157,14 +1005,10 @@
         <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg>
         </button>
-        <a class="brand" href="#top" aria-label="Murat home">
-          <svg class="brand-mark" viewBox="0 0 200 117" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M60 0.7 L114.7 55.4 L170.1 0 L200 0 L200 117 L171.1 117 L171.1 39.6 L115.9 94.8 L37.4 16.3 L1.8 16.3 L1.8 0.7 Z M1.8 26.6 L17.1 26.6 L55.7 65.2 L11.1 109.7 L0 98.6 L33.4 65.2 L1.8 33.6 Z M59.4 81.5 L59.4 117 L28.8 117 L28.8 112.1 Z"/></svg>
-        </a>
+        <a class="brand" href="#top" aria-label="Murat home">murat<span class="brand-dot">.</span></a>
       </div>
 
       <div class="nav-controls">
-        <a class="studio-link" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener">Studio</a>
-
         <!-- Language Selector -->
         <div class="lang-wrap">
           <button class="lang-selector" id="langTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Change language">
@@ -1202,16 +1046,11 @@
     </div>
   </header>
 
-  <a class="scroll-rail" id="scrollRail" href="#work" aria-label="Scroll to selected work">
-    <span>Scroll</span>
-    <i aria-hidden="true"></i>
-  </a>
-
   <main>
     <section class="hero shell" id="top">
       <div class="hero-copy">
         <h1 data-i18n="hero.title" data-i18n-html>Product engineer<br />building<br /><span class="accent"><span class="tw-ghost" aria-hidden="true"></span><span class="tw-live"><span id="typewriter"></span><span class="cursor"></span></span></span></h1>
-        <p class="hero-sub" data-i18n="hero.sub">I build products end to end: mobile apps, websites, authentication, payments, and deployment.</p>
+        <p class="hero-sub" data-i18n="hero.sub">From architecture and interface design to backend systems, payments, and store release — I take products from zero to production.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">View Work</a>
           <a class="btn btn-secondary" href="mailto:muartmac@gmail.com" data-i18n="hero.cta2">Get in touch</a>
@@ -1221,89 +1060,85 @@
 
     <section id="work" class="shell">
       <div class="section-head">
-        <span class="section-num">01</span>
-        <h2 class="section-title" data-i18n="work.title" data-i18n-html>Selected <span class="serif">Work</span></h2>
+        <h2 class="section-title" data-i18n="work.title">Selected Work</h2>
       </div>
 
-      <div class="marquee-container" role="region" aria-label="Selected Projects">
-        <div class="marquee-track">
-          <!-- 1st set -->
-          <a class="project-card" href="/corewords/" rel="noopener" data-project="corewords">
-            <div class="project-card-img">
-              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-            </div>
-            <div class="project-card-body">
-              <span class="project-card-title">CoreWords</span>
-              <span class="project-card-kind" data-i18n="proj.corewords.kind">vocabulary learning app</span>
-              <span class="project-card-meta" data-i18n="proj.corewords.meta">Mobile · In Progress</span>
-            </div>
-          </a>
-          <a class="project-card" href="/boxiq/" rel="noopener" data-project="boxiq">
-            <div class="project-card-img">
-              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-            </div>
-            <div class="project-card-body">
-              <span class="project-card-title">Boxiq</span>
-              <span class="project-card-kind" data-i18n="proj.boxiq.kind">daily logic puzzle game</span>
-              <span class="project-card-meta" data-i18n="proj.boxiq.meta">Mobile · In Progress</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" data-project="ideloc">
-            <div class="project-card-img">
-              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-            </div>
-            <div class="project-card-body">
-              <span class="project-card-title">Ideloc Studio</span>
-              <span class="project-card-kind" data-i18n="proj.ideloc.kind">creative tech studio</span>
-              <span class="project-card-meta" data-i18n="proj.ideloc.meta">Studio · Early</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" data-project="mindshelf">
-            <div class="project-card-img">
-              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-            </div>
-            <div class="project-card-body">
-              <span class="project-card-title">MindShelf</span>
-              <span class="project-card-kind" data-i18n="proj.mindshelf.kind">bookmark manager</span>
-              <span class="project-card-meta" data-i18n="proj.mindshelf.meta">iOS + Web · Live</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://softmendil.com" target="_blank" rel="noopener" data-project="soft">
-            <div class="project-card-img">
-              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-            </div>
-            <div class="project-card-body">
-              <span class="project-card-title">Softmendil</span>
-              <span class="project-card-kind" data-i18n="proj.soft.kind">packaging website</span>
-              <span class="project-card-meta" data-i18n="proj.soft.meta">Web · Live</span>
-            </div>
-          </a>
-          <a class="project-card" href="https://www.vogeriderstr.com" target="_blank" rel="noopener" data-project="voge">
-            <div class="project-card-img">
-              <span class="project-card-arrow-overlay"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-            </div>
-            <div class="project-card-body">
-              <span class="project-card-title">VogeRidersTR</span>
-              <span class="project-card-kind" data-i18n="proj.voge.kind">rider community</span>
-              <span class="project-card-meta" data-i18n="proj.voge.meta">Web · Live</span>
-            </div>
-          </a>
-        </div>
+      <div class="work-grid" role="region" aria-label="Selected Projects">
+        <!-- MindShelf -->
+        <a class="project-card" href="https://mindshelf-web.pages.dev" target="_blank" rel="noopener" data-project="mindshelf">
+          <div class="project-card-head">
+            <span class="project-card-title">MindShelf</span>
+            <span class="project-card-right">
+              <span class="project-card-kind" data-i18n="proj.mindshelf.kind">Bookmark Manager</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </div>
+          <p class="project-card-desc" data-i18n="proj.mindshelf.desc">Bookmark manager with a native iOS app and web companion. Cross-device sync, paywall, and subscriptions.</p>
+          <div class="project-card-meta">SwiftUI · React · Supabase · StoreKit</div>
+        </a>
+
+        <!-- CoreWords -->
+        <a class="project-card" href="/corewords/" rel="noopener" data-project="corewords">
+          <div class="project-card-head">
+            <span class="project-card-title">CoreWords</span>
+            <span class="project-card-right">
+              <span class="project-card-kind" data-i18n="proj.corewords.kind">Vocabulary App</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </div>
+          <p class="project-card-desc" data-i18n="proj.corewords.desc">Offline-first English vocabulary app with definitions, context hints, spaced repetition, and adaptive quizzes.</p>
+          <div class="project-card-meta">React Native · Expo · TypeScript · SQLite</div>
+        </a>
+
+        <!-- Boxiq -->
+        <a class="project-card" href="/boxiq/" rel="noopener" data-project="boxiq">
+          <div class="project-card-head">
+            <span class="project-card-title">Boxiq</span>
+            <span class="project-card-right">
+              <span class="project-card-kind" data-i18n="proj.boxiq.kind">Daily Logic Game</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </div>
+          <p class="project-card-desc" data-i18n="proj.boxiq.desc">Minimal daily logic puzzle game built around pattern reading, local progress, streaks, and a calm mobile UI.</p>
+          <div class="project-card-meta">React Native · Expo · TypeScript</div>
+        </a>
+
+        <!-- Ideloc Studio -->
+        <a class="project-card" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" data-project="ideloc">
+          <div class="project-card-head">
+            <span class="project-card-title">Ideloc Studio</span>
+            <span class="project-card-right">
+              <span class="project-card-kind" data-i18n="proj.ideloc.kind">Creative Tech Studio</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </div>
+          <p class="project-card-desc" data-i18n="proj.ideloc.desc">Independent creative technology studio crafting brand identities, interfaces, and end-to-end software systems.</p>
+          <div class="project-card-meta">Design Systems · Web · Mobile</div>
+        </a>
+
+        <!-- Softmendil -->
+        <a class="project-card" href="https://softmendil.com" target="_blank" rel="noopener" data-project="soft">
+          <div class="project-card-head">
+            <span class="project-card-title">Softmendil</span>
+            <span class="project-card-right">
+              <span class="project-card-kind" data-i18n="proj.soft.kind">B2B Packaging Web</span>
+              <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+            </span>
+          </div>
+          <p class="project-card-desc" data-i18n="proj.soft.desc">Commercial web platform for custom-branded packaging. Structured product showcase and conversion-focused inquiry flow.</p>
+          <div class="project-card-meta">Web Architecture · SEO · Cloudflare</div>
+        </a>
       </div>
     </section>
 
     <section id="stack" class="shell">
       <div class="section-head">
-        <span class="section-num">02</span>
-        <h2 class="section-title" data-i18n="stack.title" data-i18n-html>What I <span class="serif">Handle</span></h2>
+        <h2 class="section-title" data-i18n="stack.title">Capabilities</h2>
       </div>
 
       <div class="stack-grid">
         <div class="stack-item">
-          <div class="stack-item-head">
-            <span class="stack-kicker">01</span>
-            <h3 class="stack-item-title" data-i18n="stack.web.title">Websites and interfaces</h3>
-          </div>
+          <h3 class="stack-item-title" data-i18n="stack.web.title">Websites and interfaces</h3>
           <p class="stack-item-desc" data-i18n="stack.web.desc">Clear product pages, landing pages, dashboards and admin screens that feel fast and finished.</p>
           <div class="stack-tags" aria-label="Web tools">
             <span class="stack-tag">React</span>
@@ -1312,10 +1147,7 @@
           </div>
         </div>
         <div class="stack-item">
-          <div class="stack-item-head">
-            <span class="stack-kicker">02</span>
-            <h3 class="stack-item-title" data-i18n="stack.mobile.title">Mobile apps</h3>
-          </div>
+          <h3 class="stack-item-title" data-i18n="stack.mobile.title">Mobile apps</h3>
           <p class="stack-item-desc" data-i18n="stack.mobile.desc">Native iOS, Expo and React Native apps with onboarding, local data, payments and store-ready flows.</p>
           <div class="stack-tags" aria-label="Mobile tools">
             <span class="stack-tag">Swift</span>
@@ -1325,10 +1157,7 @@
           </div>
         </div>
         <div class="stack-item">
-          <div class="stack-item-head">
-            <span class="stack-kicker">03</span>
-            <h3 class="stack-item-title" data-i18n="stack.backend.title">Backend and data</h3>
-          </div>
+          <h3 class="stack-item-title" data-i18n="stack.backend.title">Backend and data</h3>
           <p class="stack-item-desc" data-i18n="stack.backend.desc">Accounts, databases, secure content, APIs and the data layer behind the product.</p>
           <div class="stack-tags" aria-label="Backend tools">
             <span class="stack-tag">Supabase</span>
@@ -1337,10 +1166,7 @@
           </div>
         </div>
         <div class="stack-item">
-          <div class="stack-item-head">
-            <span class="stack-kicker">04</span>
-            <h3 class="stack-item-title" data-i18n="stack.launch.title">Launch and care</h3>
-          </div>
+          <h3 class="stack-item-title" data-i18n="stack.launch.title">Launch and care</h3>
           <p class="stack-item-desc" data-i18n="stack.launch.desc">Deployment, performance, bug fixes, updates and the practical handoff after launch.</p>
           <div class="stack-tags" aria-label="Launch tools">
             <span class="stack-tag">Vercel</span>
@@ -1353,32 +1179,31 @@
 
     <section id="about" class="shell">
       <div class="section-head">
-        <span class="section-num">03</span>
-        <h2 class="section-title" data-i18n="about.title" data-i18n-html>About <span class="serif">Me</span></h2>
+        <h2 class="section-title" data-i18n="about.title">About Me</h2>
       </div>
 
       <div class="about-grid">
         <div class="about-prose">
-          <p data-i18n="about.p1">I'm a product engineer — full-stack across mobile, web, and backend. Mostly products that are live, paid, or used by real people.</p>
-          <p data-i18n="about.p2" data-i18n-html>I care about the <span class="serif">full path</span>: interface, flow, data, deployment, and the small details that make it feel finished.</p>
-          <p data-i18n="about.p3" data-i18n-html>I also run <span class="serif">Ideloc Studio</span>, a young creative tech studio for brands and founders who need design and engineering in one place.</p>
+          <p data-i18n="about.p1">I'm Murat, a software engineer focused on building complete digital products rather than isolated features.</p>
+          <p data-i18n="about.p2">Whether it's a native iOS app, a cross-platform mobile experience, or a commercial web platform, I handle the entire lifecycle — clean code, fast interfaces, and reliable infrastructure.</p>
+          <p data-i18n="about.p3">Alongside independent engineering work, I founded Ideloc Studio to craft software products and brand systems from the ground up.</p>
         </div>
         <div class="info-list">
           <div class="info-item">
             <span class="info-label" data-i18n="info.role">Role</span>
-            <span class="info-val" data-i18n="info.role.v">Product Engineer · Full-stack</span>
+            <span class="info-val" data-i18n="info.role.v">Product Engineer · Full-Stack</span>
           </div>
           <div class="info-item">
-            <span class="info-label" data-i18n="info.builds">Builds</span>
+            <span class="info-label" data-i18n="info.builds">Scope</span>
             <span class="info-val" data-i18n="info.builds.v">Mobile · Web · Backend · Payments</span>
           </div>
           <div class="info-item">
-            <span class="info-label" data-i18n="info.based">Location</span>
-            <span class="info-val" data-i18n="info.based.v">Turkey</span>
+            <span class="info-label" data-i18n="info.studio">Venture</span>
+            <span class="info-val"><a href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener" data-i18n="info.studio.v">Founder @ Ideloc Studio</a></span>
           </div>
           <div class="info-item">
-            <span class="info-label" data-i18n="info.langs">Languages</span>
-            <span class="info-val" data-i18n="info.langs.v">English, Turkish</span>
+            <span class="info-label" data-i18n="info.based">Location</span>
+            <span class="info-val" data-i18n="info.based.v">Türkiye · Remote / Global</span>
           </div>
         </div>
       </div>
@@ -1387,8 +1212,8 @@
     <section id="contact" class="shell">
       <div class="contact-card">
         <div>
-          <h2 class="contact-title" data-i18n="contact.title" data-i18n-html>Let's build something <span class="serif">real</span>.</h2>
-          <p class="contact-sub" data-i18n="contact.sub">Need a product, website, or studio-grade digital system? Let's talk.</p>
+          <h2 class="contact-title" data-i18n="contact.title">Let's build something real.</h2>
+          <p class="contact-sub" data-i18n="contact.sub">Need a product engineer for a mobile app, web platform, or end-to-end digital system? Let's talk.</p>
         </div>
         <div class="contact-actions">
           <a class="btn btn-primary" href="mailto:muartmac@gmail.com" data-i18n="contact.email">Start a Project</a>
@@ -1397,41 +1222,26 @@
     </section>
 
     <footer class="shell">
-      <span data-i18n="footer.left">© 2026 Murat — Turkey.</span>
+      <span data-i18n="footer.left">© 2026 Murat — Product Engineer.</span>
     </footer>
   </main>
 
   <div class="drawer-scrim" id="drawerScrim"></div>
   <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Site menu">
     <div class="drawer-head">
-      <svg class="brand-mark" viewBox="0 0 200 117" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M60 0.7 L114.7 55.4 L170.1 0 L200 0 L200 117 L171.1 117 L171.1 39.6 L115.9 94.8 L37.4 16.3 L1.8 16.3 L1.8 0.7 Z M1.8 26.6 L17.1 26.6 L55.7 65.2 L11.1 109.7 L0 98.6 L33.4 65.2 L1.8 33.6 Z M59.4 81.5 L59.4 117 L28.8 117 L28.8 112.1 Z"/></svg>
+      <span class="brand" aria-hidden="true">murat<span class="brand-dot">.</span></span>
       <button class="drawer-close" id="drawerClose" type="button" aria-label="Close menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
 
     <nav class="drawer-nav">
-      <a href="#top"><span class="drawer-num">00</span><span data-i18n="nav.home">Home</span></a>
-      <a href="#work"><span class="drawer-num">01</span><span data-i18n="nav.work">Selected Work</span></a>
-      <a href="#stack"><span class="drawer-num">02</span><span data-i18n="nav.stack">What I Handle</span></a>
-      <a href="#about"><span class="drawer-num">03</span><span data-i18n="nav.about">About</span></a>
-      <a href="#contact"><span class="drawer-num">04</span><span data-i18n="nav.contact">Contact</span></a>
+      <a href="#top" class="active"><span data-i18n="nav.home">Home</span></a>
+      <a href="#work"><span data-i18n="nav.work">Selected Work</span></a>
+      <a href="#stack"><span data-i18n="nav.stack">Capabilities</span></a>
+      <a href="#about"><span data-i18n="nav.about">About</span></a>
+      <a href="#contact"><span data-i18n="nav.contact">Contact</span></a>
     </nav>
-
-    <div class="drawer-foot">
-      <a class="drawer-studio" href="https://ideloc-studio.pages.dev/" target="_blank" rel="noopener">
-        <span>Ideloc Studio</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      </a>
-      <div class="drawer-social">
-        <a href="https://github.com/muartdev" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-        </a>
-        <a href="https://x.com/muartdev" target="_blank" rel="noopener" aria-label="Twitter">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-      </div>
-    </div>
   </aside>
 
   <button class="to-top" id="toTop" type="button" aria-label="Scroll to top">
@@ -1442,31 +1252,21 @@
     const I18N = {
       en: {
         "hero.title":"Product engineer<br />building<br /><span class=\"accent\"><span class=\"tw-ghost\" aria-hidden=\"true\"></span><span class=\"tw-live\"><span id=\"typewriter\"></span><span class=\"cursor\"></span></span></span>",
-        "hero.sub":"I build products end to end: mobile apps, websites, authentication, payments, and deployment.",
+        "hero.sub":"From architecture and interface design to backend systems, payments, and store release — I take products from zero to production.",
         "hero.cta1":"View Work","hero.cta2":"Get in touch",
-        "nav.home":"Home","nav.work":"Selected Work","nav.stack":"What I Handle","nav.about":"About","nav.contact":"Contact",
-        "work.title":"Selected <span class=\"serif\">Work</span>",
-        "proj.live":"Live",
-        "proj.corewords.kind":"vocabulary learning app",
-        "proj.corewords.meta":"Mobile · In Progress",
-        "proj.corewords.desc":"Offline-first English vocabulary app: definitions, context, spaced repetition and quizzes. React Native + Expo, by Ideloc Studio.",
-        "proj.boxiq.kind":"daily logic puzzle game",
-        "proj.boxiq.meta":"Mobile · In Progress",
-        "proj.boxiq.desc":"Minimal daily puzzle game built with Expo and React Native. Local progress, daily challenge, stats, and a calm premium mobile UI.",
-        "proj.ideloc.kind":"creative tech studio",
-        "proj.ideloc.meta":"Studio · Early",
-        "proj.ideloc.desc":"A young creative tech studio for brand identities, interfaces, and software systems.",
-        "proj.mindshelf.tag":"iOS + Web · Live",
-        "proj.mindshelf.kind":"bookmark manager",
-        "proj.mindshelf.meta":"Product · Live",
-        "proj.mindshelf.desc":"Bookmark manager with a native iOS app and a web companion. Cross-device sync, paywall, subscriptions — paid and live.",
-        "proj.soft.kind":"packaging website",
-        "proj.soft.meta":"Client · Live",
-        "proj.soft.desc":"Business site for custom-branded wet wipe packaging. Clean product presentation, trust-building layout, conversion-focused flow.",
-        "proj.voge.kind":"rider community",
-        "proj.voge.meta":"Community · Live",
-        "proj.voge.desc":"Community platform for Voge motorcycle riders in Turkey. Dynamic content managed via Google Sheets API.",
-        "stack.title":"What I <span class=\"serif\">Handle</span>",
+        "nav.home":"Home","nav.work":"Selected Work","nav.stack":"Capabilities","nav.about":"About","nav.contact":"Contact",
+        "work.title":"Selected Work",
+        "proj.mindshelf.kind":"Bookmark Manager",
+        "proj.mindshelf.desc":"Bookmark manager with a native iOS app and web companion. Cross-device sync, paywall, and subscriptions.",
+        "proj.corewords.kind":"Vocabulary App",
+        "proj.corewords.desc":"Offline-first English vocabulary app with definitions, context hints, spaced repetition, and adaptive quizzes.",
+        "proj.boxiq.kind":"Daily Logic Game",
+        "proj.boxiq.desc":"Minimal daily logic puzzle game built around pattern reading, local progress, streaks, and a calm mobile UI.",
+        "proj.ideloc.kind":"Creative Tech Studio",
+        "proj.ideloc.desc":"Independent creative technology studio crafting brand identities, interfaces, and end-to-end software systems.",
+        "proj.soft.kind":"B2B Packaging Web",
+        "proj.soft.desc":"Commercial web platform for custom-branded packaging. Structured product showcase and conversion-focused inquiry flow.",
+        "stack.title":"Capabilities",
         "stack.web.title":"Websites and interfaces",
         "stack.web.desc":"Clear product pages, landing pages, dashboards and admin screens that feel fast and finished.",
         "stack.mobile.title":"Mobile apps",
@@ -1475,81 +1275,36 @@
         "stack.backend.desc":"Accounts, databases, secure content, APIs and the data layer behind the product.",
         "stack.launch.title":"Launch and care",
         "stack.launch.desc":"Deployment, performance, bug fixes, updates and the practical handoff after launch.",
-        "tech.react":"My primary library for building interactive web interfaces with components.",
-        "tech.nextjs":"The framework I use for SEO-friendly, full-stack React applications.",
-        "tech.vite":"My go-to build tool for fast, lightweight web projects.",
-        "tech.typescript":"Provides type safety to catch errors early and write scalable code.",
-        "tech.javascript":"The core language I use across all my web projects.",
-        "tech.html5":"The foundation of all web content and semantic structure.",
-        "tech.css3":"I prefer custom CSS for precise, minimal, and performant styling.",
-        "tech.zustand":"My favorite state management library for React — small, fast, and scalable.",
-        "tech.swift":"The main language I use for all native Apple platform development.",
-        "tech.swiftui":"My tool of choice for building modern, declarative iOS and macOS interfaces.",
-        "tech.swiftdata":"Used for fast and modern local data persistence on Apple devices.",
-        "tech.storekit":"I implement in-app purchases and subscriptions using StoreKit 2.",
-        "tech.appkit":"For macOS-specific features that go beyond SwiftUI's capabilities.",
-        "tech.expo":"Helps me build and iterate React Native apps quickly.",
-        "tech.reactnative":"When I need to deploy across both iOS and Android from one codebase.",
-        "tech.supabase":"My default backend-as-a-service for auth, database, and edge functions.",
-        "tech.postgresql":"The robust, relational database powering my backend systems.",
-        "tech.rls":"I use Row Level Security to ensure data is safely isolated at the database level.",
-        "tech.sheets":"A lightweight, collaborative CMS solution using Google Sheets as a database.",
-        "tech.rest":"Designing clean, predictable REST APIs for client-server communication.",
-        "tech.vercel":"My go-to platform for deploying frontends and serverless functions instantly.",
-        "tech.cloudflare":"Used for lightning-fast global edge hosting and DNS management.",
-        "tech.githubpages":"Great for hosting static sites and open-source documentation.",
-        "tech.git":"Essential version control for tracking code changes and history.",
-        "tech.github":"Where I host code, manage projects, and collaborate.",
-        "tech.xcode":"The central IDE for all my Apple platform engineering.",
-        "tech.figma":"Where I design interfaces, system architectures, and visual assets.",
-        "about.title":"About <span class=\"serif\">Me</span>",
-        "about.p1":"I'm a product engineer — full-stack across mobile, web, and backend. Mostly products that are live, paid, or used by real people.",
-        "about.p2":"I care about the <span class=\"serif\">full path</span>: interface, flow, data, deployment, and the small details that make it feel finished.",
-        "about.p3":"I also run <span class=\"serif\">Ideloc Studio</span>, a young creative tech studio for brands and founders who need design and engineering in one place.",
-        "info.role":"Role","info.role.v":"Product Engineer · Full-stack",
-        "info.builds":"Builds","info.builds.v":"Mobile · Web · Backend · Payments",
-        "info.based":"Location","info.based.v":"Turkey",
-        "info.langs":"Languages","info.langs.v":"English, Turkish",
-        "contact.title":"Let's build something <span class=\"serif\">real</span>.",
-        "contact.sub":"Need a product, website, or studio-grade digital system? Let's talk.",
+        "about.title":"About Me",
+        "about.p1":"I'm Murat, a software engineer focused on building complete digital products rather than isolated features.",
+        "about.p2":"Whether it's a native iOS app, a cross-platform mobile experience, or a commercial web platform, I handle the entire lifecycle — clean code, fast interfaces, and reliable infrastructure.",
+        "about.p3":"Alongside independent engineering work, I founded Ideloc Studio to craft software products and brand systems from the ground up.",
+        "info.role":"Role","info.role.v":"Product Engineer · Full-Stack",
+        "info.builds":"Scope","info.builds.v":"Mobile · Web · Backend · Payments",
+        "info.studio":"Venture","info.studio.v":"Founder @ Ideloc Studio",
+        "info.based":"Location","info.based.v":"Türkiye · Remote / Global",
+        "contact.title":"Let's build something real.",
+        "contact.sub":"Need a product engineer for a mobile app, web platform, or end-to-end digital system? Let's talk.",
         "contact.email":"Start a Project",
-        "link.live":"Live",
-        "link.visit":"Visit",
-        "link.repo":"Repo",
-        "link.liveSite":"Live Site",
-        "link.iosRepo":"iOS Repo",
-        "link.webRepo":"Web Repo",
-        "link.visitSite":"Visit Site",
-        "link.viewRepo":"View Repo",
-        "footer.left":"© 2026 Murat — Turkey."
+        "footer.left":"© 2026 Murat — Product Engineer."
       },
       tr: {
-        "hero.title":"Product Engineer —<br /><span class=\"accent\"><span class=\"tw-ghost\" aria-hidden=\"true\"></span><span class=\"tw-live\"><span id=\"typewriter\"></span><span class=\"cursor\"></span></span></span>",
-        "hero.sub":"Mobil uygulamadan web sitesine, kimlik doğrulamadan ödemeye ve yayına almaya kadar ürünleri uçtan uca geliştiriyorum.",
+        "hero.title":"Uçtan uca<br />hayata geçen<br /><span class=\"accent\"><span class=\"tw-ghost\" aria-hidden=\"true\"></span><span class=\"tw-live\"><span id=\"typewriter\"></span><span class=\"cursor\"></span></span></span>",
+        "hero.sub":"Mimari kurgudan arayüz tasarımına, veri katmanından ödeme sistemleri ve mağaza yayınına kadar ürünleri sıfırdan canlıya taşıyorum.",
         "hero.cta1":"Projeleri Gör","hero.cta2":"İletişime Geç",
-        "nav.home":"Ana Sayfa","nav.work":"Seçili İşler","nav.stack":"Neleri Üstlenirim","nav.about":"Hakkımda","nav.contact":"İletişim",
-        "work.title":"Seçili <span class=\"serif\">İşler</span>",
-        "proj.live":"Yayında",
-        "proj.corewords.kind":"kelime öğrenme uygulaması",
-        "proj.corewords.meta":"Mobil · Geliştiriliyor",
-        "proj.corewords.desc":"Çevrimdışı çalışan İngilizce kelime uygulaması: tanımlar, bağlam, aralıklı tekrar ve testler. React Native + Expo, Ideloc Studio.",
-        "proj.boxiq.kind":"günlük mantık bulmaca oyunu",
-        "proj.boxiq.meta":"Mobil · Geliştiriliyor",
-        "proj.boxiq.desc":"Expo ve React Native ile geliştirilen minimal günlük puzzle oyunu. Yerel ilerleme, günlük bulmaca, istatistikler ve sakin premium mobil arayüz.",
-        "proj.ideloc.kind":"yaratıcı teknoloji stüdyosu",
-        "proj.ideloc.meta":"Stüdyo · Erken aşama",
-        "proj.ideloc.desc":"Marka kimliği, arayüz ve yazılım sistemleri için genç bir yaratıcı teknoloji stüdyosu.",
-        "proj.mindshelf.tag":"iOS + Web · Yayında",
-        "proj.mindshelf.kind":"bookmark yöneticisi",
-        "proj.mindshelf.meta":"Ürün · Yayında",
-        "proj.mindshelf.desc":"Yerel iOS uygulaması ve web arayüzü olan bookmark yöneticisi. Cihazlar arası senkron, paywall, abonelik — ücretli ve yayında.",
-        "proj.soft.kind":"ambalaj sitesi",
-        "proj.soft.meta":"Müşteri · Yayında",
-        "proj.soft.desc":"Özel markalı ıslak mendil paketleme için kurumsal site. Temiz ürün sunumu, güven veren tasarım, dönüşüm odaklı akış.",
-        "proj.voge.kind":"sürücü topluluğu",
-        "proj.voge.meta":"Topluluk · Yayında",
-        "proj.voge.desc":"Türkiye'deki Voge motosiklet kullanıcıları için topluluk platformu. Dinamik içerik Google Sheets API ile yönetiliyor.",
-        "stack.title":"Neleri <span class=\"serif\">Üstlenirim</span>",
+        "nav.home":"Ana Sayfa","nav.work":"Seçili İşler","nav.stack":"Yetkinlikler","nav.about":"Hakkımda","nav.contact":"İletişim",
+        "work.title":"Seçili İşler",
+        "proj.mindshelf.kind":"Bookmark Yöneticisi",
+        "proj.mindshelf.desc":"Native iOS uygulaması ve web arayüzü olan yer imi yöneticisi. Cihazlar arası senkronizasyon, paywall ve abonelik.",
+        "proj.corewords.kind":"Kelime Uygulaması",
+        "proj.corewords.desc":"Çevrimdışı çalışan İngilizce kelime uygulaması: tanımlar, bağlam ipuçları, aralıklı tekrar ve akıllı testler.",
+        "proj.boxiq.kind":"Günlük Mantık Oyunu",
+        "proj.boxiq.desc":"Örüntü okuma, yerel ilerleme, günlük seri ve sakin bir mobil arayüz etrafında kurgulanan minimal mantık oyunu.",
+        "proj.ideloc.kind":"Teknoloji Stüdyosu",
+        "proj.ideloc.desc":"Marka kimliği, arayüz tasarımı ve uçtan uca yazılım sistemleri üreten bağımsız yaratıcı teknoloji stüdyosu.",
+        "proj.soft.kind":"B2B Ambalaj Platformu",
+        "proj.soft.desc":"Özel baskılı ambalaj üretimi için kurumsal web platformu. Yapılandırılmış ürün vitrini ve dönüşüm odaklı teklif akışı.",
+        "stack.title":"Yetkinlikler",
         "stack.web.title":"Web siteleri ve arayüzler",
         "stack.web.desc":"Hızlı, anlaşılır ve bitmiş hissi veren ürün sayfaları, landing page'ler, paneller ve yönetim ekranları.",
         "stack.mobile.title":"Mobil uygulamalar",
@@ -1558,68 +1313,46 @@
         "stack.backend.desc":"Hesap sistemi, veritabanı, güvenli içerik, API'ler ve ürünün arkasındaki veri katmanı.",
         "stack.launch.title":"Yayınlama ve bakım",
         "stack.launch.desc":"Yayına alma, performans, hata düzeltmeleri, güncellemeler ve lansman sonrası pratik teslim süreci.",
-        "tech.react":"İnteraktif web arayüzleri ve komponent mimarisi için ana kütüphanem.",
-        "tech.nextjs":"SEO dostu, full-stack React uygulamaları geliştirdiğim ana framework.",
-        "tech.vite":"Hızlı ve hafif web projeleri için tercih ettiğim derleme aracı.",
-        "tech.typescript":"Hataları erken yakalamak ve ölçeklenebilir kod yazmak için kullandığım tip güvenliği.",
-        "tech.javascript":"Tüm web projelerimde kullandığım temel dil.",
-        "tech.html5":"Tüm web içeriğinin ve anlamsal yapının temeli.",
-        "tech.css3":"Hassas, minimal ve performanslı tasarımlar için özel CSS yazmayı tercih ediyorum.",
-        "tech.zustand":"React için en sevdiğim state yönetim kütüphanesi — küçük, hızlı ve ölçeklenebilir.",
-        "tech.swift":"Tüm native Apple platformu geliştirmelerim için ana dilim.",
-        "tech.swiftui":"Modern ve deklaratif iOS ve macOS arayüzleri inşa etmek için tercihim.",
-        "tech.swiftdata":"Apple cihazlarında hızlı ve modern yerel veri saklama için kullanıyorum.",
-        "tech.storekit":"Uygulama içi satın alma ve abonelikleri StoreKit 2 ile entegre ediyorum.",
-        "tech.appkit":"SwiftUI'ın yeteneklerinin ötesine geçen macOS'e özel özellikler için.",
-        "tech.expo":"React Native uygulamalarını hızlıca geliştirmek ve test etmek için kullanıyorum.",
-        "tech.reactnative":"Tek kod tabanından hem iOS hem de Android'e çıkmam gerektiğinde.",
-        "tech.supabase":"Kimlik doğrulama, veritabanı ve edge fonksiyonlar için varsayılan backend çözümüm.",
-        "tech.postgresql":"Backend sistemlerime güç veren sağlam, ilişkisel veritabanım.",
-        "tech.rls":"Verilerin veritabanı seviyesinde güvenle izole edilmesi için Row Level Security (RLS) kullanıyorum.",
-        "tech.sheets":"Google Sheets'i veritabanı gibi kullanarak hafif ve işbirlikçi bir CMS çözümü.",
-        "tech.rest":"İstemci-sunucu iletişimi için temiz, öngörülebilir REST API tasarımları.",
-        "tech.vercel":"Frontend ve serverless fonksiyonları anında yayına almak için ana platformum.",
-        "tech.cloudflare":"Yıldırım hızında global edge barındırma ve DNS yönetimi için.",
-        "tech.githubpages":"Statik siteler ve açık kaynak dökümantasyonlar barındırmak için ideal.",
-        "tech.git":"Kod değişikliklerini ve geçmişini takip etmek için vazgeçilmez sürüm kontrolüm.",
-        "tech.github":"Kod barındırdığım, projeleri yönettiğim ve işbirliği yaptığım yer.",
-        "tech.xcode":"Tüm Apple platformu geliştirmelerim için merkezi geliştirme ortamım (IDE).",
-        "tech.figma":"Arayüzleri, sistem mimarilerini ve görsel materyalleri tasarladığım yer.",
-        "about.title":"Hakkımda <span class=\"serif\">Ben</span>",
-        "about.p1":"Product Engineer'ım — mobil, web ve backend tarafında uçtan uca çalışıyorum. Odağım yayında olan, ücretli kullanılan ya da gerçek kullanıcıya ulaşan ürünler.",
-        "about.p2":"Arayüzden akışa, veriden yayına almaya kadar <span class=\"serif\">tüm süreci</span> ve ürünü bitmiş hissettiren küçük detayları önemsiyorum.",
-        "about.p3":"Ayrıca marka, arayüz ve yazılımı aynı yerde isteyen ekipler için genç bir yaratıcı teknoloji stüdyosu olan <span class=\"serif\">Ideloc Studio</span>'yu geliştiriyorum.",
-        "info.role":"Rol","info.role.v":"Product Engineer · Full-stack",
-        "info.builds":"Ürettiği","info.builds.v":"Mobil · Web · Backend · Ödeme sistemleri",
-        "info.based":"Konum","info.based.v":"Türkiye",
-        "info.langs":"Diller","info.langs.v":"İngilizce, Türkçe",
-        "contact.title":"Hadi <span class=\"serif\">gerçek</span> bir şey inşa edelim.",
-        "contact.sub":"Ürün, web sitesi ya da stüdyo kalitesinde bir dijital sistem gerekiyorsa konuşalım.",
+        "about.title":"Kısaca Ben",
+        "about.p1":"Ben Murat. Tekil özellikler yerine bir bütün olarak çalışan, gerçek kullanıcıya dokunan dijital ürünler geliştirmeye odaklanan bir yazılım mühendisiyim.",
+        "about.p2":"İster native iOS uygulaması ister kapsamlı bir web platformu olsun; temiz kod, hızlı arayüz ve sağlam altyapıyla sürecin tamamını sahipleniyorum.",
+        "about.p3":"Bağımsız mühendislik çalışmalarımın yanı sıra, sıfırdan yazılım ürünleri ve marka sistemleri ürettiğimiz Ideloc Studio'yu kurdum.",
+        "info.role":"Rol","info.role.v":"Product Engineer · Full-Stack",
+        "info.builds":"Kapsam","info.builds.v":"Mobil · Web · Backend · Ödeme Sistemleri",
+        "info.studio":"Girişim","info.studio.v":"Kurucu @ Ideloc Studio",
+        "info.based":"Konum","info.based.v":"Türkiye · Uzaktan / Global",
+        "contact.title":"Hadi gerçek bir şey inşa edelim.",
+        "contact.sub":"Mobil uygulama, web platformu ya da uçtan uca bir dijital ürün için birlikte çalışmak istersen konuşalım.",
         "contact.email":"Proje Başlat",
-        "link.live":"Canlı",
-        "link.visit":"Aç",
-        "link.repo":"Repo",
-        "link.liveSite":"Canlı Site",
-        "link.iosRepo":"iOS Repo",
-        "link.webRepo":"Web Repo",
-        "link.visitSite":"Siteyi Aç",
-        "link.viewRepo":"Kodu Gör",
-        "footer.left":"© 2026 Murat — Türkiye."
+        "footer.left":"© 2026 Murat — Product Engineer."
       }
     };
 
-    function setTheme(t) {
+    let themeTimer = null;
+    let igniteTimer = null;
+    function setTheme(t, animate = false) {
       const root = document.documentElement;
-      // Custom properties don't animate, so a timed fade would leave panels and
-      // borders snapping while the page background lags. Swap everything at once.
-      root.classList.add("theme-switching");
+      const fx = document.querySelector(".bg-fx");
+      if (animate) {
+        clearTimeout(themeTimer);
+        root.classList.add("theme-switching");
+        themeTimer = setTimeout(() => root.classList.remove("theme-switching"), 460);
+        if (fx) {
+          clearTimeout(igniteTimer);
+          fx.classList.remove("igniting");
+          if (t === "light") {
+            void fx.offsetWidth;
+            fx.classList.add("igniting");
+            igniteTimer = setTimeout(() => fx.classList.remove("igniting"), 650);
+          }
+        }
+      }
       root.setAttribute("data-theme", t);
       localStorage.setItem("theme", t);
       const m = document.querySelector('meta[name="theme-color"]');
       if (m) m.setAttribute("content", t === "dark" ? "#0b0b0b" : "#fdfdfc");
       const tt = document.getElementById("themeToggle");
       if (tt) tt.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
-      setTimeout(() => root.classList.remove("theme-switching"), 60);
     }
 
     const typeWords = {
@@ -1692,17 +1425,18 @@
       typeTimeout = setTimeout(typeCycle, typeSpeed);
     };
 
-    /* Anchor the background beam to the theme toggle, wherever it lands. */
+    /* Anchor the background beam to the sun lens center inside the theme pill.
+       Measured from the pill housing so it never drifts when the knob slides. */
     function syncLightSource() {
-      const knob = document.querySelector(".theme-handle");
+      const pill = document.getElementById("themeToggle");
       const bar = document.querySelector(".topbar");
-      if (!knob || !bar) return;
-      const k = knob.getBoundingClientRect();
-      // measure the knob against the bar, so the numbers hold no matter how far the page is scrolled
+      if (!pill || !bar) return;
+      const p = pill.getBoundingClientRect();
       const barTop = bar.getBoundingClientRect().top;
+      const radius = p.height / 2;
       const root = document.documentElement.style;
-      root.setProperty("--fx-lamp-x", (k.left + k.width / 2).toFixed(1) + "px");
-      root.setProperty("--fx-lamp-top", (k.bottom - barTop - 2).toFixed(1) + "px");
+      root.setProperty("--fx-lamp-x", (p.left + radius).toFixed(1) + "px");
+      root.setProperty("--fx-lamp-top", (p.top - barTop + radius).toFixed(1) + "px");
       root.setProperty("--topbar-h", bar.offsetHeight + "px");
 
       // centre the rail + content block once the window is wider than the layout
@@ -1734,7 +1468,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      setTheme(localStorage.getItem("theme") || "light");
+      setTheme(localStorage.getItem("theme") || "light", false);
       setLang(localStorage.getItem("lang") || "en");
 
       syncLightSource();
@@ -1748,7 +1482,7 @@
       }
 
       document.getElementById("themeToggle").addEventListener("click", () => {
-        setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+        setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
       });
 
       initDrawer();
@@ -1775,16 +1509,28 @@
       });
 
       const toTop = document.getElementById("toTop");
-      const scrollRail = document.getElementById("scrollRail");
       const topbar = document.querySelector(".topbar");
+      const navLinks = [...document.querySelectorAll(".drawer-nav a")];
+      const sections = navLinks.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+
       const onScroll = () => {
-        if (window.scrollY > 320) toTop.classList.add("visible");
+        const y = window.scrollY;
+        if (y > 320) toTop.classList.add("visible");
         else toTop.classList.remove("visible");
-        if (scrollRail) {
-          if (window.scrollY > 160) scrollRail.classList.add("is-hidden");
-          else scrollRail.classList.remove("is-hidden");
+        if (topbar) topbar.classList.toggle("is-stuck", y > 24);
+
+        // Scroll-spy for left navigation rail / drawer
+        let currentId = "#top";
+        const triggerY = y + window.innerHeight * 0.28;
+        for (const sec of sections) {
+          if (sec.offsetTop <= triggerY) currentId = "#" + sec.id;
         }
-        if (topbar) topbar.classList.toggle("is-stuck", window.scrollY > 24);
+        if (window.innerHeight + y >= document.documentElement.scrollHeight - 24) {
+          currentId = "#contact";
+        }
+        navLinks.forEach((a) => {
+          a.classList.toggle("active", a.getAttribute("href") === currentId);
+        });
       };
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
@@ -1792,7 +1538,6 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
 
-      initProjectShots();
       initKeyboardShortcuts();
     });
 
@@ -1880,67 +1625,6 @@
         }
       });
     }
-
-    function initProjectShots() {
-      const ms = (u) => `https://api.microlink.io/?url=${encodeURIComponent(u)}&screenshot=true&meta=false&embed=screenshot.url`;
-      const shots = {
-        corewords: [ms("https://muartdev.github.io/corewords/")],
-        boxiq: [ms("https://muartdev.github.io/boxiq/")],
-        ideloc: [ms("https://ideloc-studio.pages.dev")],
-        mindshelf: [ms("https://mindshelf-web.pages.dev")],
-        soft: [ms("https://softmendil.com")],
-        voge: [ms("https://www.vogeriderstr.com")],
-      };
-
-      document.querySelectorAll(".project-card[data-project]").forEach((card) => {
-        const key = card.dataset.project;
-        const urls = shots[key];
-        const wrap = card.querySelector(".project-card-img");
-        if (!wrap) return;
-        if (!urls || urls.length === 0) {
-          const fb = document.createElement("div");
-          fb.className = "project-card-img-fallback";
-          fb.textContent = card.querySelector(".project-card-title")?.textContent || "";
-          wrap.appendChild(fb);
-          return;
-        }
-
-        const ensureFallback = () => {
-          if (wrap.querySelector(".project-card-img-fallback")) return;
-          const fb = document.createElement("div");
-          fb.className = "project-card-img-fallback";
-          fb.textContent = card.querySelector(".project-card-title")?.textContent || "";
-          wrap.insertBefore(fb, wrap.firstChild);
-        };
-
-        const imgs = urls.map((url, i) => {
-          const img = document.createElement("img");
-          img.loading = "eager";
-          img.decoding = "async";
-          img.alt = "";
-          img.referrerPolicy = "no-referrer";
-          img.src = url;
-          img.addEventListener("error", () => {
-            img.style.display = "none";
-            const others = wrap.querySelectorAll("img");
-            const allFailed = [...others].every((o) => o.style.display === "none");
-            if (allFailed) ensureFallback();
-          });
-          if (i === 0) img.classList.add("active");
-          wrap.insertBefore(img, wrap.firstChild);
-          return img;
-        });
-
-        if (imgs.length < 2) return;
-        let idx = 0;
-        setInterval(() => {
-          imgs[idx].classList.remove("active");
-          idx = (idx + 1) % imgs.length;
-          imgs[idx].classList.add("active");
-        }, 4200);
-      });
-    }
-
   </script>
 </body>
 </html>

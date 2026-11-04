@@ -68,6 +68,23 @@
         margin-bottom: 42px;
       }
 
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .back-link {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .back-link:hover {
+        color: var(--text);
+      }
+
       .wordmark {
         width: 126px;
       }
@@ -402,7 +419,10 @@
     <main class="page">
       <div class="shell">
         <header class="nav">
-          <img class="wordmark" src="./assets/logo-transparent.png" alt="Boxiq" />
+          <div class="nav-left">
+            <a class="back-link" href="/">← muartdev</a>
+            <img class="wordmark" src="./assets/logo-transparent.png" alt="Boxiq" />
+          </div>
           <div class="nav-copy">
             <span>Daily puzzle</span>
             <span>Local progress</span>
@@ -436,8 +456,8 @@
               <div class="screen-top">
                 <div>
                   <div class="brand-mini">BOXIQ</div>
-                  <div class="level-name">Denge Dersi</div>
-                  <div class="level-sub">Kolay · 6x6 · Denge</div>
+                  <div class="level-name">Balance Study</div>
+                  <div class="level-sub">Easy · 6×6 · Balance</div>
                 </div>
                 <div class="timer">01:17</div>
               </div>
@@ -532,8 +552,9 @@
         <footer class="footer">
           <div>Boxiq · minimal daily logic for calm focus</div>
           <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Support</a>
+            <a href="#privacy">Privacy</a>
+            <a href="mailto:ideloc.studio@gmail.com">Support</a>
+            <a href="/">Portfolio</a>
           </div>
         </footer>
       </div>
