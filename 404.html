@@ -26,6 +26,7 @@
   </script>
   <style>
     :root {
+      color-scheme: light;
       --bg: #fdfdfc;
       --bg-soft: #f7f5f2;
       --text: #111110;
@@ -38,6 +39,7 @@
       --mono: "Geist Mono", ui-monospace, monospace;
     }
     [data-theme="dark"] {
+      color-scheme: dark;
       --bg: #0b0b0b;
       --bg-soft: #131313;
       --text: #ededed;
@@ -48,15 +50,12 @@
       --orange: #ff3615;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html, body { height: 100%; background-color: var(--bg); color: var(--text); }
     body {
-      background: var(--bg);
-      color: var(--text);
       font-family: var(--sans);
       font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.4s ease, color 0.4s ease;
       display: grid;
       place-items: center;
       padding: 32px 24px;

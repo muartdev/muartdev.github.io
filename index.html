@@ -29,17 +29,23 @@
     /* set theme before first paint — otherwise dark loads bright, then the lamp visibly fades out */
     (function () {
       try {
-        document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "light");
+        var t = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", t);
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute("content", t === "dark" ? "#0b0b0b" : "#fdfdfc");
       } catch (e) {}
     })();
   </script>
   <style>
     :root {
+      color-scheme: light;
       /* Light theme (Premium minimal) */
       --bg: #fdfdfc;
       --bg-soft: #f7f5f2;
       --bg-card: rgba(255, 255, 255, 0.72);
       --bg-elev: #ffffff;
+      --topbar-stuck: rgba(253, 253, 252, 0.84);
+      --menu-bg: rgba(255, 255, 255, 0.94);
       --text: #111110;
       --text-soft: #666666;
       --muted: #888888;
@@ -73,16 +79,21 @@
 
       /* Hero backdrop */
       --fx-line: rgba(17, 17, 16, 0.085);
+      --fx-line-lit: rgba(255, 54, 21, 0.22);
       --fx-beam: rgba(255, 54, 21, 0.16);
+      --fx-beam-mid: rgba(255, 54, 21, 0.095);
       --fx-glow: rgba(255, 54, 21, 0.13);
       --fx-lamp-top: 96px;
     }
 
     [data-theme="dark"] {
+      color-scheme: dark;
       --bg: #0b0b0b;
       --bg-soft: #131313;
       --bg-card: rgba(22, 22, 22, 0.5);
       --bg-elev: #161616;
+      --topbar-stuck: rgba(11, 11, 11, 0.84);
+      --menu-bg: rgba(22, 22, 22, 0.94);
       --text: #ededed;
       --text-soft: #8e8e8e;
       --muted: #5e5e5e;
@@ -104,18 +115,26 @@
       --panel-hover: rgba(34, 34, 34, 0.76);
 
       --fx-line: rgba(255, 255, 255, 0.1);
+      --fx-line-lit: rgba(255, 54, 21, 0.22);
       --fx-beam: rgba(255, 54, 21, 0.24);
+      --fx-beam-mid: rgba(255, 54, 21, 0.14);
       --fx-glow: rgba(255, 54, 21, 0.18);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     /* clip, not hidden — `hidden` turns these into scroll containers and kills position:sticky */
-    html { scroll-behavior: smooth; overflow-x: clip; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+      background-color: var(--bg);
+      color: var(--text);
+    }
     section[id] { scroll-margin-top: 96px; }
     body {
       min-height: 100vh;
       position: relative;
-      background: var(--bg);
+      isolation: isolate;
+      background-color: var(--bg);
       color: var(--text);
       font-family: var(--sans);
       font-size: 15px;
@@ -126,15 +145,11 @@
       overflow-x: clip;
     }
 
-    /* Smooth theme transition when user toggles */
-    .theme-switching,
-    .theme-switching *,
-    .theme-switching *::before,
-    .theme-switching *::after { 
-      transition: background-color 0.42s cubic-bezier(0.22, 1, 0.36, 1), color 0.42s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.42s cubic-bezier(0.22, 1, 0.36, 1), fill 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1) !important; 
-    }
-    .theme-switching .bg-fx {
-      transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1), transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    /* Atomic theme switch: surfaces/text/borders snap in the same paint frame while knob & light animate */
+    html.theme-snap *:not(.theme-handle):not(.theme-icon):not(.bg-fx),
+    html.theme-snap *::before,
+    html.theme-snap *::after {
+      transition: none !important;
     }
 
     h2, h3 { text-wrap: balance; }
@@ -161,7 +176,7 @@
     .bg-lines {
       position: absolute;
       inset: 0;
-      z-index: -2;
+      z-index: 0;
       pointer-events: none;
       background-image: repeating-linear-gradient(
         90deg,
@@ -175,11 +190,11 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: min(1000px, 118vh);
-      z-index: -1;
+      z-index: 0;
       pointer-events: none;
       overflow: hidden;
       transform-origin: var(--fx-lamp-x, 78%) var(--fx-lamp-top, 30px);
-      transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1), transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .bg-fx > * { position: absolute; }
 
@@ -188,7 +203,7 @@
       inset: 0;
       background-image: repeating-linear-gradient(
         90deg,
-        color-mix(in srgb, var(--orange) 22%, transparent) 0 1px,
+        var(--fx-line-lit) 0 1px,
         transparent 1px 88px
       );
       mask-image: radial-gradient(540px circle at var(--fx-lamp-x, 78%) var(--fx-lamp-top, 30px), #000 0%, transparent 74%);
@@ -215,7 +230,7 @@
         to bottom,
         transparent 0%,
         var(--fx-beam) 4%,
-        color-mix(in srgb, var(--fx-beam) 58%, transparent) 44%,
+        var(--fx-beam-mid) 44%,
         transparent 82%
       );
     }
@@ -238,15 +253,6 @@
       0% { opacity: 0.84; transform: translateX(-50%) scale(0.97); }
       100% { opacity: 1; transform: translateX(-50%) scale(1.03); }
     }
-    @keyframes lamp-ignite {
-      0% { opacity: 0; transform: scale(0.92); }
-      35% { opacity: 1; transform: scale(1.01); }
-      55% { opacity: 0.84; transform: scale(0.995); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-    .bg-fx.igniting {
-      animation: lamp-ignite 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
 
     /* the toggle is a light switch: dark theme = lamp off, only the ruling stays */
     [data-theme="dark"] .bg-fx {
@@ -261,11 +267,11 @@
       border-bottom: 1px solid transparent;
       padding: 16px 0;
       padding-top: calc(16px + env(safe-area-inset-top));
-      transition: background 0.3s ease, border-color 0.3s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
     }
     /* glass only once content scrolls under it */
     .topbar.is-stuck {
-      background: color-mix(in srgb, var(--bg) 58%, transparent);
+      background-color: var(--topbar-stuck);
       backdrop-filter: blur(14px) saturate(180%);
       -webkit-backdrop-filter: blur(14px) saturate(180%);
       border-bottom-color: var(--line);
@@ -288,7 +294,6 @@
       color: var(--text);
       transition: opacity 0.2s ease;
     }
-    .brand:hover { opacity: 0.78; }
     .brand-dot {
       color: var(--orange);
     }
@@ -301,14 +306,13 @@
       border-radius: var(--radius-md);
       border: 1px solid transparent;
       color: var(--icon-color);
-      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
     }
-    .menu-btn:hover { color: var(--icon-hover); background: var(--panel); border-color: var(--line); }
     .menu-btn svg { width: 19px; height: 19px; }
 
     .drawer-scrim {
       position: fixed; inset: 0; z-index: 90;
-      background: color-mix(in srgb, var(--bg) 40%, rgba(0, 0, 0, 0.5));
+      background: rgba(0, 0, 0, 0.45);
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
       opacity: 0; pointer-events: none;
@@ -344,9 +348,8 @@
       margin-right: -8px;
       border-radius: var(--radius-md);
       color: var(--icon-color);
-      transition: color 0.2s ease, background 0.2s ease;
+      transition: color 0.2s ease, background-color 0.2s ease;
     }
-    .drawer-close:hover { color: var(--icon-hover); background: var(--bg-soft); }
     .drawer-close svg { width: 18px; height: 18px; }
 
     .drawer-nav { display: grid; }
@@ -357,9 +360,8 @@
       font-size: 0.98rem;
       color: var(--text);
       border-bottom: 1px solid var(--line);
-      transition: background 0.2s ease, color 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
-    .drawer-nav a:hover,
     .drawer-nav a.active { background: var(--bg-soft); color: var(--orange); }
 
     .nav-controls {
@@ -376,19 +378,18 @@
     .lang-selector {
       display: flex; align-items: center; gap: 6px;
       color: var(--icon-color);
-      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      transition: color 0.2s, background-color 0.2s, border-color 0.2s;
       padding: 6px 8px;
       border-radius: var(--radius-md);
       border: 1px solid transparent;
     }
-    .lang-selector:hover { color: var(--icon-hover); background: var(--panel); border-color: var(--line); }
     .lang-selector svg { width: 16px; height: 16px; }
     .lang-chevron { width: 12px; height: 12px; margin-left: 2px; transition: transform 0.2s; }
     .lang-selector[aria-expanded="true"] .lang-chevron { transform: rotate(180deg); }
 
     .lang-menu {
       position: absolute; top: 100%; right: 0; transform: translateY(10px);
-      background: color-mix(in srgb, var(--bg-elev) 74%, transparent);
+      background: var(--menu-bg);
       backdrop-filter: var(--glass);
       -webkit-backdrop-filter: var(--glass);
       border: 1px solid var(--line);
@@ -409,7 +410,6 @@
       font-size: 0.9rem; color: var(--text-soft);
       cursor: pointer;
     }
-    .lang-option:hover { background: var(--bg-soft); color: var(--text); }
     .lang-option.active { color: var(--orange); font-weight: 500; background: var(--orange-soft); }
 
     /* Theme Pill Toggle — Flashlight Emitter */
@@ -417,32 +417,20 @@
       position: relative;
       width: 52px; height: 26px;
       border-radius: 100px;
-      background: color-mix(in srgb, var(--orange) 6%, var(--toggle-bg));
-      border: 1px solid color-mix(in srgb, var(--orange) 24%, var(--toggle-border));
+      background: #f3eae7;
+      border: 1px solid rgba(255, 54, 21, 0.28);
       box-shadow:
         inset 0 1px 2px rgba(0, 0, 0, 0.04),
-        0 4px 18px -6px color-mix(in srgb, var(--orange) 38%, transparent);
+        0 4px 18px -6px rgba(255, 54, 21, 0.36);
       display: flex; align-items: center;
       cursor: pointer;
       padding: 2px;
-      transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, transform 0.15s ease;
-    }
-    .theme-pill:hover {
-      border-color: color-mix(in srgb, var(--orange) 45%, var(--toggle-border));
-      box-shadow:
-        inset 0 1px 2px rgba(0, 0, 0, 0.04),
-        0 6px 22px -5px color-mix(in srgb, var(--orange) 52%, transparent);
+      transition: transform 0.15s ease;
     }
     [data-theme="dark"] .theme-pill {
       border-color: var(--line-2);
       background: var(--bg-soft);
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
-    }
-    [data-theme="dark"] .theme-pill:hover {
-      border-color: rgba(255, 255, 255, 0.26);
-      box-shadow:
-        inset 0 1px 2px rgba(0, 0, 0, 0.4),
-        0 0 16px -4px rgba(255, 255, 255, 0.18);
     }
 
     .theme-handle {
@@ -452,15 +440,10 @@
       border-radius: 50%;
       box-shadow:
         0 1px 4px rgba(0, 0, 0, 0.12),
-        0 0 18px 4px color-mix(in srgb, var(--orange) 34%, transparent);
+        0 0 18px 4px rgba(255, 54, 21, 0.32);
       display: flex; align-items: center; justify-content: center;
-      transition: transform 0.46s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, background 0.35s ease;
+      transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
       left: 2px;
-    }
-    .theme-pill:hover .theme-handle {
-      box-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.14),
-        0 0 22px 6px color-mix(in srgb, var(--orange) 46%, transparent);
     }
     [data-theme="dark"] .theme-handle {
       box-shadow: 
@@ -469,16 +452,11 @@
       transform: translateX(26px);
       background: var(--toggle-active);
     }
-    [data-theme="dark"] .theme-pill:hover .theme-handle {
-      box-shadow: 
-        0 2px 6px rgba(0, 0, 0, 0.5),
-        0 0 18px 4px rgba(255, 255, 255, 0.25);
-    }
 
     .theme-icon {
       width: 11px; height: 11px;
       color: var(--orange);
-      transition: opacity 0.35s ease, transform 0.46s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.35s ease;
+      transition: opacity 0.3s ease, transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: absolute;
     }
     [data-theme="dark"] .theme-icon { color: var(--bg); }
@@ -499,17 +477,16 @@
     .social-links { display: flex; align-items: center; gap: 12px; }
     .social-links a {
       color: var(--icon-color);
-      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
       display: flex; align-items: center; justify-content: center;
       width: 28px; height: 28px;
       border: 1px solid transparent;
       border-radius: var(--radius-md);
     }
     .social-links a svg { width: 17px; height: 17px; fill: currentColor; }
-    .social-links a:hover { color: var(--icon-hover); background: var(--panel); border-color: var(--line); }
 
     /* HERO */
-    main { padding: 104px 0 64px; position: relative; }
+    main { padding: 104px 0 64px; position: relative; z-index: 1; }
 
     .hero h1 {
       font-size: clamp(3rem, 4.4vw, 3.6rem);
@@ -561,7 +538,7 @@
       display: inline-flex; align-items: center; justify-content: center;
       height: 48px; padding: 0 26px; border-radius: 100px;
       font-size: 0.95rem; font-weight: 500;
-      transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: box-shadow 0.35s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       box-shadow: 0 0 0 0 transparent;
       transform: translateY(0);
@@ -570,23 +547,8 @@
       background: var(--text); color: var(--bg);
     }
     .btn-secondary {
-      background: var(--bg-card); color: var(--text);
+      background: var(--bg-elev); color: var(--text);
       border: 1px solid var(--line-2);
-      backdrop-filter: blur(12px);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 0 0 3px color-mix(in srgb, var(--orange) 10%, transparent),
-        0 8px 24px -6px color-mix(in srgb, var(--orange) 45%, transparent),
-        0 4px 10px -2px color-mix(in srgb, var(--orange) 25%, transparent);
-    }
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      border-color: var(--line);
-      background: var(--bg-elev);
-      box-shadow: 0 6px 20px -6px rgba(0,0,0,0.12);
     }
 
     /* SECTIONS */
@@ -614,12 +576,9 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      transition: background 0.22s ease;
+      transition: background-color 0.2s ease;
       text-decoration: none;
       color: inherit;
-    }
-    .project-card:hover {
-      background: var(--bg-soft);
     }
     .project-card:last-child:nth-child(odd) {
       grid-column: 1 / -1;
@@ -636,9 +595,6 @@
       letter-spacing: -0.01em;
       color: var(--text);
       transition: color 0.2s ease;
-    }
-    .project-card:hover .project-card-title {
-      color: var(--orange);
     }
     .project-card-right {
       display: inline-flex;
@@ -659,10 +615,6 @@
       transition: transform 0.22s ease, color 0.22s ease;
       flex-shrink: 0;
     }
-    .project-card:hover .project-card-arrow {
-      color: var(--orange);
-      transform: translate(2px, -2px);
-    }
     .project-card-desc {
       font-size: 0.92rem;
       line-height: 1.55;
@@ -675,6 +627,54 @@
       color: var(--muted);
       margin-top: auto;
       padding-top: 8px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .brand:hover { opacity: 0.78; }
+      .menu-btn:hover { color: var(--icon-hover); background: var(--panel); border-color: var(--line); }
+      .drawer-close:hover { color: var(--icon-hover); background: var(--bg-soft); }
+      .drawer-nav a:hover { background: var(--bg-soft); color: var(--orange); }
+      .lang-selector:hover { color: var(--icon-hover); background: var(--panel); border-color: var(--line); }
+      .lang-option:hover { background: var(--bg-soft); color: var(--text); }
+      .theme-pill:hover {
+        border-color: rgba(255, 54, 21, 0.45);
+        box-shadow:
+          inset 0 1px 2px rgba(0, 0, 0, 0.04),
+          0 6px 22px -5px rgba(255, 54, 21, 0.5);
+      }
+      [data-theme="dark"] .theme-pill:hover {
+        border-color: rgba(255, 255, 255, 0.26);
+        box-shadow:
+          inset 0 1px 2px rgba(0, 0, 0, 0.4),
+          0 0 16px -4px rgba(255, 255, 255, 0.18);
+      }
+      .theme-pill:hover .theme-handle {
+        box-shadow:
+          0 2px 6px rgba(0, 0, 0, 0.14),
+          0 0 22px 6px rgba(255, 54, 21, 0.44);
+      }
+      [data-theme="dark"] .theme-pill:hover .theme-handle {
+        box-shadow:
+          0 2px 6px rgba(0, 0, 0, 0.5),
+          0 0 18px 4px rgba(255, 255, 255, 0.25);
+      }
+      .social-links a:hover { color: var(--icon-hover); background: var(--panel); border-color: var(--line); }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 0 0 3px rgba(255, 54, 21, 0.1),
+          0 8px 24px -6px rgba(255, 54, 21, 0.45),
+          0 4px 10px -2px rgba(255, 54, 21, 0.25);
+      }
+      .btn-secondary:hover {
+        transform: translateY(-2px);
+        border-color: var(--line);
+        background: var(--bg-soft);
+        box-shadow: 0 6px 20px -6px rgba(0,0,0,0.12);
+      }
+      .project-card:hover { background: var(--bg-soft); }
+      .project-card:hover .project-card-title { color: var(--orange); }
+      .project-card:hover .project-card-arrow { color: var(--orange); transform: translate(2px, -2px); }
     }
 
     /* STACK */
@@ -812,11 +812,13 @@
       pointer-events: auto;
       transform: translateY(0);
     }
-    .to-top:hover {
-      box-shadow:
-        0 0 0 4px color-mix(in srgb, var(--orange) 12%, transparent),
-        0 8px 30px -6px color-mix(in srgb, var(--orange) 55%, transparent),
-        0 4px 16px -4px color-mix(in srgb, var(--orange) 36%, transparent);
+    @media (hover: hover) and (pointer: fine) {
+      .to-top:hover {
+        box-shadow:
+          0 0 0 4px rgba(255, 54, 21, 0.12),
+          0 8px 30px -6px rgba(255, 54, 21, 0.55),
+          0 4px 16px -4px rgba(255, 54, 21, 0.36);
+      }
     }
     .to-top svg { width: 18px; height: 18px; }
 
@@ -891,12 +893,11 @@
       body { font-size: 15px; }
 
       .bg-fx { height: min(700px, 88vh); }
-      .bg-lines,
-      .bg-lines-lit {
+      .bg-lines {
         background-image: repeating-linear-gradient(90deg, var(--fx-line) 0 1px, transparent 1px 58px);
       }
       .bg-lines-lit {
-        background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--orange) 22%, transparent) 0 1px, transparent 1px 58px);
+        background-image: repeating-linear-gradient(90deg, var(--fx-line-lit) 0 1px, transparent 1px 58px);
       }
       .bg-beam { width: 88vw; filter: blur(26px); transform: translateX(-50%) rotate(21deg); }
       .bg-glow { width: 108vw; top: calc(var(--fx-lamp-top) - 250px); height: 520px; }
@@ -1328,31 +1329,24 @@
       }
     };
 
-    let themeTimer = null;
-    let igniteTimer = null;
+    let snapRaf1 = 0;
+    let snapRaf2 = 0;
     function setTheme(t, animate = false) {
       const root = document.documentElement;
-      const fx = document.querySelector(".bg-fx");
-      if (animate) {
-        clearTimeout(themeTimer);
-        root.classList.add("theme-switching");
-        themeTimer = setTimeout(() => root.classList.remove("theme-switching"), 460);
-        if (fx) {
-          clearTimeout(igniteTimer);
-          fx.classList.remove("igniting");
-          if (t === "light") {
-            void fx.offsetWidth;
-            fx.classList.add("igniting");
-            igniteTimer = setTimeout(() => fx.classList.remove("igniting"), 650);
-          }
-        }
-      }
+      cancelAnimationFrame(snapRaf1);
+      cancelAnimationFrame(snapRaf2);
+      root.classList.add("theme-snap");
       root.setAttribute("data-theme", t);
       localStorage.setItem("theme", t);
       const m = document.querySelector('meta[name="theme-color"]');
       if (m) m.setAttribute("content", t === "dark" ? "#0b0b0b" : "#fdfdfc");
       const tt = document.getElementById("themeToggle");
       if (tt) tt.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
+      snapRaf1 = requestAnimationFrame(() => {
+        snapRaf2 = requestAnimationFrame(() => {
+          root.classList.remove("theme-snap");
+        });
+      });
     }
 
     const typeWords = {
