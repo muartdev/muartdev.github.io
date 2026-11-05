@@ -1682,10 +1682,10 @@
         [0xfff,0xa01,0xfff,0x809,0x80f,0x809,0x809,0x809,0x80f,0x809,0xfff,0x000],
         // 9: Watch / timepiece
         [0x1e0,0x1e0,0x3f0,0x408,0x448,0x448,0x438,0x408,0x3f0,0x1e0,0x1e0,0x000],
-        // 10: "83" pixel number tile
-        [0x000,0x000,0x000,0x73c,0x504,0x71c,0x504,0x73c,0x000,0x000,0x000,0x000],
-        // 11: "2.0" pixel number tile
-        [0x000,0x000,0x000,0x71e,0x112,0x712,0x412,0x75e,0x000,0x000,0x000,0x000],
+        // 10: "01" binary bits pixel tile
+        [0x000,0x000,0x000,0x798,0x498,0x488,0x488,0x79c,0x000,0x000,0x000,0x000],
+        // 11: CPU / IC microchip with pins
+        [0x2a0,0x2a0,0x7f0,0xc18,0x550,0xc18,0x550,0xc18,0x7f0,0x2a0,0x2a0,0x000],
         // 12: Question mark ? in diamond
         [0x0c0,0x120,0x270,0x498,0x814,0x864,0x448,0x200,0x140,0x0c0,0x000,0x000],
         // 13: Bar chart
@@ -1803,25 +1803,25 @@
         }
       };
 
-      // Curated technical & pixel micro-artifacts
+      // Computer Science & Systems Engineering micro-primitives around the mosaic
       const FLOATING_SPECS = [
-        { rx: -0.38, ry: -0.38, kind: "text", text: "hello", italic: true, role: "accent" },
-        { rx: -0.07, ry: -0.44, kind: "text", text: "001", role: "light" },
-        { rx: -0.11, ry: -0.30, kind: "text", text: "Pro", role: "accent" },
-        { rx: -0.44, ry: 0.01,  kind: "text", text: "11", serif: true, role: "muted" },
-        { rx: -0.40, ry: -0.14, kind: "text", text: "sys//", role: "muted" },
-        { rx: -0.22, ry: 0.36,  kind: "text", text: "RAM", role: "mid" },
-        { rx: -0.06, ry: 0.42,  kind: "text", text: "A", serif: true, role: "accent" },
-        { rx: 0.09,  ry: 0.36,  kind: "text", text: "HEX", role: "muted" },
-        { rx: 0.25,  ry: -0.34, kind: "text", text: "(b)", role: "mid" },
-        { rx: 0.32,  ry: -0.08, kind: "text", text: "255", role: "light" },
-        { rx: 0.19,  ry: -0.41, kind: "folder", role: "light" },
+        { rx: -0.38, ry: -0.38, kind: "text", text: "0xFF", role: "accent" },
+        { rx: -0.07, ry: -0.44, kind: "text", text: "01", role: "dark" },
+        { rx: -0.12, ry: -0.30, kind: "text", text: "O(1)", role: "accent" },
+        { rx: -0.44, ry: 0.01,  kind: "text", text: "λ", serif: true, role: "mid" },
+        { rx: -0.40, ry: -0.14, kind: "text", text: "0b10", role: "muted" },
+        { rx: -0.22, ry: 0.36,  kind: "text", text: "EOF", role: "mid" },
+        { rx: -0.06, ry: 0.42,  kind: "text", text: ">>", role: "accent" },
+        { rx: 0.09,  ry: 0.36,  kind: "text", text: "ACK", role: "muted" },
+        { rx: 0.25,  ry: -0.34, kind: "text", text: "</>", role: "mid" },
+        { rx: 0.32,  ry: -0.08, kind: "text", text: "255", role: "dark" },
+        { rx: 0.19,  ry: -0.41, kind: "folder", role: "dark" },
         { rx: 0.32,  ry: -0.25, kind: "plus", role: "accent" },
         { rx: 0.36,  ry: -0.25, kind: "ring", role: "muted" },
         { rx: -0.12, ry: 0.39,  kind: "diamond", role: "accent" },
-        { rx: 0.20,  ry: 0.38,  kind: "crossArrows", role: "light" },
+        { rx: 0.20,  ry: 0.38,  kind: "crossArrows", role: "dark" },
         { rx: 0.33,  ry: 0.32,  kind: "diamond", role: "mid" },
-        { rx: -0.34, ry: 0.35,  kind: "text", text: "{ }", role: "light" }
+        { rx: -0.34, ry: 0.35,  kind: "text", text: "{ }", role: "dark" }
       ];
 
       const WORDS = ["hello", "murat", "code"];
@@ -1913,11 +1913,12 @@
         tiles = nextTiles;
 
         const pal = PALETTES[currentPalette] || PALETTES.ember;
+        const isDarkTheme = document.documentElement.getAttribute("data-theme") === "dark";
         const roleColors = {
           accent: pal.strip[0],
           mid: pal.strip[1],
           muted: "#85888f",
-          light: pal.strip[3]
+          dark: isDarkTheme ? "#d9c3ab" : "#2c2f36"
         };
 
         const list = FLOATING_SPECS.map((sp, i) => {
